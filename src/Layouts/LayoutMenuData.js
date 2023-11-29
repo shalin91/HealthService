@@ -139,14 +139,14 @@ const Navdata = () => {
 
   const menuItems = [
  
-    {
-      id: "ecommerce",
-      label: "Form",
-      icon: "ri-form-2-line",
-      link: "/form",
-      stateVariables: isDashboard,
+    // {
+    //   id: "ecommerce",
+    //   label: "Form",
+    //   icon: " ri-survey-line",
+    //   link: "/form",
+    //   stateVariables: isDashboard,
 
-    },
+    // },
     {
       id: "apps",
       label: "Setup",
@@ -163,7 +163,7 @@ const Navdata = () => {
 
         {
           id: "appsecommerce",
-          label: "Products",
+          label: "Forms",
           link: "/#",
           isChildItem: true,
           click: function (e) {
@@ -176,202 +176,201 @@ const Navdata = () => {
             
             {
               id: 5,
-              label: "All Colors",
-              link: "/allcolors",
+              label: "Form-1",
+              link: "/form",
               parentId: "apps",
-            },
-            
+            }, 
             {
               id: 6,
-              label: "All Size",
-              link: "/allsizes",
+              label: "Form-2",
+              link: "/form",
               parentId: "apps",
             },
             {
               id: 4,
-              label: "All Products",
-              link: "/allproducts",
+              label: "Form-3",
+              link: "/form",
               parentId: "apps",
             },
 
           ],
         },
-        {
-          id: "appsprojects",
-          label: "Orders",
-          link: "/#",
-          isChildItem: true,
-          click: function (e) {
-            e.preventDefault();
-            setIsProjects(!isProjects);
-          },
-          parentId: "apps",
-          stateVariables: isProjects,
-          childItems: [
-            // {
-            //   id: 1,
-            //   label: "Orders",
-            //   link: "/apps-ecommerce-orders",
-            //   parentId: "apps",
-            // },
-            {
-              id: 1,
-              label: "New Orders",
-              link: "/orders",
-              parentId: "apps",
-            },
-            // {
-            //   id: 2,
-            //   label: "Order Details",
-            //   link: "/apps-ecommerce-order-details",
-            //   parentId: "apps",
-            // },
-            // { id: 3, label: "Create Project", link: "/apps-projects-create", parentId: "apps", },
-          ],
-        },
-        {
-          id: "appsprojects",
-          label: "manage category",
-          link: "/#",
-          isChildItem: true,
-          click: function (e) {
-            e.preventDefault();
-            setCategory(!isCategory);
-          },
-          parentId: "apps",
-          stateVariables: isCategory,
-          childItems: [
-            {
-              id: 1,
-              label: "category",
-              link: "/category-master",
-              parentId: "apps",
-            },
-            {
-              id: 2,
-              label: "sub category",
-              link: "/sub-category-master",
-              parentId: "apps",
-            },
-            {
-              id: 3,
-              label: "sub sub category",
-              link: "/sub-sub-category-master",
-              parentId: "apps",
-            },
-          ],
-        },
-        {
-          id: "tasks",
-          label: "Customers",
-          link: "/#",
-          isChildItem: true,
-          click: function (e) {
-            e.preventDefault();
-            setIsTasks(!isTasks);
-          },
-          parentId: "apps",
-          stateVariables: isTasks,
-          childItems: [
+        // {
+        //   id: "appsprojects",
+        //   label: "Orders",
+        //   link: "/#",
+        //   isChildItem: true,
+        //   click: function (e) {
+        //     e.preventDefault();
+        //     setIsProjects(!isProjects);
+        //   },
+        //   parentId: "apps",
+        //   stateVariables: isProjects,
+        //   childItems: [
+        //     // {
+        //     //   id: 1,
+        //     //   label: "Orders",
+        //     //   link: "/apps-ecommerce-orders",
+        //     //   parentId: "apps",
+        //     // },
+        //     // {
+        //     //   id: 1,
+        //     //   label: "New Orders",
+        //     //   link: "/orders",
+        //     //   parentId: "apps",
+        //     // },
+        //     // {
+        //     //   id: 2,
+        //     //   label: "Order Details",
+        //     //   link: "/apps-ecommerce-order-details",
+        //     //   parentId: "apps",
+        //     // },
+        //     // { id: 3, label: "Create Project", link: "/apps-projects-create", parentId: "apps", },
+        //   ],
+        // },
+        // {
+        //   id: "appsprojects",
+        //   label: "manage category",
+        //   link: "/#",
+        //   isChildItem: true,
+        //   click: function (e) {
+        //     e.preventDefault();
+        //     setCategory(!isCategory);
+        //   },
+        //   parentId: "apps",
+        //   stateVariables: isCategory,
+        //   childItems: [
+        //     {
+        //       id: 1,
+        //       label: "category",
+        //       link: "/category-master",
+        //       parentId: "apps",
+        //     },
+        //     {
+        //       id: 2,
+        //       label: "sub category",
+        //       link: "/sub-category-master",
+        //       parentId: "apps",
+        //     },
+        //     {
+        //       id: 3,
+        //       label: "sub sub category",
+        //       link: "/sub-sub-category-master",
+        //       parentId: "apps",
+        //     },
+        //   ],
+        // },
+        // {
+        //   id: "tasks",
+        //   label: "Customers",
+        //   link: "/#",
+        //   isChildItem: true,
+        //   click: function (e) {
+        //     e.preventDefault();
+        //     setIsTasks(!isTasks);
+        //   },
+        //   parentId: "apps",
+        //   stateVariables: isTasks,
+        //   childItems: [
 
-            { id: 2, label: "Customers", link: "/customers", parentId: "apps" },
+        //     { id: 2, label: "Customers", link: "/customers", parentId: "apps" },
 
-          ],
-        },
-        {
-          id: "appscrm",
-          label: "CMS",
-          link: "/#",
-          isChildItem: true,
-          click: function (e) {
-            e.preventDefault();
-            setIsCRM(!isCRM);
-          },
-          parentId: "apps",
-          stateVariables: isCRM,
-          childItems: [{ id: 1, label: "Content", link: "/contentmanage" },{ id: 1, label: "Banner Master", link: "/banner-master" },{ id: 3, label: "Blogs Category", link: "/blog-category" },{ id: 4, label: "Blogs Master", link: "/blog-master" }],
-        },
-        {
-          id: "NFTMarketplace",
-          label: "Gallery",
-          link: "/#",
-          isChildItem: true,
-          click: function (e) {
-            e.preventDefault();
-            setIsNFTMarketplace(!isNFTMarketplace);
-          },
-          parentId: "apps",
-          stateVariables: isNFTMarketplace,
-          childItems: [
-            { id: 1, label: "Gallery-Category", link: "/gallerycatcontent" },
-            { id: 1, label: "Gallery-Details", link: "/gallerycontent" },
-          ],
-        },
-        {
-          id: "appscrypto",
-          label: "Inventory",
-          link: "/#",
-          isChildItem: true,
-          click: function (e) {
-            e.preventDefault();
-            setIsCrypto(!isCrypto);
-          },
-          parentId: "apps",
-          stateVariables: isCrypto,
-          childItems: [
-            { id: 1, label: "Stocks", link: "/stocks" },
-            { id: 2, label: "Daily Rates", link: "/dailyrates" },
-            // { id: 3, label: "Deals", link: "/apps-crm-deals" },
-            // { id: 4, label: "Leads", link: "/apps-crm-leads" },
-          ],
-        },
-        {
-            id: "invoices",
-            label: "Coupons",
-            link: "/#",
-            isChildItem: true,
-            click: function (e) {
-                e.preventDefault();
-                setIsInvoices(!isInvoices);
-            },
-            parentId: "apps",
-            stateVariables: isInvoices,
-            childItems: [
-                { id: 1, label: "Coupons", link: "/coupons" },
-                // { id: 2, label: "Details", link: "/apps-invoices-details" },
-                // { id: 3, label: "Create Invoice", link: "/apps-invoices-create" },
-            ]
-        },
-        {
-            id: "supportTickets",
-            label: "Reports",
-            link: "/#",
-            isChildItem: true,
-            click: function (e) {
-                e.preventDefault();
-                setIsSupportTickets(!isSupportTickets);
-            },
-            parentId: "apps",
-            stateVariables: isSupportTickets,
-            childItems: [
-                { id: 1, label: "Customers Reports", link: "/customerreports" },
-                { id: 1, label: "Date wise Reports", link: "/customerbydatereport" },
-                { id: 2, label: "Products Reports", link: "/productreport" },
-                { id: 3, label: "Stock Reports", link: "/stockreport" },
-            ]
-        },
-        {
-            id: "filemanager",
-            label: "Subscription",
-            link: "/subscription",
-            parentId: "apps",
-        },
-        {
-            id: "todo",
-            label: "Contact Us",
-            link: "/contactus",
-            parentId: "apps",
-        },
+        //   ],
+        // },
+        // {
+        //   id: "appscrm",
+        //   label: "CMS",
+        //   link: "/#",
+        //   isChildItem: true,
+        //   click: function (e) {
+        //     e.preventDefault();
+        //     setIsCRM(!isCRM);
+        //   },
+        //   parentId: "apps",
+        //   stateVariables: isCRM,
+        //   childItems: [{ id: 1, label: "Content", link: "/contentmanage" },{ id: 1, label: "Banner Master", link: "/banner-master" },{ id: 3, label: "Blogs Category", link: "/blog-category" },{ id: 4, label: "Blogs Master", link: "/blog-master" }],
+        // },
+        // {
+        //   id: "NFTMarketplace",
+        //   label: "Gallery",
+        //   link: "/#",
+        //   isChildItem: true,
+        //   click: function (e) {
+        //     e.preventDefault();
+        //     setIsNFTMarketplace(!isNFTMarketplace);
+        //   },
+        //   parentId: "apps",
+        //   stateVariables: isNFTMarketplace,
+        //   childItems: [
+        //     { id: 1, label: "Gallery-Category", link: "/gallerycatcontent" },
+        //     { id: 1, label: "Gallery-Details", link: "/gallerycontent" },
+        //   ],
+        // },
+        // {
+        //   id: "appscrypto",
+        //   label: "Inventory",
+        //   link: "/#",
+        //   isChildItem: true,
+        //   click: function (e) {
+        //     e.preventDefault();
+        //     setIsCrypto(!isCrypto);
+        //   },
+        //   parentId: "apps",
+        //   stateVariables: isCrypto,
+        //   childItems: [
+        //     { id: 1, label: "Stocks", link: "/stocks" },
+        //     { id: 2, label: "Daily Rates", link: "/dailyrates" },
+        //     // { id: 3, label: "Deals", link: "/apps-crm-deals" },
+        //     // { id: 4, label: "Leads", link: "/apps-crm-leads" },
+        //   ],
+        // },
+        // {
+        //     id: "invoices",
+        //     label: "Coupons",
+        //     link: "/#",
+        //     isChildItem: true,
+        //     click: function (e) {
+        //         e.preventDefault();
+        //         setIsInvoices(!isInvoices);
+        //     },
+        //     parentId: "apps",
+        //     stateVariables: isInvoices,
+        //     childItems: [
+        //         { id: 1, label: "Coupons", link: "/coupons" },
+        //         // { id: 2, label: "Details", link: "/apps-invoices-details" },
+        //         // { id: 3, label: "Create Invoice", link: "/apps-invoices-create" },
+        //     ]
+        // },
+        // {
+        //     id: "supportTickets",
+        //     label: "Reports",
+        //     link: "/#",
+        //     isChildItem: true,
+        //     click: function (e) {
+        //         e.preventDefault();
+        //         setIsSupportTickets(!isSupportTickets);
+        //     },
+        //     parentId: "apps",
+        //     stateVariables: isSupportTickets,
+        //     childItems: [
+        //         { id: 1, label: "Customers Reports", link: "/customerreports" },
+        //         { id: 1, label: "Date wise Reports", link: "/customerbydatereport" },
+        //         { id: 2, label: "Products Reports", link: "/productreport" },
+        //         { id: 3, label: "Stock Reports", link: "/stockreport" },
+        //     ]
+        // },
+        // {
+        //     id: "filemanager",
+        //     label: "Subscription",
+        //     link: "/subscription",
+        //     parentId: "apps",
+        // },
+        // {
+        //     id: "todo",
+        //     label: "Contact Us",
+        //     link: "/contactus",
+        //     parentId: "apps",
+        // },
         // {
         //     id: "job",
         //     label: "Jobs",

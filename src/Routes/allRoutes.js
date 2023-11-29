@@ -119,12 +119,13 @@ import CustomersByDate from "../pages/Reports/CustomersByDate.js";
 import BlogCategory from "../pages/BlogMaster/BlogCategory.js";
 import SubScribe from "../pages/Subscribe/SubScribe.js";
 import Contact from "../pages/Contact/Contact.js";
+import Form1 from "../pages/Forms/Form1.js";
 
 
 // import customerNew from "../pages/Ecommerce/EcommerceCustomers/customerNew";
 const authProtectedRoutes = [
   // { path: "/dashboard", component: <NewDashboard /> },
-  { path: "/form", component: <NewDashboard /> },
+  { path: "/form", component: <Form1 /> },
   // { path: "/addproduct", component: <SignState><EcommerceNewAddProduct /></SignState> },
 
   { path: "/apps-ecommerce-orders", component: <EcommerceOrders /> },

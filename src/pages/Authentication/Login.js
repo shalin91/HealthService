@@ -58,12 +58,12 @@ const Login = () => {
         window.localStorage.setItem("rights", JSON.stringify(res.roles));
         if (res.roles.role === "Admin") {
           setSuccess(res.msg);
-          navigate("/dashboard");
+          navigate("/form");
           
         } else {
           setSuccess(res.msg);
           setTimeout(() => {
-            navigate("/dashboard");
+            navigate("/form");
           }, 3000);
         }
       }else{
