@@ -72,6 +72,15 @@ const CheckupForm = () => {
     // setRoles(res);
   };
 
+  const handleLocationChange = (e) => {
+    let selectedCompanyId = e.target.value;
+    // console.log( selectedCompanyId );
+
+    if (selectedCompanyId) {
+      getcompaniesbyId(selectedCompanyId);
+    }
+  };
+
   const getcompaniesbyId = async (id) => {
     const res = await GetCompanybyId(id);
     setAllLocation(res.data.companyLocation);
@@ -79,6 +88,16 @@ const CheckupForm = () => {
     // setDepartment(res.data.companyDepartments);
     // setRoles(res);
   };
+
+  const handleSaveCompanyAndLocation = async (val) =>{
+    
+    console.log( val )
+
+    setComapny( val.companyName );
+
+    setLocation( val.companyLocation )
+
+  }
 
   const validationSchema = Yup.object().shape({
     checkupName: Yup.string().required("Checkup Name is required"),
@@ -131,7 +150,7 @@ const CheckupForm = () => {
                 }}
                 //validationSchema={validationSchema}
                 onSubmit={async (values, { resetForm }) => {
-                  // handleSavedCompandLoc(values);
+                   handleSaveCompanyAndLocation(values);
                   resetForm();
                   // Additional actions after form submission
                   // togglemodal();
@@ -155,7 +174,7 @@ const CheckupForm = () => {
                           <Col className="col-sm">
                             <div className="d-flex justify-content-sm-between">
                               <h2 className="card-title mb-0 justify-content-sm-start">
-                                <strong>Title</strong>
+                                <strong>COMPANY DETAILS</strong>
                               </h2>
                             </div>
                           </Col>
@@ -177,20 +196,20 @@ const CheckupForm = () => {
                                   name="companyName"
                                   onChange={(e) => {
                                     handleChange(e);
-                                    // handleLocationChange(e);
+                                    handleLocationChange(e);
                                   }}
                                   onBlur={handleBlur}
                                   value={values.companyName}
                                 >
                                   <option value="">Company Name</option>
-                                  {/* {Company.map((company) => (
+                                  {allCompany.map((company) => (
                                     <option
                                       key={company._id}
                                       value={company._id}
                                     >
                                       {company.companyName}
                                     </option>
-                                  ))} */}
+                                  ))}
                                 </select>
                               </div>
                               <p className="error text-danger">
@@ -212,11 +231,11 @@ const CheckupForm = () => {
                                   name="companyLocation"
                                   onBlur={handleBlur}
                                   value={values.companyLocation}
-                                  // onChange={handleChange}
+                                 onChange={handleChange}
                                 >
                                   <option value=""> Location</option>
-                                  {Location && Location.length > 0 ? (
-                                    Location.map((location) => (
+                                  {allLocation && allLocation.length > 0 ? (
+                                    allLocation.map((location) => (
                                       <option key={location} value={location}>
                                         {location}
                                       </option>
@@ -249,7 +268,7 @@ const CheckupForm = () => {
             </Col>
           </Row>
 
-          {/* company component */}
+          {/* company component   all ok geting a company id and location name -> done  */}
 
 
           <Row>
