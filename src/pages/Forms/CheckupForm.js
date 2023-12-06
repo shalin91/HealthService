@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import UiContent from "../../Components/Common/UiContent";
 import BreadCrumb from "../../Components/Common/BreadCrumb";
+import SignContext from "../../contextAPI/Context/SignContext";
 import {
   Card,
   CardBody,
@@ -28,23 +29,77 @@ import OtherDetails from "./OtherDetails";
 import Form33 from "./Form33";
 
 const CheckupForm = () => {
-    const [customActiveTab, setcustomActiveTab] = useState("1");
+  const [customActiveTab, setcustomActiveTab] = useState("1");
+
+  const { GetCompany, GetCompanybyId } = useContext(SignContext);
+
   const toggleCustom = (tab) => {
     if (customActiveTab !== tab) {
       setcustomActiveTab(tab);
     }
   };
+
+  const [company, setComapny] = useState(null);
+
+  const [allCompany, setAllCompany] = useState([]);
+
+  const [allLocation, setAllLocation] = useState([]);
+
+  const [location, setLocation] = useState(null);
+
+  const [checkupType, setCheckupType] = useState(null);
+
+  const [allCheckupType, setAllCheckupType] = useState([]);
+
+  const [empbyCompandLoc, setEmpbyCompandLoc] = useState([]);
+
+  const [currentEmp, setCurrentEmp] = useState(null);
+
+  const [ currentUser , setCurrentUser ] = useState(null);
+
+  
+
+  // const [ allCategory , setAllCategory ] = useState( [] );
+
+  // const [ allDepartment , setAllDepartment ] = useState( [] );
+
+  // const [ category , setCategory ] = useState( null );
+
+  // const [ department , setDepartment ] = useState( null );
+
+
+
+  const getcompanies = async () => {
+
+
+
+    const res = await GetCompany();
+    console.log(res);
+    setAllCompany(res.data);
+    // setLocation(res.data.companyLocation)
+    // setRoles(res);
+  };
+
+  const getcompaniesbyId = async (id) => {
+
+    const res = await GetCompanybyId(id);
+    setAllLocation(res.data.companyLocation);
+    // (res.data.companyJobCategorys);
+    // setDepartment(res.data.companyDepartments);
+    // setRoles(res);
+  };
+
   const validationSchema = Yup.object().shape({
-      checkupName: Yup.string().required("Checkup Name is required"),
-      no: Yup.string().required("Number is required"),
-      date: Yup.string().required("Date is required"),
-      type: Yup.string().required("Type is required"),
-      name: Yup.string().required("name is required"),
-      gender: Yup.string().required("gender is required"),
-      age: Yup.string().required("age is required"),
+    checkupName: Yup.string().required("Checkup Name is required"),
+    no: Yup.string().required("Number is required"),
+    date: Yup.string().required("Date is required"),
+    type: Yup.string().required("Type is required"),
+    name: Yup.string().required("name is required"),
+    gender: Yup.string().required("gender is required"),
+    age: Yup.string().required("age is required"),
     company: Yup.string().required("Company is required"),
     location: Yup.string().required("Location is required"),
-    ecNo :Yup.string().required("EC NO is required"),
+    ecNo: Yup.string().required("EC NO is required"),
     dob: Yup.string().required("dob is required"),
     height: Yup.string().required("height is required"),
     bloodgroup: Yup.string().required("blood group is required"),
@@ -60,6 +115,11 @@ const CheckupForm = () => {
     email: Yup.string().required("email is required"),
   });
 
+
+  useEffect(() => {
+    getcompanies();
+  }, []);
+
   return (
     <>
       <UiContent />
@@ -70,30 +130,30 @@ const CheckupForm = () => {
             <Col lg={12}>
               <Formik
                 initialValues={{
-                checkupName: "",
+                  checkupName: "",
                   no: "",
                   date: "",
                   type: "",
                   name: "",
-                  gender : "",
-                  age:"",
+                  gender: "",
+                  age: "",
                   company: "",
                   location: "",
-                  ecNo :"",
+                  ecNo: "",
                   address: "",
-                  dob:"",
-                  height : "",
-                  bloodgroup : "",
+                  dob: "",
+                  height: "",
+                  bloodgroup: "",
                   martialstatus: "",
                   doj: "",
                   marks: "",
-                  natureofjob:"",
-                  res:"",
-                  mob:"",
-                  office:"",
-                  pphash:"",
-                  emer:"",
-                  email:"",
+                  natureofjob: "",
+                  res: "",
+                  mob: "",
+                  office: "",
+                  pphash: "",
+                  emer: "",
+                  email: "",
                 }}
                 validationSchema={validationSchema}
                 onSubmit={async (values, { resetForm }) => {
@@ -129,12 +189,12 @@ const CheckupForm = () => {
                         <div className="live-preview">
                           <Row className="align-items-center g-3">
                             <Col sm={4}>
-                            <label
-                                  className="form-label mt-3"
-                                  htmlFor="product-orders-input"
-                                >
-                                  Check-up Name
-                                </label>
+                              <label
+                                className="form-label mt-3"
+                                htmlFor="product-orders-input"
+                              >
+                                Check-up Name
+                              </label>
                               <div className="">
                                 <select
                                   className="form-select"
@@ -147,27 +207,27 @@ const CheckupForm = () => {
                                   <option value="Mr.">Mr.</option>
                                   <option value="Mrs.">Mrs.</option>
                                 </select>
-                                
+
                               </div>
                               <p className="error text-danger">
-                                  {errors.checkupName &&
-                                    touched.checkupName &&
-                                    errors.checkupName}
-                                </p>
+                                {errors.checkupName &&
+                                  touched.checkupName &&
+                                  errors.checkupName}
+                              </p>
                             </Col>
                             <Col sm={2}>
-                            <label
-                                  className="form-label mt-3"
-                                  htmlFor="product-orders-input"
-                                >
-                                  No.
-                                </label>
+                              <label
+                                className="form-label mt-3"
+                                htmlFor="product-orders-input"
+                              >
+                                No.
+                              </label>
                               <div className="">
                                 <Input
                                   type="text"
                                   className="form-control"
                                   id="product-orders-input"
-                                  
+
                                   name="no"
                                   aria-label="orders"
                                   aria-describedby="product-orders-addon"
@@ -176,23 +236,23 @@ const CheckupForm = () => {
                                   value={values.no}
                                 />
                               </div>
-                                <p className="error text-danger">
-                                  {errors.no && touched.no && errors.no}
-                                </p>
+                              <p className="error text-danger">
+                                {errors.no && touched.no && errors.no}
+                              </p>
                             </Col>
                             <Col sm={2}>
-                            <label
-                                  className="form-label mt-3"
-                                  htmlFor="product-orders-input"
-                                >
-                                  Date
-                                </label>
+                              <label
+                                className="form-label mt-3"
+                                htmlFor="product-orders-input"
+                              >
+                                Date
+                              </label>
                               <div className="">
                                 <Input
                                   type="text"
                                   className="form-control"
                                   id="product-orders-input"
-                                  
+
                                   name="date"
                                   aria-label="orders"
                                   aria-describedby="product-orders-addon"
@@ -201,21 +261,21 @@ const CheckupForm = () => {
                                   value={values.date}
                                 />
                               </div>
-                                <p className="error text-danger">
-                                  {errors.date &&
-                                    touched.date &&
-                                    errors.date}
-                                </p>
+                              <p className="error text-danger">
+                                {errors.date &&
+                                  touched.date &&
+                                  errors.date}
+                              </p>
                             </Col>
                             <Col sm={3}>
-                            <label
-                                  className="form-label mt-3"
-                                  htmlFor="product-orders-input"
-                                >
-                                  Type
-                                </label>
+                              <label
+                                className="form-label mt-3"
+                                htmlFor="product-orders-input"
+                              >
+                                Type
+                              </label>
                               <div className="">
-                              <select
+                                <select
                                   className="form-select"
                                   name="type"
                                   onChange={handleChange}
@@ -227,11 +287,11 @@ const CheckupForm = () => {
                                   <option value="Mrs.">Mrs.</option>
                                 </select>
                               </div>
-                                <p className="error text-danger">
-                                  {errors.type &&
-                                    touched.type &&
-                                    errors.type}
-                                </p>
+                              <p className="error text-danger">
+                                {errors.type &&
+                                  touched.type &&
+                                  errors.type}
+                              </p>
                             </Col>
                           </Row>
                           <Row className="align-items-center g-3">
@@ -247,7 +307,7 @@ const CheckupForm = () => {
                                   type="text"
                                   className="form-control"
                                   id="product-orders-input"
-                                //   placeholder="EC No."
+                                  //   placeholder="EC No."
                                   name="name"
                                   aria-label="orders"
                                   aria-describedby="product-orders-addon"
@@ -268,11 +328,11 @@ const CheckupForm = () => {
                                 Gender
                               </label>
                               <div className="">
-                              <Input
+                                <Input
                                   type="text"
                                   className="form-control"
                                   id="product-orders-input"
-                                //   placeholder="EC No."
+                                  //   placeholder="EC No."
                                   name="gender"
                                   aria-label="orders"
                                   aria-describedby="product-orders-addon"
@@ -295,11 +355,11 @@ const CheckupForm = () => {
                                 Age
                               </label>
                               <div className="">
-                              <Input
+                                <Input
                                   type="text"
                                   className="form-control"
                                   id="product-orders-input"
-                                //   placeholder="EC No."
+                                  //   placeholder="EC No."
                                   name="age"
                                   aria-label="orders"
                                   aria-describedby="product-orders-addon"
@@ -322,11 +382,11 @@ const CheckupForm = () => {
                                 Date of Birth
                               </label>
                               <div className="">
-                              <Input
+                                <Input
                                   type="text"
                                   className="form-control"
                                   id="product-orders-input"
-                                //   placeholder="EC No."
+                                  //   placeholder="EC No."
                                   name="dob"
                                   aria-label="orders"
                                   aria-describedby="product-orders-addon"
@@ -349,11 +409,11 @@ const CheckupForm = () => {
                                 Blood Group
                               </label>
                               <div className="">
-                              <Input
+                                <Input
                                   type="text"
                                   className="form-control"
                                   id="product-orders-input"
-                                //   placeholder="EC No."
+                                  //   placeholder="EC No."
                                   name="bloodgroup"
                                   aria-label="orders"
                                   aria-describedby="product-orders-addon"
@@ -370,15 +430,15 @@ const CheckupForm = () => {
                             </Col>
                             <Row className="align-items-center g-3">
                               <Row className="g-1 m-1">
-                          <Col className="col-sm">
-                            <div className="d-flex justify-content-sm-between">
-                              <h2 className="card-title mb-0 justify-content-sm-start">
-                                <strong>Job Profile</strong>
-                              </h2>
-                            </div>
-                          </Col>
-                        </Row>
-                        <Col sm={3}>
+                                <Col className="col-sm">
+                                  <div className="d-flex justify-content-sm-between">
+                                    <h2 className="card-title mb-0 justify-content-sm-start">
+                                      <strong>Job Profile</strong>
+                                    </h2>
+                                  </div>
+                                </Col>
+                              </Row>
+                              <Col sm={3}>
                                 <label
                                   className="form-label mt-3"
                                   htmlFor="product-orders-input"
@@ -386,18 +446,18 @@ const CheckupForm = () => {
                                   Company
                                 </label>
                                 <div className="">
-                                <Input
-                                  type="text"
-                                  className="form-control"
-                                  id="product-orders-input"
-                                  
-                                  name="company"
-                                  aria-label="orders"
-                                  aria-describedby="product-orders-addon"
-                                  onChange={handleChange}
-                                  onBlur={handleBlur}
-                                  value={values.company}
-                                />
+                                  <Input
+                                    type="text"
+                                    className="form-control"
+                                    id="product-orders-input"
+
+                                    name="company"
+                                    aria-label="orders"
+                                    aria-describedby="product-orders-addon"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.company}
+                                  />
                                   <p className="error text-danger">
                                     {errors.company &&
                                       touched.company &&
@@ -413,18 +473,18 @@ const CheckupForm = () => {
                                   Location
                                 </label>
                                 <div className="">
-                                <Input
-                                  type="text"
-                                  className="form-control"
-                                  id="product-orders-input"
-                                  
-                                  name="location"
-                                  aria-label="orders"
-                                  aria-describedby="product-orders-addon"
-                                  onChange={handleChange}
-                                  onBlur={handleBlur}
-                                  value={values.location}
-                                />
+                                  <Input
+                                    type="text"
+                                    className="form-control"
+                                    id="product-orders-input"
+
+                                    name="location"
+                                    aria-label="orders"
+                                    aria-describedby="product-orders-addon"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.location}
+                                  />
                                   <p className="error text-danger">
                                     {errors.location &&
                                       touched.location &&
@@ -440,18 +500,18 @@ const CheckupForm = () => {
                                   EC NO.
                                 </label>
                                 <div className="">
-                                <Input
-                                  type="text"
-                                  className="form-control"
-                                  id="product-orders-input"
-                                  
-                                  name="ecNo"
-                                  aria-label="orders"
-                                  aria-describedby="product-orders-addon"
-                                  onChange={handleChange}
-                                  onBlur={handleBlur}
-                                  value={values.ecNo}
-                                />
+                                  <Input
+                                    type="text"
+                                    className="form-control"
+                                    id="product-orders-input"
+
+                                    name="ecNo"
+                                    aria-label="orders"
+                                    aria-describedby="product-orders-addon"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.ecNo}
+                                  />
                                   <p className="error text-danger">
                                     {errors.ecNo &&
                                       touched.ecNo &&
@@ -516,7 +576,7 @@ const CheckupForm = () => {
                                 toggleCustom("4");
                               }}
                             >
-                               Investigation
+                              Investigation
                             </NavLink>
                           </NavItem>
                           <NavItem>
@@ -545,32 +605,32 @@ const CheckupForm = () => {
                               Form-33
                             </NavLink>
                           </NavItem>
-                         
+
                         </Nav>
                       </CardHeader>
 
                       <CardBody>
                         <TabContent activeTab={customActiveTab}>
                           <TabPane id="addproduct-general-info" tabId="1">
-                            <VitalsandHistory/>
+                            <VitalsandHistory />
                           </TabPane>
 
                           <TabPane id="addproduct-metadata" tabId="2">
-                          <GeneralExam/>
+                            <GeneralExam />
                           </TabPane>
 
                           <TabPane id="addproduct-general-info" tabId="3">
-                            <Eye/>
+                            <Eye />
                           </TabPane>
 
                           <TabPane id="addproduct-general-info" tabId="4">
-                            <Investigation/>
+                            <Investigation />
                           </TabPane>
                           <TabPane id="addproduct-general-info" tabId="5">
-                            <OtherDetails/>
+                            <OtherDetails />
                           </TabPane>
                           <TabPane id="addproduct-general-info" tabId="6">
-                            <Form33/>
+                            <Form33 />
                           </TabPane>
                         </TabContent>
                       </CardBody>
@@ -579,7 +639,7 @@ const CheckupForm = () => {
                       <button
                         type="submit"
                         className="btn btn-success w-sm"
-                        //   onClick={togglesuccessmodal}
+                      //   onClick={togglesuccessmodal}
                       >
                         Submit
                       </button>
