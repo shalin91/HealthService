@@ -58,12 +58,12 @@ const Login = () => {
         window.localStorage.setItem("rights", JSON.stringify(res.roles));
         if (res.roles.role === "Admin") {
           setSuccess(res.msg);
-          navigate("/form");
+          navigate("/newform");
           
         } else {
           setSuccess(res.msg);
           setTimeout(() => {
-            navigate("/form");
+            navigate("/newform");
           }, 3000);
         }
       }else{
@@ -92,7 +92,7 @@ const Login = () => {
     }
   };
 
-  document.title = "Pushtishangar | Admin Login";
+  document.title = "Login";
   return (
     <React.Fragment>
       <ParticlesAuth>
@@ -102,11 +102,11 @@ const Login = () => {
               <Col lg={12}>
                 <div className="text-center mt-sm-5 mb-4 text-white-50">
                   <div>
-                    <img
+                    {/* <img
                       src={logo}
                       alt="pushti shangar"
                       style={{ maxHeight: "200px" }}
-                    ></img>
+                    ></img> */}
                   </div>
                   {/* <p className="mt-3 fs-15 fw-medium">
                     Premium Admin & Dashboard Template

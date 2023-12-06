@@ -36,11 +36,13 @@ const AddGalleryCat = () => {
   // };
 
   const validationSchema = Yup.object().shape({
-    gallaryCategoryTitle: Yup.string().required(
-      "GalleryCategory Title is required"
+    companyName: Yup.string().required(
+      "company name  is required"
     ),
-    description: Yup.string().required("Description is required"),
-    imagePath: Yup.mixed().required("Image is required"),
+    companyLocation: Yup.string().required("Location is required"),
+    companyJobCategorys: Yup.string().required("Category is required"),
+    companyDepartments: Yup.string().required("Department is required"),
+
   });
 
   const handleSavedcat = async (Values) => {

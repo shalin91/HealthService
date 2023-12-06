@@ -326,7 +326,7 @@ const NewTeam = () => {
                                   />
                                 </div>
                               </td>
-                              <td className="Email" style={{ width: "170px" }}>
+                              <td className="Email" style={{ width: "120px" }}>
                                 {user.email}
                               </td>
                               <td className="roles">{user.roles}</td>
