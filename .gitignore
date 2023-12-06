@@ -2,7 +2,6 @@
 
 # dependencies
 /node_modules
-/healthService_backend
 /.pnp
 .pnp.js
 
