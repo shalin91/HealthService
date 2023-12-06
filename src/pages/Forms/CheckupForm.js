@@ -117,6 +117,9 @@ const CheckupForm = () => {
         <Container fluid>
           <BreadCrumb grandParent="Setup" parent="Forms" child="Form-2" />
 
+
+
+
           {/* company componemnt */}
 
           <Row>
@@ -247,6 +250,7 @@ const CheckupForm = () => {
           </Row>
 
           {/* company component */}
+
 
           <Row>
             <Col lg={12}>
