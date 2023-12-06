@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
-import UiContent from "../../Components/Common/UiContent";
-import BreadCrumb from "../../Components/Common/BreadCrumb";
-import SignContext from "../../contextAPI/Context/SignContext";
+import classnames from "classnames";
+import { Formik } from "formik";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Card,
   CardBody,
@@ -10,7 +9,6 @@ import {
   Container,
   Form,
   Input,
-  Label,
   Nav,
   NavItem,
   NavLink,
@@ -18,15 +16,16 @@ import {
   TabContent,
   TabPane,
 } from "reactstrap";
-import { Formik, useFormik } from "formik";
-import classnames from "classnames";
 import * as Yup from "yup";
-import VitalsandHistory from "./VitalsandHistory";
+import BreadCrumb from "../../Components/Common/BreadCrumb";
+import UiContent from "../../Components/Common/UiContent";
+import SignContext from "../../contextAPI/Context/SignContext";
 import Eye from "./Eye";
-import Investigation from "./Investigation";
-import GeneralExam from "./GeneralExam";
-import OtherDetails from "./OtherDetails";
 import Form33 from "./Form33";
+import GeneralExam from "./GeneralExam";
+import Investigation from "./Investigation";
+import OtherDetails from "./OtherDetails";
+import VitalsandHistory from "./VitalsandHistory";
 
 const CheckupForm = () => {
   const [customActiveTab, setcustomActiveTab] = useState("1");
@@ -55,9 +54,7 @@ const CheckupForm = () => {
 
   const [currentEmp, setCurrentEmp] = useState(null);
 
-  const [ currentUser , setCurrentUser ] = useState(null);
-
-  
+  const [currentUser, setCurrentUser] = useState(null);
 
   // const [ allCategory , setAllCategory ] = useState( [] );
 
@@ -67,12 +64,7 @@ const CheckupForm = () => {
 
   // const [ department , setDepartment ] = useState( null );
 
-
-
   const getcompanies = async () => {
-
-
-
     const res = await GetCompany();
     console.log(res);
     setAllCompany(res.data);
@@ -81,7 +73,6 @@ const CheckupForm = () => {
   };
 
   const getcompaniesbyId = async (id) => {
-
     const res = await GetCompanybyId(id);
     setAllLocation(res.data.companyLocation);
     // (res.data.companyJobCategorys);
@@ -115,7 +106,6 @@ const CheckupForm = () => {
     email: Yup.string().required("email is required"),
   });
 
-
   useEffect(() => {
     getcompanies();
   }, []);
@@ -126,6 +116,138 @@ const CheckupForm = () => {
       <div className="page-content">
         <Container fluid>
           <BreadCrumb grandParent="Setup" parent="Forms" child="Form-2" />
+
+          {/* company componemnt */}
+
+          <Row>
+            <Col lg={12}>
+              <Formik
+                initialValues={{
+                  companyName: "",
+                  companyLocation: "",
+                }}
+                //validationSchema={validationSchema}
+                onSubmit={async (values, { resetForm }) => {
+                  // handleSavedCompandLoc(values);
+                  resetForm();
+                  // Additional actions after form submission
+                  // togglemodal();
+                }}
+              >
+                {({
+                  isSubmitting,
+                  handleChange,
+                  handleSubmit,
+                  errors,
+                  touched,
+                  values,
+                  handleBlur,
+                  setFieldValue,
+                }) => (
+                  <Form onSubmit={handleSubmit}>
+                    {/* Your form fields and components */}
+                    <Card>
+                      <CardHeader>
+                        <Row className="g-1 m-1">
+                          <Col className="col-sm">
+                            <div className="d-flex justify-content-sm-between">
+                              <h2 className="card-title mb-0 justify-content-sm-start">
+                                <strong>Title</strong>
+                              </h2>
+                            </div>
+                          </Col>
+                        </Row>
+                      </CardHeader>
+                      <div className="card-body">
+                        <div className="live-preview">
+                          <Row className="align-items-center g-3">
+                            <Col sm={6}>
+                              <label
+                                className="form-label mt-3"
+                                htmlFor="product-orders-input"
+                              >
+                                Company
+                              </label>
+                              <div className="">
+                                <select
+                                  className="form-select"
+                                  name="companyName"
+                                  onChange={(e) => {
+                                    handleChange(e);
+                                    // handleLocationChange(e);
+                                  }}
+                                  onBlur={handleBlur}
+                                  value={values.companyName}
+                                >
+                                  <option value="">Company Name</option>
+                                  {/* {Company.map((company) => (
+                                    <option
+                                      key={company._id}
+                                      value={company._id}
+                                    >
+                                      {company.companyName}
+                                    </option>
+                                  ))} */}
+                                </select>
+                              </div>
+                              <p className="error text-danger">
+                                {errors.companyName &&
+                                  touched.companyName &&
+                                  errors.companyName}
+                              </p>
+                            </Col>
+                            <Col sm={6}>
+                              <label
+                                className="form-label mt-3"
+                                htmlFor="product-orders-input"
+                              >
+                                Location
+                              </label>
+                              <div className="">
+                                <select
+                                  className="form-select"
+                                  name="companyLocation"
+                                  onBlur={handleBlur}
+                                  value={values.companyLocation}
+                                  // onChange={handleChange}
+                                >
+                                  <option value=""> Location</option>
+                                  {Location && Location.length > 0 ? (
+                                    Location.map((location) => (
+                                      <option key={location} value={location}>
+                                        {location}
+                                      </option>
+                                    ))
+                                  ) : (
+                                    <option value="" disabled>
+                                      No locations available
+                                    </option>
+                                  )}
+                                </select>
+                              </div>
+                              <p className="error text-danger">
+                                {errors.companyLocation &&
+                                  touched.companyLocation &&
+                                  errors.companyLocation}
+                              </p>
+                            </Col>
+                          </Row>
+                        </div>
+                      </div>
+                      <div className="text-end mb-3 me-3">
+                        <button className="btn btn-success w-sm" type="submit">
+                          Submit
+                        </button>
+                      </div>
+                    </Card>
+                  </Form>
+                )}
+              </Formik>
+            </Col>
+          </Row>
+
+          {/* company component */}
+
           <Row>
             <Col lg={12}>
               <Formik
@@ -207,7 +329,6 @@ const CheckupForm = () => {
                                   <option value="Mr.">Mr.</option>
                                   <option value="Mrs.">Mrs.</option>
                                 </select>
-
                               </div>
                               <p className="error text-danger">
                                 {errors.checkupName &&
@@ -227,7 +348,6 @@ const CheckupForm = () => {
                                   type="text"
                                   className="form-control"
                                   id="product-orders-input"
-
                                   name="no"
                                   aria-label="orders"
                                   aria-describedby="product-orders-addon"
@@ -252,7 +372,6 @@ const CheckupForm = () => {
                                   type="text"
                                   className="form-control"
                                   id="product-orders-input"
-
                                   name="date"
                                   aria-label="orders"
                                   aria-describedby="product-orders-addon"
@@ -262,9 +381,7 @@ const CheckupForm = () => {
                                 />
                               </div>
                               <p className="error text-danger">
-                                {errors.date &&
-                                  touched.date &&
-                                  errors.date}
+                                {errors.date && touched.date && errors.date}
                               </p>
                             </Col>
                             <Col sm={3}>
@@ -288,9 +405,7 @@ const CheckupForm = () => {
                                 </select>
                               </div>
                               <p className="error text-danger">
-                                {errors.type &&
-                                  touched.type &&
-                                  errors.type}
+                                {errors.type && touched.type && errors.type}
                               </p>
                             </Col>
                           </Row>
@@ -368,9 +483,7 @@ const CheckupForm = () => {
                                   value={values.age}
                                 />
                                 <p className="error text-danger">
-                                  {errors.age &&
-                                    touched.age &&
-                                    errors.age}
+                                  {errors.age && touched.age && errors.age}
                                 </p>
                               </div>
                             </Col>
@@ -395,9 +508,7 @@ const CheckupForm = () => {
                                   value={values.dob}
                                 />
                                 <p className="error text-danger">
-                                  {errors.dob &&
-                                    touched.dob &&
-                                    errors.dob}
+                                  {errors.dob && touched.dob && errors.dob}
                                 </p>
                               </div>
                             </Col>
@@ -450,7 +561,6 @@ const CheckupForm = () => {
                                     type="text"
                                     className="form-control"
                                     id="product-orders-input"
-
                                     name="company"
                                     aria-label="orders"
                                     aria-describedby="product-orders-addon"
@@ -477,7 +587,6 @@ const CheckupForm = () => {
                                     type="text"
                                     className="form-control"
                                     id="product-orders-input"
-
                                     name="location"
                                     aria-label="orders"
                                     aria-describedby="product-orders-addon"
@@ -504,7 +613,6 @@ const CheckupForm = () => {
                                     type="text"
                                     className="form-control"
                                     id="product-orders-input"
-
                                     name="ecNo"
                                     aria-label="orders"
                                     aria-describedby="product-orders-addon"
@@ -513,9 +621,7 @@ const CheckupForm = () => {
                                     value={values.ecNo}
                                   />
                                   <p className="error text-danger">
-                                    {errors.ecNo &&
-                                      touched.ecNo &&
-                                      errors.ecNo}
+                                    {errors.ecNo && touched.ecNo && errors.ecNo}
                                   </p>
                                 </div>
                               </Col>
@@ -605,7 +711,6 @@ const CheckupForm = () => {
                               Form-33
                             </NavLink>
                           </NavItem>
-
                         </Nav>
                       </CardHeader>
 
@@ -639,7 +744,7 @@ const CheckupForm = () => {
                       <button
                         type="submit"
                         className="btn btn-success w-sm"
-                      //   onClick={togglesuccessmodal}
+                        //   onClick={togglesuccessmodal}
                       >
                         Submit
                       </button>
@@ -653,6 +758,6 @@ const CheckupForm = () => {
       </div>
     </>
   );
-}
+};
 
-export default CheckupForm
+export default CheckupForm;
