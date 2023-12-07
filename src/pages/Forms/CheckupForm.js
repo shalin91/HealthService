@@ -268,11 +268,11 @@ const CheckupForm = () => {
             </Col>
           </Row>
 
-          {/* company component   all ok geting a company id and location name -> done  */}
+          {/* company component   all ok geting a company id and location name -> done and come */}
 
          
           <Row>
-            
+
             <Col lg={12}>
               <Formik
                 initialValues={{
