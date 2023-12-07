@@ -9,6 +9,11 @@ const Eye = () => {
     gallaryCategoryTitle2: Yup.string().required("gallary category title"),
     gallaryCategoryTitle3: Yup.string().required("gallary category title"),
     gallaryCategoryTitle4: Yup.string().required("gallary category title"),
+    gallaryCategoryTitle5: Yup.string().required("gallary category title"),
+    gallaryCategoryTitle6: Yup.string().required("gallary category title"),
+    gallaryCategoryTitle7: Yup.string().required("gallary category title"),
+    gallaryCategoryTitle8: Yup.string().required("gallary category title"),
+    // gallaryCategoryTitle9: Yup.string().required("gallary category title"),
     companyLocation: Yup.string().required("CompanyLocation is a required "),
     type: Yup.string().required("Type is required"),
     name: Yup.string().required("name is required"),
@@ -41,6 +46,11 @@ const Eye = () => {
               gallaryCategoryTitle2: "",
               gallaryCategoryTitle3: "",
               gallaryCategoryTitle4: "",
+              gallaryCategoryTitle5: "",
+              gallaryCategoryTitle6: "",
+              gallaryCategoryTitle7: "",
+              gallaryCategoryTitle8: "",
+              // gallaryCategoryTitle9: "",
             }}
             validationSchema={validationSchema}
             onSubmit={(values) => {
@@ -177,7 +187,7 @@ const Eye = () => {
                                     className="form-control"
                                     id="product-orders-input"
                                     placeholder=""
-                                    name="gallaryCategoryTitle"
+                                    name="gallaryCategoryTitle4"
                                     aria-label="orders"
                                     aria-describedby="product-orders-addon"
                                     onChange={handleChange}
@@ -214,17 +224,17 @@ const Eye = () => {
                                     className="form-control"
                                     id="product-orders-input"
                                     placeholder=""
-                                    name="gallaryCategoryTitle"
+                                    name="gallaryCategoryTitle5"
                                     aria-label="orders"
                                     aria-describedby="product-orders-addon"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    // value={values.gallaryCategoryTitle}
+                                    value={values.gallaryCategoryTitle5}
                                   />
                                   <p className="error text-danger">
-                                    {errors.gallaryCategoryTitle &&
-                                      touched.gallaryCategoryTitle &&
-                                      errors.gallaryCategoryTitle}
+                                    {errors.gallaryCategoryTitle5 &&
+                                      touched.gallaryCategoryTitle5 &&
+                                      errors.gallaryCategoryTitle5}
                                   </p>
                                 </Col>
                                 <Col className="col-lg-2 col-md-2 col-12 ">
@@ -233,17 +243,17 @@ const Eye = () => {
                                     className="form-control"
                                     id="product-orders-input"
                                     placeholder=""
-                                    name="gallaryCategoryTitle"
+                                    name="gallaryCategoryTitle6"
                                     aria-label="orders"
                                     aria-describedby="product-orders-addon"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    // value={values.gallaryCategoryTitle}
+                                    value={values.gallaryCategoryTitle6}
                                   />
                                   <p className="error text-danger">
-                                    {errors.gallaryCategoryTitle &&
-                                      touched.gallaryCategoryTitle &&
-                                      errors.gallaryCategoryTitle}
+                                    {errors.gallaryCategoryTitle6 &&
+                                      touched.gallaryCategoryTitle6 &&
+                                      errors.gallaryCategoryTitle6}
                                   </p>
                                 </Col>
                               </Row>
@@ -267,17 +277,17 @@ const Eye = () => {
                                     className="form-control"
                                     id="product-orders-input"
                                     placeholder=""
-                                    name="gallaryCategoryTitle"
+                                    name="gallaryCategoryTitle7"
                                     aria-label="orders"
                                     aria-describedby="product-orders-addon"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    // value={values.gallaryCategoryTitle}
+                                    value={values.gallaryCategoryTitle7}
                                   />
                                   <p className="error text-danger">
-                                    {errors.gallaryCategoryTitle &&
-                                      touched.gallaryCategoryTitle &&
-                                      errors.gallaryCategoryTitle}
+                                    {errors.gallaryCategoryTitle7 &&
+                                      touched.gallaryCategoryTitle7 &&
+                                      errors.gallaryCategoryTitle7}
                                   </p>
                                 </Col>
                                 <Col className="col-lg-2 col-md-2 col-12 ">
@@ -286,17 +296,17 @@ const Eye = () => {
                                     className="form-control"
                                     id="product-orders-input"
                                     placeholder=""
-                                    name="gallaryCategoryTitle"
+                                    name="gallaryCategoryTitle8"
                                     aria-label="orders"
                                     aria-describedby="product-orders-addon"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    // value={values.gallaryCategoryTitle}
+                                    value={values.gallaryCategoryTitle8}
                                   />
                                   <p className="error text-danger">
-                                    {errors.gallaryCategoryTitle &&
-                                      touched.gallaryCategoryTitle &&
-                                      errors.gallaryCategoryTitle}
+                                    {errors.gallaryCategoryTitle8 &&
+                                      touched.gallaryCategoryTitle8 &&
+                                      errors.gallaryCategoryTitle8}
                                   </p>
                                 </Col>
                               </Row>
@@ -319,14 +329,18 @@ const Eye = () => {
                                   <textarea
                                     className="form-control"
                                     id="meassageInput"
+                                    type="text"
                                     rows="3"
                                     placeholder="Enter your message"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    // value={values.gallaryCategoryTitle9}
                                   ></textarea>
-                                  <p className="error text-danger">
-                                    {errors.gallaryCategoryTitle &&
-                                      touched.gallaryCategoryTitle &&
-                                      errors.gallaryCategoryTitle}
-                                  </p>
+                                  {/* <p className="error text-danger">
+                                    {errors.gallaryCategoryTitle9 &&
+                                      touched.gallaryCategoryTitle9 &&
+                                      errors.gallaryCategoryTitle9}
+                                  </p> */}
                                 </Col>
                               </Row>
                             </div>
