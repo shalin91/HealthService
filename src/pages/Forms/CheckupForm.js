@@ -30,7 +30,7 @@ import VitalsandHistory from "./VitalsandHistory";
 const CheckupForm = () => {
   const [customActiveTab, setcustomActiveTab] = useState("1");
 
-  const { GetCompany, GetCompanybyId } = useContext(SignContext);
+  const { GetCompany, GetCompanybyId ,setNewCheckupName } = useContext(SignContext);
 
   const toggleCustom = (tab) => {
     if (customActiveTab !== tab) {
@@ -54,7 +54,9 @@ const CheckupForm = () => {
 
   const [currentEmp, setCurrentEmp] = useState(null);
 
-  const [currentUser, setCurrentUser] = useState(null);
+  const [ currentUser, setCurrentUser ] = useState(null);
+
+  const [ checkupName , setCheckupName ] = useState( null )
 
   // const [ allCategory , setAllCategory ] = useState( [] );
 
@@ -98,6 +100,17 @@ const CheckupForm = () => {
     setLocation( val.companyLocation )
 
   }
+
+const addCheckupDetails = async (val) =>{
+   
+  console.log( val );
+
+  const response = await setNewCheckupName( val );
+  
+  console.log(response);
+
+
+}  
 
   const validationSchema = Yup.object().shape({
     checkupName: Yup.string().required("Checkup Name is required"),
