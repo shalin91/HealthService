@@ -30,7 +30,7 @@ import VitalsandHistory from "./VitalsandHistory";
 const CheckupForm = () => {
   const [customActiveTab, setcustomActiveTab] = useState("1");
 
-  const { GetCompany, GetCompanybyId } = useContext(SignContext);
+  const { GetCompany, GetCompanybyId ,setNewCheckupName } = useContext(SignContext);
 
   const toggleCustom = (tab) => {
     if (customActiveTab !== tab) {
@@ -54,7 +54,9 @@ const CheckupForm = () => {
 
   const [currentEmp, setCurrentEmp] = useState(null);
 
-  const [currentUser, setCurrentUser] = useState(null);
+  const [ currentUser, setCurrentUser ] = useState(null);
+
+  const [ checkupName , setCheckupName ] = useState( null )
 
   // const [ allCategory , setAllCategory ] = useState( [] );
 
@@ -104,6 +106,17 @@ const CheckupForm = () => {
     date: Yup.string().required("Date is a required "),
     companyLocation: Yup.string().required("CompanyLocation is a required "),
   });
+
+const addCheckupDetails = async (val) =>{
+   
+  console.log( val );
+
+  const response = await setNewCheckupName( val );
+  
+  console.log(response);
+
+
+}  
 
   const validationSchema = Yup.object().shape({
     checkupName: Yup.string().required("Checkup Name is required"),
@@ -271,9 +284,10 @@ const CheckupForm = () => {
             </Col>
           </Row>
 
-          {/* company component   all ok geting a company id and location name -> done  */}
+          {/* company component   all ok geting a company id and location name -> done and come */}
 
           <Row>
+            
             <Col lg={12}>
               <Formik
                 validationSchema={schema}

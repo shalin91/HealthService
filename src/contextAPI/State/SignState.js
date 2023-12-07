@@ -248,6 +248,27 @@ export const SignState = (props) => {
     }
   };
 
+  const setNewCheckupName = async (props) =>{
+
+    try {
+
+      console.log(props);
+    
+    // const response = await  axios.post(`${url}/checkup/add-checkup-name`, 
+    // {},
+    // );
+    //   console.log(response.data)
+
+      // return response;
+      return "jay"
+    } catch (error) {
+      console.error("Error during API call:", error);
+    }
+
+   
+
+  }
+
  
 
 
@@ -271,7 +292,8 @@ export const SignState = (props) => {
         GetCompany,
         GetCompanybyId,
         GetEmpsbyCompAndLoc,
-        GetContactDetailsById
+        GetContactDetailsById,
+        setNewCheckupName
       }}
     >
       {props.children}
