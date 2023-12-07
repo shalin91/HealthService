@@ -139,7 +139,7 @@ const CheckupForm = () => {
 
 
 
-          {/* company componemnt */}
+          {/* company componemnt we get companyid and location name */}
 
           <Row>
             <Col lg={12}>
@@ -270,6 +270,185 @@ const CheckupForm = () => {
 
           {/* company component   all ok geting a company id and location name -> done  */}
 
+         
+          <Row>
+            
+            <Col lg={12}>
+              <Formik
+                initialValues={{
+                  company: "",
+                  no: "",
+                  date:""
+                }}
+                //validationSchema={validationSchema}
+                onSubmit={async (values, { resetForm }) => {
+                   handleSaveCompanyAndLocation(values);
+                  resetForm();
+                  // Additional actions after form submission
+                  // togglemodal();
+                }}
+              >
+                {({
+                  isSubmitting,
+                  handleChange,
+                  handleSubmit,
+                  errors,
+                  touched,
+                  values,
+                  handleBlur,
+                  setFieldValue,
+                }) => (
+                  <Form onSubmit={handleSubmit}>
+                    {/* Your form fields and components */}
+                    <Card>
+                      <CardHeader>
+                        <Row className="g-1 m-1">
+                          <Col className="col-sm">
+                            <div className="d-flex justify-content-sm-between">
+                              <h2 className="card-title mb-0 justify-content-sm-start">
+                                <strong>CHECK UP DETAILS</strong>
+                              </h2>
+                            </div>
+                          </Col>
+                        </Row>
+                      </CardHeader>
+                      <div className="card-body">
+                        <div className="live-preview">
+                          <Row className="align-items-center g-3">
+                            <Col sm={3}>
+                              <label
+                                className="form-label mt-3"
+                                htmlFor="product-orders-input"
+                              >
+                                Company
+                              </label>
+                              <div className="">
+                              <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  name="company"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.company}
+                                />
+                              </div>
+                             
+                        
+                              <p className="error text-danger">
+                                {errors.company &&
+                                  touched.company &&
+                                  errors.company}
+                              </p>
+                            </Col>
+                            <Col sm={3}>
+                              <label
+                                className="form-label mt-3"
+                                htmlFor="product-orders-input"
+                              >
+                               No.
+                              </label>
+                              <div className="">
+                              <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  name="no"
+                                  aria-label="orders"
+                                  ar
+                                  ia-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.no}
+                                />
+                              </div>
+                             
+                        
+                              <p className="error text-danger">
+                                {errors.no &&
+                                  touched.no &&
+                                  errors.no}
+                              </p>
+                            </Col>
+                            <Col sm={3}>
+                              <label
+                                className="form-label mt-3"
+                                htmlFor="product-orders-input"
+                              >
+                               Date
+                              </label>
+                              <div className="">
+                              <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  name="date"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.date}
+                                />
+                              </div>
+                             
+                        
+                              <p className="error text-danger">
+                                {errors.date &&
+                                  touched.date &&
+                                  errors.date}
+                              </p>
+                            </Col>
+                            <Col sm={3}>
+                              <label
+                                className="form-label mt-3"
+                                htmlFor="product-orders-input"
+                              >
+                               Check-up Type
+                              </label>
+                              <div className="">
+                                <select
+                                  className="form-select"
+                                  name="companyLocation"
+                                  onBlur={handleBlur}
+                                  value={values.type}
+                                 onChange={handleChange}
+                                >
+                                  <option value=""> Location</option>
+                                  {allLocation && allLocation.length > 0 ? (
+                                    allLocation.map((location) => (
+                                      <option key={location} value={location}>
+                                        {location}
+                                      </option>
+                                    ))
+                                  ) : (
+                                    <option value="" disabled>
+                                      No locations available
+                                    </option>
+                                  )}
+                                </select>
+                              </div>
+                              <p className="error text-danger">
+                                {errors.type &&
+                                  touched.type &&
+                                  errors.type}
+                              </p>
+                            </Col>
+                          </Row>
+                        </div>
+                      </div>
+                      <div className="text-end mb-3 me-3">
+                        <button className="btn btn-success w-sm" type="submit">
+                          Submit
+                        </button>
+                      </div>
+                    </Card>
+                  </Form>
+                )}
+              </Formik>
+            </Col>
+          </Row>
 
           <Row>
             <Col lg={12}>
