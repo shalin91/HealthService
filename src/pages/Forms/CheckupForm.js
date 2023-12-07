@@ -30,7 +30,7 @@ import VitalsandHistory from "./VitalsandHistory";
 const CheckupForm = () => {
   const [customActiveTab, setcustomActiveTab] = useState("1");
 
-  const { GetCompany, GetCompanybyId ,setNewCheckupName } = useContext(SignContext);
+  const { GetCompany, GetCompanybyId, setNewCheckupName, getCheckupType } = useContext(SignContext);
 
   const toggleCustom = (tab) => {
     if (customActiveTab !== tab) {
@@ -54,9 +54,9 @@ const CheckupForm = () => {
 
   const [currentEmp, setCurrentEmp] = useState(null);
 
-  const [ currentUser, setCurrentUser ] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
 
-  const [ checkupName , setCheckupName ] = useState( null )
+  const [checkupName, setCheckupName] = useState(null)
 
   // const [ allCategory , setAllCategory ] = useState( [] );
 
@@ -96,27 +96,54 @@ const CheckupForm = () => {
 
     setComapny(val.companyName);
 
+
+    console.log(val.companyName)
+    console.log(company);
+
     setLocation(val.companyLocation);
   };
 
   // Creating schema
   const schema = Yup.object().shape({
-    company: Yup.string().required("Email is a required "),
-    no: Yup.string().required("Number  is a required "),
-    date: Yup.string().required("Date is a required "),
-    companyLocation: Yup.string().required("CompanyLocation is a required "),
+    checkupName: Yup.string().required("checkupName is a required "),
+    checkupNumber: Yup.string().required("Number  is a required "),
+    checkupDate: Yup.string().required("Date is a required "),
+    checkupType: Yup.string().required("checkupType is a required "),
   });
 
-const addCheckupDetails = async (val) =>{
-   
-  console.log( val );
-
-  const response = await setNewCheckupName( val );
-  
-  console.log(response);
 
 
-}  
+  const addCheckupDetails = async (val) => {
+
+    console.log(val)
+
+    setCheckupType(val.checkupType)
+
+    const response = await setNewCheckupName({ val, company, location });
+
+    console.log(response);
+
+    setCheckupName( response._id );
+
+    console.log( response.data._id );
+    
+
+
+
+
+  }
+
+
+  const getAllCheckupType = async () => {
+
+    const responce = await getCheckupType();
+
+    console.log(responce);
+
+    setAllCheckupType(responce.data);
+
+
+  }
 
   const validationSchema = Yup.object().shape({
     checkupName: Yup.string().required("Checkup Name is required"),
@@ -146,6 +173,7 @@ const addCheckupDetails = async (val) =>{
 
   useEffect(() => {
     getcompanies();
+    getAllCheckupType();
   }, []);
 
   return (
@@ -287,19 +315,18 @@ const addCheckupDetails = async (val) =>{
           {/* company component   all ok geting a company id and location name -> done and come */}
 
           <Row>
-            
+
             <Col lg={12}>
               <Formik
                 validationSchema={schema}
                 initialValues={{
-                  company: "",
-                  no: "",
-                  date: "",
-                  companyLocation: "",
+                  checkupName: "",
+                  checkupNumber: "",
+                  checkupDate: "",
+                  checkupType: "",
                 }}
                 onSubmit={(values) => {
-                  // Alert the input values of the form that we filled
-                  alert(JSON.stringify(values));
+                  addCheckupDetails(values)
                 }}
               >
                 {({
@@ -336,26 +363,26 @@ const addCheckupDetails = async (val) =>{
                                     className="form-label mt-3"
                                     htmlFor="product-orders-input"
                                   >
-                                    Company
+                                    checkup name
                                   </label>
                                   <div className="">
                                     <Input
                                       type="text"
                                       className="form-control"
                                       id="product-orders-input"
-                                      name="company"
+                                      name="checkupName"
                                       aria-label="orders"
                                       aria-describedby="product-orders-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={values.company}
+                                      value={values.checkupName}
                                     />
                                   </div>
 
                                   <p className="error text-danger">
-                                    {errors.company &&
-                                      touched.company &&
-                                      errors.company}
+                                    {errors.checkupName &&
+                                      touched.checkupName &&
+                                      errors.checkupName}
                                   </p>
                                 </Col>
                                 <Col sm={3}>
@@ -363,25 +390,25 @@ const addCheckupDetails = async (val) =>{
                                     className="form-label mt-3"
                                     htmlFor="product-orders-input"
                                   >
-                                    No.
+                                    checkup Number
                                   </label>
                                   <div className="">
                                     <Input
                                       type="text"
                                       className="form-control"
                                       id="product-orders-input"
-                                      name="no"
+                                      name="checkupNumber"
                                       aria-label="orders"
                                       ar
                                       ia-describedby="product-orders-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={values.no}
+                                      value={values.checkupNumber}
                                     />
                                   </div>
 
                                   <p className="error text-danger">
-                                    {errors.no && touched.no && errors.no}
+                                    {errors.checkupNumber && touched.checkupNumber && errors.checkupNumber}
                                   </p>
                                 </Col>
                                 <Col sm={3}>
@@ -396,17 +423,17 @@ const addCheckupDetails = async (val) =>{
                                       type="text"
                                       className="form-control"
                                       id="product-orders-input"
-                                      name="date"
+                                      name="checkupDate"
                                       aria-label="orders"
                                       aria-describedby="product-orders-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={values.date}
+                                      value={values.checkupDate}
                                     />
                                   </div>
 
                                   <p className="error text-danger">
-                                    {errors.date && touched.date && errors.date}
+                                    {errors.checkupDate && touched.checkupDate && errors.checkupDate}
                                   </p>
                                 </Col>
                                 <Col sm={3}>
@@ -419,19 +446,19 @@ const addCheckupDetails = async (val) =>{
                                   <div className="">
                                     <select
                                       className="form-select"
-                                      name="companyLocation"
+                                      name="checkupType"
                                       onBlur={handleBlur}
-                                      value={values.companyLocation}
+                                      value={values.checkupType}
                                       onChange={handleChange}
                                     >
-                                      <option value=""> Location</option>
-                                      {allLocation && allLocation.length > 0 ? (
-                                        allLocation.map((location) => (
+                                      <option value=""> checkup Type</option>
+                                      {allCheckupType && allCheckupType.length > 0 ? (
+                                        allCheckupType.map((type) => (
                                           <option
-                                            key={location}
-                                            value={location}
+                                            key={type}
+                                            value={type._id}
                                           >
-                                            {location}
+                                            {type.checkupType}
                                           </option>
                                         ))
                                       ) : (
@@ -442,9 +469,9 @@ const addCheckupDetails = async (val) =>{
                                     </select>
                                   </div>
                                   <p className="error text-danger">
-                                    {errors.companyLocation &&
-                                      touched.companyLocation &&
-                                      errors.companyLocation}
+                                    {errors.checkupType &&
+                                      touched.checkupType &&
+                                      errors.checkupType}
                                   </p>
                                 </Col>
                               </Row>
@@ -963,7 +990,7 @@ const addCheckupDetails = async (val) =>{
                       <button
                         type="submit"
                         className="btn btn-success w-sm"
-                        //   onClick={togglesuccessmodal}
+                      //   onClick={togglesuccessmodal}
                       >
                         Submit
                       </button>
