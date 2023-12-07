@@ -89,15 +89,21 @@ const CheckupForm = () => {
     // setRoles(res);
   };
 
-  const handleSaveCompanyAndLocation = async (val) =>{
-    
-    console.log( val )
+  const handleSaveCompanyAndLocation = async (val) => {
+    console.log(val);
 
-    setComapny( val.companyName );
+    setComapny(val.companyName);
 
-    setLocation( val.companyLocation )
+    setLocation(val.companyLocation);
+  };
 
-  }
+  // Creating schema
+  const schema = Yup.object().shape({
+    company: Yup.string().required("Email is a required "),
+    no: Yup.string().required("Number  is a required "),
+    date: Yup.string().required("Date is a required "),
+    companyLocation: Yup.string().required("CompanyLocation is a required "),
+  });
 
   const validationSchema = Yup.object().shape({
     checkupName: Yup.string().required("Checkup Name is required"),
@@ -136,9 +142,6 @@ const CheckupForm = () => {
         <Container fluid>
           <BreadCrumb grandParent="Setup" parent="Forms" child="Form-2" />
 
-
-
-
           {/* company componemnt we get companyid and location name */}
 
           <Row>
@@ -150,7 +153,7 @@ const CheckupForm = () => {
                 }}
                 //validationSchema={validationSchema}
                 onSubmit={async (values, { resetForm }) => {
-                   handleSaveCompanyAndLocation(values);
+                  handleSaveCompanyAndLocation(values);
                   resetForm();
                   // Additional actions after form submission
                   // togglemodal();
@@ -231,7 +234,7 @@ const CheckupForm = () => {
                                   name="companyLocation"
                                   onBlur={handleBlur}
                                   value={values.companyLocation}
-                                 onChange={handleChange}
+                                  onChange={handleChange}
                                 >
                                   <option value=""> Location</option>
                                   {allLocation && allLocation.length > 0 ? (
@@ -270,181 +273,181 @@ const CheckupForm = () => {
 
           {/* company component   all ok geting a company id and location name -> done  */}
 
-         
           <Row>
-            
             <Col lg={12}>
               <Formik
+                validationSchema={schema}
                 initialValues={{
                   company: "",
                   no: "",
-                  date:""
+                  date: "",
+                  companyLocation: "",
                 }}
-                //validationSchema={validationSchema}
-                onSubmit={async (values, { resetForm }) => {
-                   handleSaveCompanyAndLocation(values);
-                  resetForm();
-                  // Additional actions after form submission
-                  // togglemodal();
+                onSubmit={(values) => {
+                  // Alert the input values of the form that we filled
+                  alert(JSON.stringify(values));
                 }}
               >
                 {({
-                  isSubmitting,
-                  handleChange,
-                  handleSubmit,
+                  values,
                   errors,
                   touched,
-                  values,
+                  handleChange,
                   handleBlur,
-                  setFieldValue,
+                  handleSubmit,
                 }) => (
-                  <Form onSubmit={handleSubmit}>
-                    {/* Your form fields and components */}
-                    <Card>
-                      <CardHeader>
-                        <Row className="g-1 m-1">
-                          <Col className="col-sm">
-                            <div className="d-flex justify-content-sm-between">
-                              <h2 className="card-title mb-0 justify-content-sm-start">
-                                <strong>CHECK UP DETAILS</strong>
-                              </h2>
+                  <div className="login">
+                    <div className="form">
+                      {/* Passing handleSubmit parameter tohtml form onSubmit property */}
+                      <form noValidate onSubmit={handleSubmit}>
+                        {/* Our input html with passing formik parameters like handleChange, values, handleBlur to input properties */}
+
+                        <Card>
+                          <CardHeader>
+                            <Row className="g-1 m-1">
+                              <Col className="col-sm">
+                                <div className="d-flex justify-content-sm-between">
+                                  <h2 className="card-title mb-0 justify-content-sm-start">
+                                    <strong>CHECK UP DETAILS</strong>
+                                  </h2>
+                                </div>
+                              </Col>
+                            </Row>
+                          </CardHeader>
+                          <div className="card-body">
+                            <div className="live-preview">
+                              <Row className="align-items-center g-3">
+                                <Col sm={3}>
+                                  <label
+                                    className="form-label mt-3"
+                                    htmlFor="product-orders-input"
+                                  >
+                                    Company
+                                  </label>
+                                  <div className="">
+                                    <Input
+                                      type="text"
+                                      className="form-control"
+                                      id="product-orders-input"
+                                      name="company"
+                                      aria-label="orders"
+                                      aria-describedby="product-orders-addon"
+                                      onChange={handleChange}
+                                      onBlur={handleBlur}
+                                      value={values.company}
+                                    />
+                                  </div>
+
+                                  <p className="error text-danger">
+                                    {errors.company &&
+                                      touched.company &&
+                                      errors.company}
+                                  </p>
+                                </Col>
+                                <Col sm={3}>
+                                  <label
+                                    className="form-label mt-3"
+                                    htmlFor="product-orders-input"
+                                  >
+                                    No.
+                                  </label>
+                                  <div className="">
+                                    <Input
+                                      type="text"
+                                      className="form-control"
+                                      id="product-orders-input"
+                                      name="no"
+                                      aria-label="orders"
+                                      ar
+                                      ia-describedby="product-orders-addon"
+                                      onChange={handleChange}
+                                      onBlur={handleBlur}
+                                      value={values.no}
+                                    />
+                                  </div>
+
+                                  <p className="error text-danger">
+                                    {errors.no && touched.no && errors.no}
+                                  </p>
+                                </Col>
+                                <Col sm={3}>
+                                  <label
+                                    className="form-label mt-3"
+                                    htmlFor="product-orders-input"
+                                  >
+                                    Date
+                                  </label>
+                                  <div className="">
+                                    <Input
+                                      type="text"
+                                      className="form-control"
+                                      id="product-orders-input"
+                                      name="date"
+                                      aria-label="orders"
+                                      aria-describedby="product-orders-addon"
+                                      onChange={handleChange}
+                                      onBlur={handleBlur}
+                                      value={values.date}
+                                    />
+                                  </div>
+
+                                  <p className="error text-danger">
+                                    {errors.date && touched.date && errors.date}
+                                  </p>
+                                </Col>
+                                <Col sm={3}>
+                                  <label
+                                    className="form-label mt-3"
+                                    htmlFor="product-orders-input"
+                                  >
+                                    Check-up Type
+                                  </label>
+                                  <div className="">
+                                    <select
+                                      className="form-select"
+                                      name="companyLocation"
+                                      onBlur={handleBlur}
+                                      value={values.companyLocation}
+                                      onChange={handleChange}
+                                    >
+                                      <option value=""> Location</option>
+                                      {allLocation && allLocation.length > 0 ? (
+                                        allLocation.map((location) => (
+                                          <option
+                                            key={location}
+                                            value={location}
+                                          >
+                                            {location}
+                                          </option>
+                                        ))
+                                      ) : (
+                                        <option value="" disabled>
+                                          No locations available
+                                        </option>
+                                      )}
+                                    </select>
+                                  </div>
+                                  <p className="error text-danger">
+                                    {errors.companyLocation &&
+                                      touched.companyLocation &&
+                                      errors.companyLocation}
+                                  </p>
+                                </Col>
+                              </Row>
                             </div>
-                          </Col>
-                        </Row>
-                      </CardHeader>
-                      <div className="card-body">
-                        <div className="live-preview">
-                          <Row className="align-items-center g-3">
-                            <Col sm={3}>
-                              <label
-                                className="form-label mt-3"
-                                htmlFor="product-orders-input"
-                              >
-                                Company
-                              </label>
-                              <div className="">
-                              <Input
-                                  type="text"
-                                  className="form-control"
-                                  id="product-orders-input"
-                                  name="company"
-                                  aria-label="orders"
-                                  aria-describedby="product-orders-addon"
-                                  onChange={handleChange}
-                                  onBlur={handleBlur}
-                                  value={values.company}
-                                />
-                              </div>
-                             
-                        
-                              <p className="error text-danger">
-                                {errors.company &&
-                                  touched.company &&
-                                  errors.company}
-                              </p>
-                            </Col>
-                            <Col sm={3}>
-                              <label
-                                className="form-label mt-3"
-                                htmlFor="product-orders-input"
-                              >
-                               No.
-                              </label>
-                              <div className="">
-                              <Input
-                                  type="text"
-                                  className="form-control"
-                                  id="product-orders-input"
-                                  name="no"
-                                  aria-label="orders"
-                                  ar
-                                  ia-describedby="product-orders-addon"
-                                  onChange={handleChange}
-                                  onBlur={handleBlur}
-                                  value={values.no}
-                                />
-                              </div>
-                             
-                        
-                              <p className="error text-danger">
-                                {errors.no &&
-                                  touched.no &&
-                                  errors.no}
-                              </p>
-                            </Col>
-                            <Col sm={3}>
-                              <label
-                                className="form-label mt-3"
-                                htmlFor="product-orders-input"
-                              >
-                               Date
-                              </label>
-                              <div className="">
-                              <Input
-                                  type="text"
-                                  className="form-control"
-                                  id="product-orders-input"
-                                  name="date"
-                                  aria-label="orders"
-                                  aria-describedby="product-orders-addon"
-                                  onChange={handleChange}
-                                  onBlur={handleBlur}
-                                  value={values.date}
-                                />
-                              </div>
-                             
-                        
-                              <p className="error text-danger">
-                                {errors.date &&
-                                  touched.date &&
-                                  errors.date}
-                              </p>
-                            </Col>
-                            <Col sm={3}>
-                              <label
-                                className="form-label mt-3"
-                                htmlFor="product-orders-input"
-                              >
-                               Check-up Type
-                              </label>
-                              <div className="">
-                                <select
-                                  className="form-select"
-                                  name="companyLocation"
-                                  onBlur={handleBlur}
-                                  value={values.type}
-                                 onChange={handleChange}
-                                >
-                                  <option value=""> Location</option>
-                                  {allLocation && allLocation.length > 0 ? (
-                                    allLocation.map((location) => (
-                                      <option key={location} value={location}>
-                                        {location}
-                                      </option>
-                                    ))
-                                  ) : (
-                                    <option value="" disabled>
-                                      No locations available
-                                    </option>
-                                  )}
-                                </select>
-                              </div>
-                              <p className="error text-danger">
-                                {errors.type &&
-                                  touched.type &&
-                                  errors.type}
-                              </p>
-                            </Col>
-                          </Row>
-                        </div>
-                      </div>
-                      <div className="text-end mb-3 me-3">
-                        <button className="btn btn-success w-sm" type="submit">
-                          Submit
-                        </button>
-                      </div>
-                    </Card>
-                  </Form>
+                          </div>
+                          <div className="text-end mb-3 me-3">
+                            <button
+                              className="btn btn-success w-sm"
+                              type="submit"
+                            >
+                              Submit
+                            </button>
+                          </div>
+                        </Card>
+                      </form>
+                    </div>
+                  </div>
                 )}
               </Formik>
             </Col>
