@@ -4,17 +4,24 @@ import { Card, CardHeader, Col, Input, Row } from "reactstrap";
 import * as Yup from "yup";
 
 const VitalsandHistory = () => {
+
+
   const validationSchema = Yup.object().shape({
-    height: Yup.string().required("height  is required"),
+    height: Yup.string().required(
+      "height  is required"
+    ),
+
     weight: Yup.string().required("weight is required"),
     bmi: Yup.string().required("bmi is required"),
     pulse: Yup.string().required("pulse is required"),
     bp: Yup.string().required("bp is required"),
     temp: Yup.string().required("temp is required"),
+
     complaints: Yup.string().required("complaints is required"),
     pastHistory: Yup.string().required("pastHistory is required"),
     personalHistory: Yup.string().required("personalHistory is required"),
     familyHistory: Yup.string().required("familyHistory is required"),
+
   });
 
   return (
@@ -35,9 +42,12 @@ const VitalsandHistory = () => {
               familyHistory: "",
             }}
             validationSchema={validationSchema}
-            onSubmit={(values) => {
-              // Alert the input values of the form that we filled
-              alert(JSON.stringify(values));
+
+            onSubmit={async (values, { resetForm }) => {
+              // await handleSavedcat(values);
+              resetForm();
+              // togglemodal();
+
             }}
           >
             {({
@@ -59,6 +69,7 @@ const VitalsandHistory = () => {
                           <h2 className="card-title mb-0 justify-content-sm-start">
                             <strong>Vitals</strong>
                           </h2>
+
                         </div>
                       </Col>
                     </Row>
@@ -146,7 +157,11 @@ const VitalsandHistory = () => {
                                 value={values.bmi}
                               />
                               <p className="error text-danger">
-                                {errors.bmi && touched.bmi && errors.bmi}
+
+                                {errors.bmi &&
+                                  touched.bmi &&
+                                  errors.bmi}
+
                               </p>
                             </div>
                           </div>
@@ -175,7 +190,11 @@ const VitalsandHistory = () => {
                                 value={values.pulse}
                               />
                               <p className="error text-danger">
-                                {errors.pulse && touched.pulse && errors.pulse}
+
+                                {errors.pulse &&
+                                  touched.pulse &&
+                                  errors.pulse}
+
                               </p>
                             </div>
                           </div>
@@ -202,7 +221,11 @@ const VitalsandHistory = () => {
                                 value={values.bp}
                               />
                               <p className="error text-danger">
-                                {errors.bp && touched.bp && errors.bp}
+
+                                {errors.bp &&
+                                  touched.bp &&
+                                  errors.bp}
+
                               </p>
                             </div>
                           </div>
@@ -229,7 +252,11 @@ const VitalsandHistory = () => {
                                 value={values.temp}
                               />
                               <p className="error text-danger">
-                                {errors.temp && touched.temp && errors.temp}
+
+                                {errors.temp &&
+                                  touched.temp &&
+                                  errors.temp}
+
                               </p>
                             </div>
                           </div>
@@ -242,6 +269,7 @@ const VitalsandHistory = () => {
                               <h2 className="card-title mb-0 justify-content-sm-start">
                                 <strong>Medical History</strong>
                               </h2>
+
                             </div>
                           </Col>
                         </Row>
@@ -268,11 +296,13 @@ const VitalsandHistory = () => {
                                 onBlur={handleBlur}
                                 value={values.complaints}
                               />
+
                               <p className="error text-danger">
                                 {errors.complaints &&
                                   touched.complaints &&
                                   errors.complaints}
                               </p>
+
                             </div>
                           </div>
                         </Col>
@@ -299,11 +329,13 @@ const VitalsandHistory = () => {
                                 onBlur={handleBlur}
                                 value={values.pastHistory}
                               />
+
                               <p className="error text-danger">
                                 {errors.pastHistory &&
                                   touched.pastHistory &&
                                   errors.pastHistory}
                               </p>
+
                             </div>
                           </div>
                         </Col>
@@ -330,11 +362,13 @@ const VitalsandHistory = () => {
                                 onBlur={handleBlur}
                                 value={values.personalHistory}
                               />
+
                               <p className="error text-danger">
                                 {errors.personalHistory &&
                                   touched.personalHistory &&
                                   errors.personalHistory}
                               </p>
+
                             </div>
                           </div>
                         </Col>
@@ -361,22 +395,26 @@ const VitalsandHistory = () => {
                                 onBlur={handleBlur}
                                 value={values.familyHistory}
                               />
+
                               <p className="error text-danger">
                                 {errors.familyHistory &&
                                   touched.familyHistory &&
                                   errors.familyHistory}
                               </p>
+
                             </div>
                           </div>
                         </Col>
                       </Row>
                     </div>
                   </div>
+
                   <div className="text-end mb-3 me-3">
                     <button className="btn btn-success w-sm" type="submit">
                       Submit
                     </button>
                   </div>
+
                 </Card>
               </Form>
             )}
@@ -384,7 +422,12 @@ const VitalsandHistory = () => {
         </Col>
       </Row>
     </>
+
+
+  
+
   );
 };
+
 
 export default VitalsandHistory;
