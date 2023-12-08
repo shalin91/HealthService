@@ -177,7 +177,7 @@ const Navdata = () => {
             {
               id: 5,
               label: "Form-1",
-              link: "/form",
+              link: "/newform",
               parentId: "apps",
             }, 
             {
@@ -195,39 +195,39 @@ const Navdata = () => {
 
           ],
         },
-        // {
-        //   id: "appsprojects",
-        //   label: "Orders",
-        //   link: "/#",
-        //   isChildItem: true,
-        //   click: function (e) {
-        //     e.preventDefault();
-        //     setIsProjects(!isProjects);
-        //   },
-        //   parentId: "apps",
-        //   stateVariables: isProjects,
-        //   childItems: [
-        //     // {
-        //     //   id: 1,
-        //     //   label: "Orders",
-        //     //   link: "/apps-ecommerce-orders",
-        //     //   parentId: "apps",
-        //     // },
-        //     // {
-        //     //   id: 1,
-        //     //   label: "New Orders",
-        //     //   link: "/orders",
-        //     //   parentId: "apps",
-        //     // },
-        //     // {
-        //     //   id: 2,
-        //     //   label: "Order Details",
-        //     //   link: "/apps-ecommerce-order-details",
-        //     //   parentId: "apps",
-        //     // },
-        //     // { id: 3, label: "Create Project", link: "/apps-projects-create", parentId: "apps", },
-        //   ],
-        // },
+        {
+          id: "appsprojects",
+          label: "Company Master",
+          link: "/#",
+          isChildItem: true,
+          click: function (e) {
+            e.preventDefault();
+            setIsProjects(!isProjects);
+          },
+          parentId: "apps",
+          stateVariables: isProjects,
+          childItems: [
+            {
+              id: 1,
+              label: "Add Company",
+              link: "/addcompany",
+              parentId: "apps",
+            },
+            // {
+            //   id: 1,
+            //   label: "New Orders",
+            //   link: "/orders",
+            //   parentId: "apps",
+            // },
+            // {
+            //   id: 2,
+            //   label: "Order Details",
+            //   link: "/apps-ecommerce-order-details",
+            //   parentId: "apps",
+            // },
+            // { id: 3, label: "Create Project", link: "/apps-projects-create", parentId: "apps", },
+          ],
+        },
         // {
         //   id: "appsprojects",
         //   label: "manage category",

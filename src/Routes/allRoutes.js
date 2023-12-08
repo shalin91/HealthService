@@ -119,14 +119,31 @@ import CustomersByDate from "../pages/Reports/CustomersByDate.js";
 import BlogCategory from "../pages/BlogMaster/BlogCategory.js";
 import SubScribe from "../pages/Subscribe/SubScribe.js";
 import Contact from "../pages/Contact/Contact.js";
-import Form1 from "../pages/Forms/Form1.js";
+
+import NewForm from "../pages/Forms/NewForm.js";
+import AddCompany from "../pages/CompanyMaster/AddCompany.js";
+import CheckupForm from "../pages/Forms/CheckupForm.js";
+import VitalsandHistory from "../pages/Forms/VitalsandHistory.js";
+import GeneralExam from "../pages/Forms/GeneralExam.js";
+import Eye from "../pages/Forms/Eye.js";
+import Investigation from "../pages/Forms/Investigation.js";
+import OtherDetails from "../pages/Forms/OtherDetails.js";
+import Form33 from "../pages/Forms/Form33.js";
 
 
 // import customerNew from "../pages/Ecommerce/EcommerceCustomers/customerNew";
 const authProtectedRoutes = [
   // { path: "/dashboard", component: <NewDashboard /> },
-  { path: "/form", component: <Form1 /> },
-  // { path: "/addproduct", component: <SignState><EcommerceNewAddProduct /></SignState> },
+
+  { path: "/newform", component: <SignState><NewForm /></SignState> },
+  { path: "/form", component: <SignState><CheckupForm /></SignState> },
+  { path: "/addcompany", component: <SignState><AddCompany /></SignState> },
+  { path: "/vitalsandhistory", component: <SignState><VitalsandHistory /></SignState> },
+  { path: "/generalexam", component: <SignState><GeneralExam /></SignState> },
+  { path: "/eye", component: <SignState><Eye /></SignState> },
+  { path: "/investigation", component: <SignState><Investigation /></SignState> },
+  { path: "/otherdetails", component: <SignState><OtherDetails /></SignState> },
+  { path: "/form33", component: <SignState><Form33 /></SignState> },
 
   { path: "/apps-ecommerce-orders", component: <EcommerceOrders /> },
   // { path: "/apps-ecommerce-order-details", component: <EcommerceOrderDetail /> },

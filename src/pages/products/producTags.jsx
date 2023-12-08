@@ -20,7 +20,7 @@ const ProducTags = (props) => {
           name="tags"
           placeHolder="enter tags"
         />
-        {/* <em>press enter or comma to add new tag</em> */}
+  
       </div>
     </Col>
   );
