@@ -249,6 +249,7 @@ const Eye = () => {
                                   <p>with glasses</p>
                                 </Col>
 
+
                                 <Col className="col-lg-2 col-md-2 col-12">
                                   <Input
                                     type="text"
@@ -293,6 +294,42 @@ const Eye = () => {
                         </Col>
                       </Row>
 
+                                    <Col className="col-lg-2 col-md-2 col-12">
+                                      <Input
+                                        type="text"
+                                        className="form-control"
+                                        id="product-orders-input"
+                                        placeholder=""
+                                        name="gallaryCategoryTitle"
+                                        aria-label="orders"
+                                        aria-describedby="product-orders-addon"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        // value={values.gallaryCategoryTitle}
+                                      />
+                                    </Col>
+                                    <Col className="col-lg-2 col-md-2 col-12 ">
+                                      <Input
+                                        type="text"
+                                        className="form-control"
+                                        id="product-orders-input"
+                                        placeholder=""
+                                        name="gallaryCategoryTitle"
+                                        aria-label="orders"
+                                        aria-describedby="product-orders-addon"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        // value={values.gallaryCategoryTitle}
+                                      />
+                                    </Col>
+                                  </Row>
+                                </div>
+                              </div>
+                            </Col>
+                          </Row>
+                          
+
+
                       <Row className="align-items-center g-3 mt-2">
                         <Col className="col-sm">
                           <div>
@@ -302,6 +339,7 @@ const Eye = () => {
                                   Colour vision
                                 </Col>
                                 <Col className="col-lg-2 col-md-2"></Col>
+
 
                                 <Col className="col-lg-4 col-md-4">
                                   <textarea
@@ -338,6 +376,32 @@ const Eye = () => {
           </Formik>
         </Col>
       </Row>
+
+                                    <Col className="col-lg-4 col-md-4">
+                                      <textarea
+                                        className="form-control"
+                                        id="meassageInput"
+                                        rows="3"
+                                        placeholder="Enter your message"
+                                      ></textarea>
+                                    </Col>
+                                  </Row>
+                                </div>
+                              </div>
+                            </Col>
+                          </Row>
+
+
+                        </div>
+                      </div>
+                    </Card>
+                  </Form>
+                )}
+              </Formik>
+            </Col>
+          </Row>
+        
+
     </>
   );
 };

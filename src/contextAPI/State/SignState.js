@@ -169,7 +169,7 @@ export const SignState = (props) => {
       return { success: false, msg: "server Error" };
     }
   };
-  
+
 
   // Add Company
   const AddComapany = async (CompanyData) => {
@@ -201,8 +201,8 @@ export const SignState = (props) => {
   // Get Company by Id
   const GetCompanybyId = async (id) => {
     try {
-      const response = await axios.get(`${url}/company/get-company-by-id/${id}`, 
-      {}
+      const response = await axios.get(`${url}/company/get-company-by-id/${id}`,
+        {}
       );
       return response;
     } catch (error) {
@@ -214,15 +214,15 @@ export const SignState = (props) => {
     try {
 
       const id = props.id
-      
+
       console.log("---id in front end---")
 
-      console.log( id )
+      console.log(id)
 
       const response = await axios.post(`${url}/employ/get-employ-contactetails-by-id`, {
         id: id,
       });
-    
+
       return response;
     } catch (error) {
       console.error("Error during API call:", error);
@@ -234,10 +234,10 @@ export const SignState = (props) => {
     try {
 
       const id = props.companyName
-      const location = props.companyLocation 
-      
-      const response = await axios.post(`${url}/company/get-all-emp-by-company-location/${id}`, 
-      {location : location},
+      const location = props.companyLocation
+
+      const response = await axios.post(`${url}/company/get-all-emp-by-company-location/${id}`,
+        { location: location },
       );
 
       console.log(response.data)
@@ -248,7 +248,51 @@ export const SignState = (props) => {
     }
   };
 
- 
+  const setNewCheckupName = async (props) => {
+
+    try {
+
+      console.log("----------------------------------------------------------------")
+
+      console.log(props);
+
+      const data = {
+        checkupName: props.val.checkupName,
+        checkupType: props.val.checkupType,
+        checkupDate: props.val.checkupDate,
+        checkupNumber: props.val.checkupNumber,
+        companyId: props.company,
+        location: props.location
+      }
+
+      console.log(data);
+
+      const response = await axios.post(`${url}/checkup/add-checkup-name`,
+        { data },
+      );
+      console.log(response.data)
+
+      return response;
+      // return "jay"
+    } catch (error) {
+      console.error("Error during API call:", error);
+    }
+
+  }
+
+  const getCheckupType = async () => {
+    try {
+      const response = await axios.get(`${url}/checkup/get-all-checkup-type`, {},
+      );
+
+      return response;
+
+    } catch (error) {
+      console.error("Error during API call:", error);
+    }
+  }
+
+
 
 
 
@@ -271,7 +315,9 @@ export const SignState = (props) => {
         GetCompany,
         GetCompanybyId,
         GetEmpsbyCompAndLoc,
-        GetContactDetailsById
+        GetContactDetailsById,
+        setNewCheckupName,
+        getCheckupType
       }}
     >
       {props.children}
