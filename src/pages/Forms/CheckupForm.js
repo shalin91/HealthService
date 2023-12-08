@@ -149,6 +149,7 @@ const CheckupForm = () => {
     checkupName: Yup.string().required("Checkup Name is required"),
     no: Yup.string().required("Number is required"),
     date: Yup.string().required("Date is required"),
+    companyLocation: Yup.string().required("CompanyLocation is a required "),
     type: Yup.string().required("Type is required"),
     name: Yup.string().required("name is required"),
     gender: Yup.string().required("gender is required"),
@@ -497,482 +498,309 @@ const CheckupForm = () => {
           <Row>
             <Col lg={12}>
               <Formik
+                validationSchema={validationSchema}
                 initialValues={{
-                  checkupName: "",
-                  no: "",
-                  date: "",
-                  type: "",
                   name: "",
                   gender: "",
-                  age: "",
-                  company: "",
-                  location: "",
-                  ecNo: "",
-                  address: "",
                   dob: "",
-                  height: "",
+                  age: "",
                   bloodgroup: "",
-                  martialstatus: "",
-                  doj: "",
-                  marks: "",
-                  natureofjob: "",
-                  res: "",
-                  mob: "",
-                  office: "",
-                  pphash: "",
-                  emer: "",
-                  email: "",
                 }}
-                validationSchema={validationSchema}
-                onSubmit={async (values, { resetForm }) => {
-                  //   await handleSavedcat(values);
-                  resetForm();
-                  // togglemodal();
+                onSubmit={(values) => {
+                  // Alert the input values of the form that we filled
+                  alert(JSON.stringify(values));
                 }}
               >
                 {({
-                  isSubmitting,
-                  handleChange,
-                  handleSubmit,
+                  values,
                   errors,
                   touched,
-                  values,
+                  handleChange,
                   handleBlur,
-                  setFieldValue,
+                  handleSubmit,
                 }) => (
-                  <Form onSubmit={handleSubmit}>
-                    <Card>
-                      <CardHeader>
-                        <Row className="g-1 m-1">
-                          <Col className="col-sm">
-                            <div className="d-flex justify-content-sm-between">
-                              <h2 className="card-title mb-0 justify-content-sm-start">
-                                <strong>Title</strong>
-                              </h2>
-                            </div>
-                          </Col>
-                        </Row>
-                      </CardHeader>
-                      <div className="card-body">
-                        <div className="live-preview">
-                          <Row className="align-items-center g-3">
-                            <Col sm={4}>
-                              <label
-                                className="form-label mt-3"
-                                htmlFor="product-orders-input"
-                              >
-                                Check-up Name
-                              </label>
-                              <div className="">
-                                <select
-                                  className="form-select"
-                                  name="checkupName"
-                                  onChange={handleChange}
-                                  onBlur={handleBlur}
-                                  value={values.checkupName}
-                                >
-                                  <option value="">Select</option>
-                                  <option value="Mr.">Mr.</option>
-                                  <option value="Mrs.">Mrs.</option>
-                                </select>
-                              </div>
-                              <p className="error text-danger">
-                                {errors.checkupName &&
-                                  touched.checkupName &&
-                                  errors.checkupName}
-                              </p>
-                            </Col>
-                            <Col sm={2}>
-                              <label
-                                className="form-label mt-3"
-                                htmlFor="product-orders-input"
-                              >
-                                No.
-                              </label>
-                              <div className="">
-                                <Input
-                                  type="text"
-                                  className="form-control"
-                                  id="product-orders-input"
-                                  name="no"
-                                  aria-label="orders"
-                                  aria-describedby="product-orders-addon"
-                                  onChange={handleChange}
-                                  onBlur={handleBlur}
-                                  value={values.no}
-                                />
-                              </div>
-                              <p className="error text-danger">
-                                {errors.no && touched.no && errors.no}
-                              </p>
-                            </Col>
-                            <Col sm={2}>
-                              <label
-                                className="form-label mt-3"
-                                htmlFor="product-orders-input"
-                              >
-                                Date
-                              </label>
-                              <div className="">
-                                <Input
-                                  type="text"
-                                  className="form-control"
-                                  id="product-orders-input"
-                                  name="date"
-                                  aria-label="orders"
-                                  aria-describedby="product-orders-addon"
-                                  onChange={handleChange}
-                                  onBlur={handleBlur}
-                                  value={values.date}
-                                />
-                              </div>
-                              <p className="error text-danger">
-                                {errors.date && touched.date && errors.date}
-                              </p>
-                            </Col>
-                            <Col sm={3}>
-                              <label
-                                className="form-label mt-3"
-                                htmlFor="product-orders-input"
-                              >
-                                Type
-                              </label>
-                              <div className="">
-                                <select
-                                  className="form-select"
-                                  name="type"
-                                  onChange={handleChange}
-                                  onBlur={handleBlur}
-                                  value={values.type}
-                                >
-                                  <option value="">Select</option>
-                                  <option value="Mr.">Mr.</option>
-                                  <option value="Mrs.">Mrs.</option>
-                                </select>
-                              </div>
-                              <p className="error text-danger">
-                                {errors.type && touched.type && errors.type}
-                              </p>
-                            </Col>
-                          </Row>
-                          <Row className="align-items-center g-3">
-                            <Col sm={3}>
-                              <label
-                                className="form-label mt-3"
-                                htmlFor="product-orders-input"
-                              >
-                                Name
-                              </label>
-                              <div className="">
-                                <Input
-                                  type="text"
-                                  className="form-control"
-                                  id="product-orders-input"
-                                  //   placeholder="EC No."
-                                  name="name"
-                                  aria-label="orders"
-                                  aria-describedby="product-orders-addon"
-                                  onChange={handleChange}
-                                  onBlur={handleBlur}
-                                  value={values.name}
-                                />
-                                <p className="error text-danger">
-                                  {errors.name && touched.name && errors.name}
-                                </p>
-                              </div>
-                            </Col>
-                            <Col sm={2}>
-                              <label
-                                className="form-label mt-3"
-                                htmlFor="product-orders-input"
-                              >
-                                Gender
-                              </label>
-                              <div className="">
-                                <Input
-                                  type="text"
-                                  className="form-control"
-                                  id="product-orders-input"
-                                  //   placeholder="EC No."
-                                  name="gender"
-                                  aria-label="orders"
-                                  aria-describedby="product-orders-addon"
-                                  onChange={handleChange}
-                                  onBlur={handleBlur}
-                                  value={values.gender}
-                                />
-                                <p className="error text-danger">
-                                  {errors.gender &&
-                                    touched.gender &&
-                                    errors.gender}
-                                </p>
-                              </div>
-                            </Col>
-                            <Col sm={2}>
-                              <label
-                                className="form-label mt-3"
-                                htmlFor="product-orders-input"
-                              >
-                                Age
-                              </label>
-                              <div className="">
-                                <Input
-                                  type="text"
-                                  className="form-control"
-                                  id="product-orders-input"
-                                  //   placeholder="EC No."
-                                  name="age"
-                                  aria-label="orders"
-                                  aria-describedby="product-orders-addon"
-                                  onChange={handleChange}
-                                  onBlur={handleBlur}
-                                  value={values.age}
-                                />
-                                <p className="error text-danger">
-                                  {errors.age && touched.age && errors.age}
-                                </p>
-                              </div>
-                            </Col>
-                            <Col sm={2}>
-                              <label
-                                className="form-label mt-3"
-                                htmlFor="product-orders-input"
-                              >
-                                Date of Birth
-                              </label>
-                              <div className="">
-                                <Input
-                                  type="text"
-                                  className="form-control"
-                                  id="product-orders-input"
-                                  //   placeholder="EC No."
-                                  name="dob"
-                                  aria-label="orders"
-                                  aria-describedby="product-orders-addon"
-                                  onChange={handleChange}
-                                  onBlur={handleBlur}
-                                  value={values.dob}
-                                />
-                                <p className="error text-danger">
-                                  {errors.dob && touched.dob && errors.dob}
-                                </p>
-                              </div>
-                            </Col>
-                            <Col sm={2}>
-                              <label
-                                className="form-label mt-3"
-                                htmlFor="product-orders-input"
-                              >
-                                Blood Group
-                              </label>
-                              <div className="">
-                                <Input
-                                  type="text"
-                                  className="form-control"
-                                  id="product-orders-input"
-                                  //   placeholder="EC No."
-                                  name="bloodgroup"
-                                  aria-label="orders"
-                                  aria-describedby="product-orders-addon"
-                                  onChange={handleChange}
-                                  onBlur={handleBlur}
-                                  value={values.bloodgroup}
-                                />
-                                <p className="error text-danger">
-                                  {errors.bloodgroup &&
-                                    touched.bloodgroup &&
-                                    errors.bloodgroup}
-                                </p>
-                              </div>
-                            </Col>
-                            <Row className="align-items-center g-3">
-                              <Row className="g-1 m-1">
-                                <Col className="col-sm">
-                                  <div className="d-flex justify-content-sm-between">
-                                    <h2 className="card-title mb-0 justify-content-sm-start">
-                                      <strong>Job Profile</strong>
-                                    </h2>
-                                  </div>
-                                </Col>
-                              </Row>
-                              <Col sm={3}>
-                                <label
-                                  className="form-label mt-3"
-                                  htmlFor="product-orders-input"
-                                >
-                                  Company
-                                </label>
-                                <div className="">
-                                  <Input
-                                    type="text"
-                                    className="form-control"
-                                    id="product-orders-input"
-                                    name="company"
-                                    aria-label="orders"
-                                    aria-describedby="product-orders-addon"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.company}
-                                  />
-                                  <p className="error text-danger">
-                                    {errors.company &&
-                                      touched.company &&
-                                      errors.company}
-                                  </p>
-                                </div>
-                              </Col>
-                              <Col sm={3}>
-                                <label
-                                  className="form-label mt-3"
-                                  htmlFor="product-orders-input"
-                                >
-                                  Location
-                                </label>
-                                <div className="">
-                                  <Input
-                                    type="text"
-                                    className="form-control"
-                                    id="product-orders-input"
-                                    name="location"
-                                    aria-label="orders"
-                                    aria-describedby="product-orders-addon"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.location}
-                                  />
-                                  <p className="error text-danger">
-                                    {errors.location &&
-                                      touched.location &&
-                                      errors.location}
-                                  </p>
-                                </div>
-                              </Col>
-                              <Col sm={3}>
-                                <label
-                                  className="form-label mt-3"
-                                  htmlFor="product-orders-input"
-                                >
-                                  EC NO.
-                                </label>
-                                <div className="">
-                                  <Input
-                                    type="text"
-                                    className="form-control"
-                                    id="product-orders-input"
-                                    name="ecNo"
-                                    aria-label="orders"
-                                    aria-describedby="product-orders-addon"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.ecNo}
-                                  />
-                                  <p className="error text-danger">
-                                    {errors.ecNo && touched.ecNo && errors.ecNo}
-                                  </p>
+                  <div className="login">
+                    <div className="form">
+                      {/* Passing handleSubmit parameter tohtml form onSubmit property */}
+                      <form noValidate onSubmit={handleSubmit}>
+                        {/* Our input html with passing formik parameters like handleChange, values, handleBlur to input properties */}
+
+                        <Card>
+                          <CardHeader>
+                            <Row className="g-1 m-1">
+                              <Col className="col-sm">
+                                <div className="d-flex justify-content-sm-between">
+                                  <h2 className="card-title mb-0 justify-content-sm-start">
+                                    <strong>Title</strong>
+                                  </h2>
                                 </div>
                               </Col>
                             </Row>
-                          </Row>
-                        </div>
-                      </div>
-                    </Card>
-                    <Card>
-                      <CardHeader>
-                        <Nav className="nav-tabs-custom card-header-tabs border-bottom-0">
-                          <NavItem>
-                            <NavLink
-                              style={{ cursor: "pointer" }}
-                              className={classnames({
-                                active: customActiveTab === "1",
-                              })}
-                              onClick={() => {
-                                toggleCustom("1");
-                              }}
+                          </CardHeader>
+                          <div className="card-body">
+                            <div className="live-preview">
+                              <Row className="align-items-center g-3">
+                                <Col sm={3}>
+                                  <label
+                                    className="form-label mt-3"
+                                    htmlFor="product-orders-input"
+                                  >
+                                    Name
+                                  </label>
+                                  <div className="">
+                                    <select
+                                      className="form-select"
+                                      name="name"
+                                      onChange={handleChange}
+                                      onBlur={handleBlur}
+                                      value={values.name}
+                                    >
+                                      <option value="">Select</option>
+                                      <option value="Mr.">Mr.</option>
+                                      <option value="Mrs.">Mrs.</option>
+                                    </select>
+                                    <p className="error text-danger">
+                                      {errors.name &&
+                                        touched.name &&
+                                        errors.name}
+                                    </p>
+                                  </div>
+                                </Col>
+                                <Col sm={2}>
+                                  <label
+                                    className="form-label mt-3"
+                                    htmlFor="product-orders-input"
+                                  >
+                                    Gender
+                                  </label>
+                                  <div className="">
+                                    <Input
+                                      type="text"
+                                      className="form-control"
+                                      id="product-orders-input"
+                                      //   placeholder="EC No."
+                                      name="gender"
+                                      aria-label="orders"
+                                      aria-describedby="product-orders-addon"
+                                      onChange={handleChange}
+                                      onBlur={handleBlur}
+                                      value={values.gender}
+                                    />
+                                    <p className="error text-danger">
+                                      {errors.gender &&
+                                        touched.gender &&
+                                        errors.gender}
+                                    </p>
+                                  </div>
+                                </Col>
+                                <Col sm={2}>
+                                  <label
+                                    className="form-label mt-3"
+                                    htmlFor="product-orders-input"
+                                  >
+                                    Age
+                                  </label>
+                                  <div className="">
+                                    <Input
+                                      type="text"
+                                      className="form-control"
+                                      id="product-orders-input"
+                                      //   placeholder="EC No."
+                                      name="age"
+                                      aria-label="orders"
+                                      aria-describedby="product-orders-addon"
+                                      onChange={handleChange}
+                                      onBlur={handleBlur}
+                                      value={values.age}
+                                    />
+                                    <p className="error text-danger">
+                                      {errors.age && touched.age && errors.age}
+                                    </p>
+                                  </div>
+                                </Col>
+                                <Col sm={2}>
+                                  <label
+                                    className="form-label mt-3"
+                                    htmlFor="product-orders-input"
+                                  >
+                                    Date of Birth
+                                  </label>
+                                  <div className="">
+                                    <Input
+                                      type="date"
+                                      className="form-control"
+                                      id="product-orders-input"
+                                      //   placeholder="EC No."
+                                      name="dob"
+                                      aria-label="orders"
+                                      aria-describedby="product-orders-addon"
+                                      onChange={handleChange}
+                                      onBlur={handleBlur}
+                                      value={values.dob}
+                                    />
+                                    <p className="error text-danger">
+                                      {errors.dob && touched.dob && errors.dob}
+                                    </p>
+                                  </div>
+                                </Col>
+                                <Col sm={2}>
+                                  <label
+                                    className="form-label mt-3"
+                                    htmlFor="product-orders-input"
+                                  >
+                                    Blood Group
+                                  </label>
+                                  <div className="">
+                                    <Input
+                                      type="text"
+                                      className="form-control"
+                                      id="product-orders-input"
+                                      //   placeholder="EC No."
+                                      name="bloodgroup"
+                                      aria-label="orders"
+                                      aria-describedby="product-orders-addon"
+                                      onChange={handleChange}
+                                      onBlur={handleBlur}
+                                      value={values.bloodgroup}
+                                    />
+                                    <p className="error text-danger">
+                                      {errors.bloodgroup &&
+                                        touched.bloodgroup &&
+                                        errors.bloodgroup}
+                                    </p>
+                                  </div>
+                                </Col>
+                              </Row>
+                            </div>
+                          </div>
+                          <div className="text-end mb-3 me-3">
+                            <button
+                              className="btn btn-success w-sm"
+                              type="submit"
                             >
-                              Vitals & History
-                            </NavLink>
-                          </NavItem>
-                          <NavItem>
-                            <NavLink
-                              style={{ cursor: "pointer" }}
-                              className={classnames({
-                                active: customActiveTab === "2",
-                              })}
-                              onClick={() => {
-                                toggleCustom("2");
-                              }}
-                            >
-                              General Exam
-                            </NavLink>
-                          </NavItem>
-                          <NavItem>
-                            <NavLink
-                              style={{ cursor: "pointer" }}
-                              className={classnames({
-                                active: customActiveTab === "3",
-                              })}
-                              onClick={() => {
-                                toggleCustom("3");
-                              }}
-                            >
-                              Eye
-                            </NavLink>
-                          </NavItem>
-                          <NavItem>
-                            <NavLink
-                              style={{ cursor: "pointer" }}
-                              className={classnames({
-                                active: customActiveTab === "4",
-                              })}
-                              onClick={() => {
-                                toggleCustom("4");
-                              }}
-                            >
-                              Investigation
-                            </NavLink>
-                          </NavItem>
-                          <NavItem>
-                            <NavLink
-                              style={{ cursor: "pointer" }}
-                              className={classnames({
-                                active: customActiveTab === "5",
-                              })}
-                              onClick={() => {
-                                toggleCustom("5");
-                              }}
-                            >
-                              Form-32
-                            </NavLink>
-                          </NavItem>
-                          <NavItem>
-                            <NavLink
-                              style={{ cursor: "pointer" }}
-                              className={classnames({
-                                active: customActiveTab === "6",
-                              })}
-                              onClick={() => {
-                                toggleCustom("6");
-                              }}
-                            >
-                              Form-33
-                            </NavLink>
-                          </NavItem>
-                        </Nav>
-                      </CardHeader>
+                              Submit
+                            </button>
+                          </div>
+                        </Card>
+                      </form>
+                    </div>
+                  </div>
+                )}
+              </Formik>
+            </Col>
+          </Row>
+          <Row>
+            <Col lg={12}>
+              <Card>
+                <CardHeader>
+                  <Nav className="nav-tabs-custom card-header-tabs border-bottom-0">
+                    <NavItem>
+                      <NavLink
+                        style={{ cursor: "pointer" }}
+                        className={classnames({
+                          active: customActiveTab === "1",
+                        })}
+                        onClick={() => {
+                          toggleCustom("1");
+                        }}
+                      >
+                        Vitals & History
+                      </NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink
+                        style={{ cursor: "pointer" }}
+                        className={classnames({
+                          active: customActiveTab === "2",
+                        })}
+                        onClick={() => {
+                          toggleCustom("2");
+                        }}
+                      >
+                        General Exam
+                      </NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink
+                        style={{ cursor: "pointer" }}
+                        className={classnames({
+                          active: customActiveTab === "3",
+                        })}
+                        onClick={() => {
+                          toggleCustom("3");
+                        }}
+                      >
+                        Eye
+                      </NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink
+                        style={{ cursor: "pointer" }}
+                        className={classnames({
+                          active: customActiveTab === "4",
+                        })}
+                        onClick={() => {
+                          toggleCustom("4");
+                        }}
+                      >
+                        Investigation
+                      </NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink
+                        style={{ cursor: "pointer" }}
+                        className={classnames({
+                          active: customActiveTab === "5",
+                        })}
+                        onClick={() => {
+                          toggleCustom("5");
+                        }}
+                      >
+                        Form-32
+                      </NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink
+                        style={{ cursor: "pointer" }}
+                        className={classnames({
+                          active: customActiveTab === "6",
+                        })}
+                        onClick={() => {
+                          toggleCustom("6");
+                        }}
+                      >
+                        Form-33
+                      </NavLink>
+                    </NavItem>
+                  </Nav>
+                </CardHeader>
 
-                      <CardBody>
-                        <TabContent activeTab={customActiveTab}>
-                          <TabPane id="addproduct-general-info" tabId="1">
-                            <VitalsandHistory />
-                          </TabPane>
+                <CardBody>
+                  <TabContent activeTab={customActiveTab}>
+                    <TabPane id="addproduct-general-info" tabId="1">
+                      <VitalsandHistory />
+                    </TabPane>
 
-                          <TabPane id="addproduct-metadata" tabId="2">
-                            <GeneralExam />
-                          </TabPane>
+                    <TabPane id="addproduct-metadata" tabId="2">
+                      <GeneralExam />
+                    </TabPane>
 
-                          <TabPane id="addproduct-general-info" tabId="3">
-                            <Eye />
-                          </TabPane>
+                    <TabPane id="addproduct-general-info" tabId="3">
+                      <Eye />
+                    </TabPane>
+
+                    <TabPane id="addproduct-general-info" tabId="4">
+                      <Investigation />
+                    </TabPane>
+                    <TabPane id="addproduct-general-info" tabId="5">
+                      <OtherDetails />
+                    </TabPane>
+                    <TabPane id="addproduct-general-info" tabId="6">
+                      <Form33 />
+                    </TabPane>
+                  </TabContent>
+                </CardBody>
+              </Card>
 
                           <TabPane id="addproduct-general-info" tabId="4">
                             <Investigation />
@@ -998,6 +826,7 @@ const CheckupForm = () => {
                   </Form>
                 )}
               </Formik>
+
             </Col>
           </Row>
         </Container>
