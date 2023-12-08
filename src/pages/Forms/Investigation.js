@@ -5,12 +5,12 @@ import * as Yup from "yup";
 
 const Investigation = () => {
   const validationSchema = Yup.object().shape({
-    familyHistory: Yup.string().required("family history  is required"),
-    weight: Yup.string().required("weight is required"),
-    bmi: Yup.string().required("bmi is required"),
-    pulse: Yup.string().required("pulse is required"),
-    bp: Yup.string().required("bp is required"),
-    temp: Yup.string().required("temp is required"),
+    labReports: Yup.string().required("lab reports  is required"),
+    xRayReports: Yup.string().required("x ray reports is required"),
+    ecgReports: Yup.string().required("ecgReports is required"),
+    spirometry: Yup.string().required("spirometry is required"),
+    autometry: Yup.string().required("autometry is required"),
+    remarks: Yup.string().required("remarks is required"),
   });
 
   return (
@@ -19,22 +19,21 @@ const Investigation = () => {
         <Col lg={12}>
           <Formik
             initialValues={{
-              height: "",
-              weight: "",
-              bmi: "",
-              pulse: "",
-              bp: "",
-              temp: "",
+              labReports: "",
+              xRayReports: "",
+              ecgReports: "",
+              spirometry: "",
+              autometry: "",
+              remarks: "",
               complaints: "",
               pastHistory: "",
               personalHistory: "",
               familyHistory: "",
             }}
             validationSchema={validationSchema}
-            onSubmit={async (values, { resetForm }) => {
-              // await handleSavedcat(values);
-              resetForm();
-              // togglemodal();
+            onSubmit={(values) => {
+              // Alert the input values of the form that we filled
+              alert(JSON.stringify(values));
             }}
           >
             {({
@@ -66,12 +65,12 @@ const Investigation = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="lab reports"
-                                name="complaints"
+                                name="labReports"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.complaints}
+                                value={values.labReports}
                               />
                             </div>
                           </div>
@@ -92,18 +91,13 @@ const Investigation = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="X-Ray reports"
-                                name="pastHistory"
+                                name="xRayReports"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.pastHistory}
+                                value={values.xRayReports}
                               />
-                              <p className="error text-danger">
-                                {errors.pastHistory &&
-                                  touched.pastHistory &&
-                                  errors.pastHistory}
-                              </p>
                             </div>
                           </div>
                         </Col>
@@ -123,18 +117,13 @@ const Investigation = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="ECG reports"
-                                name="personalHistory"
+                                name="ecgReports"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.personalHistory}
+                                value={values.ecgReports}
                               />
-                              <p className="error text-danger">
-                                {errors.personalHistory &&
-                                  touched.personalHistory &&
-                                  errors.personalHistory}
-                              </p>
                             </div>
                           </div>
                         </Col>
@@ -154,18 +143,13 @@ const Investigation = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="spirometry"
-                                name="familyHistory"
+                                name="spirometry"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.familyHistory}
+                                value={values.spirometry}
                               />
-                              <p className="error text-danger">
-                                {errors.familyHistory &&
-                                  touched.familyHistory &&
-                                  errors.familyHistory}
-                              </p>
                             </div>
                           </div>
                         </Col>
@@ -185,18 +169,13 @@ const Investigation = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="autometry"
-                                name="familyHistory"
+                                name="autometry"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.familyHistory}
+                                value={values.autometry}
                               />
-                              <p className="error text-danger">
-                                {errors.familyHistory &&
-                                  touched.familyHistory &&
-                                  errors.familyHistory}
-                              </p>
                             </div>
                           </div>
                         </Col>
@@ -216,18 +195,13 @@ const Investigation = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="remarks"
-                                name="familyHistory"
+                                name="remarks"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.familyHistory}
+                                value={values.remarks}
                               />
-                              <p className="error text-danger">
-                                {errors.familyHistory &&
-                                  touched.familyHistory &&
-                                  errors.familyHistory}
-                              </p>
                             </div>
                           </div>
                         </Col>
