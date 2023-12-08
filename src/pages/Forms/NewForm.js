@@ -66,6 +66,9 @@ const NewForm = () => {
 
   const handleSavedCompandLoc = async (Values) => {
 
+    console.log( "----------------------------------------------------------------------------" );
+    console.log( Values )
+
 
     const res = await GetEmpsbyCompAndLoc(Values);
     console.log(res.data)
@@ -157,8 +160,6 @@ const NewForm = () => {
                 }}
                 //validationSchema={validationSchema}
                 onSubmit={async (values, { resetForm }) => {
-
-
                   handleSavedCompandLoc(values)
                   resetForm();
                   // Additional actions after form submission
