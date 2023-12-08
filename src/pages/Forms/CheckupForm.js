@@ -123,10 +123,10 @@ const CheckupForm = () => {
 
     console.log(response);
 
-    setCheckupName( response._id );
+    setCheckupName(response._id);
 
-    console.log( response.data._id );
-    
+    console.log(response.data._id);
+
 
 
 
@@ -147,8 +147,9 @@ const CheckupForm = () => {
 
   const validationSchema = Yup.object().shape({
     checkupName: Yup.string().required("Checkup Name is required"),
-    no: Yup.string().required("Number is required"),
-    date: Yup.string().required("Date is required"),
+    checkupNumber: Yup.string().required("Number is required"),
+    checkupDate: Yup.string().required("Date is required"),
+    checkupType: Yup.string().required("checkupType is a required "),
     type: Yup.string().required("Type is required"),
     name: Yup.string().required("name is required"),
     gender: Yup.string().required("gender is required"),
@@ -169,6 +170,7 @@ const CheckupForm = () => {
     pphash: Yup.string().required("pp# is required"),
     emer: Yup.string().required("emer is required"),
     email: Yup.string().required("email is required"),
+
   });
 
   useEffect(() => {
@@ -313,6 +315,8 @@ const CheckupForm = () => {
           </Row>
 
           {/* company component   all ok geting a company id and location name -> done and come */}
+
+          {/* check up details start */}
 
           <Row>
 
@@ -493,6 +497,429 @@ const CheckupForm = () => {
               </Formik>
             </Col>
           </Row>
+
+          {/* check up over */}
+
+          {/* company employee */}
+
+{/* 
+          <Row>
+
+            <Col lg={12}>
+              <Formik
+                validationSchema={schema}
+                initialValues={{
+                  emplyeeName: "",
+                  gender: "",
+                  age: "",
+                  dateOfBirth: "",
+                  bloodGroup: ""
+                }}
+                onSubmit={(values) => {
+                  addCheckupDetails(values)
+                }}
+              >
+                {({
+                  values,
+                  errors,
+                  touched,
+                  handleChange,
+                  handleBlur,
+                  handleSubmit,
+                }) => (
+                  <div className="login">
+                    <div className="form">
+                    
+                      <form noValidate onSubmit={handleSubmit}>
+                
+
+                        <Card>
+                          <CardHeader>
+                            <Row className="g-1 m-1">
+                              <Col className="col-sm">
+                                <div className="d-flex justify-content-sm-between">
+                                  <h2 className="card-title mb-0 justify-content-sm-start">
+                                    <strong>Employee details</strong>
+                                  </h2>
+                                </div>
+                              </Col>
+                            </Row>
+                          </CardHeader>
+                          <div className="card-body">
+                            <div className="live-preview">
+                              <Row className="align-items-center g-3">
+
+                                <Col sm={3}>
+                                  <label
+                                    className="form-label mt-3"
+                                    htmlFor="product-orders-input"
+                                  >
+                                    Employee name
+                                  </label>
+                                  <div className="">
+                                    <select
+                                      className="form-select"
+                                      name="emplyeeName"
+                                      onBlur={handleBlur}
+                                      value={values.emplyeeName}
+                                      onChange={handleChange}
+                                    >
+                                      <option value=""> Name </option>
+                                      {allCheckupType && allCheckupType.length > 0 ? (
+                                        allCheckupType.map((type) => (
+                                          <option
+                                            key={type}
+                                            value={type._id}
+                                          >
+                                            {type.checkupType}
+                                          </option>
+                                        ))
+                                      ) : (
+                                        <option value="" disabled>
+                                          No employee available
+                                        </option>
+                                      )}
+                                    </select>
+                                  </div>
+                                  <p className="error text-danger">
+                                    {errors.emplyeeName &&
+                                      touched.emplyeeName &&
+                                      errors.emplyeeName}
+                                  </p>
+                                </Col>
+
+                                <Col sm={3}>
+                                  <label
+                                    className="form-label mt-3"
+                                    htmlFor="product-orders-input"
+                                  >
+                                    gender
+                                  </label>
+                                  <div className="">
+                                    <Input
+                                      type="text"
+                                      className="form-control"
+                                      id="product-orders-input"
+                                      name="gender"
+                                      aria-label="orders"
+                                      aria-describedby="product-orders-addon"
+                                      onChange={handleChange}
+                                      onBlur={handleBlur}
+                                      value={values.gender}
+                                    />
+                                  </div>
+
+                                  <p className="error text-danger">
+                                    {errors.gender &&
+                                      touched.gender &&
+                                      errors.gender}
+                                  </p>
+                                </Col>
+                                <Col sm={3}>
+                                  <label
+                                    className="form-label mt-3"
+                                    htmlFor="product-orders-input"
+                                  >
+                                    Age
+                                  </label>
+                                  <div className="">
+                                    <Input
+                                      type="text"
+                                      className="form-control"
+                                      id="product-orders-input"
+                                      name="age"
+                                      aria-label="orders"
+                                      ar
+                                      ia-describedby="product-orders-addon"
+                                      onChange={handleChange}
+                                      onBlur={handleBlur}
+                                      value={values.age}
+                                    />
+                                  </div>
+
+                                  <p className="error text-danger">
+                                    {errors.age && touched.age && errors.age}
+                                  </p>
+                                </Col>
+                                <Col sm={3}>
+                                  <label
+                                    className="form-label mt-3"
+                                    htmlFor="product-orders-input"
+                                  >
+                                    Date of Birth
+                                  </label>
+                                  <div className="">
+                                    <Input
+                                      type="text"
+                                      className="form-control"
+                                      id="product-orders-input"
+                                      name="dateOfBirth"
+                                      aria-label="orders"
+                                      aria-describedby="product-orders-addon"
+                                      onChange={handleChange}
+                                      onBlur={handleBlur}
+                                      value={values.dateOfBirth}
+                                    />
+                                  </div>
+
+                                  <p className="error text-danger">
+                                    {errors.dateOfBirth && touched.dateOfBirth && errors.dateOfBirth}
+                                  </p>
+                                </Col>
+
+                                <Col sm={3}>
+                                  <label
+                                    className="form-label mt-3"
+                                    htmlFor="product-orders-input"
+                                  >
+                                    Blood group
+                                  </label>
+                                  <div className="">
+                                    <Input
+                                      type="text"
+                                      className="form-control"
+                                      id="product-orders-input"
+                                      name="bloodGroup"
+                                      aria-label="orders"
+                                      aria-describedby="product-orders-addon"
+                                      onChange={handleChange}
+                                      onBlur={handleBlur}
+                                      value={values.bloodGroup}
+                                    />
+                                  </div>
+
+                                  <p className="error text-danger">
+                                    {errors.bloodGroup && touched.bloodGroup && errors.bloodGroup}
+                                  </p>
+                                </Col>
+
+                              </Row>
+                            </div>
+                          </div>
+                          <div className="text-end mb-3 me-3">
+                            <button
+                              className="btn btn-success w-sm"
+                              type="submit"
+                            >
+                              Submit
+                            </button>
+                          </div>
+                        </Card>
+                      </form>
+                    </div>
+                  </div>
+                )}
+              </Formik>
+            </Col>
+          </Row>
+
+ */}          
+
+          
+          <Row>
+            <Col lg={12}>
+              <Formik
+                validationSchema={validationSchema}
+                initialValues={{
+                  name: "",
+                  gender: "",
+                  dob: "",
+                  age: "",
+                  bloodgroup: "",
+                }}
+                onSubmit={(values) => {
+                  // Alert the input values of the form that we filled
+                  console.log( values )
+                  alert(JSON.stringify(values));
+                }}
+              >
+                {({
+                  values,
+                  errors,
+                  touched,
+                  handleChange,
+                  handleBlur,
+                  handleSubmit,
+                }) => (
+                  <div className="login">
+                    <div className="form">
+                      {/* Passing handleSubmit parameter tohtml form onSubmit property */}
+                      <form  onSubmit={handleSubmit}>
+                        {/* Our input html with passing formik parameters like handleChange, values, handleBlur to input properties */}
+
+                        <Card>
+                          <CardHeader>
+                            <Row className="g-1 m-1">
+                              <Col className="col-sm">
+                                <div className="d-flex justify-content-sm-between">
+                                  <h2 className="card-title mb-0 justify-content-sm-start">
+                                    <strong>Title</strong>
+                                  </h2>
+                                </div>
+                              </Col>
+                            </Row>
+                          </CardHeader>
+                          <div className="card-body">
+                            <div className="live-preview">
+                              <Row className="align-items-center g-3">
+                                <Col sm={3}>
+                                  <label
+                                    className="form-label mt-3"
+                                    htmlFor="product-orders-input"
+                                  >
+                                    Name
+                                  </label>
+                                  <div className="">
+                                    <select
+                                      className="form-select"
+                                      name="name"
+                                      onChange={handleChange}
+                                      onBlur={handleBlur}
+                                      value={values.name}
+                                    >
+                                      <option value="">Select</option>
+                                      <option value="Mr.">Mr.</option>
+                                      <option value="Mrs.">Mrs.</option>
+                                    </select>
+                                    <p className="error text-danger">
+                                      {errors.name &&
+                                        touched.name &&
+                                        errors.name}
+                                    </p>
+                                  </div>
+                                </Col>
+                                <Col sm={2}>
+                                  <label
+                                    className="form-label mt-3"
+                                    htmlFor="product-orders-input"
+                                  >
+                                    Gender
+                                  </label>
+                                  <div className="">
+                                    <Input
+                                      type="text"
+                                      className="form-control"
+                                      id="product-orders-input"
+                                      //   placeholder="EC No."
+                                      name="gender"
+                                      aria-label="orders"
+                                      aria-describedby="product-orders-addon"
+                                      onChange={handleChange}
+                                      onBlur={handleBlur}
+                                      value={values.gender}
+                                    />
+                                    <p className="error text-danger">
+                                      {errors.gender &&
+                                        touched.gender &&
+                                        errors.gender}
+                                    </p>
+                                  </div>
+                                </Col>
+                                <Col sm={2}>
+                                  <label
+                                    className="form-label mt-3"
+                                    htmlFor="product-orders-input"
+                                  >
+                                    Age
+                                  </label>
+                                  <div className="">
+                                    <Input
+                                      type="text"
+                                      className="form-control"
+                                      id="product-orders-input"
+                                      //   placeholder="EC No."
+                                      name="age"
+                                      aria-label="orders"
+                                      aria-describedby="product-orders-addon"
+                                      onChange={handleChange}
+                                      onBlur={handleBlur}
+                                      value={values.age}
+                                    />
+                                    <p className="error text-danger">
+                                      {errors.age && touched.age && errors.age}
+                                    </p>
+                                  </div>
+                                </Col>
+                                <Col sm={2}>
+                                  <label
+                                    className="form-label mt-3"
+                                    htmlFor="product-orders-input"
+                                  >
+                                    Date of Birth
+                                  </label>
+                                  <div className="">
+                                    <Input
+                                      type="date"
+                                      className="form-control"
+                                      id="product-orders-input"
+                                      //   placeholder="EC No."
+                                      name="dob"
+                                      aria-label="orders"
+                                      aria-describedby="product-orders-addon"
+                                      onChange={handleChange}
+                                      onBlur={handleBlur}
+                                      value={values.dob}
+                                    />
+                                    <p className="error text-danger">
+                                      {errors.dob && touched.dob && errors.dob}
+                                    </p>
+                                  </div>
+                                </Col>
+                                <Col sm={2}>
+                                  <label
+                                    className="form-label mt-3"
+                                    htmlFor="product-orders-input"
+                                  >
+                                    Blood Group
+                                  </label>
+                                  <div className="">
+                                    <Input
+                                      type="text"
+                                      className="form-control"
+                                      id="product-orders-input"
+                                      //   placeholder="EC No."
+                                      name="bloodgroup"
+                                      aria-label="orders"
+                                      aria-describedby="product-orders-addon"
+                                      onChange={handleChange}
+                                      onBlur={handleBlur}
+                                      value={values.bloodgroup}
+                                    />
+                                    <p className="error text-danger">
+                                      {errors.bloodgroup &&
+                                        touched.bloodgroup &&
+                                        errors.bloodgroup}
+                                    </p>
+                                  </div>
+                                </Col>
+                              </Row>
+                            </div>
+                          </div>
+                          <div className="text-end mb-3 me-3">
+                            <button
+                              className="btn btn-success w-sm"
+                              type="submit"
+                            >
+                              Submit
+                            </button>
+                          </div>
+                        </Card>
+                      </form>
+                    </div>
+                  </div>
+                )}
+              </Formik>
+            </Col>
+          </Row>
+
+
+
+
+
+
+          {/* company employee over */}
+
+
 
           <Row>
             <Col lg={12}>
