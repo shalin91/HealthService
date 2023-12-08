@@ -32,7 +32,7 @@ const GeneralExam = () => {
               musculoSkeletal: "",
               ent: "",
             }}
-            validationSchema={validationSchema}
+            // validationSchema={validationSchema}
             onSubmit={(values) => {
               // Alert the input values of the form that we filled
               alert(JSON.stringify(values));
