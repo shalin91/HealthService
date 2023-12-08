@@ -98,7 +98,8 @@ const Eye = () => {
                         </Col>
                       </Row>
                       <Row className="align-items-center g-3 mt-2">
-                        <Col className="col-sm">
+
+                      <Col className="col-sm">
                           <div>
                             <div>
                               <Row className="mb-3">
@@ -148,7 +149,7 @@ const Eye = () => {
                                   </p>
                                 </Col>
                               </Row>
-                            </div>
+                              </div>
                           </div>
                         </Col>
                       </Row>
@@ -198,7 +199,7 @@ const Eye = () => {
                                     {errors.gallaryCategoryTitle4 &&
                                       touched.gallaryCategoryTitle4 &&
                                       errors.gallaryCategoryTitle4}
-                                  </p>
+</p>
                                 </Col>
                               </Row>
                             </div>
@@ -247,59 +248,57 @@ const Eye = () => {
                                     aria-label="orders"
                                     aria-describedby="product-orders-addon"
                                     onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.gallaryCategoryTitle6}
-                                  />
-                                  <p className="error text-danger">
-                                    {errors.gallaryCategoryTitle6 &&
-                                      touched.gallaryCategoryTitle6 &&
-                                      errors.gallaryCategoryTitle6}
-                                  </p>
-                                </Col>
-                              </Row>
+                                    onBlur={handleBlur}value={values.gallaryCategoryTitle6}
+                                    />
+                                    <p className="error text-danger">
+                                      {errors.gallaryCategoryTitle6 &&
+                                        touched.gallaryCategoryTitle6 &&
+                                        errors.gallaryCategoryTitle6}
+                                    </p>
+                                  </Col>
+                                </Row>
+                              </div>
                             </div>
-                          </div>
-                        </Col>
-                      </Row>
-                      <Row className="align-items-center g-3">
-                        <Col className="col-sm">
-                          <div>
+                          </Col>
+                        </Row>
+                        <Row className="align-items-center g-3">
+                          <Col className="col-sm">
                             <div>
-                              <Row className="mb-3">
-                                <Col className="col-lg-2 col-md-2"></Col>
-                                <Col className="col-lg-2 col-md-2">
-                                  <p>with glasses</p>
-                                </Col>
-
-
-                                <Col className="col-lg-2 col-md-2 col-12">
-                                  <Input
-                                    type="text"
-                                    className="form-control"
-                                    id="product-orders-input"
-                                    placeholder=""
-                                    name="gallaryCategoryTitle7"
-                                    aria-label="orders"
-                                    aria-describedby="product-orders-addon"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.gallaryCategoryTitle7}
-                                  />
-                                  <p className="error text-danger">
-                                    {errors.gallaryCategoryTitle7 &&
-                                      touched.gallaryCategoryTitle7 &&
-                                      errors.gallaryCategoryTitle7}
-                                  </p>
-                                </Col>
-                                <Col className="col-lg-2 col-md-2 col-12 ">
-                                  <Input
-                                    type="text"
-                                    className="form-control"
-                                    id="product-orders-input"
-                                    placeholder=""
-                                    name="gallaryCategoryTitle8"
-                                    aria-label="orders"
-                                    aria-describedby="product-orders-addon"
+                              <div>
+                                <Row className="mb-3">
+                                  <Col className="col-lg-2 col-md-2"></Col>
+                                  <Col className="col-lg-2 col-md-2">
+                                    <p>with glasses</p>
+                                  </Col>
+  
+                                  <Col className="col-lg-2 col-md-2 col-12">
+                                    <Input
+                                      type="text"
+                                      className="form-control"
+                                      id="product-orders-input"
+                                      placeholder=""
+                                      name="gallaryCategoryTitle7"
+                                      aria-label="orders"
+                                      aria-describedby="product-orders-addon"
+                                      onChange={handleChange}
+                                      onBlur={handleBlur}
+                                      value={values.gallaryCategoryTitle7}
+                                    />
+                                    <p className="error text-danger">
+                                      {errors.gallaryCategoryTitle7 &&
+                                        touched.gallaryCategoryTitle7 &&
+                                        errors.gallaryCategoryTitle7}
+                                    </p>
+                                  </Col>
+                                  <Col className="col-lg-2 col-md-2 col-12 ">
+                                    <Input
+                                      type="text"
+                                      className="form-control"
+                                      id="product-orders-input"
+                                      placeholder=""
+                                      name="gallaryCategoryTitle8"
+                                      aria-label="orders"
+                                      aria-describedby="product-orders-addon"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.gallaryCategoryTitle8}
@@ -316,42 +315,6 @@ const Eye = () => {
                         </Col>
                       </Row>
 
-                                    <Col className="col-lg-2 col-md-2 col-12">
-                                      <Input
-                                        type="text"
-                                        className="form-control"
-                                        id="product-orders-input"
-                                        placeholder=""
-                                        name="gallaryCategoryTitle"
-                                        aria-label="orders"
-                                        aria-describedby="product-orders-addon"
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        // value={values.gallaryCategoryTitle}
-                                      />
-                                    </Col>
-                                    <Col className="col-lg-2 col-md-2 col-12 ">
-                                      <Input
-                                        type="text"
-                                        className="form-control"
-                                        id="product-orders-input"
-                                        placeholder=""
-                                        name="gallaryCategoryTitle"
-                                        aria-label="orders"
-                                        aria-describedby="product-orders-addon"
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        // value={values.gallaryCategoryTitle}
-                                      />
-                                    </Col>
-                                  </Row>
-                                </div>
-                              </div>
-                            </Col>
-                          </Row>
-                          
-
-
                       <Row className="align-items-center g-3 mt-2">
                         <Col className="col-sm">
                           <div>
@@ -361,7 +324,6 @@ const Eye = () => {
                                   Colour vision
                                 </Col>
                                 <Col className="col-lg-2 col-md-2"></Col>
-
 
                                 <Col className="col-lg-4 col-md-4">
                                   <textarea
@@ -398,32 +360,6 @@ const Eye = () => {
           </Formik>
         </Col>
       </Row>
-
-                                    <Col className="col-lg-4 col-md-4">
-                                      <textarea
-                                        className="form-control"
-                                        id="meassageInput"
-                                        rows="3"
-                                        placeholder="Enter your message"
-                                      ></textarea>
-                                    </Col>
-                                  </Row>
-                                </div>
-                              </div>
-                            </Col>
-                          </Row>
-
-
-                        </div>
-                      </div>
-                    </Card>
-                  </Form>
-                )}
-              </Formik>
-            </Col>
-          </Row>
-        
-
     </>
   );
 };

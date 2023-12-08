@@ -1239,9 +1239,7 @@ const CheckupForm = () => {
                           <TabPane id="addproduct-general-info" tabId="6">
                             <Form33 />
                           </TabPane>
-                        </TabContent>
-                      </CardBody>
-                    </Card>
+                   
                     <div className="text-end mb-3">
                       <button
                         type="submit"
@@ -1251,15 +1249,14 @@ const CheckupForm = () => {
                         Submit
                       </button>
                     </div>
-                  </Form>
-                )}
-              </Formik>
+                 
 
             </Col>
           </Row>
         </Container>
       </div>
     </>
+
   );
 };
 
