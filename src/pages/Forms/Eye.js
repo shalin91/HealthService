@@ -28,8 +28,8 @@ const Eye = () => {
               nvright: "",
               nvleft2: "",
               nvright2: "",
-              cv:"",
-              
+              cv: "",
+
               // gallaryCategoryTitle9: "",
             }}
             // validationSchema={validationSchema}
@@ -78,8 +78,7 @@ const Eye = () => {
                         </Col>
                       </Row>
                       <Row className="align-items-center g-3 mt-2">
-
-                      <Col className="col-sm">
+                        <Col className="col-sm">
                           <div>
                             <div>
                               <Row className="mb-3">
@@ -129,7 +128,7 @@ const Eye = () => {
                                   </p>
                                 </Col>
                               </Row>
-                              </div>
+                            </div>
                           </div>
                         </Col>
                       </Row>
@@ -179,7 +178,7 @@ const Eye = () => {
                                     {errors.gallaryCategoryTitle4 &&
                                       touched.gallaryCategoryTitle4 &&
                                       errors.gallaryCategoryTitle4}
-</p>
+                                  </p>
                                 </Col>
                               </Row>
                             </div>
@@ -230,56 +229,56 @@ const Eye = () => {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.nvright}
-                                    />
-                                    <p className="error text-danger">
-                                      {errors.gallaryCategoryTitle6 &&
-                                        touched.gallaryCategoryTitle6 &&
-                                        errors.gallaryCategoryTitle6}
-                                    </p>
-                                  </Col>
-                                </Row>
-                              </div>
+                                  />
+                                  <p className="error text-danger">
+                                    {errors.gallaryCategoryTitle6 &&
+                                      touched.gallaryCategoryTitle6 &&
+                                      errors.gallaryCategoryTitle6}
+                                  </p>
+                                </Col>
+                              </Row>
                             </div>
-                          </Col>
-                        </Row>
-                        <Row className="align-items-center g-3">
-                          <Col className="col-sm">
+                          </div>
+                        </Col>
+                      </Row>
+                      <Row className="align-items-center g-3">
+                        <Col className="col-sm">
+                          <div>
                             <div>
-                              <div>
-                                <Row className="mb-3">
-                                  <Col className="col-lg-2 col-md-2"></Col>
-                                  <Col className="col-lg-2 col-md-2">
-                                    <p>with glasses</p>
-                                  </Col>
-  
-                                  <Col className="col-lg-2 col-md-2 col-12">
-                                    <Input
-                                      type="text"
-                                      className="form-control"
-                                      id="product-orders-input"
-                                      placeholder=""
-                                      name="nvleft2"
-                                      aria-label="orders"
-                                      aria-describedby="product-orders-addon"
-                                      onChange={handleChange}
-                                      onBlur={handleBlur}
-                                      value={values.nvleft2}
-                                    />
-                                    <p className="error text-danger">
-                                      {errors.gallaryCategoryTitle7 &&
-                                        touched.gallaryCategoryTitle7 &&
-                                        errors.gallaryCategoryTitle7}
-                                    </p>
-                                  </Col>
-                                  <Col className="col-lg-2 col-md-2 col-12 ">
-                                    <Input
-                                      type="text"
-                                      className="form-control"
-                                      id="product-orders-input"
-                                      placeholder=""
-                                      name="nvright2"
-                                      aria-label="orders"
-                                      aria-describedby="product-orders-addon"
+                              <Row className="mb-3">
+                                <Col className="col-lg-2 col-md-2"></Col>
+                                <Col className="col-lg-2 col-md-2">
+                                  <p>with glasses</p>
+                                </Col>
+
+                                <Col className="col-lg-2 col-md-2 col-12">
+                                  <Input
+                                    type="text"
+                                    className="form-control"
+                                    id="product-orders-input"
+                                    placeholder=""
+                                    name="nvleft2"
+                                    aria-label="orders"
+                                    aria-describedby="product-orders-addon"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.nvleft2}
+                                  />
+                                  <p className="error text-danger">
+                                    {errors.gallaryCategoryTitle7 &&
+                                      touched.gallaryCategoryTitle7 &&
+                                      errors.gallaryCategoryTitle7}
+                                  </p>
+                                </Col>
+                                <Col className="col-lg-2 col-md-2 col-12 ">
+                                  <Input
+                                    type="text"
+                                    className="form-control"
+                                    id="product-orders-input"
+                                    placeholder=""
+                                    name="nvright2"
+                                    aria-label="orders"
+                                    aria-describedby="product-orders-addon"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.nvright2}
