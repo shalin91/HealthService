@@ -108,6 +108,8 @@ import SubScribe from "../pages/Subscribe/SubScribe.js";
 import AddVariation from "../pages/products/AddVariation";
 
 import AddCompany from "../pages/CompanyMaster/AddCompany.js";
+import AddCheckuptype from "../pages/Forms/AddCheckuptype.js";
+import BloodInvestigation from "../pages/Forms/BloodInvestigation.js";
 import CheckupForm from "../pages/Forms/CheckupForm.js";
 import Eye from "../pages/Forms/Eye.js";
 import Form33 from "../pages/Forms/Form33.js";
@@ -116,7 +118,6 @@ import Investigation from "../pages/Forms/Investigation.js";
 import NewForm from "../pages/Forms/NewForm.js";
 import OtherDetails from "../pages/Forms/OtherDetails.js";
 import VitalsandHistory from "../pages/Forms/VitalsandHistory.js";
-import BloodInvestigation from "../pages/Forms/BloodInvestigation.js";
 
 // import customerNew from "../pages/Ecommerce/EcommerceCustomers/customerNew";
 const authProtectedRoutes = [
@@ -143,6 +144,14 @@ const authProtectedRoutes = [
     component: (
       <SignState>
         <AddCompany />
+      </SignState>
+    ),
+  },
+  {
+    path: "/checkuptype",
+    component: (
+      <SignState>
+        <AddCheckuptype />
       </SignState>
     ),
   },
