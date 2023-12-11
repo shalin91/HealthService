@@ -24,8 +24,9 @@ import SignContext from "../../contextAPI/Context/SignContext";
 import { preventDefault } from "@fullcalendar/react";
 import { set } from "date-fns";
 
+
 const NewForm = () => {
-  const { GetCompany, GetCompanybyId, GetEmpsbyCompAndLoc ,GetContactDetailsById } = useContext(SignContext);
+  const { GetCompany, GetCompanybyId, GetEmpsbyCompAndLoc ,GetContactDetailsById , getCheckupData } = useContext(SignContext);
   const [Company, setCompany] = useState([]);
   const [Location, setLocation] = useState([]);
   const [Category, setCategory] = useState([]);
@@ -120,7 +121,7 @@ const NewForm = () => {
     }
   };
 
-  const handleEmpData = (e) => {
+  const handleEmpData = async (e) => {
     let data = e.target.value;
     
    const curremp = EmpbyCompandLoc.filter( (emp) =>  emp._id === data )
@@ -133,7 +134,6 @@ const NewForm = () => {
   //  getEmpContactDetails()
 
    setCurrentEmp(curremp[0])
-
   
   }
 
@@ -158,7 +158,7 @@ const NewForm = () => {
                   companyName: '',
                   companyLocation: '',
                 }}
-                //validationSchema={validationSchema}
+              
                 onSubmit={async (values, { resetForm }) => {
                   handleSavedCompandLoc(values)
                   resetForm();
@@ -352,8 +352,6 @@ const NewForm = () => {
                                   onClick={(e) => {
                                     handleChange(e);
                                     handleEmpData(e);
-                                    
-                                    
                                   }}
                                   onBlur={handleBlur}
                                   value={values.employeeName}

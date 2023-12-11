@@ -294,6 +294,94 @@ export const SignState = (props) => {
 
 
 
+  // set checkupdata
+
+  const getCheckupData = async () => {
+    try{
+      const response = await axios.post(`${url}/checkup/add-checkup-data`, {},
+      );
+
+      return response;
+
+    }catch(error){
+      console.error("Error during API call:", error);
+    }
+  }
+
+  const setVitalAndHistory = async (data)=>{
+    try{
+     
+      const response = await axios.post(`${url}/employ/set-employ-vital-and-history-details`,{data})
+
+      return response;
+
+    }catch(error){
+     
+      console.error("Error during API call:", error);
+
+    }
+  }
+
+  const setGeneralExamination = async (data)=>{
+    try{
+     
+      const response = await axios.post(`${url}/employ/set-employ-general-examination`,{data})
+
+      return response;
+
+    }catch(error){
+     
+      console.error("Error during API call:", error);
+
+    }
+  }
+
+  const setEyeDetails = async (data) => {
+    try{
+
+      const response = await axios.post(`${url}/employ/set-employ-eye-details` , {data} );
+
+      return response;
+
+    }catch(error){
+      
+      console.error("Error during API call:", error);
+
+    }
+  }
+
+  const setInvestigation = async (data) => {
+    try{
+
+      const response = await axios.post(`${url}/employ/set-employ-investigation-details` , {data} );
+
+      return response;
+
+    }catch(error){
+      
+      console.error("Error during API call:", error);
+
+    }
+  }
+
+  const setForm33 = async (data) => {
+   
+    try{
+
+      const response = await axios.post( `${url}/employ/set-employ-form-33-details`,{data});
+
+      return response;
+
+    }catch(error){
+
+      console.error("Error during API call:", error);
+
+    }
+
+  }
+
+
+
 
 
   return (
@@ -317,7 +405,13 @@ export const SignState = (props) => {
         GetEmpsbyCompAndLoc,
         GetContactDetailsById,
         setNewCheckupName,
-        getCheckupType
+        getCheckupType,
+        getCheckupData,
+        setVitalAndHistory,
+        setGeneralExamination,
+        setEyeDetails,
+        setInvestigation,
+        setForm33
       }}
     >
       {props.children}

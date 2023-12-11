@@ -4,6 +4,18 @@ import { Card, Col, Input, Row } from "reactstrap";
 import * as Yup from "yup";
 
 const OtherDetails = () => {
+
+
+  // const handleSubmitData = async( values ) => {
+      
+  //   const data = { ...props , ...values };
+
+  //   const response = await setVitalAndHistory(data);
+    
+  //   console.log(response);
+
+  // }
+
   const validationSchema = Yup.object().shape({
     parmanentTemporary: Yup.string().required("company name  is required"),
     temporaryUnfit: Yup.string().required("Location is required"),
@@ -24,22 +36,25 @@ const OtherDetails = () => {
         <Col lg={12}>
           <Formik
             initialValues={{
-              parmanentTemporary: "",
-              temporaryUnfit: "",
+
+              permanatOrTemporary: "",
+              periodOfTemporaryUnfit: "",
               department: "",
-              exposure: "",
-              leavinfTransfer: "",
-              discharge: "",
-              symptoms: "",
-              Nature: "",
-              date: "",
-              fitness: "",
-              dateOfPosting: "",
+              exposureTo: "",
+              natureOfTests: "",
+              dateOFPosting: "",
+              dateOfLeaving :"",
+              reasons:"",
+              signs : "",
+              dateOfDeclaringUnfit :"",
+              dateOfissuingFitness :""
+
             }}
             validationSchema={validationSchema}
             onSubmit={(values) => {
               // Alert the input values of the form that we filled
               alert(JSON.stringify(values));
+              // handleSubmitData(values);
             }}
           >
             {({
@@ -71,11 +86,11 @@ const OtherDetails = () => {
                                 name="parmanentTemporary"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.parmanentTemporary}
+                                value={values.permanatOrTemporary}
                               >
-                                <option value="">Select</option>
-                                <option value="Mr.">Mr.</option>
-                                <option value="Mrs.">Mrs.</option>
+                                <option value="">parmanent</option>
+                                <option value="">temporary</option>
+                               
                               </select>
                             </div>
                           </div>
@@ -94,12 +109,12 @@ const OtherDetails = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="period of temporary unfit"
-                                name="temporaryUnfit"
+                                name="periodOfTemporaryUnfit"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.temporaryUnfit}
+                                value={values.periodOfTemporaryUnfit}
                               />
                             </div>
                           </div>
@@ -146,12 +161,12 @@ const OtherDetails = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="department"
-                                name="exposure"
+                                name="exposureTo"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.exposure}
+                                value={values.exposureTo}
                               />
                             </div>
                           </div>
@@ -172,12 +187,12 @@ const OtherDetails = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="DD/MM/YYYY"
-                                name="dateOfPosting"
+                                name="dateOFPosting"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.dateOfPosting}
+                                value={values.dateOFPosting}
                               />
                             </div>
                           </div>
@@ -196,12 +211,12 @@ const OtherDetails = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="period of temporary unfit"
-                                name="leavinfTransfer"
+                                name="dateOfLeaving"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.leavinfTransfer}
+                                value={values.dateOfLeaving}
                               />
                             </div>
                           </div>
@@ -222,12 +237,12 @@ const OtherDetails = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="department"
-                                name="discharge"
+                                name="reasons"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.discharge}
+                                value={values.reasons}
                               />
                             </div>
                           </div>
@@ -248,12 +263,12 @@ const OtherDetails = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="department"
-                                name="symptoms"
+                                name="signs"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.symptoms}
+                                value={values.signs}
                               />
                             </div>
                           </div>
@@ -274,12 +289,12 @@ const OtherDetails = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="department"
-                                name="Nature"
+                                name="natureOfTests"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.Nature}
+                                value={values.natureOfTests}
                               />
                             </div>
                           </div>
@@ -300,12 +315,12 @@ const OtherDetails = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="DD/MM/YYYY"
-                                name="date"
+                                name="dateOfDeclaringUnfit"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.date}
+                                value={values.dateOfDeclaringUnfit}
                               />
                             </div>
                           </div>
@@ -324,12 +339,12 @@ const OtherDetails = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="period of temporary unfit"
-                                name="fitness"
+                                name="dateOfissuingFitness"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.fitness}
+                                value={values.dateOfissuingFitness}
                               />
                             </div>
                           </div>

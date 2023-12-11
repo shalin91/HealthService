@@ -2,8 +2,23 @@ import { Form, Formik } from "formik";
 import React from "react";
 import { Card, Col, Input, Row } from "reactstrap";
 import * as Yup from "yup";
+import SignContext from "../../contextAPI/Context/SignContext"
+import  { useContext } from "react";
 
-const Investigation = () => {
+const Investigation = ( props ) => {
+
+  const { setInvestigation } = useContext(SignContext);
+
+  const handleSubmitData = async( values ) => {
+      
+    const data = { ...props , ...values };
+
+    const response = await setInvestigation(data);
+    
+    console.log(response);
+
+  }
+
   const validationSchema = Yup.object().shape({
     labReports: Yup.string().required("lab reports  is required"),
     xRayReports: Yup.string().required("x ray reports is required"),
@@ -20,20 +35,18 @@ const Investigation = () => {
           <Formik
             initialValues={{
               labReports: "",
-              xRayReports: "",
-              ecgReports: "",
+              xRayReport: "",
+              ecgReport: "",
               spirometry: "",
               autometry: "",
               remarks: "",
-              complaints: "",
-              pastHistory: "",
-              personalHistory: "",
-              familyHistory: "",
+             
             }}
             validationSchema={validationSchema}
             onSubmit={(values) => {
               // Alert the input values of the form that we filled
               alert(JSON.stringify(values));
+               handleSubmitData(values);
             }}
           >
             {({
@@ -96,7 +109,7 @@ const Investigation = () => {
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.xRayReports}
+                                value={values.xRayReport}
                               />
                             </div>
                           </div>
@@ -122,7 +135,7 @@ const Investigation = () => {
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.ecgReports}
+                                value={values.ecgReport}
                               />
                             </div>
                           </div>

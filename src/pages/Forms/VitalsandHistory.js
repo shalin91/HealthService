@@ -2,9 +2,26 @@ import { Form, Formik } from "formik";
 import React from "react";
 import { Card, CardHeader, Col, Input, Row } from "reactstrap";
 import * as Yup from "yup";
+import SignContext from "../../contextAPI/Context/SignContext"
+import  { useContext, useEffect, useState } from "react";
 
-const VitalsandHistory = () => {
+const VitalsandHistory = ( props ) => {
 
+  const { setVitalAndHistory } = useContext(SignContext);
+
+
+
+
+
+  const handleSubmitData = async( values ) => {
+      
+    const data = { ...props , ...values };
+
+    const response = await setVitalAndHistory(data);
+
+    console.log(response);
+
+  }
 
   const validationSchema = Yup.object().shape({
     height: Yup.string().required(
@@ -45,7 +62,7 @@ const VitalsandHistory = () => {
 
             onSubmit={async (values, { resetForm }) => {
               // await handleSavedcat(values);
-              alert(JSON.stringify(values));
+               handleSubmitData( values );
               resetForm();
               // togglemodal();
 
