@@ -41,10 +41,11 @@ const VitalsandHistory = () => {
               personalHistory: "",
               familyHistory: "",
             }}
-            validationSchema={validationSchema}
+            // validationSchema={validationSchema}
 
             onSubmit={async (values, { resetForm }) => {
               // await handleSavedcat(values);
+              alert(JSON.stringify(values));
               resetForm();
               // togglemodal();
 

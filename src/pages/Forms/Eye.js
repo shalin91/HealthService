@@ -13,28 +13,6 @@ const Eye = () => {
     gallaryCategoryTitle6: Yup.string().required("gallary category title"),
     gallaryCategoryTitle7: Yup.string().required("gallary category title"),
     gallaryCategoryTitle8: Yup.string().required("gallary category title"),
-    // gallaryCategoryTitle9: Yup.string().required("gallary category title"),
-    companyLocation: Yup.string().required("CompanyLocation is a required "),
-    type: Yup.string().required("Type is required"),
-    name: Yup.string().required("name is required"),
-    gender: Yup.string().required("gender is required"),
-    age: Yup.string().required("age is required"),
-    company: Yup.string().required("Company is required"),
-    location: Yup.string().required("Location is required"),
-    ecNo: Yup.string().required("EC NO is required"),
-    dob: Yup.string().required("dob is required"),
-    height: Yup.string().required("height is required"),
-    bloodgroup: Yup.string().required("blood group is required"),
-    martialstatus: Yup.string().required("martial status is required"),
-    doj: Yup.string().required("date is required"),
-    marks: Yup.string().required("marks is required"),
-    natureofjob: Yup.string().required("nature of job is required"),
-    res: Yup.string().required("res is required"),
-    mob: Yup.string().required("mob is required"),
-    office: Yup.string().required("office is required"),
-    pphash: Yup.string().required("pp# is required"),
-    emer: Yup.string().required("emer is required"),
-    email: Yup.string().required("email is required"),
   });
   return (
     <>
@@ -42,17 +20,19 @@ const Eye = () => {
         <Col lg={12}>
           <Formik
             initialValues={{
-              gallaryCategoryTitle: "",
-              gallaryCategoryTitle2: "",
-              gallaryCategoryTitle3: "",
-              gallaryCategoryTitle4: "",
-              gallaryCategoryTitle5: "",
-              gallaryCategoryTitle6: "",
-              gallaryCategoryTitle7: "",
-              gallaryCategoryTitle8: "",
+              dvleft: "",
+              dvright: "",
+              dvleft2: "",
+              dvright2: "",
+              nvleft: "",
+              nvright: "",
+              nvleft2: "",
+              nvright2: "",
+              cv:"",
+              
               // gallaryCategoryTitle9: "",
             }}
-            validationSchema={validationSchema}
+            // validationSchema={validationSchema}
             onSubmit={(values) => {
               // Alert the input values of the form that we filled
               alert(JSON.stringify(values));
@@ -116,12 +96,12 @@ const Eye = () => {
                                     className="form-control"
                                     id="product-orders-input"
                                     placeholder=""
-                                    name="gallaryCategoryTitle"
+                                    name="dvleft"
                                     aria-label="orders"
                                     aria-describedby="product-orders-addon"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value={values.gallaryCategoryTitle}
+                                    value={values.dvleft}
                                   />
                                   <p className="error text-danger">
                                     {errors.gallaryCategoryTitle &&
@@ -135,12 +115,12 @@ const Eye = () => {
                                     className="form-control"
                                     id="product-orders-input"
                                     placeholder=""
-                                    name="gallaryCategoryTitle2"
+                                    name="dvright"
                                     aria-label="orders"
                                     aria-describedby="product-orders-addon"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value={values.gallaryCategoryTitle2}
+                                    value={values.dvright}
                                   />
                                   <p className="error text-danger">
                                     {errors.gallaryCategoryTitle2 &&
@@ -169,12 +149,12 @@ const Eye = () => {
                                     className="form-control"
                                     id="product-orders-input"
                                     placeholder=""
-                                    name="gallaryCategoryTitle3"
+                                    name="dvleft2"
                                     aria-label="orders"
                                     aria-describedby="product-orders-addon"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value={values.gallaryCategoryTitle3}
+                                    value={values.dvleft2}
                                   />
                                   <p className="error text-danger">
                                     {errors.gallaryCategoryTitle3 &&
@@ -188,12 +168,12 @@ const Eye = () => {
                                     className="form-control"
                                     id="product-orders-input"
                                     placeholder=""
-                                    name="gallaryCategoryTitle4"
+                                    name="dvright2"
                                     aria-label="orders"
                                     aria-describedby="product-orders-addon"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value={values.gallaryCategoryTitle4}
+                                    value={values.dvright2}
                                   />
                                   <p className="error text-danger">
                                     {errors.gallaryCategoryTitle4 &&
@@ -225,12 +205,12 @@ const Eye = () => {
                                     className="form-control"
                                     id="product-orders-input"
                                     placeholder=""
-                                    name="gallaryCategoryTitle5"
+                                    name="nvleft"
                                     aria-label="orders"
                                     aria-describedby="product-orders-addon"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value={values.gallaryCategoryTitle5}
+                                    value={values.nvleft}
                                   />
                                   <p className="error text-danger">
                                     {errors.gallaryCategoryTitle5 &&
@@ -244,11 +224,12 @@ const Eye = () => {
                                     className="form-control"
                                     id="product-orders-input"
                                     placeholder=""
-                                    name="gallaryCategoryTitle6"
+                                    name="nvright"
                                     aria-label="orders"
                                     aria-describedby="product-orders-addon"
                                     onChange={handleChange}
-                                    onBlur={handleBlur}value={values.gallaryCategoryTitle6}
+                                    onBlur={handleBlur}
+                                    value={values.nvright}
                                     />
                                     <p className="error text-danger">
                                       {errors.gallaryCategoryTitle6 &&
@@ -277,12 +258,12 @@ const Eye = () => {
                                       className="form-control"
                                       id="product-orders-input"
                                       placeholder=""
-                                      name="gallaryCategoryTitle7"
+                                      name="nvleft2"
                                       aria-label="orders"
                                       aria-describedby="product-orders-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={values.gallaryCategoryTitle7}
+                                      value={values.nvleft2}
                                     />
                                     <p className="error text-danger">
                                       {errors.gallaryCategoryTitle7 &&
@@ -296,12 +277,12 @@ const Eye = () => {
                                       className="form-control"
                                       id="product-orders-input"
                                       placeholder=""
-                                      name="gallaryCategoryTitle8"
+                                      name="nvright2"
                                       aria-label="orders"
                                       aria-describedby="product-orders-addon"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value={values.gallaryCategoryTitle8}
+                                    value={values.nvright2}
                                   />
                                   <p className="error text-danger">
                                     {errors.gallaryCategoryTitle8 &&
@@ -331,10 +312,11 @@ const Eye = () => {
                                     id="meassageInput"
                                     type="text"
                                     rows="3"
+                                    name="cv"
                                     placeholder="Enter your message"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    // value={values.gallaryCategoryTitle9}
+                                    value={values.cv}
                                   ></textarea>
                                   {/* <p className="error text-danger">
                                     {errors.gallaryCategoryTitle9 &&

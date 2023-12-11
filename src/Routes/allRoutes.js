@@ -116,6 +116,7 @@ import Investigation from "../pages/Forms/Investigation.js";
 import NewForm from "../pages/Forms/NewForm.js";
 import OtherDetails from "../pages/Forms/OtherDetails.js";
 import VitalsandHistory from "../pages/Forms/VitalsandHistory.js";
+import BloodInvestigation from "../pages/Forms/BloodInvestigation.js";
 
 // import customerNew from "../pages/Ecommerce/EcommerceCustomers/customerNew";
 const authProtectedRoutes = [
@@ -182,6 +183,14 @@ const authProtectedRoutes = [
     component: (
       <SignState>
         <OtherDetails />
+      </SignState>
+    ),
+  },
+  {
+    path: "/bloodinvestigation",
+    component: (
+      <SignState>
+        <BloodInvestigation />
       </SignState>
     ),
   },
