@@ -21,14 +21,18 @@ import { Formik, useFormik, useFormikContext } from "formik";
 import classnames from "classnames";
 import * as Yup from "yup";
 import SignContext from "../../contextAPI/Context/SignContext";
+import { preventDefault } from "@fullcalendar/react";
+import { set } from "date-fns";
 
 const NewForm = () => {
-  const { GetCompany, GetCompanybyId , GetEmpsbyCompAndLoc } = useContext(SignContext);
+  const { GetCompany, GetCompanybyId, GetEmpsbyCompAndLoc ,GetContactDetailsById } = useContext(SignContext);
   const [Company, setCompany] = useState([]);
   const [Location, setLocation] = useState([]);
   const [Category, setCategory] = useState([]);
   const [Department, setDepartment] = useState([]);
   const [EmpbyCompandLoc, setEmpbyCompandLoc] = useState([]);
+  const [currentEmp , setCurrentEmp ] = useState( null )
+  const [currentEmpContactDetails , setCurrentEmpContactDetails] = useState(null) 
 
   const getcompanies = async () => {
     const res = await GetCompany();
@@ -37,24 +41,42 @@ const NewForm = () => {
     // setLocation(res.data.companyLocation)
     // setRoles(res);
   };
+  
+  const getEmpContactDetails = async (id) => {
+
+    console.log( "---id in frontend first---" )
+
+    console.log(id)
+
+    const res = await GetContactDetailsById(id)
+    
+    console.log(res.data);
+
+    setCurrentEmpContactDetails(res.data);
+  }
 
   const getcompaniesbyId = async (id) => {
+
     const res = await GetCompanybyId(id);
-    console.log(id);
     setLocation(res.data.companyLocation);
     setCategory(res.data.companyJobCategorys);
     setDepartment(res.data.companyDepartments);
     // setRoles(res);
   };
 
-  const handleSavedCompandLoc =  async (Values) => {
+  const handleSavedCompandLoc = async (Values) => {
+
+    console.log( "----------------------------------------------------------------------------" );
+    console.log( Values )
+
+
     const res = await GetEmpsbyCompAndLoc(Values);
-    console.log(res);
-    
+    console.log(res.data)
+    setEmpbyCompandLoc(res.data)
+
   };
 
-  // console.log(Company);
-  // console.log(Location);
+
 
   const [customActiveTab, setcustomActiveTab] = useState("1");
   const toggleCustom = (tab) => {
@@ -98,9 +120,30 @@ const NewForm = () => {
     }
   };
 
+  const handleEmpData = (e) => {
+    let data = e.target.value;
+    
+   const curremp = EmpbyCompandLoc.filter( (emp) =>  emp._id === data )
+
+
+   console.log("-----------------------------------");
+
+   getEmpContactDetails( {id : curremp[0].employeeContactDetailsId} )
+
+  //  getEmpContactDetails()
+
+   setCurrentEmp(curremp[0])
+
+  
+  }
+
   useEffect(() => {
     getcompanies();
   }, []);
+
+  useEffect(() => {
+   console.log("set  data")
+  }, [currentEmp]);
 
   return (
     <>
@@ -112,14 +155,14 @@ const NewForm = () => {
             <Col lg={12}>
               <Formik
                 initialValues={{
-                  companyName: "",
-                  companyLocation: "",
+                  companyName: '',
+                  companyLocation: '',
                 }}
-                validationSchema={validationSchema}
+                //validationSchema={validationSchema}
                 onSubmit={async (values, { resetForm }) => {
-                    await handleSavedCompandLoc(values);
-                    // console.log(values)
+                  handleSavedCompandLoc(values)
                   resetForm();
+                  // Additional actions after form submission
                   // togglemodal();
                 }}
               >
@@ -134,6 +177,7 @@ const NewForm = () => {
                   setFieldValue,
                 }) => (
                   <Form onSubmit={handleSubmit}>
+                    {/* Your form fields and components */}
                     <Card>
                       <CardHeader>
                         <Row className="g-1 m-1">
@@ -150,11 +194,8 @@ const NewForm = () => {
                         <div className="live-preview">
                           <Row className="align-items-center g-3">
                             <Col sm={6}>
-                              <label
-                                className="form-label mt-3"
-                                htmlFor="product-orders-input"
-                              >
-                                Company
+                              <label className="form-label mt-3" htmlFor="product-orders-input">
+                                Company 
                               </label>
                               <div className="">
                                 <select
@@ -169,26 +210,18 @@ const NewForm = () => {
                                 >
                                   <option value="">Company Name</option>
                                   {Company.map((company) => (
-                                    <option
-                                      key={company._id}
-                                      value={company._id}
-                                    >
+                                    <option key={company._id} value={company._id}>
                                       {company.companyName}
                                     </option>
                                   ))}
                                 </select>
                               </div>
                               <p className="error text-danger">
-                                {errors.companyName &&
-                                  touched.companyName &&
-                                  errors.companyName}
+                                {errors.companyName && touched.companyName && errors.companyName}
                               </p>
                             </Col>
                             <Col sm={6}>
-                              <label
-                                className="form-label mt-3"
-                                htmlFor="product-orders-input"
-                              >
+                              <label className="form-label mt-3" htmlFor="product-orders-input">
                                 Location
                               </label>
                               <div className="">
@@ -223,11 +256,7 @@ const NewForm = () => {
                         </div>
                       </div>
                       <div className="text-end mb-3 me-3">
-                        <button
-                          onSubmit={handleSubmit}
-                          className="btn btn-success w-sm"
-                          //   onClick={togglesuccessmodal}
-                        >
+                        <button className="btn btn-success w-sm" type="submit">
                           Submit
                         </button>
                       </div>
@@ -242,7 +271,7 @@ const NewForm = () => {
               <Formik
                 initialValues={{
                   title: "",
-                  name: "",
+                  name:   "" ,
                   fathersName: "",
                   ecNo: "",
                   companyJobCategorys: "",
@@ -265,11 +294,11 @@ const NewForm = () => {
                   email: "",
                 }}
                 validationSchema={validationSchema}
-                onSubmit={async (values, { resetForm }) => {
-                  //   await handleSavedcat(values);
-                  resetForm();
-                  // togglemodal();
-                }}
+              // onSubmit={async (values, { resetForm }) => {
+              //   //   await handleSavedcat(values);
+              //   // resetForm();
+              //   // togglemodal();
+              // }}
               >
                 {({
                   isSubmitting,
@@ -281,7 +310,7 @@ const NewForm = () => {
                   handleBlur,
                   setFieldValue,
                 }) => (
-                  <Form onSubmit={handleSubmit}>
+                  <Form >
                     <Card>
                       <CardHeader>
                         <Row className="g-1 m-1">
@@ -320,13 +349,22 @@ const NewForm = () => {
                                 <select
                                   className="form-select"
                                   name="title"
-                                  onChange={handleChange}
+                                  onClick={(e) => {
+                                    handleChange(e);
+                                    handleEmpData(e);
+                                    
+                                    
+                                  }}
                                   onBlur={handleBlur}
-                                  value={values.title}
+                                  value={values.employeeName}
                                 >
-                                  <option value="">Select</option>
-                                  <option value="Mr.">Mr.</option>
-                                  <option value="Mrs.">Mrs.</option>
+                                  <option value=""  >Employees</option>
+                                  {
+                                    EmpbyCompandLoc.map((i, index) => (
+                                      <option value={ i._id } key={index}>{i.employeeName}</option>
+                                    ))
+                                  }
+
                                 </select>
                               </div>
                               <p className="error text-danger">
@@ -345,7 +383,7 @@ const NewForm = () => {
                                   aria-describedby="product-orders-addon"
                                   onChange={handleChange}
                                   onBlur={handleBlur}
-                                  value={values.name}
+                                  value={ currentEmp ? currentEmp.employeeName : ""}
                                 />
                               </div>
                               <p className="error text-danger">
@@ -364,7 +402,7 @@ const NewForm = () => {
                                   aria-describedby="product-orders-addon"
                                   onChange={handleChange}
                                   onBlur={handleBlur}
-                                  value={values.fathersName}
+                                  value={ currentEmp ? currentEmp.employeeFatherName : ""}
                                 />
                               </div>
                               <p className="error text-danger">
@@ -403,31 +441,25 @@ const NewForm = () => {
                             <Col sm={3}>
                               <label
                                 className="form-label mt-3"
-                                htmlFor="product-orders-input"
+                                htmlFor="product-orders-inputrd"
                               >
                                 Category
                               </label>
                               <div className="">
-                                <select
-                                  className="form-select"
+                              
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="company category"
                                   name="companyJobCategorys"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
                                   onChange={handleChange}
                                   onBlur={handleBlur}
-                                  value={values.companyJobCategorys}
-                                >
-                                <option value=""> Select</option>
-                                  {Category && Category.length > 0 ? (
-                                    Category.map((category) => (
-                                      <option key={category} value={category}>
-                                        {category}
-                                      </option>
-                                    ))
-                                  ) : (
-                                    <option value="" disabled>
-                                      No Categories available
-                                    </option>
-                                  )}
-                                </select>
+                                  value={currentEmp ? currentEmp.companyJobCategorys : ""  }
+                                />
+                             
                                 <p className="error text-danger">
                                   {errors.companyJobCategorys &&
                                     touched.companyJobCategorys &&
@@ -443,7 +475,7 @@ const NewForm = () => {
                                 Department
                               </label>
                               <div className="">
-                                <select
+                                {/* <select
                                   className="form-select"
                                   name="companyDepartments"
                                   onChange={handleChange}
@@ -462,7 +494,23 @@ const NewForm = () => {
                                       No Department available
                                     </option>
                                   )}
-                                </select>
+                                </select> */}
+
+
+
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="company Departments"
+                                  name="companyDepartments"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={currentEmp ? currentEmp.companyJobCategorys : ""  }
+                                /> 
+
                                 <p className="error text-danger">
                                   {errors.companyDepartments &&
                                     touched.companyDepartments &&
@@ -526,7 +574,7 @@ const NewForm = () => {
                                     placeholder="address"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value={values.address}
+                                    value={ currentEmpContactDetails ?  currentEmpContactDetails.address : "" }
                                   />
                                   <p className="error text-danger">
                                     {errors.address &&
@@ -573,7 +621,7 @@ const NewForm = () => {
                                       name="age"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={values.age}
+                                      value={currentEmpContactDetails ?  currentEmpContactDetails.age : ""}
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -601,7 +649,7 @@ const NewForm = () => {
                                       aria-describedby="product-price-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={values.dob}
+                                      value={currentEmpContactDetails ?  currentEmpContactDetails.dateOfBirth : ""}
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -619,17 +667,21 @@ const NewForm = () => {
                                     Gender
                                   </label>
                                   <div className="input-group mb-3">
-                                    <select
-                                      className="form-select"
+
+                                  <Input
+                                      type="text"
+                                      className="form-control"
+                                      id="product-price-input"
+                                      placeholder="gendet"
                                       name="gender"
+                                      aria-label="Price"
+                                      aria-describedby="product-price-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={values.gender}
-                                    >
-                                      <option value="">Select</option>
-                                      <option value="Mr.">Male</option>
-                                      <option value="Mrs.">Female</option>
-                                    </select>
+                                      value={  currentEmpContactDetails ?  currentEmpContactDetails.gender : "" }
+                                    />
+
+                                  
                                   </div>
                                   <p className="error text-danger">
                                     {errors.gender &&
@@ -658,7 +710,7 @@ const NewForm = () => {
                                       aria-describedby="product-orders-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={values.height}
+                                      value={currentEmpContactDetails ?  currentEmpContactDetails.height : ""}
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -687,7 +739,7 @@ const NewForm = () => {
                                       aria-describedby="product-orders-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={values.bloodgroup}
+                                      value={currentEmpContactDetails ?  currentEmpContactDetails.bloodGroup : ""} // bloodGroup
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -716,7 +768,7 @@ const NewForm = () => {
                                       aria-describedby="product-orders-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={values.martialstatus}
+                                      value={ currentEmpContactDetails ?  currentEmpContactDetails.mentalStatus : "" } // mentalStatus
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -745,7 +797,7 @@ const NewForm = () => {
                                       name="res"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={values.res}
+                                      value={currentEmpContactDetails ?  currentEmpContactDetails.res : ""}  // res
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -773,7 +825,8 @@ const NewForm = () => {
                                       aria-describedby="product-price-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={values.mob}
+                                      value={currentEmpContactDetails ?  currentEmpContactDetails.mobileNumber : ""}  //mobileNumber
+
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -801,7 +854,7 @@ const NewForm = () => {
                                       aria-describedby="product-orders-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={values.office}
+                                      value={currentEmpContactDetails ?  currentEmpContactDetails.office : ""}  //office
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -831,7 +884,7 @@ const NewForm = () => {
                                       aria-describedby="product-orders-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={values.pphash}
+                                      value={currentEmpContactDetails ?  currentEmpContactDetails.pp : ""} //pp
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -860,7 +913,7 @@ const NewForm = () => {
                                       aria-describedby="product-orders-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={values.emer}
+                                      value={currentEmpContactDetails ?  currentEmpContactDetails.emer : ""}   // emer
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -887,7 +940,7 @@ const NewForm = () => {
                                       aria-describedby="product-orders-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={values.email}
+                                      value={currentEmpContactDetails ?  currentEmpContactDetails.email : ""}  //email
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -919,7 +972,7 @@ const NewForm = () => {
                                       aria-describedby="product-price-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={values.doj}
+                                      value={currentEmpContactDetails ?  currentEmpContactDetails.dateOfJoin : ""}  //dateOfJoin
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -946,7 +999,7 @@ const NewForm = () => {
                                       aria-describedby="product-price-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={values.marks}
+                                      value={currentEmpContactDetails ?  currentEmpContactDetails.idMark : ""}  // idMark
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -978,7 +1031,7 @@ const NewForm = () => {
                                       aria-describedby="product-price-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={values.natureofjob}
+                                      value={ currentEmpContactDetails ?  currentEmpContactDetails.natureOfJob : ""}  // "no"
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -1053,7 +1106,7 @@ const NewForm = () => {
                       <button
                         type="submit"
                         className="btn btn-success w-sm"
-                        //   onClick={togglesuccessmodal}
+                      //   onClick={togglesuccessmodal}
                       >
                         Submit
                       </button>
