@@ -176,23 +176,16 @@ const Navdata = () => {
             
             {
               id: 5,
-              label: "Form-1",
+              label: "Patient-Details",
               link: "/newform",
               parentId: "apps",
             }, 
             {
               id: 6,
-              label: "Form-2",
+              label: "Check-up Form",
               link: "/form",
               parentId: "apps",
             },
-            {
-              id: 4,
-              label: "Form-3",
-              link: "/form",
-              parentId: "apps",
-            },
-
           ],
         },
         {

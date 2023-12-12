@@ -25,10 +25,6 @@ const Investigation = () => {
               spirometry: "",
               autometry: "",
               remarks: "",
-              complaints: "",
-              pastHistory: "",
-              personalHistory: "",
-              familyHistory: "",
             }}
             validationSchema={validationSchema}
             onSubmit={(values) => {
