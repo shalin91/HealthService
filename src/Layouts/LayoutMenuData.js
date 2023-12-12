@@ -138,7 +138,6 @@ const Navdata = () => {
   ]);
 
   const menuItems = [
- 
     // {
     //   id: "ecommerce",
     //   label: "Form",
@@ -160,7 +159,6 @@ const Navdata = () => {
       },
       stateVariables: isApps,
       subItems: [
-
         {
           id: "appsecommerce",
           label: "Forms",
@@ -173,13 +171,12 @@ const Navdata = () => {
           parentId: "apps",
           stateVariables: isEcommerce,
           childItems: [
-            
             {
               id: 5,
               label: "Form-1",
               link: "/newform",
               parentId: "apps",
-            }, 
+            },
             {
               id: 6,
               label: "Form-2",
@@ -192,7 +189,6 @@ const Navdata = () => {
               link: "/form",
               parentId: "apps",
             },
-
           ],
         },
         {
@@ -239,7 +235,7 @@ const Navdata = () => {
         //   },
         //   parentId: "apps",
         //   stateVariables: isCategory,
-        //   childItems: [
+        //   childItems:
         //     {
         //       id: 1,
         //       label: "category",
@@ -260,23 +256,26 @@ const Navdata = () => {
         //     },
         //   ],
         // },
-        // {
-        //   id: "tasks",
-        //   label: "Customers",
-        //   link: "/#",
-        //   isChildItem: true,
-        //   click: function (e) {
-        //     e.preventDefault();
-        //     setIsTasks(!isTasks);
-        //   },
-        //   parentId: "apps",
-        //   stateVariables: isTasks,
-        //   childItems: [
-
-        //     { id: 2, label: "Customers", link: "/customers", parentId: "apps" },
-
-        //   ],
-        // },
+        {
+          id: "tasks",
+          label: "Checkup-type Master",
+          link: "/#",
+          isChildItem: true,
+          click: function (e) {
+            e.preventDefault();
+            setIsTasks(!isTasks);
+          },
+          parentId: "apps",
+          stateVariables: isTasks,
+          childItems: [
+            {
+              id: 2,
+              label: "Add Checkup-type",
+              link: "/checkuptype",
+              parentId: "apps",
+            },
+          ],
+        },
         // {
         //   id: "appscrm",
         //   label: "CMS",
