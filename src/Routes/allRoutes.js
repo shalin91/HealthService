@@ -118,6 +118,10 @@ import Investigation from "../pages/Forms/Investigation.js";
 import NewForm from "../pages/Forms/NewForm.js";
 import OtherDetails from "../pages/Forms/OtherDetails.js";
 import VitalsandHistory from "../pages/Forms/VitalsandHistory.js";
+import Form32Health from "../pages/Pages/PrintForm/Form32Health.js";
+import FormHelth33 from "../pages/Pages/PrintForm/Form33Health.js";
+import HelthCard from "../pages/Pages/PrintForm/HelthCard.js";
+import MediclaCheckUp from "../pages/Pages/PrintForm/MediclaCheckUp.js";
 
 // import customerNew from "../pages/Ecommerce/EcommerceCustomers/customerNew";
 const authProtectedRoutes = [
@@ -215,6 +219,56 @@ const authProtectedRoutes = [
   { path: "/apps-ecommerce-orders", component: <EcommerceOrders /> },
   // { path: "/apps-ecommerce-order-details", component: <EcommerceOrderDetail /> },
   { path: "/apps-ecommerce-customers", component: <EcommerceCustomers /> },
+
+  {
+    path: "/customers",
+    component: (
+      <SignState>
+        <NewCustomer />
+      </SignState>
+    ),
+  },
+  {
+    path: "/customerorder/:id",
+    component: (
+      <SignState>
+        <CustomerOrders />
+      </SignState>
+    ),
+  },
+  {
+    path: "/form32",
+    component: (
+      <SignState>
+        <Form32Health />
+      </SignState>
+    ),
+  },
+  {
+    path: "/form-helth33",
+    component: (
+      <SignState>
+        <FormHelth33 />
+      </SignState>
+    ),
+  },
+  {
+    path: "/helth-card",
+    component: (
+      <SignState>
+        <HelthCard />
+      </SignState>
+    ),
+  },
+  {
+    path: "/medical-checkup",
+    component: (
+      <SignState>
+        <MediclaCheckUp />
+      </SignState>
+    ),
+  },
+=======
   // {
   //   path: "/customers",
   //   component: (
@@ -231,6 +285,7 @@ const authProtectedRoutes = [
   //     </SignState>
   //   ),
   // },
+
   { path: "/apps-ecommerce-cart", component: <EcommerceCart /> },
   { path: "/apps-ecommerce-checkout", component: <EcommerceCheckout /> },
 

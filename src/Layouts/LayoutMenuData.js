@@ -334,24 +334,28 @@ const Navdata = () => {
         //         // { id: 3, label: "Create Invoice", link: "/apps-invoices-create" },
         //     ]
         // },
-        // {
-        //     id: "supportTickets",
-        //     label: "Reports",
-        //     link: "/#",
-        //     isChildItem: true,
-        //     click: function (e) {
-        //         e.preventDefault();
-        //         setIsSupportTickets(!isSupportTickets);
-        //     },
-        //     parentId: "apps",
-        //     stateVariables: isSupportTickets,
-        //     childItems: [
-        //         { id: 1, label: "Customers Reports", link: "/customerreports" },
-        //         { id: 1, label: "Date wise Reports", link: "/customerbydatereport" },
-        //         { id: 2, label: "Products Reports", link: "/productreport" },
-        //         { id: 3, label: "Stock Reports", link: "/stockreport" },
-        //     ]
-        // },
+        {
+          id: "supportTickets",
+          label: "Reports",
+          link: "/#",
+          isChildItem: true,
+          click: function (e) {
+            e.preventDefault();
+            setIsSupportTickets(!isSupportTickets);
+          },
+          parentId: "apps",
+          stateVariables: isSupportTickets,
+          childItems: [
+            { id: 1, label: "Form32", link: "/form32" },
+            {
+              id: 2,
+              label: "Form 33 Health",
+              link: "/form-helth33",
+            },
+            { id: 3, label: "Health Card", link: "/helth-card" },
+            { id: 4, label: "Medical Check Up", link: "/medical-checkup" },
+          ],
+        },
         // {
         //     id: "filemanager",
         //     label: "Subscription",
