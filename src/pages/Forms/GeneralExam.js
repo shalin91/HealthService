@@ -64,6 +64,8 @@ const GeneralExam = () => {
                       </CardHeader> */}
                   <div className="card-body">
                     <div className="live-preview">
+                    
+                      
                       <Row className="align-items-center g-3">
                         <Col sm={6}>
                           <div className="mb-3">
@@ -307,6 +309,7 @@ const GeneralExam = () => {
                           </div>
                         </Col>
                       </Row>
+                      
                     </div>
                   </div>
                   <div className="text-end mb-3 me-3">
