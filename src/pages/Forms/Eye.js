@@ -1,7 +1,9 @@
-import { Form, Formik } from "formik";
 import React from "react";
-import { Card, CardHeader, Col, Input, Row } from "reactstrap";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { Card, CardHeader, Col, Container, Input, Row } from "reactstrap";
+import { ToastContainer } from "react-toastify";
+import UiContent from "../../Components/Common/UiContent";
 
 const Eye = () => {
   const validationSchema = Yup.object().shape({
@@ -293,17 +295,49 @@ const Eye = () => {
                             </div>
                           </div>
                         </Col>
-                      </Row>
-
-                      <Row className="align-items-center g-3 mt-2">
-                        <Col className="col-sm">
-                          <div>
-                            <div>
-                              <Row className="mb-3">
-                                <Col className="col-lg-2 col-md-2">
-                                  Colour vision
-                                </Col>
-                                <Col className="col-lg-2 col-md-2"></Col>
+                      </Row>          
+                                    <Col className="col-lg-2 col-md-2 col-12 ">
+                                      <Input
+                                        type="text"
+                                        className="form-control"
+                                        id="product-orders-input"
+                                        placeholder=""
+                                        name="gallaryCategoryTitle"
+                                        aria-label="orders"
+                                        aria-describedby="product-orders-addon"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        // value={values.gallaryCategoryTitle}
+                                      />
+                                    </Col>
+                                    <Col className="col-lg-2 col-md-2 col-12 ">
+                                      <Input
+                                        type="text"
+                                        className="form-control"
+                                        id="product-orders-input"
+                                        placeholder=""
+                                        name="gallaryCategoryTitle"
+                                        aria-label="orders"
+                                        aria-describedby="product-orders-addon"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        // value={values.gallaryCategoryTitle}
+                                      />
+                                    </Col>
+                                  </Row>
+                                </div>
+                              </div>
+                            </Col>
+                          </Row>
+                          <Row className="align-items-center g-3">
+                            <Col className="col-sm">
+                              <div>
+                                <div>
+                                  <Row className="mb-3">
+                                    <Col className="col-lg-2 col-md-2"></Col>
+                                    <Col className="col-lg-2 col-md-2">
+                                      <p>with glasses</p>
+                                    </Col>
 
                                 <Col className="col-lg-4 col-md-4">
                                   <textarea
