@@ -67,7 +67,7 @@ const AddCompany = () => {
                     await handleSaveCompanyData(values);
                   console.log(values);
                   resetForm();
-                  // togglemodal();
+                  
                 }}
               >
                 {({

@@ -220,22 +220,22 @@ const authProtectedRoutes = [
   // { path: "/apps-ecommerce-order-details", component: <EcommerceOrderDetail /> },
   { path: "/apps-ecommerce-customers", component: <EcommerceCustomers /> },
 
-  {
-    path: "/customers",
-    component: (
-      <SignState>
-        <NewCustomer />
-      </SignState>
-    ),
-  },
-  {
-    path: "/customerorder/:id",
-    component: (
-      <SignState>
-        <CustomerOrders />
-      </SignState>
-    ),
-  },
+  // {
+  //   path: "/customers",
+  //   component: (
+  //     <SignState>
+  //       <NewCustomer />
+  //     </SignState>
+  //   ),
+  // },
+  // {
+  //   path: "/customerorder/:id",
+  //   component: (
+  //     <SignState>
+  //       <CustomerOrders />
+  //     </SignState>
+  //   ),
+  // },
   {
     path: "/form32",
     component: (
@@ -268,7 +268,7 @@ const authProtectedRoutes = [
       </SignState>
     ),
   },
-=======
+
   // {
   //   path: "/customers",
   //   component: (

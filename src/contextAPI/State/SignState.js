@@ -187,6 +187,46 @@ export const SignState = (props) => {
     }
   };
 
+  //add form one
+
+  const AddEmployee = async (EmployeeData) => {
+    try {
+      const response = await axios.post(
+        `${url}/employ/add-employ`,
+        EmployeeData
+      );
+
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Error adding content:", error);
+      return {
+        success: false,
+        msg: "An error occurred while adding the email.",
+      };
+    }
+  };
+
+  //adding contact details
+
+  const AddContact = async (ContactData) => {
+    try {
+      const response = await axios.post(
+        `${url}/employ/set-employ-contact-details`,
+        ContactData
+      );
+
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Error adding content:", error);
+      return {
+        success: false,
+        msg: "An error occurred while adding the email.",
+      };
+    }
+  };
+
   // Get Copmany
   const GetCompany = async () => {
     try {
@@ -326,6 +366,7 @@ export const SignState = (props) => {
         GetRoles,
         GetRoleSpecificPermission,
         AddComapany,
+        AddEmployee,
         GetCompany,
         GetCompanybyId,
         GetEmpsbyCompAndLoc,
@@ -333,6 +374,7 @@ export const SignState = (props) => {
         setNewCheckupName,
         getCheckupType,
         AddCheckupType,
+        AddContact,
       }}
     >
       {props.children}

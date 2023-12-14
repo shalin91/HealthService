@@ -4,6 +4,8 @@ import { Form, Formik } from "formik";
 import React, { useContext, useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import axios from "axios";
+
 import {
   Card,
   CardBody,
@@ -18,9 +20,11 @@ import {
   TabPane,
 } from "reactstrap";
 import * as Yup from "yup";
+
+import { companies } from "../../common/data";
 import SignContext from "../../contextAPI/Context/SignContext";
 
-function Example() {
+function Example({ companyId, location }) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -30,7 +34,10 @@ function Example() {
     GetCompanybyId,
     GetEmpsbyCompAndLoc,
     GetContactDetailsById,
+    AddEmployee,
+    AddContact,
   } = useContext(SignContext);
+
   const [Company, setCompany] = useState([]);
   const [Location, setLocation] = useState([]);
   const [Category, setCategory] = useState([]);
@@ -40,13 +47,19 @@ function Example() {
   const [currentEmpContactDetails, setCurrentEmpContactDetails] =
     useState(null);
 
+  const [empId, setEmpId] = useState(null);
+
   const getcompanies = async () => {
     const res = await GetCompany();
     console.log(res);
-    setCompany(res.data);
-    // setLocation(res.data.companyLocation)
-    // setRoles(res);
+    setCategory(res.data[0].companyJobCategorys);
+    // setCategory(res.data.companyJobCategorys);
+    setDepartment(res.data[0].companyDepartments);
   };
+
+  console.log(Category);
+  console.log(Department);
+  // console.log(Category);
 
   const getEmpContactDetails = async (id) => {
     console.log("---id in frontend first---");
@@ -85,6 +98,26 @@ function Example() {
       setcustomActiveTab(tab);
     }
   };
+
+  const handleSavedEmployee = async (Values) => {
+    const data = { ...Values, companyId, location };
+    console.log("--------------------------------------data");
+    // console.log(data);
+    const res = await AddEmployee(data);
+    console.log("empid>>>>>");
+    console.log(res._id);
+
+    setEmpId(res._id);
+  };
+
+  //handle save contact detail...
+  const handleSavedcat = async (Values) => {
+    const data1 = { ...Values, companyId, empId };
+    const res = await AddContact(data1);
+    console.log("--------------data-------");
+    console.log(res);
+  };
+
   const validationSchema = Yup.object().shape({
     title: Yup.string().required("Title is required"),
     name: Yup.string().required("Name is required"),
@@ -135,6 +168,18 @@ function Example() {
     setCurrentEmp(curremp[0]);
   };
 
+  // const handleSavedEmployee = async (Values) => {
+  //   try {
+  //     const { data } = axios.post(
+  //       "http://localhost:5002/employ/add-employ",
+  //       Values
+  //     );
+  //     console.log("data >>>");
+  //   } catch (error) {
+  //     console.log("error");
+  //   }
+  // };
+
   useEffect(() => {
     getcompanies();
   }, []);
@@ -162,19 +207,22 @@ function Example() {
             <Col lg={12}>
               <Formik
                 initialValues={{
-                  title: "",
-                  name: "",
-                  fathersName: "",
+                  employeeNameAbbrevation: "",
+                  employeeName: "",
+                  employeeFatherName: "",
                   ecNo: "",
                   companyJobCategorys: "",
                   companyDepartments: "",
                 }}
-                validationSchema={validationSchema}
-                // onSubmit={async (values, { resetForm }) => {
-                //   //   await handleSavedcat(values);
-                //   // resetForm();
-                //   // togglemodal();
-                // }}
+                // validationSchema={validationSchema}
+                onSubmit={async (values, { resetForm }) => {
+                  await handleSavedEmployee(values);
+                  resetForm();
+                  // togglemodal();
+                  // toast.success("Category Added Successfully", {
+                  //   autoClose: 3000,
+                  // });
+                }}
               >
                 {({
                   isSubmitting,
@@ -186,7 +234,7 @@ function Example() {
                   handleBlur,
                   setFieldValue,
                 }) => (
-                  <Form>
+                  <Form onSubmit={handleSubmit}>
                     <Card>
                       <CardHeader>
                         <Row className="g-1 m-1">
@@ -224,20 +272,21 @@ function Example() {
                               <div className="">
                                 <select
                                   className="form-select"
-                                  name="title"
+                                  name="employeeNameAbbrevation"
                                   onClick={(e) => {
                                     handleChange(e);
                                     handleEmpData(e);
                                   }}
                                   onBlur={handleBlur}
-                                  value={values.employeeName}
+                                  value={values.employeeNameAbbrevation}
                                 >
-                                  <option value="">Employees</option>
-                                  {EmpbyCompandLoc.map((i, index) => (
+                                  <option value="Mr.">Mr</option>
+                                  <option value="Mrs.">Mrs</option>
+                                  {/* {EmpbyCompandLoc.map((i, index) => (
                                     <option value={i._id} key={index}>
                                       {i.employeeName}
                                     </option>
-                                  ))}
+                                  ))} */}
                                 </select>
                               </div>
                             </Col>
@@ -248,14 +297,12 @@ function Example() {
                                   className="form-control"
                                   id="product-orders-input"
                                   placeholder="First Name"
-                                  name="name"
+                                  name="employeeName"
                                   aria-label="orders"
                                   aria-describedby="product-orders-addon"
                                   onChange={handleChange}
                                   onBlur={handleBlur}
-                                  value={
-                                    currentEmp ? currentEmp.employeeName : ""
-                                  }
+                                  value={values.employeeName}
                                 />
                               </div>
                             </Col>
@@ -266,16 +313,12 @@ function Example() {
                                   className="form-control"
                                   id="product-orders-input"
                                   placeholder="Father's Name"
-                                  name="fathersName"
+                                  name="employeeFatherName"
                                   aria-label="orders"
                                   aria-describedby="product-orders-addon"
                                   onChange={handleChange}
                                   onBlur={handleBlur}
-                                  value={
-                                    currentEmp
-                                      ? currentEmp.employeeFatherName
-                                      : ""
-                                  }
+                                  value={values.employeeFatherName}
                                 />
                               </div>
                             </Col>
@@ -303,6 +346,7 @@ function Example() {
                                 />
                               </div>
                             </Col>
+
                             <Col sm={3}>
                               <label
                                 className="form-label mt-3"
@@ -311,25 +355,27 @@ function Example() {
                                 Category
                               </label>
                               <div className="">
-                                <Input
-                                  type="text"
-                                  className="form-control"
-                                  id="product-orders-input"
-                                  placeholder="company category"
+                                <select
+                                  className="form-select"
                                   name="companyJobCategorys"
-                                  aria-label="orders"
-                                  aria-describedby="product-orders-addon"
-                                  onChange={handleChange}
+                                  onChange={(e) => {
+                                    handleChange(e);
+                                  }}
                                   onBlur={handleBlur}
-                                  value={
-                                    currentEmp
-                                      ? currentEmp.companyJobCategorys
-                                      : ""
-                                  }
-                                />
+                                  value={values.companyJobCategorys}
+                                >
+                                  {Category.map((name, index) => (
+                                    <option key={index} value={name}>
+                                      {name}
+                                    </option>
+                                  ))}
+                                </select>
                               </div>
                             </Col>
-                            <Col sm={3}>
+
+                            {/* setting category by api */}
+
+                            {/* <Col sm={3}>
                               <label
                                 className="form-label mt-3"
                                 htmlFor="product-orders-input"
@@ -354,6 +400,34 @@ function Example() {
                                   }
                                 />
                               </div>
+                            </Col> */}
+
+                            {/* //setting Department */}
+
+                            <Col sm={3}>
+                              <label
+                                className="form-label mt-3"
+                                htmlFor="product-orders-inputrd"
+                              >
+                                Department
+                              </label>
+                              <div className="">
+                                <select
+                                  className="form-select"
+                                  name="companyDepartments"
+                                  onChange={(e) => {
+                                    handleChange(e);
+                                  }}
+                                  onBlur={handleBlur}
+                                  value={values.companyDepartments}
+                                >
+                                  {Department.map((name, index) => (
+                                    <option key={index} value={name}>
+                                      {name}
+                                    </option>
+                                  ))}
+                                </select>
+                              </div>
                             </Col>
                           </Row>
                         </div>
@@ -367,31 +441,32 @@ function Example() {
                   </Form>
                 )}
               </Formik>
+
               <Formik
                 initialValues={{
                   address: "",
                   age: "",
-                  dob: "",
+                  dateOfBirth: "",
                   gender: "",
                   height: "",
-                  bloodgroup: "",
-                  martialstatus: "",
-                  doj: "",
-                  marks: "",
-                  natureofjob: "",
+                  bloodGroup: "",
+                  mentalStatus: "",
+                  dateOfJoin: "",
+                  idMark: "",
+                  natureOfJob: "",
                   res: "",
-                  mob: "",
+                  mobileNumber: "",
                   office: "",
-                  pphash: "",
+                  pp: "",
                   emer: "",
                   email: "",
                 }}
-                validationSchema={validationSchema}
-                // onSubmit={async (values, { resetForm }) => {
-                //   //   await handleSavedcat(values);
-                //   // resetForm();
-                //   // togglemodal();
-                // }}
+                // validationSchema={validationSchema}
+                onSubmit={async (values, { resetForm }) => {
+                  await handleSavedcat(values);
+                  resetForm();
+                  // togglemodal();
+                }}
               >
                 {({
                   isSubmitting,
@@ -442,11 +517,7 @@ function Example() {
                                     placeholder="address"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value={
-                                      currentEmpContactDetails
-                                        ? currentEmpContactDetails.address
-                                        : ""
-                                    }
+                                    value={values.address}
                                   />
                                 </div>
                               </Col>
@@ -462,18 +533,14 @@ function Example() {
                                   </label>
                                   <div className="input-group mb-3">
                                     <Input
-                                      type="text"
+                                      type="number"
                                       className="form-control"
                                       id="product-stock-input"
                                       placeholder="age"
                                       name="age"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={
-                                        currentEmpContactDetails
-                                          ? currentEmpContactDetails.age
-                                          : ""
-                                      }
+                                      value={values.age}
                                     />
                                   </div>
                                 </div>
@@ -489,20 +556,16 @@ function Example() {
                                   </label>
                                   <div className="input-group mb-3">
                                     <Input
-                                      type="text"
+                                      type="date"
                                       className="form-control"
                                       id="product-price-input"
                                       placeholder="DD/MM/YYYY"
-                                      name="dob"
+                                      name="dateOfBirth"
                                       aria-label="Price"
                                       aria-describedby="product-price-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={
-                                        currentEmpContactDetails
-                                          ? currentEmpContactDetails.dateOfBirth
-                                          : ""
-                                      }
+                                      value={values.dateOfBirth}
                                     />
                                   </div>
                                 </div>
@@ -517,22 +580,21 @@ function Example() {
                                     Gender
                                   </label>
                                   <div className="input-group mb-3">
-                                    <Input
-                                      type="text"
-                                      className="form-control"
-                                      id="product-price-input"
-                                      placeholder="gendet"
+                                    <select
+                                      className="form-select"
+                                      id="product-gender-input"
                                       name="gender"
-                                      aria-label="Price"
-                                      aria-describedby="product-price-addon"
+                                      aria-label="Gender"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={
-                                        currentEmpContactDetails
-                                          ? currentEmpContactDetails.gender
-                                          : ""
-                                      }
-                                    />
+                                      value={values.gender}
+                                    >
+                                      <option value="" disabled>
+                                        Select Gender
+                                      </option>
+                                      <option value="male">Male</option>
+                                      <option value="female">Female</option>
+                                    </select>
                                   </div>
                                 </div>
                               </Col>
@@ -547,7 +609,7 @@ function Example() {
                                   </label>
                                   <div className="input-group mb-3">
                                     <Input
-                                      type="text"
+                                      type="number"
                                       className="form-control"
                                       id="product-orders-input"
                                       placeholder="height"
@@ -556,11 +618,7 @@ function Example() {
                                       aria-describedby="product-orders-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={
-                                        currentEmpContactDetails
-                                          ? currentEmpContactDetails.height
-                                          : ""
-                                      }
+                                      value={values.height}
                                     />
                                   </div>
                                 </div>
@@ -579,16 +637,12 @@ function Example() {
                                       className="form-control"
                                       id="product-orders-input"
                                       placeholder="blood group"
-                                      name="bloodgroup"
+                                      name="bloodGroup"
                                       aria-label="orders"
                                       aria-describedby="product-orders-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={
-                                        currentEmpContactDetails
-                                          ? currentEmpContactDetails.bloodGroup
-                                          : ""
-                                      } // bloodGroup
+                                      value={values.bloodGroup}
                                     />
                                   </div>
                                 </div>
@@ -607,16 +661,12 @@ function Example() {
                                       className="form-control"
                                       id="product-orders-input"
                                       placeholder="martial status"
-                                      name="martialstatus"
+                                      name="mentalStatus"
                                       aria-label="orders"
                                       aria-describedby="product-orders-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={
-                                        currentEmpContactDetails
-                                          ? currentEmpContactDetails.mentalStatus
-                                          : ""
-                                      } // mentalStatus
+                                      value={values.mentalStatus} // mentalStatus
                                     />
                                   </div>
                                 </div>
@@ -640,11 +690,7 @@ function Example() {
                                       name="res"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={
-                                        currentEmpContactDetails
-                                          ? currentEmpContactDetails.res
-                                          : ""
-                                      } // res
+                                      value={values.res} // res
                                     />
                                   </div>
                                 </div>
@@ -660,20 +706,16 @@ function Example() {
                                   </label>
                                   <div className="input-group mb-3">
                                     <Input
-                                      type="text"
+                                      type="number"
                                       className="form-control"
                                       id="product-price-input"
                                       placeholder="MOB"
-                                      name="mob"
+                                      name="mobileNumber"
                                       aria-label="Price"
                                       aria-describedby="product-price-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={
-                                        currentEmpContactDetails
-                                          ? currentEmpContactDetails.mobileNumber
-                                          : ""
-                                      } //mobileNumber
+                                      value={values.mobileNumber}
                                     />
                                   </div>
                                 </div>
@@ -698,11 +740,7 @@ function Example() {
                                       aria-describedby="product-orders-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={
-                                        currentEmpContactDetails
-                                          ? currentEmpContactDetails.office
-                                          : ""
-                                      } //office
+                                      value={values.office}
                                     />
                                   </div>
                                 </div>
@@ -722,16 +760,12 @@ function Example() {
                                       className="form-control"
                                       id="product-orders-input"
                                       placeholder="PP #"
-                                      name="pphash"
+                                      name="pp"
                                       aria-label="orders"
                                       aria-describedby="product-orders-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={
-                                        currentEmpContactDetails
-                                          ? currentEmpContactDetails.pp
-                                          : ""
-                                      } //pp
+                                      value={values.pp}
                                     />
                                   </div>
                                 </div>
@@ -755,15 +789,12 @@ function Example() {
                                       aria-describedby="product-orders-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={
-                                        currentEmpContactDetails
-                                          ? currentEmpContactDetails.emer
-                                          : ""
-                                      } // emer
+                                      value={values.emer} // emer
                                     />
                                   </div>
                                 </div>
                               </Col>
+
                               <Col sm={2}>
                                 <div className="mb-3">
                                   <label
@@ -783,11 +814,7 @@ function Example() {
                                       aria-describedby="product-orders-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={
-                                        currentEmpContactDetails
-                                          ? currentEmpContactDetails.email
-                                          : ""
-                                      } //email
+                                      value={values.email}
                                     />
                                   </div>
                                 </div>
@@ -805,20 +832,16 @@ function Example() {
                                   </label>
                                   <div className="input-group mb-3">
                                     <Input
-                                      type="text"
+                                      type="date"
                                       className="form-control"
                                       id="product-price-input"
                                       placeholder="DD/MM/YYYY"
-                                      name="doj"
+                                      name="dateOfJoin"
                                       aria-label="Price"
                                       aria-describedby="product-price-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={
-                                        currentEmpContactDetails
-                                          ? currentEmpContactDetails.dateOfJoin
-                                          : ""
-                                      } //dateOfJoin
+                                      value={values.dateOfJoin} //dateOfJoin
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -840,16 +863,12 @@ function Example() {
                                       className="form-control"
                                       id="product-price-input"
                                       placeholder="Marks on body"
-                                      name="marks"
+                                      name="idMark"
                                       aria-label="Price"
                                       aria-describedby="product-price-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={
-                                        currentEmpContactDetails
-                                          ? currentEmpContactDetails.idMark
-                                          : ""
-                                      } // idMark
+                                      value={values.idMark} // idMark
                                     />
                                   </div>
                                 </div>
@@ -871,16 +890,12 @@ function Example() {
                                       className="form-control"
                                       id="product-price-input"
                                       placeholder="nature of job"
-                                      name="natureofjob"
+                                      name="natureOfJob"
                                       aria-label="Price"
                                       aria-describedby="product-price-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={
-                                        currentEmpContactDetails
-                                          ? currentEmpContactDetails.natureOfJob
-                                          : ""
-                                      } // "no"
+                                      value={values.natureOfJob}
                                     />
                                   </div>
                                 </div>

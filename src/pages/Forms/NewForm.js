@@ -36,6 +36,8 @@ const NewForm = () => {
   const [Department, setDepartment] = useState([]);
   const [EmpbyCompandLoc, setEmpbyCompandLoc] = useState([]);
   const [currentEmp, setCurrentEmp] = useState(null);
+  const [currentCompanyId, setCurrentCompanyId] = useState(null);
+  const [currentLocation, setCurrentLocation] = useState(null);
   const [currentEmpContactDetails, setCurrentEmpContactDetails] =
     useState(null);
 
@@ -69,9 +71,12 @@ const NewForm = () => {
 
   const handleSavedCompandLoc = async (Values) => {
     console.log(
-      "----------------------------------------------------------------------------"
+      "------------------------ARRAY-------------------------------------------"
     );
+
     console.log(Values);
+    setCurrentCompanyId(Values.companyName);
+    setCurrentLocation(Values.companyLocation);
 
     const res = await GetEmpsbyCompAndLoc(Values);
     console.log(res.data);
@@ -113,7 +118,6 @@ const NewForm = () => {
 
   const handleLocationChange = (e) => {
     let selectedCompanyId = e.target.value;
-    // console.log( selectedCompanyId );
 
     if (selectedCompanyId) {
       getcompaniesbyId(selectedCompanyId);
@@ -537,7 +541,7 @@ const NewForm = () => {
                           </Row>
                         </div>
                       </div>
-                      <Example />
+                      <Example companyId={currentCompanyId} location={currentLocation} />
                     </Card>
                     <Card>
                       <CardHeader>
@@ -553,19 +557,6 @@ const NewForm = () => {
                               }}
                             >
                               Contact Details
-                            </NavLink>
-                          </NavItem>
-                          <NavItem>
-                            <NavLink
-                              style={{ cursor: "pointer" }}
-                              className={classnames({
-                                active: customActiveTab === "2",
-                              })}
-                              onClick={() => {
-                                toggleCustom("2");
-                              }}
-                            >
-                              Patient Details
                             </NavLink>
                           </NavItem>
                         </Nav>
@@ -1119,62 +1110,6 @@ const NewForm = () => {
                                 </div>
                               </Col>
                             </Row>
-                          </TabPane>
-
-                          <TabPane id="addproduct-metadata" tabId="2">
-                            <Row>
-                              <Col lg={6}>
-                                <div className="mb-3">
-                                  <Label
-                                    className="form-label"
-                                    htmlFor="meta-title-input"
-                                  >
-                                    Meta title
-                                  </Label>
-                                  <Input
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="Enter meta title"
-                                    id="meta-title-input"
-                                    name="meta_title"
-                                  />
-                                </div>
-                              </Col>
-
-                              <Col lg={6}>
-                                <div className="mb-3">
-                                  <Label
-                                    className="form-label"
-                                    htmlFor="meta-keywords-input"
-                                  >
-                                    Meta Keywords
-                                  </Label>
-                                  <Input
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="Enter meta keywords"
-                                    id="meta-keywords-input"
-                                    name="meta_keyword"
-                                  />
-                                </div>
-                              </Col>
-                            </Row>
-
-                            <div>
-                              <Label
-                                className="form-label"
-                                htmlFor="meta-description-input"
-                              >
-                                Meta Description
-                              </Label>
-                              <textarea
-                                className="form-control"
-                                id="meta-description-input"
-                                placeholder="Enter meta description"
-                                name="meta_description"
-                                rows="3"
-                              ></textarea>
-                            </div>
                           </TabPane>
                         </TabContent>
                       </CardBody>
