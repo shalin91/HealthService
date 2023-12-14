@@ -26,6 +26,7 @@ import GeneralExam from "./GeneralExam";
 import Investigation from "./Investigation";
 import OtherDetails from "./OtherDetails";
 import VitalsandHistory from "./VitalsandHistory";
+import BloodInvestigation from "./BloodInvestigation";
 
 const CheckupForm = () => {
   const [customActiveTab, setcustomActiveTab] = useState("1");
@@ -104,12 +105,12 @@ const CheckupForm = () => {
   };
 
   // Creating schema
-  const schema = Yup.object().shape({
-    checkupName: Yup.string().required("checkupName is a required "),
-    checkupNumber: Yup.string().required("Number  is a required "),
-    checkupDate: Yup.string().required("Date is a required "),
-    checkupType: Yup.string().required("checkupType is a required "),
-  });
+  // const schema = Yup.object().shape({
+  //   checkupName: Yup.string().required("checkupName is a required "),
+  //   checkupNumber: Yup.string().required("Number  is a required "),
+  //   checkupDate: Yup.string().required("Date is a required "),
+  //   checkupType: Yup.string().required("checkupType is a required "),
+  // });
 
 
 
@@ -145,35 +146,35 @@ const CheckupForm = () => {
 
   }
 
-  const validationSchema = Yup.object().shape({
-    checkupName: Yup.string().required("Checkup Name is required"),
+  // const validationSchema = Yup.object().shape({
+  //   checkupName: Yup.string().required("Checkup Name is required"),
 
-    checkupNumber: Yup.string().required("Number is required"),
-    checkupDate: Yup.string().required("Date is required"),
-    checkupType: Yup.string().required("checkupType is a required "),
+  //   checkupNumber: Yup.string().required("Number is required"),
+  //   checkupDate: Yup.string().required("Date is required"),
+  //   checkupType: Yup.string().required("checkupType is a required "),
 
-    type: Yup.string().required("Type is required"),
-    name: Yup.string().required("name is required"),
-    gender: Yup.string().required("gender is required"),
-    age: Yup.string().required("age is required"),
-    company: Yup.string().required("Company is required"),
-    location: Yup.string().required("Location is required"),
-    ecNo: Yup.string().required("EC NO is required"),
-    dob: Yup.string().required("dob is required"),
-    height: Yup.string().required("height is required"),
-    bloodgroup: Yup.string().required("blood group is required"),
-    martialstatus: Yup.string().required("martial status is required"),
-    doj: Yup.string().required("date is required"),
-    marks: Yup.string().required("marks is required"),
-    natureofjob: Yup.string().required("nature of job is required"),
-    res: Yup.string().required("res is required"),
-    mob: Yup.string().required("mob is required"),
-    office: Yup.string().required("office is required"),
-    pphash: Yup.string().required("pp# is required"),
-    emer: Yup.string().required("emer is required"),
-    email: Yup.string().required("email is required"),
+  //   type: Yup.string().required("Type is required"),
+  //   name: Yup.string().required("name is required"),
+  //   gender: Yup.string().required("gender is required"),
+  //   age: Yup.string().required("age is required"),
+  //   company: Yup.string().required("Company is required"),
+  //   location: Yup.string().required("Location is required"),
+  //   ecNo: Yup.string().required("EC NO is required"),
+  //   dob: Yup.string().required("dob is required"),
+  //   height: Yup.string().required("height is required"),
+  //   bloodgroup: Yup.string().required("blood group is required"),
+  //   martialstatus: Yup.string().required("martial status is required"),
+  //   doj: Yup.string().required("date is required"),
+  //   marks: Yup.string().required("marks is required"),
+  //   natureofjob: Yup.string().required("nature of job is required"),
+  //   res: Yup.string().required("res is required"),
+  //   mob: Yup.string().required("mob is required"),
+  //   office: Yup.string().required("office is required"),
+  //   pphash: Yup.string().required("pp# is required"),
+  //   emer: Yup.string().required("emer is required"),
+  //   email: Yup.string().required("email is required"),
 
-  });
+  // });
 
   useEffect(() => {
     getcompanies();
@@ -324,7 +325,7 @@ const CheckupForm = () => {
 
             <Col lg={12}>
               <Formik
-                validationSchema={schema}
+                // validationSchema={schema}
                 initialValues={{
                   checkupName: "",
                   checkupNumber: "",
@@ -718,201 +719,7 @@ const CheckupForm = () => {
  */}          
 
           
-          <Row>
-            <Col lg={12}>
-              <Formik
-                validationSchema={validationSchema}
-                initialValues={{
-                  name: "",
-                  gender: "",
-                  dob: "",
-                  age: "",
-                  bloodgroup: "",
-                }}
-                onSubmit={(values) => {
-                  // Alert the input values of the form that we filled
-                  console.log( values )
-                  alert(JSON.stringify(values));
-                }}
-              >
-                {({
-                  values,
-                  errors,
-                  touched,
-                  handleChange,
-                  handleBlur,
-                  handleSubmit,
-                }) => (
-                  <div className="login">
-                    <div className="form">
-                      {/* Passing handleSubmit parameter tohtml form onSubmit property */}
-                      <form  onSubmit={handleSubmit}>
-                        {/* Our input html with passing formik parameters like handleChange, values, handleBlur to input properties */}
-
-                        <Card>
-                          <CardHeader>
-                            <Row className="g-1 m-1">
-                              <Col className="col-sm">
-                                <div className="d-flex justify-content-sm-between">
-                                  <h2 className="card-title mb-0 justify-content-sm-start">
-                                    <strong>Title</strong>
-                                  </h2>
-                                </div>
-                              </Col>
-                            </Row>
-                          </CardHeader>
-                          <div className="card-body">
-                            <div className="live-preview">
-                              <Row className="align-items-center g-3">
-                                <Col sm={3}>
-                                  <label
-                                    className="form-label mt-3"
-                                    htmlFor="product-orders-input"
-                                  >
-                                    Name
-                                  </label>
-                                  <div className="">
-                                    <select
-                                      className="form-select"
-                                      name="name"
-                                      onChange={handleChange}
-                                      onBlur={handleBlur}
-                                      value={values.name}
-                                    >
-                                      <option value="">Select</option>
-                                      <option value="Mr.">Mr.</option>
-                                      <option value="Mrs.">Mrs.</option>
-                                    </select>
-                                    <p className="error text-danger">
-                                      {errors.name &&
-                                        touched.name &&
-                                        errors.name}
-                                    </p>
-                                  </div>
-                                </Col>
-                                <Col sm={2}>
-                                  <label
-                                    className="form-label mt-3"
-                                    htmlFor="product-orders-input"
-                                  >
-                                    Gender
-                                  </label>
-                                  <div className="">
-                                    <Input
-                                      type="text"
-                                      className="form-control"
-                                      id="product-orders-input"
-                                      //   placeholder="EC No."
-                                      name="gender"
-                                      aria-label="orders"
-                                      aria-describedby="product-orders-addon"
-                                      onChange={handleChange}
-                                      onBlur={handleBlur}
-                                      value={values.gender}
-                                    />
-                                    <p className="error text-danger">
-                                      {errors.gender &&
-                                        touched.gender &&
-                                        errors.gender}
-                                    </p>
-                                  </div>
-                                </Col>
-                                <Col sm={2}>
-                                  <label
-                                    className="form-label mt-3"
-                                    htmlFor="product-orders-input"
-                                  >
-                                    Age
-                                  </label>
-                                  <div className="">
-                                    <Input
-                                      type="text"
-                                      className="form-control"
-                                      id="product-orders-input"
-                                      //   placeholder="EC No."
-                                      name="age"
-                                      aria-label="orders"
-                                      aria-describedby="product-orders-addon"
-                                      onChange={handleChange}
-                                      onBlur={handleBlur}
-                                      value={values.age}
-                                    />
-                                    <p className="error text-danger">
-                                      {errors.age && touched.age && errors.age}
-                                    </p>
-                                  </div>
-                                </Col>
-                                <Col sm={2}>
-                                  <label
-                                    className="form-label mt-3"
-                                    htmlFor="product-orders-input"
-                                  >
-                                    Date of Birth
-                                  </label>
-                                  <div className="">
-                                    <Input
-                                      type="date"
-                                      className="form-control"
-                                      id="product-orders-input"
-                                      //   placeholder="EC No."
-                                      name="dob"
-                                      aria-label="orders"
-                                      aria-describedby="product-orders-addon"
-                                      onChange={handleChange}
-                                      onBlur={handleBlur}
-                                      value={values.dob}
-                                    />
-                                    <p className="error text-danger">
-                                      {errors.dob && touched.dob && errors.dob}
-                                    </p>
-                                  </div>
-                                </Col>
-                                <Col sm={2}>
-                                  <label
-                                    className="form-label mt-3"
-                                    htmlFor="product-orders-input"
-                                  >
-                                    Blood Group
-                                  </label>
-                                  <div className="">
-                                    <Input
-                                      type="text"
-                                      className="form-control"
-                                      id="product-orders-input"
-                                      //   placeholder="EC No."
-                                      name="bloodgroup"
-                                      aria-label="orders"
-                                      aria-describedby="product-orders-addon"
-                                      onChange={handleChange}
-                                      onBlur={handleBlur}
-                                      value={values.bloodgroup}
-                                    />
-                                    <p className="error text-danger">
-                                      {errors.bloodgroup &&
-                                        touched.bloodgroup &&
-                                        errors.bloodgroup}
-                                    </p>
-                                  </div>
-                                </Col>
-                              </Row>
-                            </div>
-                          </div>
-                          <div className="text-end mb-3 me-3">
-                            <button
-                              className="btn btn-success w-sm"
-                              type="submit"
-                            >
-                              Submit
-                            </button>
-                          </div>
-                        </Card>
-                      </form>
-                    </div>
-                  </div>
-                )}
-              </Formik>
-            </Col>
-          </Row>
+          
 
 
 
@@ -926,7 +733,7 @@ const CheckupForm = () => {
           <Row>
             <Col lg={12}>
               <Formik
-                validationSchema={validationSchema}
+                // validationSchema={validationSchema}
                 initialValues={{
                   name: "",
                   gender: "",
@@ -1171,7 +978,7 @@ const CheckupForm = () => {
                           toggleCustom("4");
                         }}
                       >
-                        Investigation
+                        Blood Investigation
                       </NavLink>
                     </NavItem>
                     <NavItem>
@@ -1184,7 +991,7 @@ const CheckupForm = () => {
                           toggleCustom("5");
                         }}
                       >
-                        Form-32
+                        Investigation
                       </NavLink>
                     </NavItem>
                     <NavItem>
@@ -1195,6 +1002,19 @@ const CheckupForm = () => {
                         })}
                         onClick={() => {
                           toggleCustom("6");
+                        }}
+                      >
+                        Form-32
+                      </NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink
+                        style={{ cursor: "pointer" }}
+                        className={classnames({
+                          active: customActiveTab === "7",
+                        })}
+                        onClick={() => {
+                          toggleCustom("7");
                         }}
                       >
                         Form-33
@@ -1218,38 +1038,25 @@ const CheckupForm = () => {
                     </TabPane>
 
                     <TabPane id="addproduct-general-info" tabId="4">
+                      <BloodInvestigation />
+                    </TabPane>
+
+                    <TabPane id="addproduct-general-info" tabId="5">
                       <Investigation />
                     </TabPane>
-                    <TabPane id="addproduct-general-info" tabId="5">
+
+                    <TabPane id="addproduct-general-info" tabId="6">
                       <OtherDetails />
                     </TabPane>
-                    <TabPane id="addproduct-general-info" tabId="6">
+
+                    <TabPane id="addproduct-general-info" tabId="7">
                       <Form33 />
                     </TabPane>
                   </TabContent>
                 </CardBody>
               </Card>
-
-                          <TabPane id="addproduct-general-info" tabId="4">
-                            <Investigation />
-                          </TabPane>
-                          <TabPane id="addproduct-general-info" tabId="5">
-                            <OtherDetails />
-                          </TabPane>
-                          <TabPane id="addproduct-general-info" tabId="6">
-                            <Form33 />
-                          </TabPane>
                    
-                    <div className="text-end mb-3">
-                      <button
-                        type="submit"
-                        className="btn btn-success w-sm"
-                      //   onClick={togglesuccessmodal}
-                      >
-                        Submit
-                      </button>
-                    </div>
-                 
+                    
 
             </Col>
           </Row>

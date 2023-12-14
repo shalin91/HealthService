@@ -1,15 +1,15 @@
 import classnames from "classnames";
-import { Formik } from "formik";
+import { Form, Formik } from "formik";
+
 import React, { useContext, useEffect, useState } from "react";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 import {
   Card,
   CardBody,
   CardHeader,
   Col,
-  Container,
-  Form,
   Input,
-  Label,
   Nav,
   NavItem,
   NavLink,
@@ -18,12 +18,13 @@ import {
   TabPane,
 } from "reactstrap";
 import * as Yup from "yup";
-import BreadCrumb from "../../Components/Common/BreadCrumb";
-import UiContent from "../../Components/Common/UiContent";
-import Example from "../../Components/FormModal/FormOne";
 import SignContext from "../../contextAPI/Context/SignContext";
 
-const NewForm = () => {
+function Example() {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const {
     GetCompany,
     GetCompanybyId,
@@ -143,137 +144,20 @@ const NewForm = () => {
   }, [currentEmp]);
 
   return (
-    <>
-      <UiContent />
-      <div className="page-content">
-        <Container fluid>
-          <BreadCrumb grandParent="Setup" parent="Forms" child="Form-1" />
-          <Row>
-            <Col lg={12}>
-              <Formik
-                initialValues={{
-                  companyName: "",
-                  companyLocation: "",
-                }}
-                //validationSchema={validationSchema}
-                onSubmit={async (values, { resetForm }) => {
-                  handleSavedCompandLoc(values);
-                  resetForm();
-                  // Additional actions after form submission
-                  // togglemodal();
-                }}
-              >
-                {({
-                  isSubmitting,
-                  handleChange,
-                  handleSubmit,
-                  errors,
-                  touched,
-                  values,
-                  handleBlur,
-                  setFieldValue,
-                }) => (
-                  <Form onSubmit={handleSubmit}>
-                    {/* Your form fields and components */}
-                    <Card>
-                      <CardHeader>
-                        <Row className="g-1 m-1">
-                          <Col className="col-sm">
-                            <div className="d-flex justify-content-sm-between">
-                              <h2 className="card-title mb-0 justify-content-sm-start">
-                                <strong>Title</strong>
-                              </h2>
-                            </div>
-                          </Col>
-                        </Row>
-                      </CardHeader>
-                      <div className="card-body">
-                        <div className="live-preview">
-                          <Row className="align-items-center g-3">
-                            <Col sm={6}>
-                              <label
-                                className="form-label mt-3"
-                                htmlFor="product-orders-input"
-                              >
-                                Company
-                              </label>
-                              <div className="">
-                                <select
-                                  className="form-select"
-                                  name="companyName"
-                                  onChange={(e) => {
-                                    handleChange(e);
-                                    handleLocationChange(e);
-                                  }}
-                                  onBlur={handleBlur}
-                                  value={values.companyName}
-                                >
-                                  <option value="">Company Name</option>
-                                  {Company.map((company) => (
-                                    <option
-                                      key={company._id}
-                                      value={company._id}
-                                    >
-                                      {company.companyName}
-                                    </option>
-                                  ))}
-                                </select>
-                              </div>
-                              <p className="error text-danger">
-                                {errors.companyName &&
-                                  touched.companyName &&
-                                  errors.companyName}
-                              </p>
-                            </Col>
-                            <Col sm={6}>
-                              <label
-                                className="form-label mt-3"
-                                htmlFor="product-orders-input"
-                              >
-                                Location
-                              </label>
-                              <div className="">
-                                <select
-                                  className="form-select"
-                                  name="companyLocation"
-                                  onBlur={handleBlur}
-                                  value={values.companyLocation}
-                                  onChange={handleChange}
-                                >
-                                  <option value=""> Location</option>
-                                  {Location && Location.length > 0 ? (
-                                    Location.map((location) => (
-                                      <option key={location} value={location}>
-                                        {location}
-                                      </option>
-                                    ))
-                                  ) : (
-                                    <option value="" disabled>
-                                      No locations available
-                                    </option>
-                                  )}
-                                </select>
-                              </div>
-                              <p className="error text-danger">
-                                {errors.companyLocation &&
-                                  touched.companyLocation &&
-                                  errors.companyLocation}
-                              </p>
-                            </Col>
-                          </Row>
-                        </div>
-                      </div>
-                      <div className="text-end mb-3 me-3">
-                        <button className="btn btn-success w-sm" type="submit">
-                          Submit
-                        </button>
-                      </div>
-                    </Card>
-                  </Form>
-                )}
-              </Formik>
-            </Col>
-          </Row>
+    <React.Fragment>
+      <div className="text-end mb-3 me-3">
+        <Button className="btn btn-success w-sm" onClick={handleShow}>
+          Add
+        </Button>
+      </div>
+
+      <Modal size="lg" show={show} onHide={handleClose} animation={false}>
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Modal heading
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
           <Row>
             <Col lg={12}>
               <Formik
@@ -284,22 +168,6 @@ const NewForm = () => {
                   ecNo: "",
                   companyJobCategorys: "",
                   companyDepartments: "",
-                  address: "",
-                  age: "",
-                  dob: "",
-                  gender: "",
-                  height: "",
-                  bloodgroup: "",
-                  martialstatus: "",
-                  doj: "",
-                  marks: "",
-                  natureofjob: "",
-                  res: "",
-                  mob: "",
-                  office: "",
-                  pphash: "",
-                  emer: "",
-                  email: "",
                 }}
                 validationSchema={validationSchema}
                 // onSubmit={async (values, { resetForm }) => {
@@ -372,9 +240,6 @@ const NewForm = () => {
                                   ))}
                                 </select>
                               </div>
-                              <p className="error text-danger">
-                                {errors.title && touched.title && errors.title}
-                              </p>
                             </Col>
                             <Col sm={4}>
                               <div className="">
@@ -393,9 +258,6 @@ const NewForm = () => {
                                   }
                                 />
                               </div>
-                              <p className="error text-danger">
-                                {errors.name && touched.name && errors.name}
-                              </p>
                             </Col>
                             <Col sm={4}>
                               <div className="">
@@ -416,11 +278,6 @@ const NewForm = () => {
                                   }
                                 />
                               </div>
-                              <p className="error text-danger">
-                                {errors.fathersName &&
-                                  touched.fathersName &&
-                                  errors.fathersName}
-                              </p>
                             </Col>
                           </Row>
                           <Row className="align-items-center g-3">
@@ -444,9 +301,6 @@ const NewForm = () => {
                                   onBlur={handleBlur}
                                   value={values.ecNo}
                                 />
-                                <p className="error text-danger">
-                                  {errors.ecNo && touched.ecNo && errors.ecNo}
-                                </p>
                               </div>
                             </Col>
                             <Col sm={3}>
@@ -473,12 +327,6 @@ const NewForm = () => {
                                       : ""
                                   }
                                 />
-
-                                <p className="error text-danger">
-                                  {errors.companyJobCategorys &&
-                                    touched.companyJobCategorys &&
-                                    errors.companyJobCategorys}
-                                </p>
                               </div>
                             </Col>
                             <Col sm={3}>
@@ -489,27 +337,6 @@ const NewForm = () => {
                                 Department
                               </label>
                               <div className="">
-                                {/* <select
-                                  className="form-select"
-                                  name="companyDepartments"
-                                  onChange={handleChange}
-                                  onBlur={handleBlur}
-                                  value={values.companyDepartments}
-                                >
-                                  <option value="">Select</option>
-                                  {Department && Department.length > 0 ? (
-                                    Department.map((department) => (
-                                      <option key={department} value={department}>
-                                        {department}
-                                      </option>
-                                    ))
-                                  ) : (
-                                    <option value="" disabled>
-                                      No Department available
-                                    </option>
-                                  )}
-                                </select> */}
-
                                 <Input
                                   type="text"
                                   className="form-control"
@@ -526,19 +353,57 @@ const NewForm = () => {
                                       : ""
                                   }
                                 />
-
-                                <p className="error text-danger">
-                                  {errors.companyDepartments &&
-                                    touched.companyDepartments &&
-                                    errors.companyDepartments}
-                                </p>
                               </div>
                             </Col>
                           </Row>
                         </div>
                       </div>
-                      <Example />
+                      <div className="text-end mb-3 me-3">
+                        <button className="btn btn-success w-sm" type="submit">
+                          Submit
+                        </button>
+                      </div>
                     </Card>
+                  </Form>
+                )}
+              </Formik>
+              <Formik
+                initialValues={{
+                  address: "",
+                  age: "",
+                  dob: "",
+                  gender: "",
+                  height: "",
+                  bloodgroup: "",
+                  martialstatus: "",
+                  doj: "",
+                  marks: "",
+                  natureofjob: "",
+                  res: "",
+                  mob: "",
+                  office: "",
+                  pphash: "",
+                  emer: "",
+                  email: "",
+                }}
+                validationSchema={validationSchema}
+                // onSubmit={async (values, { resetForm }) => {
+                //   //   await handleSavedcat(values);
+                //   // resetForm();
+                //   // togglemodal();
+                // }}
+              >
+                {({
+                  isSubmitting,
+                  handleChange,
+                  handleSubmit,
+                  errors,
+                  touched,
+                  values,
+                  handleBlur,
+                  setFieldValue,
+                }) => (
+                  <Form>
                     <Card>
                       <CardHeader>
                         <Nav className="nav-tabs-custom card-header-tabs border-bottom-0">
@@ -555,22 +420,8 @@ const NewForm = () => {
                               Contact Details
                             </NavLink>
                           </NavItem>
-                          <NavItem>
-                            <NavLink
-                              style={{ cursor: "pointer" }}
-                              className={classnames({
-                                active: customActiveTab === "2",
-                              })}
-                              onClick={() => {
-                                toggleCustom("2");
-                              }}
-                            >
-                              Patient Details
-                            </NavLink>
-                          </NavItem>
                         </Nav>
                       </CardHeader>
-
                       <CardBody>
                         <TabContent activeTab={customActiveTab}>
                           <TabPane id="addproduct-general-info" tabId="1">
@@ -597,32 +448,8 @@ const NewForm = () => {
                                         : ""
                                     }
                                   />
-                                  <p className="error text-danger">
-                                    {errors.address &&
-                                      touched.address &&
-                                      errors.address}
-                                  </p>
                                 </div>
                               </Col>
-                              {/* <Col lg={6}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="manufacturer-brand-input"
-                            >
-                              Manufacturer Brand
-                            </label>
-                            <Input
-                              type="text"
-                              className="form-control"
-                              id="manufacturer-brand-input"
-                              name="manufacturer_brand"
-                              placeholder="Enter manufacturer brand"
-                             
-                            />
-                            
-                          </div>
-                        </Col> */}
                             </Row>
                             <Row>
                               <Col sm={2}>
@@ -649,9 +476,6 @@ const NewForm = () => {
                                       }
                                     />
                                   </div>
-                                  <p className="error text-danger">
-                                    {errors.age && touched.age && errors.age}
-                                  </p>
                                 </div>
                               </Col>
 
@@ -681,9 +505,6 @@ const NewForm = () => {
                                       }
                                     />
                                   </div>
-                                  <p className="error text-danger">
-                                    {errors.dob && touched.dob && errors.dob}
-                                  </p>
                                 </div>
                               </Col>
 
@@ -713,11 +534,6 @@ const NewForm = () => {
                                       }
                                     />
                                   </div>
-                                  <p className="error text-danger">
-                                    {errors.gender &&
-                                      touched.gender &&
-                                      errors.gender}
-                                  </p>
                                 </div>
                               </Col>
 
@@ -747,11 +563,6 @@ const NewForm = () => {
                                       }
                                     />
                                   </div>
-                                  <p className="error text-danger">
-                                    {errors.height &&
-                                      touched.height &&
-                                      errors.height}
-                                  </p>
                                 </div>
                               </Col>
                               <Col sm={2}>
@@ -780,11 +591,6 @@ const NewForm = () => {
                                       } // bloodGroup
                                     />
                                   </div>
-                                  <p className="error text-danger">
-                                    {errors.bloodgroup &&
-                                      touched.bloodgroup &&
-                                      errors.bloodgroup}
-                                  </p>
                                 </div>
                               </Col>
                               <Col sm={2}>
@@ -813,11 +619,6 @@ const NewForm = () => {
                                       } // mentalStatus
                                     />
                                   </div>
-                                  <p className="error text-danger">
-                                    {errors.martialstatus &&
-                                      touched.martialstatus &&
-                                      errors.martialstatus}
-                                  </p>
                                 </div>
                               </Col>
                             </Row>
@@ -846,9 +647,6 @@ const NewForm = () => {
                                       } // res
                                     />
                                   </div>
-                                  <p className="error text-danger">
-                                    {errors.res && touched.res && errors.res}
-                                  </p>
                                 </div>
                               </Col>
 
@@ -878,9 +676,6 @@ const NewForm = () => {
                                       } //mobileNumber
                                     />
                                   </div>
-                                  <p className="error text-danger">
-                                    {errors.mob && touched.mob && errors.mob}
-                                  </p>
                                 </div>
                               </Col>
 
@@ -910,11 +705,6 @@ const NewForm = () => {
                                       } //office
                                     />
                                   </div>
-                                  <p className="error text-danger">
-                                    {errors.office &&
-                                      touched.office &&
-                                      errors.office}
-                                  </p>
                                 </div>
                               </Col>
 
@@ -944,11 +734,6 @@ const NewForm = () => {
                                       } //pp
                                     />
                                   </div>
-                                  <p className="error text-danger">
-                                    {errors.pphash &&
-                                      touched.pphash &&
-                                      errors.pphash}
-                                  </p>
                                 </div>
                               </Col>
                               <Col sm={2}>
@@ -977,9 +762,6 @@ const NewForm = () => {
                                       } // emer
                                     />
                                   </div>
-                                  <p className="error text-danger">
-                                    {errors.emer && touched.emer && errors.emer}
-                                  </p>
                                 </div>
                               </Col>
                               <Col sm={2}>
@@ -1008,11 +790,6 @@ const NewForm = () => {
                                       } //email
                                     />
                                   </div>
-                                  <p className="error text-danger">
-                                    {errors.email &&
-                                      touched.email &&
-                                      errors.email}
-                                  </p>
                                 </div>
                               </Col>
                             </Row>
@@ -1075,11 +852,6 @@ const NewForm = () => {
                                       } // idMark
                                     />
                                   </div>
-                                  <p className="error text-danger">
-                                    {errors.marks &&
-                                      touched.marks &&
-                                      errors.marks}
-                                  </p>
                                 </div>
                               </Col>
                             </Row>
@@ -1111,92 +883,31 @@ const NewForm = () => {
                                       } // "no"
                                     />
                                   </div>
-                                  <p className="error text-danger">
-                                    {errors.natureofjob &&
-                                      touched.natureofjob &&
-                                      errors.natureofjob}
-                                  </p>
                                 </div>
                               </Col>
                             </Row>
-                          </TabPane>
-
-                          <TabPane id="addproduct-metadata" tabId="2">
-                            <Row>
-                              <Col lg={6}>
-                                <div className="mb-3">
-                                  <Label
-                                    className="form-label"
-                                    htmlFor="meta-title-input"
-                                  >
-                                    Meta title
-                                  </Label>
-                                  <Input
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="Enter meta title"
-                                    id="meta-title-input"
-                                    name="meta_title"
-                                  />
-                                </div>
-                              </Col>
-
-                              <Col lg={6}>
-                                <div className="mb-3">
-                                  <Label
-                                    className="form-label"
-                                    htmlFor="meta-keywords-input"
-                                  >
-                                    Meta Keywords
-                                  </Label>
-                                  <Input
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="Enter meta keywords"
-                                    id="meta-keywords-input"
-                                    name="meta_keyword"
-                                  />
-                                </div>
-                              </Col>
-                            </Row>
-
-                            <div>
-                              <Label
-                                className="form-label"
-                                htmlFor="meta-description-input"
-                              >
-                                Meta Description
-                              </Label>
-                              <textarea
-                                className="form-control"
-                                id="meta-description-input"
-                                placeholder="Enter meta description"
-                                name="meta_description"
-                                rows="3"
-                              ></textarea>
-                            </div>
                           </TabPane>
                         </TabContent>
                       </CardBody>
+                      <div className="text-end mb-3">
+                        <button
+                          type="submit"
+                          className="btn btn-success w-sm"
+                          //   onClick={togglesuccessmodal}
+                        >
+                          Submit
+                        </button>
+                      </div>
                     </Card>
-                    <div className="text-end mb-3">
-                      <button
-                        type="submit"
-                        className="btn btn-success w-sm"
-                        //   onClick={togglesuccessmodal}
-                      >
-                        Submit
-                      </button>
-                    </div>
                   </Form>
                 )}
               </Formik>
             </Col>
           </Row>
-        </Container>
-      </div>
-    </>
+        </Modal.Body>
+      </Modal>
+    </React.Fragment>
   );
-};
+}
 
-export default NewForm;
+export default Example;
