@@ -295,8 +295,7 @@ const Eye = () => {
                             </div>
                           </div>
                         </Col>
-                      </Row>
-
+                      </Row>          
                                     <Col className="col-lg-2 col-md-2 col-12 ">
                                       <Input
                                         type="text"
