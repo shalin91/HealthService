@@ -1,11 +1,32 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+
+import SignContext from "../../contextAPI/Context/SignContext"
+import  { useContext } from "react";
+const Eye = ( props ) => {
+
+  const { setEyeDetails } = useContext(SignContext);
+  
+  const handleSubmitData = async( values ) => {
+      
+    const data = { ...props , ...values };
+
+    const response = await setEyeDetails(data);
+    
+    console.log(response);
+
+  }
+
+
+
+
+
 import { Card, CardHeader, Col, Container, Input, Row } from "reactstrap";
 import { ToastContainer } from "react-toastify";
 import UiContent from "../../Components/Common/UiContent";
 
-const Eye = () => {
+
   const validationSchema = Yup.object().shape({
     gallaryCategoryTitle: Yup.string().required("gallary category title"),
     gallaryCategoryTitle2: Yup.string().required("gallary category title"),
@@ -37,7 +58,7 @@ const Eye = () => {
             // validationSchema={validationSchema}
             onSubmit={(values) => {
               // Alert the input values of the form that we filled
-              alert(JSON.stringify(values));
+               handleSubmitData(values);
             }}
           >
             {({

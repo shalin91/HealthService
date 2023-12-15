@@ -2,8 +2,17 @@ import { Form, Formik } from "formik";
 import React from "react";
 import { Card, CardHeader, Col, Input, Row } from "reactstrap";
 
-const BloodInvestigation = () => {
+const BloodInvestigation = ( props ) => {
 
+  // const handleSubmitData = async( values ) => {
+      
+  //   const data = { ...props , ...values };
+
+  //   const response = await setVitalAndHistory(data);
+    
+  //   console.log(response);
+
+  // }
 
 
   return (
@@ -52,7 +61,7 @@ const BloodInvestigation = () => {
 
             onSubmit={async (values, { resetForm }) => {
               // await handleSavedcat(values);
-              alert(JSON.stringify(values));
+              // handleSubmitData(values);
               resetForm();
               // togglemodal();
 
