@@ -324,11 +324,11 @@ const Eye = () => {
                                         // value={values.gallaryCategoryTitle}
                                       />
                                     </Col>
-                                  </Row>
-                                </div>
-                              </div>
-                            </Col>
-                          </Row>
+                                 
+                                  
+                                
+                            
+                         
                           <Row className="align-items-center g-3">
                             <Col className="col-sm">
                               <div>
