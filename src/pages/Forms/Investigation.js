@@ -40,7 +40,7 @@ const Investigation = ( props ) => {
               spirometry: "",
               autometry: "",
               remarks: "",
-             
+
             }}
             validationSchema={validationSchema}
             onSubmit={(values) => {

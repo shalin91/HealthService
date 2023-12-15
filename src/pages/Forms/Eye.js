@@ -1,7 +1,7 @@
-import { Form, Formik } from "formik";
 import React from "react";
-import { Card, CardHeader, Col, Input, Row } from "reactstrap";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+
 import SignContext from "../../contextAPI/Context/SignContext"
 import  { useContext } from "react";
 const Eye = ( props ) => {
@@ -20,6 +20,11 @@ const Eye = ( props ) => {
 
 
 
+
+
+import { Card, CardHeader, Col, Container, Input, Row } from "reactstrap";
+import { ToastContainer } from "react-toastify";
+import UiContent from "../../Components/Common/UiContent";
 
 
   const validationSchema = Yup.object().shape({
@@ -46,8 +51,8 @@ const Eye = ( props ) => {
               nvright: "",
               nvleft2: "",
               nvright2: "",
-              cv:"",
-              
+              cv: "",
+
               // gallaryCategoryTitle9: "",
             }}
             // validationSchema={validationSchema}
@@ -96,8 +101,7 @@ const Eye = ( props ) => {
                         </Col>
                       </Row>
                       <Row className="align-items-center g-3 mt-2">
-
-                      <Col className="col-sm">
+                        <Col className="col-sm">
                           <div>
                             <div>
                               <Row className="mb-3">
@@ -147,7 +151,7 @@ const Eye = ( props ) => {
                                   </p>
                                 </Col>
                               </Row>
-                              </div>
+                            </div>
                           </div>
                         </Col>
                       </Row>
@@ -197,7 +201,7 @@ const Eye = ( props ) => {
                                     {errors.gallaryCategoryTitle4 &&
                                       touched.gallaryCategoryTitle4 &&
                                       errors.gallaryCategoryTitle4}
-</p>
+                                  </p>
                                 </Col>
                               </Row>
                             </div>
@@ -248,56 +252,56 @@ const Eye = ( props ) => {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.nvright}
-                                    />
-                                    <p className="error text-danger">
-                                      {errors.gallaryCategoryTitle6 &&
-                                        touched.gallaryCategoryTitle6 &&
-                                        errors.gallaryCategoryTitle6}
-                                    </p>
-                                  </Col>
-                                </Row>
-                              </div>
+                                  />
+                                  <p className="error text-danger">
+                                    {errors.gallaryCategoryTitle6 &&
+                                      touched.gallaryCategoryTitle6 &&
+                                      errors.gallaryCategoryTitle6}
+                                  </p>
+                                </Col>
+                              </Row>
                             </div>
-                          </Col>
-                        </Row>
-                        <Row className="align-items-center g-3">
-                          <Col className="col-sm">
+                          </div>
+                        </Col>
+                      </Row>
+                      <Row className="align-items-center g-3">
+                        <Col className="col-sm">
+                          <div>
                             <div>
-                              <div>
-                                <Row className="mb-3">
-                                  <Col className="col-lg-2 col-md-2"></Col>
-                                  <Col className="col-lg-2 col-md-2">
-                                    <p>with glasses</p>
-                                  </Col>
-  
-                                  <Col className="col-lg-2 col-md-2 col-12">
-                                    <Input
-                                      type="text"
-                                      className="form-control"
-                                      id="product-orders-input"
-                                      placeholder=""
-                                      name="nvleft2"
-                                      aria-label="orders"
-                                      aria-describedby="product-orders-addon"
-                                      onChange={handleChange}
-                                      onBlur={handleBlur}
-                                      value={values.nvleft2}
-                                    />
-                                    <p className="error text-danger">
-                                      {errors.gallaryCategoryTitle7 &&
-                                        touched.gallaryCategoryTitle7 &&
-                                        errors.gallaryCategoryTitle7}
-                                    </p>
-                                  </Col>
-                                  <Col className="col-lg-2 col-md-2 col-12 ">
-                                    <Input
-                                      type="text"
-                                      className="form-control"
-                                      id="product-orders-input"
-                                      placeholder=""
-                                      name="nvright2"
-                                      aria-label="orders"
-                                      aria-describedby="product-orders-addon"
+                              <Row className="mb-3">
+                                <Col className="col-lg-2 col-md-2"></Col>
+                                <Col className="col-lg-2 col-md-2">
+                                  <p>with glasses</p>
+                                </Col>
+
+                                <Col className="col-lg-2 col-md-2 col-12">
+                                  <Input
+                                    type="text"
+                                    className="form-control"
+                                    id="product-orders-input"
+                                    placeholder=""
+                                    name="nvleft2"
+                                    aria-label="orders"
+                                    aria-describedby="product-orders-addon"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.nvleft2}
+                                  />
+                                  <p className="error text-danger">
+                                    {errors.gallaryCategoryTitle7 &&
+                                      touched.gallaryCategoryTitle7 &&
+                                      errors.gallaryCategoryTitle7}
+                                  </p>
+                                </Col>
+                                <Col className="col-lg-2 col-md-2 col-12 ">
+                                  <Input
+                                    type="text"
+                                    className="form-control"
+                                    id="product-orders-input"
+                                    placeholder=""
+                                    name="nvright2"
+                                    aria-label="orders"
+                                    aria-describedby="product-orders-addon"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.nvright2}
@@ -312,17 +316,49 @@ const Eye = ( props ) => {
                             </div>
                           </div>
                         </Col>
-                      </Row>
-
-                      <Row className="align-items-center g-3 mt-2">
-                        <Col className="col-sm">
-                          <div>
-                            <div>
-                              <Row className="mb-3">
-                                <Col className="col-lg-2 col-md-2">
-                                  Colour vision
-                                </Col>
-                                <Col className="col-lg-2 col-md-2"></Col>
+                      </Row>          
+                                    <Col className="col-lg-2 col-md-2 col-12 ">
+                                      <Input
+                                        type="text"
+                                        className="form-control"
+                                        id="product-orders-input"
+                                        placeholder=""
+                                        name="gallaryCategoryTitle"
+                                        aria-label="orders"
+                                        aria-describedby="product-orders-addon"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        // value={values.gallaryCategoryTitle}
+                                      />
+                                    </Col>
+                                    <Col className="col-lg-2 col-md-2 col-12 ">
+                                      <Input
+                                        type="text"
+                                        className="form-control"
+                                        id="product-orders-input"
+                                        placeholder=""
+                                        name="gallaryCategoryTitle"
+                                        aria-label="orders"
+                                        aria-describedby="product-orders-addon"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        // value={values.gallaryCategoryTitle}
+                                      />
+                                    </Col>
+                                  </Row>
+                                </div>
+                              </div>
+                            </Col>
+                          </Row>
+                          <Row className="align-items-center g-3">
+                            <Col className="col-sm">
+                              <div>
+                                <div>
+                                  <Row className="mb-3">
+                                    <Col className="col-lg-2 col-md-2"></Col>
+                                    <Col className="col-lg-2 col-md-2">
+                                      <p>with glasses</p>
+                                    </Col>
 
                                 <Col className="col-lg-4 col-md-4">
                                   <textarea

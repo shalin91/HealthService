@@ -138,7 +138,6 @@ const Navdata = () => {
   ]);
 
   const menuItems = [
- 
     // {
     //   id: "ecommerce",
     //   label: "Form",
@@ -160,7 +159,6 @@ const Navdata = () => {
       },
       stateVariables: isApps,
       subItems: [
-
         {
           id: "appsecommerce",
           label: "Forms",
@@ -173,26 +171,18 @@ const Navdata = () => {
           parentId: "apps",
           stateVariables: isEcommerce,
           childItems: [
-            
             {
               id: 5,
-              label: "Form-1",
+              label: "Patient-Details",
               link: "/newform",
               parentId: "apps",
-            }, 
+            },
             {
               id: 6,
-              label: "Form-2",
+              label: "Check-up Form",
               link: "/form",
               parentId: "apps",
             },
-            {
-              id: 4,
-              label: "Form-3",
-              link: "/form",
-              parentId: "apps",
-            },
-
           ],
         },
         {
@@ -239,7 +229,7 @@ const Navdata = () => {
         //   },
         //   parentId: "apps",
         //   stateVariables: isCategory,
-        //   childItems: [
+        //   childItems:
         //     {
         //       id: 1,
         //       label: "category",
@@ -260,23 +250,26 @@ const Navdata = () => {
         //     },
         //   ],
         // },
-        // {
-        //   id: "tasks",
-        //   label: "Customers",
-        //   link: "/#",
-        //   isChildItem: true,
-        //   click: function (e) {
-        //     e.preventDefault();
-        //     setIsTasks(!isTasks);
-        //   },
-        //   parentId: "apps",
-        //   stateVariables: isTasks,
-        //   childItems: [
-
-        //     { id: 2, label: "Customers", link: "/customers", parentId: "apps" },
-
-        //   ],
-        // },
+        {
+          id: "tasks",
+          label: "Checkup-type Master",
+          link: "/#",
+          isChildItem: true,
+          click: function (e) {
+            e.preventDefault();
+            setIsTasks(!isTasks);
+          },
+          parentId: "apps",
+          stateVariables: isTasks,
+          childItems: [
+            {
+              id: 2,
+              label: "Add Checkup-type",
+              link: "/checkuptype",
+              parentId: "apps",
+            },
+          ],
+        },
         // {
         //   id: "appscrm",
         //   label: "CMS",
@@ -341,24 +334,28 @@ const Navdata = () => {
         //         // { id: 3, label: "Create Invoice", link: "/apps-invoices-create" },
         //     ]
         // },
-        // {
-        //     id: "supportTickets",
-        //     label: "Reports",
-        //     link: "/#",
-        //     isChildItem: true,
-        //     click: function (e) {
-        //         e.preventDefault();
-        //         setIsSupportTickets(!isSupportTickets);
-        //     },
-        //     parentId: "apps",
-        //     stateVariables: isSupportTickets,
-        //     childItems: [
-        //         { id: 1, label: "Customers Reports", link: "/customerreports" },
-        //         { id: 1, label: "Date wise Reports", link: "/customerbydatereport" },
-        //         { id: 2, label: "Products Reports", link: "/productreport" },
-        //         { id: 3, label: "Stock Reports", link: "/stockreport" },
-        //     ]
-        // },
+        {
+          id: "supportTickets",
+          label: "Reports",
+          link: "/#",
+          isChildItem: true,
+          click: function (e) {
+            e.preventDefault();
+            setIsSupportTickets(!isSupportTickets);
+          },
+          parentId: "apps",
+          stateVariables: isSupportTickets,
+          childItems: [
+            { id: 1, label: "Form32", link: "/form32" },
+            {
+              id: 2,
+              label: "Form 33 Health",
+              link: "/form-helth33",
+            },
+            { id: 3, label: "Health Card", link: "/helth-card" },
+            { id: 4, label: "Medical Check Up", link: "/medical-checkup" },
+          ],
+        },
         // {
         //     id: "filemanager",
         //     label: "Subscription",

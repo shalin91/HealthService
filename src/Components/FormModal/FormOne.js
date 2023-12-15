@@ -1,15 +1,17 @@
 import classnames from "classnames";
-import { Formik } from "formik";
+import { Form, Formik } from "formik";
+
 import React, { useContext, useEffect, useState } from "react";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import axios from "axios";
+
 import {
   Card,
   CardBody,
   CardHeader,
   Col,
-  Container,
-  Form,
   Input,
-  Label,
   Nav,
   NavItem,
   NavLink,
@@ -18,15 +20,23 @@ import {
   TabPane,
 } from "reactstrap";
 import * as Yup from "yup";
-import BreadCrumb from "../../Components/Common/BreadCrumb";
-import UiContent from "../../Components/Common/UiContent";
-import Example from "../../Components/FormModal/FormOne";
+
+import { companies } from "../../common/data";
 import SignContext from "../../contextAPI/Context/SignContext";
 
+function Example({ companyId, location }) {
+  const [show, setShow] = useState(false);
 
-const NewForm = () => {
-
-  const { GetCompany, GetCompanybyId, GetEmpsbyCompAndLoc ,GetContactDetailsById , getCheckupData } = useContext(SignContext);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const {
+    GetCompany,
+    GetCompanybyId,
+    GetEmpsbyCompAndLoc,
+    GetContactDetailsById,
+    AddEmployee,
+    AddContact,
+  } = useContext(SignContext);
 
   const [Company, setCompany] = useState([]);
   const [Location, setLocation] = useState([]);
@@ -34,18 +44,22 @@ const NewForm = () => {
   const [Department, setDepartment] = useState([]);
   const [EmpbyCompandLoc, setEmpbyCompandLoc] = useState([]);
   const [currentEmp, setCurrentEmp] = useState(null);
-  const [currentCompanyId, setCurrentCompanyId] = useState(null);
-  const [currentLocation, setCurrentLocation] = useState(null);
   const [currentEmpContactDetails, setCurrentEmpContactDetails] =
     useState(null);
+
+  const [empId, setEmpId] = useState(null);
 
   const getcompanies = async () => {
     const res = await GetCompany();
     console.log(res);
-    setCompany(res.data);
-    // setLocation(res.data.companyLocation)
-    // setRoles(res);
+    setCategory(res.data[0].companyJobCategorys);
+    // setCategory(res.data.companyJobCategorys);
+    setDepartment(res.data[0].companyDepartments);
   };
+
+  console.log(Category);
+  console.log(Department);
+  // console.log(Category);
 
   const getEmpContactDetails = async (id) => {
     console.log("---id in frontend first---");
@@ -69,12 +83,9 @@ const NewForm = () => {
 
   const handleSavedCompandLoc = async (Values) => {
     console.log(
-      "------------------------ARRAY-------------------------------------------"
+      "----------------------------------------------------------------------------"
     );
-
     console.log(Values);
-    setCurrentCompanyId(Values.companyName);
-    setCurrentLocation(Values.companyLocation);
 
     const res = await GetEmpsbyCompAndLoc(Values);
     console.log(res.data);
@@ -87,6 +98,26 @@ const NewForm = () => {
       setcustomActiveTab(tab);
     }
   };
+
+  const handleSavedEmployee = async (Values) => {
+    const data = { ...Values, companyId, location };
+    console.log("--------------------------------------data");
+    // console.log(data);
+    const res = await AddEmployee(data);
+    console.log("empid>>>>>");
+    console.log(res._id);
+
+    setEmpId(res._id);
+  };
+
+  //handle save contact detail...
+  const handleSavedcat = async (Values) => {
+    const data1 = { ...Values, companyId, empId };
+    const res = await AddContact(data1);
+    console.log("--------------data-------");
+    console.log(res);
+  };
+
   const validationSchema = Yup.object().shape({
     title: Yup.string().required("Title is required"),
     name: Yup.string().required("Name is required"),
@@ -116,13 +147,14 @@ const NewForm = () => {
 
   const handleLocationChange = (e) => {
     let selectedCompanyId = e.target.value;
+    // console.log( selectedCompanyId );
 
     if (selectedCompanyId) {
       getcompaniesbyId(selectedCompanyId);
     }
   };
 
-  const handleEmpData = async (e) => {
+  const handleEmpData = (e) => {
     let data = e.target.value;
 
     const curremp = EmpbyCompandLoc.filter((emp) => emp._id === data);
@@ -131,12 +163,22 @@ const NewForm = () => {
 
     getEmpContactDetails({ id: curremp[0].employeeContactDetailsId });
 
-
     //  getEmpContactDetails()
 
     setCurrentEmp(curremp[0]);
   };
 
+  // const handleSavedEmployee = async (Values) => {
+  //   try {
+  //     const { data } = axios.post(
+  //       "http://localhost:5002/employ/add-employ",
+  //       Values
+  //     );
+  //     console.log("data >>>");
+  //   } catch (error) {
+  //     console.log("error");
+  //   }
+  // };
 
   useEffect(() => {
     getcompanies();
@@ -147,24 +189,39 @@ const NewForm = () => {
   }, [currentEmp]);
 
   return (
-    <>
-      <UiContent />
-      <div className="page-content">
-        <Container fluid>
-          <BreadCrumb grandParent="Setup" parent="Forms" child="Form-1" />
+    <React.Fragment>
+      <div className="text-end mb-3 me-3">
+        <Button className="btn btn-success w-sm" onClick={handleShow}>
+          Add
+        </Button>
+      </div>
+
+      <Modal size="lg" show={show} onHide={handleClose} animation={false}>
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Modal heading
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
           <Row>
             <Col lg={12}>
               <Formik
                 initialValues={{
-                  companyName: "",
-                  companyLocation: "",
+                  employeeNameAbbrevation: "",
+                  employeeName: "",
+                  employeeFatherName: "",
+                  ecNo: "",
+                  companyJobCategorys: "",
+                  companyDepartments: "",
                 }}
-              
+                // validationSchema={validationSchema}
                 onSubmit={async (values, { resetForm }) => {
-                  handleSavedCompandLoc(values);
+                  await handleSavedEmployee(values);
                   resetForm();
-                  // Additional actions after form submission
                   // togglemodal();
+                  // toast.success("Category Added Successfully", {
+                  //   autoClose: 3000,
+                  // });
                 }}
               >
                 {({
@@ -178,151 +235,6 @@ const NewForm = () => {
                   setFieldValue,
                 }) => (
                   <Form onSubmit={handleSubmit}>
-                    {/* Your form fields and components */}
-                    <Card>
-                      <CardHeader>
-                        <Row className="g-1 m-1">
-                          <Col className="col-sm">
-                            <div className="d-flex justify-content-sm-between">
-                              <h2 className="card-title mb-0 justify-content-sm-start">
-                                <strong>Title</strong>
-                              </h2>
-                            </div>
-                          </Col>
-                        </Row>
-                      </CardHeader>
-                      <div className="card-body">
-                        <div className="live-preview">
-                          <Row className="align-items-center g-3">
-                            <Col sm={6}>
-                              <label
-                                className="form-label mt-3"
-                                htmlFor="product-orders-input"
-                              >
-                                Company
-                              </label>
-                              <div className="">
-                                <select
-                                  className="form-select"
-                                  name="companyName"
-                                  onChange={(e) => {
-                                    handleChange(e);
-                                    handleLocationChange(e);
-                                  }}
-                                  onBlur={handleBlur}
-                                  value={values.companyName}
-                                >
-                                  <option value="">Company Name</option>
-                                  {Company.map((company) => (
-                                    <option
-                                      key={company._id}
-                                      value={company._id}
-                                    >
-                                      {company.companyName}
-                                    </option>
-                                  ))}
-                                </select>
-                              </div>
-                              <p className="error text-danger">
-                                {errors.companyName &&
-                                  touched.companyName &&
-                                  errors.companyName}
-                              </p>
-                            </Col>
-                            <Col sm={6}>
-                              <label
-                                className="form-label mt-3"
-                                htmlFor="product-orders-input"
-                              >
-                                Location
-                              </label>
-                              <div className="">
-                                <select
-                                  className="form-select"
-                                  name="companyLocation"
-                                  onBlur={handleBlur}
-                                  value={values.companyLocation}
-                                  onChange={handleChange}
-                                >
-                                  <option value=""> Location</option>
-                                  {Location && Location.length > 0 ? (
-                                    Location.map((location) => (
-                                      <option key={location} value={location}>
-                                        {location}
-                                      </option>
-                                    ))
-                                  ) : (
-                                    <option value="" disabled>
-                                      No locations available
-                                    </option>
-                                  )}
-                                </select>
-                              </div>
-                              <p className="error text-danger">
-                                {errors.companyLocation &&
-                                  touched.companyLocation &&
-                                  errors.companyLocation}
-                              </p>
-                            </Col>
-                          </Row>
-                        </div>
-                      </div>
-                      <div className="text-end mb-3 me-3">
-                        <button className="btn btn-success w-sm" type="submit">
-                          Submit
-                        </button>
-                      </div>
-                    </Card>
-                  </Form>
-                )}
-              </Formik>
-            </Col>
-          </Row>
-          <Row>
-            <Col lg={12}>
-              <Formik
-                initialValues={{
-                  title: "",
-                  name: "",
-                  fathersName: "",
-                  ecNo: "",
-                  companyJobCategorys: "",
-                  companyDepartments: "",
-                  address: "",
-                  age: "",
-                  dob: "",
-                  gender: "",
-                  height: "",
-                  bloodgroup: "",
-                  martialstatus: "",
-                  doj: "",
-                  marks: "",
-                  natureofjob: "",
-                  res: "",
-                  mob: "",
-                  office: "",
-                  pphash: "",
-                  emer: "",
-                  email: "",
-                }}
-                validationSchema={validationSchema}
-                // onSubmit={async (values, { resetForm }) => {
-                //   //   await handleSavedcat(values);
-                //   // resetForm();
-                //   // togglemodal();
-                // }}
-              >
-                {({
-                  isSubmitting,
-                  handleChange,
-                  handleSubmit,
-                  errors,
-                  touched,
-                  values,
-                  handleBlur,
-                  setFieldValue,
-                }) => (
-                  <Form>
                     <Card>
                       <CardHeader>
                         <Row className="g-1 m-1">
@@ -360,25 +272,23 @@ const NewForm = () => {
                               <div className="">
                                 <select
                                   className="form-select"
-                                  name="title"
+                                  name="employeeNameAbbrevation"
                                   onClick={(e) => {
                                     handleChange(e);
                                     handleEmpData(e);
                                   }}
                                   onBlur={handleBlur}
-                                  value={values.employeeName}
+                                  value={values.employeeNameAbbrevation}
                                 >
-                                  <option value="">Employees</option>
-                                  {EmpbyCompandLoc.map((i, index) => (
+                                  <option value="Mr.">Mr</option>
+                                  <option value="Mrs.">Mrs</option>
+                                  {/* {EmpbyCompandLoc.map((i, index) => (
                                     <option value={i._id} key={index}>
                                       {i.employeeName}
                                     </option>
-                                  ))}
+                                  ))} */}
                                 </select>
                               </div>
-                              <p className="error text-danger">
-                                {errors.title && touched.title && errors.title}
-                              </p>
                             </Col>
                             <Col sm={4}>
                               <div className="">
@@ -387,19 +297,14 @@ const NewForm = () => {
                                   className="form-control"
                                   id="product-orders-input"
                                   placeholder="First Name"
-                                  name="name"
+                                  name="employeeName"
                                   aria-label="orders"
                                   aria-describedby="product-orders-addon"
                                   onChange={handleChange}
                                   onBlur={handleBlur}
-                                  value={
-                                    currentEmp ? currentEmp.employeeName : ""
-                                  }
+                                  value={values.employeeName}
                                 />
                               </div>
-                              <p className="error text-danger">
-                                {errors.name && touched.name && errors.name}
-                              </p>
                             </Col>
                             <Col sm={4}>
                               <div className="">
@@ -408,23 +313,14 @@ const NewForm = () => {
                                   className="form-control"
                                   id="product-orders-input"
                                   placeholder="Father's Name"
-                                  name="fathersName"
+                                  name="employeeFatherName"
                                   aria-label="orders"
                                   aria-describedby="product-orders-addon"
                                   onChange={handleChange}
                                   onBlur={handleBlur}
-                                  value={
-                                    currentEmp
-                                      ? currentEmp.employeeFatherName
-                                      : ""
-                                  }
+                                  value={values.employeeFatherName}
                                 />
                               </div>
-                              <p className="error text-danger">
-                                {errors.fathersName &&
-                                  touched.fathersName &&
-                                  errors.fathersName}
-                              </p>
                             </Col>
                           </Row>
                           <Row className="align-items-center g-3">
@@ -448,11 +344,9 @@ const NewForm = () => {
                                   onBlur={handleBlur}
                                   value={values.ecNo}
                                 />
-                                <p className="error text-danger">
-                                  {errors.ecNo && touched.ecNo && errors.ecNo}
-                                </p>
                               </div>
                             </Col>
+
                             <Col sm={3}>
                               <label
                                 className="form-label mt-3"
@@ -461,31 +355,27 @@ const NewForm = () => {
                                 Category
                               </label>
                               <div className="">
-                                <Input
-                                  type="text"
-                                  className="form-control"
-                                  id="product-orders-input"
-                                  placeholder="company category"
+                                <select
+                                  className="form-select"
                                   name="companyJobCategorys"
-                                  aria-label="orders"
-                                  aria-describedby="product-orders-addon"
-                                  onChange={handleChange}
+                                  onChange={(e) => {
+                                    handleChange(e);
+                                  }}
                                   onBlur={handleBlur}
-                                  value={
-                                    currentEmp
-                                      ? currentEmp.companyJobCategorys
-                                      : ""
-                                  }
-                                />
-
-                                <p className="error text-danger">
-                                  {errors.companyJobCategorys &&
-                                    touched.companyJobCategorys &&
-                                    errors.companyJobCategorys}
-                                </p>
+                                  value={values.companyJobCategorys}
+                                >
+                                  {Category.map((name, index) => (
+                                    <option key={index} value={name}>
+                                      {name}
+                                    </option>
+                                  ))}
+                                </select>
                               </div>
                             </Col>
-                            <Col sm={3}>
+
+                            {/* setting category by api */}
+
+                            {/* <Col sm={3}>
                               <label
                                 className="form-label mt-3"
                                 htmlFor="product-orders-input"
@@ -493,27 +383,6 @@ const NewForm = () => {
                                 Department
                               </label>
                               <div className="">
-                                {/* <select
-                                  className="form-select"
-                                  name="companyDepartments"
-                                  onChange={handleChange}
-                                  onBlur={handleBlur}
-                                  value={values.companyDepartments}
-                                >
-                                  <option value="">Select</option>
-                                  {Department && Department.length > 0 ? (
-                                    Department.map((department) => (
-                                      <option key={department} value={department}>
-                                        {department}
-                                      </option>
-                                    ))
-                                  ) : (
-                                    <option value="" disabled>
-                                      No Department available
-                                    </option>
-                                  )}
-                                </select> */}
-
                                 <Input
                                   type="text"
                                   className="form-control"
@@ -530,19 +399,86 @@ const NewForm = () => {
                                       : ""
                                   }
                                 />
+                              </div>
+                            </Col> */}
 
-                                <p className="error text-danger">
-                                  {errors.companyDepartments &&
-                                    touched.companyDepartments &&
-                                    errors.companyDepartments}
-                                </p>
+                            {/* //setting Department */}
+
+                            <Col sm={3}>
+                              <label
+                                className="form-label mt-3"
+                                htmlFor="product-orders-inputrd"
+                              >
+                                Department
+                              </label>
+                              <div className="">
+                                <select
+                                  className="form-select"
+                                  name="companyDepartments"
+                                  onChange={(e) => {
+                                    handleChange(e);
+                                  }}
+                                  onBlur={handleBlur}
+                                  value={values.companyDepartments}
+                                >
+                                  {Department.map((name, index) => (
+                                    <option key={index} value={name}>
+                                      {name}
+                                    </option>
+                                  ))}
+                                </select>
                               </div>
                             </Col>
                           </Row>
                         </div>
                       </div>
-                      <Example companyId={currentCompanyId} location={currentLocation} />
+                      <div className="text-end mb-3 me-3">
+                        <button className="btn btn-success w-sm" type="submit">
+                          Submit
+                        </button>
+                      </div>
                     </Card>
+                  </Form>
+                )}
+              </Formik>
+
+              <Formik
+                initialValues={{
+                  address: "",
+                  age: "",
+                  dateOfBirth: "",
+                  gender: "",
+                  height: "",
+                  bloodGroup: "",
+                  mentalStatus: "",
+                  dateOfJoin: "",
+                  idMark: "",
+                  natureOfJob: "",
+                  res: "",
+                  mobileNumber: "",
+                  office: "",
+                  pp: "",
+                  emer: "",
+                  email: "",
+                }}
+                // validationSchema={validationSchema}
+                onSubmit={async (values, { resetForm }) => {
+                  await handleSavedcat(values);
+                  resetForm();
+                  // togglemodal();
+                }}
+              >
+                {({
+                  isSubmitting,
+                  handleChange,
+                  handleSubmit,
+                  errors,
+                  touched,
+                  values,
+                  handleBlur,
+                  setFieldValue,
+                }) => (
+                  <Form>
                     <Card>
                       <CardHeader>
                         <Nav className="nav-tabs-custom card-header-tabs border-bottom-0">
@@ -561,7 +497,6 @@ const NewForm = () => {
                           </NavItem>
                         </Nav>
                       </CardHeader>
-
                       <CardBody>
                         <TabContent activeTab={customActiveTab}>
                           <TabPane id="addproduct-general-info" tabId="1">
@@ -582,38 +517,10 @@ const NewForm = () => {
                                     placeholder="address"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value={
-                                      currentEmpContactDetails
-                                        ? currentEmpContactDetails.address
-                                        : ""
-                                    }
+                                    value={values.address}
                                   />
-                                  <p className="error text-danger">
-                                    {errors.address &&
-                                      touched.address &&
-                                      errors.address}
-                                  </p>
                                 </div>
                               </Col>
-                              {/* <Col lg={6}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="manufacturer-brand-input"
-                            >
-                              Manufacturer Brand
-                            </label>
-                            <Input
-                              type="text"
-                              className="form-control"
-                              id="manufacturer-brand-input"
-                              name="manufacturer_brand"
-                              placeholder="Enter manufacturer brand"
-                             
-                            />
-                            
-                          </div>
-                        </Col> */}
                             </Row>
                             <Row>
                               <Col sm={2}>
@@ -626,23 +533,16 @@ const NewForm = () => {
                                   </label>
                                   <div className="input-group mb-3">
                                     <Input
-                                      type="text"
+                                      type="number"
                                       className="form-control"
                                       id="product-stock-input"
                                       placeholder="age"
                                       name="age"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={
-                                        currentEmpContactDetails
-                                          ? currentEmpContactDetails.age
-                                          : ""
-                                      }
+                                      value={values.age}
                                     />
                                   </div>
-                                  <p className="error text-danger">
-                                    {errors.age && touched.age && errors.age}
-                                  </p>
                                 </div>
                               </Col>
 
@@ -656,25 +556,18 @@ const NewForm = () => {
                                   </label>
                                   <div className="input-group mb-3">
                                     <Input
-                                      type="text"
+                                      type="date"
                                       className="form-control"
                                       id="product-price-input"
                                       placeholder="DD/MM/YYYY"
-                                      name="dob"
+                                      name="dateOfBirth"
                                       aria-label="Price"
                                       aria-describedby="product-price-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={
-                                        currentEmpContactDetails
-                                          ? currentEmpContactDetails.dateOfBirth
-                                          : ""
-                                      }
+                                      value={values.dateOfBirth}
                                     />
                                   </div>
-                                  <p className="error text-danger">
-                                    {errors.dob && touched.dob && errors.dob}
-                                  </p>
                                 </div>
                               </Col>
 
@@ -687,28 +580,22 @@ const NewForm = () => {
                                     Gender
                                   </label>
                                   <div className="input-group mb-3">
-                                    <Input
-                                      type="text"
-                                      className="form-control"
-                                      id="product-price-input"
-                                      placeholder="gendet"
+                                    <select
+                                      className="form-select"
+                                      id="product-gender-input"
                                       name="gender"
-                                      aria-label="Price"
-                                      aria-describedby="product-price-addon"
+                                      aria-label="Gender"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={
-                                        currentEmpContactDetails
-                                          ? currentEmpContactDetails.gender
-                                          : ""
-                                      }
-                                    />
+                                      value={values.gender}
+                                    >
+                                      <option value="" disabled>
+                                        Select Gender
+                                      </option>
+                                      <option value="male">Male</option>
+                                      <option value="female">Female</option>
+                                    </select>
                                   </div>
-                                  <p className="error text-danger">
-                                    {errors.gender &&
-                                      touched.gender &&
-                                      errors.gender}
-                                  </p>
                                 </div>
                               </Col>
 
@@ -722,7 +609,7 @@ const NewForm = () => {
                                   </label>
                                   <div className="input-group mb-3">
                                     <Input
-                                      type="text"
+                                      type="number"
                                       className="form-control"
                                       id="product-orders-input"
                                       placeholder="height"
@@ -731,18 +618,9 @@ const NewForm = () => {
                                       aria-describedby="product-orders-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={
-                                        currentEmpContactDetails
-                                          ? currentEmpContactDetails.height
-                                          : ""
-                                      }
+                                      value={values.height}
                                     />
                                   </div>
-                                  <p className="error text-danger">
-                                    {errors.height &&
-                                      touched.height &&
-                                      errors.height}
-                                  </p>
                                 </div>
                               </Col>
                               <Col sm={2}>
@@ -759,23 +637,14 @@ const NewForm = () => {
                                       className="form-control"
                                       id="product-orders-input"
                                       placeholder="blood group"
-                                      name="bloodgroup"
+                                      name="bloodGroup"
                                       aria-label="orders"
                                       aria-describedby="product-orders-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={
-                                        currentEmpContactDetails
-                                          ? currentEmpContactDetails.bloodGroup
-                                          : ""
-                                      } // bloodGroup
+                                      value={values.bloodGroup}
                                     />
                                   </div>
-                                  <p className="error text-danger">
-                                    {errors.bloodgroup &&
-                                      touched.bloodgroup &&
-                                      errors.bloodgroup}
-                                  </p>
                                 </div>
                               </Col>
                               <Col sm={2}>
@@ -792,23 +661,14 @@ const NewForm = () => {
                                       className="form-control"
                                       id="product-orders-input"
                                       placeholder="martial status"
-                                      name="martialstatus"
+                                      name="mentalStatus"
                                       aria-label="orders"
                                       aria-describedby="product-orders-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={
-                                        currentEmpContactDetails
-                                          ? currentEmpContactDetails.mentalStatus
-                                          : ""
-                                      } // mentalStatus
+                                      value={values.mentalStatus} // mentalStatus
                                     />
                                   </div>
-                                  <p className="error text-danger">
-                                    {errors.martialstatus &&
-                                      touched.martialstatus &&
-                                      errors.martialstatus}
-                                  </p>
                                 </div>
                               </Col>
                             </Row>
@@ -830,16 +690,9 @@ const NewForm = () => {
                                       name="res"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={
-                                        currentEmpContactDetails
-                                          ? currentEmpContactDetails.res
-                                          : ""
-                                      } // res
+                                      value={values.res} // res
                                     />
                                   </div>
-                                  <p className="error text-danger">
-                                    {errors.res && touched.res && errors.res}
-                                  </p>
                                 </div>
                               </Col>
 
@@ -853,25 +706,18 @@ const NewForm = () => {
                                   </label>
                                   <div className="input-group mb-3">
                                     <Input
-                                      type="text"
+                                      type="number"
                                       className="form-control"
                                       id="product-price-input"
                                       placeholder="MOB"
-                                      name="mob"
+                                      name="mobileNumber"
                                       aria-label="Price"
                                       aria-describedby="product-price-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={
-                                        currentEmpContactDetails
-                                          ? currentEmpContactDetails.mobileNumber
-                                          : ""
-                                      } //mobileNumber
+                                      value={values.mobileNumber}
                                     />
                                   </div>
-                                  <p className="error text-danger">
-                                    {errors.mob && touched.mob && errors.mob}
-                                  </p>
                                 </div>
                               </Col>
 
@@ -894,18 +740,9 @@ const NewForm = () => {
                                       aria-describedby="product-orders-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={
-                                        currentEmpContactDetails
-                                          ? currentEmpContactDetails.office
-                                          : ""
-                                      } //office
+                                      value={values.office}
                                     />
                                   </div>
-                                  <p className="error text-danger">
-                                    {errors.office &&
-                                      touched.office &&
-                                      errors.office}
-                                  </p>
                                 </div>
                               </Col>
 
@@ -923,23 +760,14 @@ const NewForm = () => {
                                       className="form-control"
                                       id="product-orders-input"
                                       placeholder="PP #"
-                                      name="pphash"
+                                      name="pp"
                                       aria-label="orders"
                                       aria-describedby="product-orders-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={
-                                        currentEmpContactDetails
-                                          ? currentEmpContactDetails.pp
-                                          : ""
-                                      } //pp
+                                      value={values.pp}
                                     />
                                   </div>
-                                  <p className="error text-danger">
-                                    {errors.pphash &&
-                                      touched.pphash &&
-                                      errors.pphash}
-                                  </p>
                                 </div>
                               </Col>
                               <Col sm={2}>
@@ -961,18 +789,12 @@ const NewForm = () => {
                                       aria-describedby="product-orders-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={
-                                        currentEmpContactDetails
-                                          ? currentEmpContactDetails.emer
-                                          : ""
-                                      } // emer
+                                      value={values.emer} // emer
                                     />
                                   </div>
-                                  <p className="error text-danger">
-                                    {errors.emer && touched.emer && errors.emer}
-                                  </p>
                                 </div>
                               </Col>
+
                               <Col sm={2}>
                                 <div className="mb-3">
                                   <label
@@ -992,18 +814,9 @@ const NewForm = () => {
                                       aria-describedby="product-orders-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={
-                                        currentEmpContactDetails
-                                          ? currentEmpContactDetails.email
-                                          : ""
-                                      } //email
+                                      value={values.email}
                                     />
                                   </div>
-                                  <p className="error text-danger">
-                                    {errors.email &&
-                                      touched.email &&
-                                      errors.email}
-                                  </p>
                                 </div>
                               </Col>
                             </Row>
@@ -1019,20 +832,16 @@ const NewForm = () => {
                                   </label>
                                   <div className="input-group mb-3">
                                     <Input
-                                      type="text"
+                                      type="date"
                                       className="form-control"
                                       id="product-price-input"
                                       placeholder="DD/MM/YYYY"
-                                      name="doj"
+                                      name="dateOfJoin"
                                       aria-label="Price"
                                       aria-describedby="product-price-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={
-                                        currentEmpContactDetails
-                                          ? currentEmpContactDetails.dateOfJoin
-                                          : ""
-                                      } //dateOfJoin
+                                      value={values.dateOfJoin} //dateOfJoin
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -1054,23 +863,14 @@ const NewForm = () => {
                                       className="form-control"
                                       id="product-price-input"
                                       placeholder="Marks on body"
-                                      name="marks"
+                                      name="idMark"
                                       aria-label="Price"
                                       aria-describedby="product-price-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={
-                                        currentEmpContactDetails
-                                          ? currentEmpContactDetails.idMark
-                                          : ""
-                                      } // idMark
+                                      value={values.idMark} // idMark
                                     />
                                   </div>
-                                  <p className="error text-danger">
-                                    {errors.marks &&
-                                      touched.marks &&
-                                      errors.marks}
-                                  </p>
                                 </div>
                               </Col>
                             </Row>
@@ -1090,48 +890,39 @@ const NewForm = () => {
                                       className="form-control"
                                       id="product-price-input"
                                       placeholder="nature of job"
-                                      name="natureofjob"
+                                      name="natureOfJob"
                                       aria-label="Price"
                                       aria-describedby="product-price-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={
-                                        currentEmpContactDetails
-                                          ? currentEmpContactDetails.natureOfJob
-                                          : ""
-                                      } // "no"
+                                      value={values.natureOfJob}
                                     />
                                   </div>
-                                  <p className="error text-danger">
-                                    {errors.natureofjob &&
-                                      touched.natureofjob &&
-                                      errors.natureofjob}
-                                  </p>
                                 </div>
                               </Col>
                             </Row>
                           </TabPane>
                         </TabContent>
                       </CardBody>
+                      <div className="text-end mb-3">
+                        <button
+                          type="submit"
+                          className="btn btn-success w-sm"
+                          //   onClick={togglesuccessmodal}
+                        >
+                          Submit
+                        </button>
+                      </div>
                     </Card>
-                    <div className="text-end mb-3">
-                      <button
-                        type="submit"
-                        className="btn btn-success w-sm"
-                        //   onClick={togglesuccessmodal}
-                      >
-                        Submit
-                      </button>
-                    </div>
                   </Form>
                 )}
               </Formik>
             </Col>
           </Row>
-        </Container>
-      </div>
-    </>
+        </Modal.Body>
+      </Modal>
+    </React.Fragment>
   );
-};
+}
 
-export default NewForm;
+export default Example;

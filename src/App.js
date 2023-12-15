@@ -1,16 +1,16 @@
-import React from 'react';
+import React from "react";
 import "./App.css";
 
 //import Scss
-import './assets/scss/themes.scss';
+import "./assets/scss/themes.scss";
 
 //imoprt Route
-import Route from './Routes';
+import Route from "./Routes";
 
 // Import Firebase Configuration file
 // import { initFirebaseBackend } from "./helpers/firebase_helper";
 
-// Fake Backend 
+// Fake Backend
 import fakeBackend from "./helpers/AuthType/fakeBackend";
 
 // Activating fake backend
@@ -34,6 +34,7 @@ function App() {
   return (
     <React.Fragment>
       <Route />
+      {/* <HelthCard /> */}
     </React.Fragment>
   );
 }

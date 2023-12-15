@@ -740,7 +740,7 @@ const CheckupForm = () => {
                           toggleCustom("1");
                         }}
                       >
-                        Vitals & History
+                        Vitals
                       </NavLink>
                     </NavItem>
                     <NavItem>
@@ -753,7 +753,7 @@ const CheckupForm = () => {
                           toggleCustom("2");
                         }}
                       >
-                        General Exam
+                       History &  Examination
                       </NavLink>
                     </NavItem>
                     <NavItem>
