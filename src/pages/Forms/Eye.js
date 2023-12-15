@@ -295,75 +295,72 @@ const Eye = () => {
                             </div>
                           </div>
                         </Col>
-                      </Row>          
-                                    <Col className="col-lg-2 col-md-2 col-12 ">
-                                      <Input
-                                        type="text"
-                                        className="form-control"
-                                        id="product-orders-input"
-                                        placeholder=""
-                                        name="gallaryCategoryTitle"
-                                        aria-label="orders"
-                                        aria-describedby="product-orders-addon"
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        // value={values.gallaryCategoryTitle}
-                                      />
-                                    </Col>
-                                    <Col className="col-lg-2 col-md-2 col-12 ">
-                                      <Input
-                                        type="text"
-                                        className="form-control"
-                                        id="product-orders-input"
-                                        placeholder=""
-                                        name="gallaryCategoryTitle"
-                                        aria-label="orders"
-                                        aria-describedby="product-orders-addon"
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        // value={values.gallaryCategoryTitle}
-                                      />
-                                    </Col>
-                                  </Row>
-                                </div>
-                              </div>
-                            </Col>
-                          </Row>
-                          <Row className="align-items-center g-3">
-                            <Col className="col-sm">
-                              <div>
-                                <div>
-                                  <Row className="mb-3">
-                                    <Col className="col-lg-2 col-md-2"></Col>
-                                    <Col className="col-lg-2 col-md-2">
-                                      <p>with glasses</p>
-                                    </Col>
+                      </Row>
+                      <Col className="col-lg-2 col-md-2 col-12 ">
+                        <Input
+                          type="text"
+                          className="form-control"
+                          id="product-orders-input"
+                          placeholder=""
+                          name="gallaryCategoryTitle"
+                          aria-label="orders"
+                          aria-describedby="product-orders-addon"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          // value={values.gallaryCategoryTitle}
+                        />
+                      </Col>
+                      <Col className="col-lg-2 col-md-2 col-12 ">
+                        <Input
+                          type="text"
+                          className="form-control"
+                          id="product-orders-input"
+                          placeholder=""
+                          name="gallaryCategoryTitle"
+                          aria-label="orders"
+                          aria-describedby="product-orders-addon"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          // value={values.gallaryCategoryTitle}
+                        />
+                      </Col>
+                    </div>
 
-                                <Col className="col-lg-4 col-md-4">
-                                  <textarea
-                                    className="form-control"
-                                    id="meassageInput"
-                                    type="text"
-                                    rows="3"
-                                    name="cv"
-                                    placeholder="Enter your message"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.cv}
-                                  ></textarea>
-                                  {/* <p className="error text-danger">
+                    <Row className="align-items-center g-3">
+                      <Col className="col-sm">
+                        <div>
+                          <div>
+                            <Row className="mb-3">
+                              <Col className="col-lg-2 col-md-2"></Col>
+                              <Col className="col-lg-2 col-md-2">
+                                <p>with glasses</p>
+                              </Col>
+
+                              <Col className="col-lg-4 col-md-4">
+                                <textarea
+                                  className="form-control"
+                                  id="meassageInput"
+                                  type="text"
+                                  rows="3"
+                                  name="cv"
+                                  placeholder="Enter your message"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.cv}
+                                ></textarea>
+                                {/* <p className="error text-danger">
                                     {errors.gallaryCategoryTitle9 &&
                                       touched.gallaryCategoryTitle9 &&
                                       errors.gallaryCategoryTitle9}
                                   </p> */}
-                                </Col>
-                              </Row>
-                            </div>
+                              </Col>
+                            </Row>
                           </div>
-                        </Col>
-                      </Row>
-                    </div>
+                        </div>
+                      </Col>
+                    </Row>
                   </div>
+
                   <div className="text-end mb-3 me-3">
                     <button className="btn btn-success w-sm" type="submit">
                       Submit
