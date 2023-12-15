@@ -23,13 +23,11 @@ import UiContent from "../../Components/Common/UiContent";
 import Example from "../../Components/FormModal/FormOne";
 import SignContext from "../../contextAPI/Context/SignContext";
 
+
 const NewForm = () => {
-  const {
-    GetCompany,
-    GetCompanybyId,
-    GetEmpsbyCompAndLoc,
-    GetContactDetailsById,
-  } = useContext(SignContext);
+
+  const { GetCompany, GetCompanybyId, GetEmpsbyCompAndLoc ,GetContactDetailsById , getCheckupData } = useContext(SignContext);
+
   const [Company, setCompany] = useState([]);
   const [Location, setLocation] = useState([]);
   const [Category, setCategory] = useState([]);
@@ -124,7 +122,7 @@ const NewForm = () => {
     }
   };
 
-  const handleEmpData = (e) => {
+  const handleEmpData = async (e) => {
     let data = e.target.value;
 
     const curremp = EmpbyCompandLoc.filter((emp) => emp._id === data);
@@ -133,10 +131,12 @@ const NewForm = () => {
 
     getEmpContactDetails({ id: curremp[0].employeeContactDetailsId });
 
+
     //  getEmpContactDetails()
 
     setCurrentEmp(curremp[0]);
   };
+
 
   useEffect(() => {
     getcompanies();
@@ -159,7 +159,7 @@ const NewForm = () => {
                   companyName: "",
                   companyLocation: "",
                 }}
-                //validationSchema={validationSchema}
+              
                 onSubmit={async (values, { resetForm }) => {
                   handleSavedCompandLoc(values);
                   resetForm();
