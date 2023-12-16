@@ -145,16 +145,7 @@ const CheckupForm = () => {
     console.log(response.data._id);
   };
 
-  // const handleSavedCompandLoc = async (Values) => {
-
-  //   console.log( "----------------------------------------------------------------------------" );
-  //   console.log( Values )
-
-  //   const res = await GetEmpsbyCompAndLoc(Values);
-  //   console.log(res.data)
-  //   setEmpbyCompandLoc(res.data)
-
-  // };
+ 
 
   const getAllCheckupType = async () => {
     const responce = await getCheckupType();
@@ -182,7 +173,7 @@ const CheckupForm = () => {
     const chaeckupData = await getCheckupData();
 
     console.log("dddddaaaatttttaaaaa");
-    console.log(chaeckupData.data._id);
+    console.log(chaeckupData.data);
 
     setCheckupDataId(chaeckupData.data._id);
 
@@ -200,19 +191,7 @@ const CheckupForm = () => {
     getAllCheckupType();
   }, []);
 
-  function formatDate(inputDate) {
-    const dateObject = new Date(inputDate);
-
-    // Extract day, month, and year components
-    const day = dateObject.getUTCDate().toString().padStart(2, "0");
-    const month = (dateObject.getUTCMonth() + 1).toString().padStart(2, "0"); // Months are zero-based
-    const year = dateObject.getUTCFullYear();
-
-    // Assemble the formatted date string
-    const formattedDate = `${day}-${month}-${year}`;
-
-    return formattedDate;
-  }
+  
 
   return (
     <>
