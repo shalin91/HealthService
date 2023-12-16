@@ -2,8 +2,24 @@ import { Form, Formik } from "formik";
 import React from "react";
 import { Card, Col, Input, Row } from "reactstrap";
 import * as Yup from "yup";
+import SignContext from "../../contextAPI/Context/SignContext"
+import  { useContext } from "react";
 
-const GeneralExam = () => {
+const GeneralExam = ( props ) => {
+
+  const { setGeneralExamination } = useContext(SignContext);
+
+  const handleSubmitData = async( values ) => {
+      
+    const data = { ...props , ...values };
+
+    const response = await setGeneralExamination(data);
+    
+    console.log(response);
+
+  }
+
+
   const validationSchema = Yup.object().shape({
     generalExam: Yup.string().required("general exam  is required"),
     rs: Yup.string().required("rs is required"),
@@ -26,16 +42,17 @@ const GeneralExam = () => {
               rs: "",
               cvs: "",
               cns: "",
-              skingenitals: "",
+              skinAndGenitals: "",
               other: "",
-              abdomen: "",
+              abdomenAS: "",
               musculoSkeletal: "",
               ent: "",
             }}
             // validationSchema={validationSchema}
             onSubmit={(values) => {
               // Alert the input values of the form that we filled
-              alert(JSON.stringify(values));
+              //  alert(JSON.stringify(values));
+              handleSubmitData( values );
             }}
           >
             {({
@@ -137,17 +154,17 @@ const GeneralExam = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="Enter Title"
-                                name="abdomen"
+                                name="abdomenAS"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.abdomen}
+                                value={values.abdomenAS}
                               />
                               <p className="error text-danger">
-                                {errors.abdomen &&
-                                  touched.abdomen &&
-                                  errors.abdomen}
+                                {errors.abdomenAS &&
+                                  touched.abdomenAS &&
+                                  errors.abdomenAS}
                               </p>
                             </div>
                           </div>
@@ -268,17 +285,17 @@ const GeneralExam = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="Enter Title"
-                                name="skingenitals"
+                                name="skinAndGenitals"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.skingenitals}
+                                value={values.skinAndGenitals}
                               />
                               <p className="error text-danger">
-                                {errors.skingenitals &&
-                                  touched.skingenitals &&
-                                  errors.skingenitals}
+                                {errors.skinAndGenitals &&
+                                  touched.skinAndGenitals &&
+                                  errors.skinAndGenitals}
                               </p>
                             </div>
                           </div>

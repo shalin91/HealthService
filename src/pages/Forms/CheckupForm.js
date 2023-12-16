@@ -31,12 +31,32 @@ import BloodInvestigation from "./BloodInvestigation";
 const CheckupForm = () => {
   const [customActiveTab, setcustomActiveTab] = useState("1");
 
-  const { GetCompany, GetCompanybyId, setNewCheckupName, getCheckupType } = useContext(SignContext);
+  const {
+    GetCompany,
+    GetCompanybyId,
+    setNewCheckupName,
+    GetEmpsbyCompAndLoc,
+    getCheckupData,
+    getCheckupType,
+    GetContactDetailsById,
+  } = useContext(SignContext);
 
   const toggleCustom = (tab) => {
     if (customActiveTab !== tab) {
       setcustomActiveTab(tab);
     }
+  };
+
+  const getEmpContactDetails = async (id) => {
+    console.log("---id in frontend first---");
+
+    console.log(id);
+
+    const res = await GetContactDetailsById(id);
+
+    console.log(res.data);
+
+    setCurrentEmpContactDetails(res.data);
   };
 
   const [company, setComapny] = useState(null);
@@ -51,13 +71,18 @@ const CheckupForm = () => {
 
   const [allCheckupType, setAllCheckupType] = useState([]);
 
-  const [empbyCompandLoc, setEmpbyCompandLoc] = useState([]);
+  const [EmpbyCompandLoc, setEmpbyCompandLoc] = useState([]);
 
   const [currentEmp, setCurrentEmp] = useState(null);
 
   const [currentUser, setCurrentUser] = useState(null);
 
-  const [checkupName, setCheckupName] = useState(null)
+  const [checkupName, setCheckupName] = useState(null);
+
+  const [checkupDataId, setCheckupDataId] = useState(null);
+
+  const [currentEmpContactDetails, setCurrentEmpContactDetails] =
+    useState(null);
 
   // const [ allCategory , setAllCategory ] = useState( [] );
 
@@ -97,89 +122,97 @@ const CheckupForm = () => {
 
     setComapny(val.companyName);
 
-
-    console.log(val.companyName)
-    console.log(company);
-
     setLocation(val.companyLocation);
+
+    const res = await GetEmpsbyCompAndLoc(val);
+
+    console.log(res.data);
+
+    setEmpbyCompandLoc(res.data);
   };
 
-  // Creating schema
-  // const schema = Yup.object().shape({
-  //   checkupName: Yup.string().required("checkupName is a required "),
-  //   checkupNumber: Yup.string().required("Number  is a required "),
-  //   checkupDate: Yup.string().required("Date is a required "),
-  //   checkupType: Yup.string().required("checkupType is a required "),
-  // });
-
-
-
   const addCheckupDetails = async (val) => {
+    console.log(val);
 
-    console.log(val)
-
-    setCheckupType(val.checkupType)
+    setCheckupType(val.checkupType);
 
     const response = await setNewCheckupName({ val, company, location });
 
     console.log(response);
 
-    setCheckupName(response._id);
+    setCheckupName(response.data._id);
 
     console.log(response.data._id);
+  };
 
+  // const handleSavedCompandLoc = async (Values) => {
 
+  //   console.log( "----------------------------------------------------------------------------" );
+  //   console.log( Values )
 
+  //   const res = await GetEmpsbyCompAndLoc(Values);
+  //   console.log(res.data)
+  //   setEmpbyCompandLoc(res.data)
 
-
-  }
-
+  // };
 
   const getAllCheckupType = async () => {
-
     const responce = await getCheckupType();
 
     console.log(responce);
 
     setAllCheckupType(responce.data);
+  };
 
+  const handleEmpData = (e) => {
+    let data = e.target.value;
 
-  }
+    const curremp = EmpbyCompandLoc.filter((emp) => emp._id === data);
 
-  // const validationSchema = Yup.object().shape({
-  //   checkupName: Yup.string().required("Checkup Name is required"),
+    console.log("-----------------------------------");
 
-  //   checkupNumber: Yup.string().required("Number is required"),
-  //   checkupDate: Yup.string().required("Date is required"),
-  //   checkupType: Yup.string().required("checkupType is a required "),
+    getEmpContactDetails({ id: curremp[0].employeeContactDetailsId });
 
-  //   type: Yup.string().required("Type is required"),
-  //   name: Yup.string().required("name is required"),
-  //   gender: Yup.string().required("gender is required"),
-  //   age: Yup.string().required("age is required"),
-  //   company: Yup.string().required("Company is required"),
-  //   location: Yup.string().required("Location is required"),
-  //   ecNo: Yup.string().required("EC NO is required"),
-  //   dob: Yup.string().required("dob is required"),
-  //   height: Yup.string().required("height is required"),
-  //   bloodgroup: Yup.string().required("blood group is required"),
-  //   martialstatus: Yup.string().required("martial status is required"),
-  //   doj: Yup.string().required("date is required"),
-  //   marks: Yup.string().required("marks is required"),
-  //   natureofjob: Yup.string().required("nature of job is required"),
-  //   res: Yup.string().required("res is required"),
-  //   mob: Yup.string().required("mob is required"),
-  //   office: Yup.string().required("office is required"),
-  //   pphash: Yup.string().required("pp# is required"),
-  //   emer: Yup.string().required("emer is required"),
-  //   email: Yup.string().required("email is required"),
+    //  getEmpContactDetails()
 
-  // });
+    setCurrentEmp(curremp[0]);
+  };
+
+  const handleSubmitForEmp = async () => {
+    const chaeckupData = await getCheckupData();
+
+    console.log("dddddaaaatttttaaaaa");
+    console.log(chaeckupData.data._id);
+
+    setCheckupDataId(chaeckupData.data._id);
+
+    console.log("|||||||||||||||||data|||||||||||||");
+    console.log(company);
+    console.log(location);
+    console.log(checkupName);
+    console.log(checkupType);
+    console.log(checkupDataId);
+    console.log("|||||||||||||||||data|||||||||||||");
+  };
 
   useEffect(() => {
     getcompanies();
     getAllCheckupType();
   }, []);
+
+  function formatDate(inputDate) {
+    const dateObject = new Date(inputDate);
+
+    // Extract day, month, and year components
+    const day = dateObject.getUTCDate().toString().padStart(2, "0");
+    const month = (dateObject.getUTCMonth() + 1).toString().padStart(2, "0"); // Months are zero-based
+    const year = dateObject.getUTCFullYear();
+
+    // Assemble the formatted date string
+    const formattedDate = `${day}-${month}-${year}`;
+
+    return formattedDate;
+  }
 
   return (
     <>
@@ -322,7 +355,6 @@ const CheckupForm = () => {
           {/* check up details start */}
 
           <Row>
-
             <Col lg={12}>
               <Formik
                 // validationSchema={schema}
@@ -333,7 +365,7 @@ const CheckupForm = () => {
                   checkupType: "",
                 }}
                 onSubmit={(values) => {
-                  addCheckupDetails(values)
+                  addCheckupDetails(values);
                 }}
               >
                 {({
@@ -415,7 +447,9 @@ const CheckupForm = () => {
                                   </div>
 
                                   <p className="error text-danger">
-                                    {errors.checkupNumber && touched.checkupNumber && errors.checkupNumber}
+                                    {errors.checkupNumber &&
+                                      touched.checkupNumber &&
+                                      errors.checkupNumber}
                                   </p>
                                 </Col>
                                 <Col sm={3}>
@@ -440,7 +474,9 @@ const CheckupForm = () => {
                                   </div>
 
                                   <p className="error text-danger">
-                                    {errors.checkupDate && touched.checkupDate && errors.checkupDate}
+                                    {errors.checkupDate &&
+                                      touched.checkupDate &&
+                                      errors.checkupDate}
                                   </p>
                                 </Col>
                                 <Col sm={3}>
@@ -459,12 +495,10 @@ const CheckupForm = () => {
                                       onChange={handleChange}
                                     >
                                       <option value=""> checkup Type</option>
-                                      {allCheckupType && allCheckupType.length > 0 ? (
+                                      {allCheckupType &&
+                                      allCheckupType.length > 0 ? (
                                         allCheckupType.map((type) => (
-                                          <option
-                                            key={type}
-                                            value={type._id}
-                                          >
+                                          <option key={type} value={type._id}>
                                             {type.checkupType}
                                           </option>
                                         ))
@@ -505,230 +539,7 @@ const CheckupForm = () => {
 
           {/* company employee */}
 
-{/* 
-          <Row>
-
-            <Col lg={12}>
-              <Formik
-                validationSchema={schema}
-                initialValues={{
-                  emplyeeName: "",
-                  gender: "",
-                  age: "",
-                  dateOfBirth: "",
-                  bloodGroup: ""
-                }}
-                onSubmit={(values) => {
-                  addCheckupDetails(values)
-                }}
-              >
-                {({
-                  values,
-                  errors,
-                  touched,
-                  handleChange,
-                  handleBlur,
-                  handleSubmit,
-                }) => (
-                  <div className="login">
-                    <div className="form">
-                    
-                      <form noValidate onSubmit={handleSubmit}>
-                
-
-                        <Card>
-                          <CardHeader>
-                            <Row className="g-1 m-1">
-                              <Col className="col-sm">
-                                <div className="d-flex justify-content-sm-between">
-                                  <h2 className="card-title mb-0 justify-content-sm-start">
-                                    <strong>Employee details</strong>
-                                  </h2>
-                                </div>
-                              </Col>
-                            </Row>
-                          </CardHeader>
-                          <div className="card-body">
-                            <div className="live-preview">
-                              <Row className="align-items-center g-3">
-
-                                <Col sm={3}>
-                                  <label
-                                    className="form-label mt-3"
-                                    htmlFor="product-orders-input"
-                                  >
-                                    Employee name
-                                  </label>
-                                  <div className="">
-                                    <select
-                                      className="form-select"
-                                      name="emplyeeName"
-                                      onBlur={handleBlur}
-                                      value={values.emplyeeName}
-                                      onChange={handleChange}
-                                    >
-                                      <option value=""> Name </option>
-                                      {allCheckupType && allCheckupType.length > 0 ? (
-                                        allCheckupType.map((type) => (
-                                          <option
-                                            key={type}
-                                            value={type._id}
-                                          >
-                                            {type.checkupType}
-                                          </option>
-                                        ))
-                                      ) : (
-                                        <option value="" disabled>
-                                          No employee available
-                                        </option>
-                                      )}
-                                    </select>
-                                  </div>
-                                  <p className="error text-danger">
-                                    {errors.emplyeeName &&
-                                      touched.emplyeeName &&
-                                      errors.emplyeeName}
-                                  </p>
-                                </Col>
-
-                                <Col sm={3}>
-                                  <label
-                                    className="form-label mt-3"
-                                    htmlFor="product-orders-input"
-                                  >
-                                    gender
-                                  </label>
-                                  <div className="">
-                                    <Input
-                                      type="text"
-                                      className="form-control"
-                                      id="product-orders-input"
-                                      name="gender"
-                                      aria-label="orders"
-                                      aria-describedby="product-orders-addon"
-                                      onChange={handleChange}
-                                      onBlur={handleBlur}
-                                      value={values.gender}
-                                    />
-                                  </div>
-
-                                  <p className="error text-danger">
-                                    {errors.gender &&
-                                      touched.gender &&
-                                      errors.gender}
-                                  </p>
-                                </Col>
-                                <Col sm={3}>
-                                  <label
-                                    className="form-label mt-3"
-                                    htmlFor="product-orders-input"
-                                  >
-                                    Age
-                                  </label>
-                                  <div className="">
-                                    <Input
-                                      type="text"
-                                      className="form-control"
-                                      id="product-orders-input"
-                                      name="age"
-                                      aria-label="orders"
-                                      ar
-                                      ia-describedby="product-orders-addon"
-                                      onChange={handleChange}
-                                      onBlur={handleBlur}
-                                      value={values.age}
-                                    />
-                                  </div>
-
-                                  <p className="error text-danger">
-                                    {errors.age && touched.age && errors.age}
-                                  </p>
-                                </Col>
-                                <Col sm={3}>
-                                  <label
-                                    className="form-label mt-3"
-                                    htmlFor="product-orders-input"
-                                  >
-                                    Date of Birth
-                                  </label>
-                                  <div className="">
-                                    <Input
-                                      type="text"
-                                      className="form-control"
-                                      id="product-orders-input"
-                                      name="dateOfBirth"
-                                      aria-label="orders"
-                                      aria-describedby="product-orders-addon"
-                                      onChange={handleChange}
-                                      onBlur={handleBlur}
-                                      value={values.dateOfBirth}
-                                    />
-                                  </div>
-
-                                  <p className="error text-danger">
-                                    {errors.dateOfBirth && touched.dateOfBirth && errors.dateOfBirth}
-                                  </p>
-                                </Col>
-
-                                <Col sm={3}>
-                                  <label
-                                    className="form-label mt-3"
-                                    htmlFor="product-orders-input"
-                                  >
-                                    Blood group
-                                  </label>
-                                  <div className="">
-                                    <Input
-                                      type="text"
-                                      className="form-control"
-                                      id="product-orders-input"
-                                      name="bloodGroup"
-                                      aria-label="orders"
-                                      aria-describedby="product-orders-addon"
-                                      onChange={handleChange}
-                                      onBlur={handleBlur}
-                                      value={values.bloodGroup}
-                                    />
-                                  </div>
-
-                                  <p className="error text-danger">
-                                    {errors.bloodGroup && touched.bloodGroup && errors.bloodGroup}
-                                  </p>
-                                </Col>
-
-                              </Row>
-                            </div>
-                          </div>
-                          <div className="text-end mb-3 me-3">
-                            <button
-                              className="btn btn-success w-sm"
-                              type="submit"
-                            >
-                              Submit
-                            </button>
-                          </div>
-                        </Card>
-                      </form>
-                    </div>
-                  </div>
-                )}
-              </Formik>
-            </Col>
-          </Row>
-
- */}          
-
-          
-          
-
-
-
-
-
-
           {/* company employee over */}
-
-
 
           <Row>
             <Col lg={12}>
@@ -737,19 +548,23 @@ const CheckupForm = () => {
                 initialValues={{
                   name: "",
                   gender: "",
-                  dob: "",
+                  dateOfBirth: "",
                   age: "",
-                  bloodgroup: "",
+                  bloodGroup: "",
                 }}
                 onSubmit={(values) => {
                   // Alert the input values of the form that we filled
-                  alert(JSON.stringify(values));
+
+                  handleSubmitForEmp();
+
+                  //
                 }}
               >
                 {({
                   values,
                   errors,
                   touched,
+                  setFieldValue,
                   handleChange,
                   handleBlur,
                   handleSubmit,
@@ -786,13 +601,21 @@ const CheckupForm = () => {
                                     <select
                                       className="form-select"
                                       name="name"
-                                      onChange={handleChange}
+                                      onClick={(e) => {
+                                        handleChange(e);
+                                        handleEmpData(e);
+                                      }}
                                       onBlur={handleBlur}
-                                      value={values.name}
+                                      value={values.employeeName}
                                     >
-                                      <option value="">Select</option>
-                                      <option value="Mr.">Mr.</option>
-                                      <option value="Mrs.">Mrs.</option>
+                                      {EmpbyCompandLoc &&
+                                        EmpbyCompandLoc.length > 0 &&
+                                        EmpbyCompandLoc.map((emp, index) => (
+                                          <option value={emp._id} key={index}>
+                                            {" "}
+                                            {emp.employeeName}{" "}
+                                          </option>
+                                        ))}
                                     </select>
                                     <p className="error text-danger">
                                       {errors.name &&
@@ -819,7 +642,11 @@ const CheckupForm = () => {
                                       aria-describedby="product-orders-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={values.gender}
+                                      value={
+                                        currentEmpContactDetails
+                                          ? currentEmpContactDetails.gender
+                                          : ""
+                                      }
                                     />
                                     <p className="error text-danger">
                                       {errors.gender &&
@@ -846,7 +673,11 @@ const CheckupForm = () => {
                                       aria-describedby="product-orders-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={values.age}
+                                      value={
+                                        currentEmpContactDetails
+                                          ? currentEmpContactDetails.age
+                                          : ""
+                                      }
                                     />
                                     <p className="error text-danger">
                                       {errors.age && touched.age && errors.age}
@@ -862,16 +693,35 @@ const CheckupForm = () => {
                                   </label>
                                   <div className="">
                                     <Input
-                                      type="date"
+                                      type="text"
                                       className="form-control"
                                       id="product-orders-input"
                                       //   placeholder="EC No."
-                                      name="dob"
+                                      name="dateOfBirth"
                                       aria-label="orders"
                                       aria-describedby="product-orders-addon"
-                                      onChange={handleChange}
+                                      onChange={(e) => {
+                                        handleChange(e);
+                                        // Format and set the value using setFieldValue
+                                        setFieldValue(
+                                          "dateOfBirth",
+                                          e.target.value
+                                            .slice(0, 10)
+                                            .split("")
+                                            .reverse()
+                                            .join("")
+                                        );
+                                      }}
                                       onBlur={handleBlur}
-                                      value={values.dob}
+                                      value={
+                                        currentEmpContactDetails
+                                          ? currentEmpContactDetails.dateOfBirth
+                                              .slice(0, 10)
+                                              .split("-")
+                                              .reverse()
+                                              .join("-")
+                                          : ""
+                                      }
                                     />
                                     <p className="error text-danger">
                                       {errors.dob && touched.dob && errors.dob}
@@ -891,12 +741,16 @@ const CheckupForm = () => {
                                       className="form-control"
                                       id="product-orders-input"
                                       //   placeholder="EC No."
-                                      name="bloodgroup"
+                                      name="bloodGroup"
                                       aria-label="orders"
                                       aria-describedby="product-orders-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={values.bloodgroup}
+                                      value={
+                                        currentEmpContactDetails
+                                          ? currentEmpContactDetails.bloodGroup
+                                          : ""
+                                      }
                                     />
                                     <p className="error text-danger">
                                       {errors.bloodgroup &&
@@ -952,7 +806,7 @@ const CheckupForm = () => {
                           toggleCustom("2");
                         }}
                       >
-                       History &  Examination
+                        History & Examination
                       </NavLink>
                     </NavItem>
                     <NavItem>
@@ -1023,47 +877,90 @@ const CheckupForm = () => {
                   </Nav>
                 </CardHeader>
 
+                {/* console.log( company );
+    console.log( location );
+    console.log( checkupName );
+    console.log( checkupType); */}
+
                 <CardBody>
                   <TabContent activeTab={customActiveTab}>
                     <TabPane id="addproduct-general-info" tabId="1">
-                      <VitalsandHistory />
+                      <VitalsandHistory
+                        companyId={company}
+                        location={location}
+                        chackupNameId={checkupName}
+                        checkupTypeId={checkupType}
+                        checkupDataId={checkupDataId}
+                      />
                     </TabPane>
 
                     <TabPane id="addproduct-metadata" tabId="2">
-                      <GeneralExam />
+                      <GeneralExam
+                        companyId={company}
+                        location={location}
+                        chackupNameId={checkupName}
+                        checkupTypeId={checkupType}
+                        checkupDataId={checkupDataId}
+                      />
                     </TabPane>
 
                     <TabPane id="addproduct-general-info" tabId="3">
-                      <Eye />
+                      <Eye
+                        companyId={company}
+                        location={location}
+                        chackupNameId={checkupName}
+                        checkupTypeId={checkupType}
+                        checkupDataId={checkupDataId}
+                      />
                     </TabPane>
 
                     <TabPane id="addproduct-general-info" tabId="4">
-                      <BloodInvestigation />
+                      <BloodInvestigation
+                        companyId={company}
+                        location={location}
+                        chackupNameId={checkupName}
+                        checkupTypeId={checkupType}
+                        checkupDataId={checkupDataId}
+                      />
                     </TabPane>
 
                     <TabPane id="addproduct-general-info" tabId="5">
-                      <Investigation />
+                      <Investigation
+                        companyId={company}
+                        location={location}
+                        chackupNameId={checkupName}
+                        checkupTypeId={checkupType}
+                        checkupDataId={checkupDataId}
+                      />
                     </TabPane>
 
                     <TabPane id="addproduct-general-info" tabId="6">
-                      <OtherDetails />
+                      <OtherDetails
+                        companyId={company}
+                        location={location}
+                        chackupNameId={checkupName}
+                        checkupTypeId={checkupType}
+                        checkupDataId={checkupDataId}
+                      />
                     </TabPane>
 
                     <TabPane id="addproduct-general-info" tabId="7">
-                      <Form33 />
+                      <Form33
+                        companyId={company}
+                        location={location}
+                        chackupNameId={checkupName}
+                        checkupTypeId={checkupType}
+                        checkupDataId={checkupDataId}
+                      />
                     </TabPane>
                   </TabContent>
                 </CardBody>
               </Card>
-                   
-                    
-
             </Col>
           </Row>
         </Container>
       </div>
     </>
-
   );
 };
 

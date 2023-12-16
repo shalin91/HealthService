@@ -2,8 +2,23 @@ import { Form, Formik } from "formik";
 import React from "react";
 import { Card, Col, Input, Row } from "reactstrap";
 import * as Yup from "yup";
+import SignContext from "../../contextAPI/Context/SignContext"
+import  { useContext } from "react";
 
-const Investigation = () => {
+const Investigation = ( props ) => {
+
+  const { setInvestigation } = useContext(SignContext);
+
+  const handleSubmitData = async( values ) => {
+      
+    const data = { ...props , ...values };
+
+    const response = await setInvestigation(data);
+    
+    console.log(response);
+
+  }
+
   const validationSchema = Yup.object().shape({
     labReports: Yup.string().required("lab reports  is required"),
     xRayReports: Yup.string().required("x ray reports is required"),
@@ -23,13 +38,15 @@ const Investigation = () => {
               xRayReports: "",
               ecgReports: "",
               spirometry: "",
-              autometry: "",
+              audiometry: "",
               remarks: "",
+
             }}
-            validationSchema={validationSchema}
+            // validationSchema={validationSchema}
             onSubmit={(values) => {
               // Alert the input values of the form that we filled
-              alert(JSON.stringify(values));
+              // alert(JSON.stringify(values));
+               handleSubmitData(values);
             }}
           >
             {({
@@ -165,12 +182,12 @@ const Investigation = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="autometry"
-                                name="autometry"
+                                name="audiometry"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.autometry}
+                                value={values.audiometry}
                               />
                             </div>
                           </div>

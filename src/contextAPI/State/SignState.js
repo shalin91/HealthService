@@ -169,7 +169,6 @@ export const SignState = (props) => {
       return { success: false, msg: "server Error" };
     }
   };
-  
 
   // Add Company
   const AddComapany = async (CompanyData) => {
@@ -212,6 +211,9 @@ export const SignState = (props) => {
 
   const AddContact = async (ContactData) => {
     try {
+      console.log("---------contact details----");
+      console.log(ContactData);
+
       const response = await axios.post(
         `${url}/employ/set-employ-contact-details`,
         ContactData
@@ -277,6 +279,11 @@ export const SignState = (props) => {
       const id = props.companyName;
       const location = props.companyLocation;
 
+      console.log("|||||||||||||||||||||||---|||");
+
+      console.log(id);
+      console.log(location);
+
       const response = await axios.post(
         `${url}/company/get-all-emp-by-company-location/${id}`,
         { location: location }
@@ -334,6 +341,111 @@ export const SignState = (props) => {
     }
   };
 
+  // set checkupdata
+
+  const getCheckupData = async () => {
+    try {
+      const response = await axios.post(`${url}/checkup/add-checkup-data`, {});
+
+      return response;
+    } catch (error) {
+      console.error("Error during API call:", error);
+    }
+  };
+
+  const setVitalAndHistory = async (data) => {
+    try {
+      const response = await axios.post(
+        `${url}/employ/set-employ-vital-and-history-details`,
+        { data }
+      );
+
+      return response;
+    } catch (error) {
+      console.error("Error during API call:", error);
+    }
+  };
+
+  const setGeneralExamination = async (data) => {
+    try {
+      const response = await axios.post(
+        `${url}/employ/set-employ-general-examination`,
+        { data }
+      );
+
+      return response;
+    } catch (error) {
+      console.error("Error during API call:", error);
+    }
+  };
+
+  const setEyeDetails = async (data) => {
+    try {
+      const response = await axios.post(
+        `${url}/employ/set-employ-eye-details`,
+        { data }
+      );
+
+      return response;
+    } catch (error) {
+      console.error("Error during API call:", error);
+    }
+  };
+
+  const setBloodDetails = async (data) => {
+    try {
+      const response = await axios.post(
+        `${url}/employ/set-employ-blood-information`,
+        { data }
+      );
+
+      return response;
+    } catch (error) {
+      console.error("Error during API call:", error);
+    }
+  };
+
+
+
+  const setInvestigation = async (data) => {
+    try {
+      const response = await axios.post(
+        `${url}/employ/set-employ-investigation-details`,
+        { data }
+      );
+
+      return response;
+    } catch (error) {
+      console.error("Error during API call:", error);
+    }
+  };
+
+  const setForm33 = async (data) => {
+    try {
+      const response = await axios.post(
+        `${url}/employ/set-employ-form-33-details`,
+        { data }
+      );
+
+      return response;
+    } catch (error) {
+      console.error("Error during API call:", error);
+    }
+  };
+
+  const setForm32 = async (data) => {
+    try {
+      const response = await axios.post(
+        `${url}/employ/set-employ-form-32-details`,
+        { data }
+      );
+
+      return response;
+    } catch (error) {
+      console.error("Error during API call:", error);
+    }
+  };
+
   // Add Checkup type
   const AddCheckupType = async (checkupTypeData) => {
     try {
@@ -374,8 +486,16 @@ export const SignState = (props) => {
         GetContactDetailsById,
         setNewCheckupName,
         getCheckupType,
+        getCheckupData,
+        setVitalAndHistory,
+        setGeneralExamination,
+        setEyeDetails,
+        setInvestigation,
+        setForm33,
         AddCheckupType,
         AddContact,
+        setBloodDetails,
+        setForm32,
       }}
     >
       {props.children}

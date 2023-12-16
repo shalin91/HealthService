@@ -29,7 +29,9 @@ const NewForm = () => {
     GetCompanybyId,
     GetEmpsbyCompAndLoc,
     GetContactDetailsById,
+    getCheckupData,
   } = useContext(SignContext);
+
   const [Company, setCompany] = useState([]);
   const [Location, setLocation] = useState([]);
   const [Category, setCategory] = useState([]);
@@ -48,6 +50,8 @@ const NewForm = () => {
     // setLocation(res.data.companyLocation)
     // setRoles(res);
   };
+
+  console.log(EmpbyCompandLoc);
 
   const getEmpContactDetails = async (id) => {
     console.log("---id in frontend first---");
@@ -79,6 +83,8 @@ const NewForm = () => {
     setCurrentLocation(Values.companyLocation);
 
     const res = await GetEmpsbyCompAndLoc(Values);
+    console.log(res.data);
+    console.log("----empdata----");
     console.log(res.data);
     setEmpbyCompandLoc(res.data);
   };
@@ -124,12 +130,14 @@ const NewForm = () => {
     }
   };
 
-  const handleEmpData = (e) => {
+  const handleEmpData = async (e) => {
     let data = e.target.value;
 
     const curremp = EmpbyCompandLoc.filter((emp) => emp._id === data);
 
     console.log("-----------------------------------");
+
+    console.log(curremp);
 
     getEmpContactDetails({ id: curremp[0].employeeContactDetailsId });
 
@@ -159,7 +167,6 @@ const NewForm = () => {
                   companyName: "",
                   companyLocation: "",
                 }}
-                //validationSchema={validationSchema}
                 onSubmit={async (values, { resetForm }) => {
                   handleSavedCompandLoc(values);
                   resetForm();
@@ -305,7 +312,7 @@ const NewForm = () => {
                   emer: "",
                   email: "",
                 }}
-                validationSchema={validationSchema}
+                // validationSchema={validationSchema}
                 // onSubmit={async (values, { resetForm }) => {
                 //   //   await handleSavedcat(values);
                 //   // resetForm();
@@ -446,7 +453,7 @@ const NewForm = () => {
                                   aria-describedby="product-orders-addon"
                                   onChange={handleChange}
                                   onBlur={handleBlur}
-                                  value={values.ecNo}
+                                  value={currentEmp ? currentEmp.ecNo : ""}
                                 />
                                 <p className="error text-danger">
                                   {errors.ecNo && touched.ecNo && errors.ecNo}
@@ -526,7 +533,7 @@ const NewForm = () => {
                                   onBlur={handleBlur}
                                   value={
                                     currentEmp
-                                      ? currentEmp.companyJobCategorys
+                                      ? currentEmp.companyDepartments
                                       : ""
                                   }
                                 />
@@ -541,7 +548,10 @@ const NewForm = () => {
                           </Row>
                         </div>
                       </div>
-                      <Example companyId={currentCompanyId} location={currentLocation} />
+                      <Example
+                        companyId={currentCompanyId}
+                        location={currentLocation}
+                      />
                     </Card>
                     <Card>
                       <CardHeader>

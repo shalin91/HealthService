@@ -100,7 +100,7 @@ function Example({ companyId, location }) {
   };
 
   const handleSavedEmployee = async (Values) => {
-    const data = { ...Values, companyId, location };
+    const data = { ...Values, companyId, companyLocation: location };
     console.log("--------------------------------------data");
     // console.log(data);
     const res = await AddEmployee(data);
@@ -112,7 +112,7 @@ function Example({ companyId, location }) {
 
   //handle save contact detail...
   const handleSavedcat = async (Values) => {
-    const data1 = { ...Values, companyId, empId };
+    const data1 = { ...Values, companyId, employeeId: empId };
     const res = await AddContact(data1);
     console.log("--------------data-------");
     console.log(res);

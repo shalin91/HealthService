@@ -1,9 +1,23 @@
-import { Form, Formik } from "formik";
 import React from "react";
+import { Form, Formik } from "formik";
+
 import { Card, CardHeader, Col, Input, Row } from "reactstrap";
+import SignContext from "../../contextAPI/Context/SignContext";
+import { useContext } from "react";
+const BloodInvestigation = ( props ) => {
 
-const BloodInvestigation = () => {
+  const { setBloodDetails } = useContext(SignContext);
 
+  const handleSubmitData = async (values) => {
+    const data = { ...props, ...values };
+
+    const response = await setBloodDetails(data);
+
+    console.log(response);
+  };
+
+
+    
 
 
   return (
@@ -13,30 +27,32 @@ const BloodInvestigation = () => {
         <Col lg={12}>
           <Formik
             initialValues={{
-              Hb: "",
-              RBC: "",
-              WBC: "",
+              hb: "",
+              rbc: "",
+              wbc: "",
               differentialCount: "",
               plateletCount: "",
-              ESR: "",
-              bloodGroup:"",
-              bloodSugarFasting:"",
-              bloodSugarPP2BS : "",
+              esr: "",
+              blGroup:"",
+              blSugarFastingOrRandom:"",
+              blSugarPP2BS : "",
               blUrea : "",
-              BUN:"",
-              SCreatine:"",
-              SGPT : "",
-              SGOT:"",
-              SBilirubinTotal  :"",
-              SBilirubinDirect  :"",
-              SBilirubinInDirect  :"",
-              AlkalinePhosphatase  :"",
-              Sprotiens  :"",
-              Albumin  :"",
+              bun:"",
+              sCreatinine:"",
+              sgpt : "",
+              sgot:"",
+              sBilirubinTotal :"",
+              sBilirubinDirect  :"",
+              sBilirubinIndirect  :"",
+              alklinePhosphatase  :"",
+              sProteins  :"",
+              albumin  :"",
               globulin :"",
               sodium :"",
-              potassium :"",
+              potassuim :"",
               chloride :"",
+              urineRAndM:
+              {
               proein  :"",
               glucose  :"",
               ketone  :"",
@@ -47,15 +63,12 @@ const BloodInvestigation = () => {
               epiCells :"",
               cast :"",
               crystals :"",
+              },
             }}
             // validationSchema={validationSchema}
 
-            onSubmit={async (values, { resetForm }) => {
-              // await handleSavedcat(values);
-              alert(JSON.stringify(values));
-              resetForm();
-              // togglemodal();
-
+            onSubmit={(values) => {
+              handleSubmitData(values);
             }}
           >
             {({
@@ -99,12 +112,12 @@ const BloodInvestigation = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="Hb"
-                                name="Hb"
+                                name="hb"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.Hb}
+                                value={values.hb}
                               />
                               <p className="error text-danger">
                                 {errors.height &&
@@ -128,12 +141,12 @@ const BloodInvestigation = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="RBC"
-                                name="RBC"
+                                name="rbc"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.RBC}
+                                value={values.rbc}
                               />
                               <p className="error text-danger">
                                 {errors.weight &&
@@ -157,12 +170,12 @@ const BloodInvestigation = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="WBC"
-                                name="WBC"
+                                name="wbc"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.WBC}
+                                value={values.wbc}
                               />
                               <p className="error text-danger">
 
@@ -251,12 +264,12 @@ const BloodInvestigation = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="ESR"
-                                name="ESR"
+                                name="esr"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.ESR}
+                                value={values.esr}
                               />
                               <p className="error text-danger">
 
@@ -284,12 +297,12 @@ const BloodInvestigation = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="Blood Group"
-                                name="bloodGroup"
+                                name="blGroup"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.bloodGroup}
+                                value={values.blGroup}
                               />
                               <p className="error text-danger">
                                 {errors.height &&
@@ -313,12 +326,12 @@ const BloodInvestigation = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="BloodSugar Fasting"
-                                name="bloodSugarFasting"
+                                name="blSugarFastingOrRandom"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.bloodSugarFasting}
+                                value={values.blSugarFastingOrRandom}
                               />
                               <p className="error text-danger">
                                 {errors.weight &&
@@ -342,12 +355,12 @@ const BloodInvestigation = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="Blood Sugar PP2BS"
-                                name="bloodSugarPP2BS"
+                                name="blSugarPP2BS"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.bloodSugarPP2BS}
+                                value={values.blSugarPP2BS}
                               />
                               <p className="error text-danger">
 
@@ -405,12 +418,12 @@ const BloodInvestigation = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="BUN"
-                                name="BUN"
+                                name="bun"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.BUN}
+                                value={values.bun}
                               />
                               <p className="error text-danger">
 
@@ -436,12 +449,12 @@ const BloodInvestigation = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="S Creatine"
-                                name="SCreatine"
+                                name="sCreatinine"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.SCreatine}
+                                value={values.sCreatinine}
                               />
                               <p className="error text-danger">
 
@@ -469,12 +482,12 @@ const BloodInvestigation = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="SGPT"
-                                name="SGPT"
+                                name="sgpt"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.SGPT}
+                                value={values.sgpt}
                               />
                               <p className="error text-danger">
                                 {errors.height &&
@@ -498,12 +511,12 @@ const BloodInvestigation = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="SGOT"
-                                name="SGOT"
+                                name="sgot"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.SGOT}
+                                value={values.sgot}
                               />
                               <p className="error text-danger">
                                 {errors.weight &&
@@ -527,12 +540,12 @@ const BloodInvestigation = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="S.BilirubinTotal"
-                                name="SBilirubinTotal"
+                                name="sBilirubinTotal"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.SBilirubinTotal}
+                                value={values.sBilirubinTotal}
                               />
                               <p className="error text-danger">
 
@@ -559,12 +572,12 @@ const BloodInvestigation = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="S.BilirubinDirect"
-                                name="SBilirubinDirect"
+                                name="sBilirubinDirect"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.SBilirubinDirect}
+                                value={values.sBilirubinDirect}
                               />
                               <p className="error text-danger">
 
@@ -590,12 +603,12 @@ const BloodInvestigation = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="platelet Count"
-                                name="SBilirubinInDirect"
+                                name="sBilirubinIndirect"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.SBilirubinInDirect}
+                                value={values.sBilirubinIndirect}
                               />
                               <p className="error text-danger">
 
@@ -621,12 +634,12 @@ const BloodInvestigation = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="Alkaline Phosphatase"
-                                name="AlkalinePhosphatase"
+                                name="alklinePhosphatase"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.AlkalinePhosphatase}
+                                value={values.alklinePhosphatase}
                               />
                               <p className="error text-danger">
 
@@ -654,12 +667,12 @@ const BloodInvestigation = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="Sprotiens"
-                                name="Sprotiens"
+                                name="sProteins"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.Sprotiens}
+                                value={values.sProteins}
                               />
                               <p className="error text-danger">
                                 {errors.height &&
@@ -683,12 +696,12 @@ const BloodInvestigation = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="Albumin"
-                                name="Albumin"
+                                name="albumin"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.Albumin}
+                                value={values.albumin}
                               />
                               <p className="error text-danger">
                                 {errors.weight &&
@@ -775,12 +788,12 @@ const BloodInvestigation = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="Potassium"
-                                name="potassium"
+                                name="potassuim"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.potassium}
+                                value={values.potassuim}
                               />
                               <p className="error text-danger">
 
@@ -851,12 +864,12 @@ const BloodInvestigation = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="Proein"
-                                name="proein"
+                                name="urineRAndM.proein"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.proein}
+                                value={values.urineRAndM.proein}
                               />
                               <p className="error text-danger">
                                 {errors.height &&
@@ -880,12 +893,12 @@ const BloodInvestigation = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="Glucose"
-                                name="glucose"
+                                name="urineRAndM.glucose"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.glucose}
+                                value={values.urineRAndM.glucose}
                               />
                               <p className="error text-danger">
                                 {errors.weight &&
@@ -909,12 +922,12 @@ const BloodInvestigation = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="ketone"
-                                name="ketone"
+                                name="urineRAndM.ketone"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.ketone}
+                                value={values.urineRAndM.ketone}
                               />
                               <p className="error text-danger">
 
@@ -941,12 +954,12 @@ const BloodInvestigation = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="Bile Salts"
-                                name="bileSalts"
+                                name="urineRAndM.bileSalts"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.bileSalts}
+                                value={values.urineRAndM.bileSalts}
                               />
                               <p className="error text-danger">
 
@@ -972,12 +985,12 @@ const BloodInvestigation = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="Bile Pigments"
-                                name="bilePigments"
+                                name="urineRAndM.bilePigments"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.bilePigments}
+                                value={values.urineRAndM.bilePigments}
                               />
                               <p className="error text-danger">
 
@@ -1003,12 +1016,12 @@ const BloodInvestigation = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="Pus Cells"
-                                name="pusCells"
+                                name="urineRAndM.pusCells"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.pusCells}
+                                value={values.urineRAndM.pusCells}
                               />
                               <p className="error text-danger">
 
@@ -1036,12 +1049,12 @@ const BloodInvestigation = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="Red Cells"
-                                name="redCells"
+                                name="urineRAndM.redCells"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.redCells}
+                                value={values.urineRAndM.redCells}
                               />
                               <p className="error text-danger">
                                 {errors.height &&
@@ -1065,12 +1078,12 @@ const BloodInvestigation = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="Epi Cells"
-                                name="epiCells"
+                                name="urineRAndM.epiCells"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.epiCells}
+                                value={values.urineRAndM.epiCells}
                               />
                               <p className="error text-danger">
                                 {errors.weight &&
@@ -1094,12 +1107,12 @@ const BloodInvestigation = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="Cast"
-                                name="cast"
+                                name="urineRAndM.cast"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.cast}
+                                value={values.urineRAndM.cast}
                               />
                               <p className="error text-danger">
 
@@ -1126,12 +1139,12 @@ const BloodInvestigation = () => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="Crystals"
-                                name="crystals"
+                                name="urineRAndM.crystals"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.crystals}
+                                value={values.urineRAndM.crystals}
                               />
                               <p className="error text-danger">
 

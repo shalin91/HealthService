@@ -2,8 +2,26 @@ import { Form, Formik } from "formik";
 import React from "react";
 import { Card, Col, Input, Row } from "reactstrap";
 import * as Yup from "yup";
+import SignContext from "../../contextAPI/Context/SignContext"
+import  { useContext } from "react";
 
-const Form33 = () => {
+const Form33 = ( props ) => {
+
+  const { setForm33 } = useContext(SignContext);
+
+
+  const handleSubmitData = async( values ) => {
+      
+    const data = { ...props , ...values };
+
+    const response = await setForm33(data);
+    
+    console.log(response);
+
+  }
+
+
+
   const validationSchema = Yup.object().shape({
     employed: Yup.string().required("company name  is required"),
     hazardous: Yup.string().required("Location is required"),
@@ -19,17 +37,18 @@ const Form33 = () => {
         <Col lg={12}>
           <Formik
             initialValues={{
-              employed: "",
-              hazardous: "",
-              dangerous: "",
-              fitUnfit: "",
-              reason: "",
-              reffered: "",
+              employyedOrPrpposed: "",
+              hazardousProcess: "",
+              dnagerousOperation: "",
+              fitOrUnfit: "",
+              unfitReason: "",
+              referedTo: "",
             }}
-            validationSchema={validationSchema}
+            // validationSchema={validationSchema}
             onSubmit={(values) => {
               // Alert the input values of the form that we filled
-              alert(JSON.stringify(values));
+              //  alert(JSON.stringify(values));
+               handleSubmitData( values );
             }}
           >
             {({
