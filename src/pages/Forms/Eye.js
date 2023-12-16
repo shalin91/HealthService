@@ -1,31 +1,21 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-
-import SignContext from "../../contextAPI/Context/SignContext"
-import  { useContext } from "react";
-const Eye = ( props ) => {
-
-  const { setEyeDetails } = useContext(SignContext);
-  
-  const handleSubmitData = async( values ) => {
-      
-    const data = { ...props , ...values };
-
-    const response = await setEyeDetails(data);
-    
-    console.log(response);
-
-  }
-
-
-
-
-
 import { Card, CardHeader, Col, Container, Input, Row } from "reactstrap";
 import { ToastContainer } from "react-toastify";
 import UiContent from "../../Components/Common/UiContent";
+import SignContext from "../../contextAPI/Context/SignContext";
+import { useContext } from "react";
+const Eye = (props) => {
+  const { setEyeDetails } = useContext(SignContext);
 
+  const handleSubmitData = async (values) => {
+    const data = { ...props, ...values };
+
+    const response = await setEyeDetails(data);
+
+    console.log(response);
+  };
 
   const validationSchema = Yup.object().shape({
     gallaryCategoryTitle: Yup.string().required("gallary category title"),
@@ -43,22 +33,20 @@ import UiContent from "../../Components/Common/UiContent";
         <Col lg={12}>
           <Formik
             initialValues={{
-              dvleft: "",
-              dvright: "",
-              dvleft2: "",
-              dvright2: "",
-              nvleft: "",
-              nvright: "",
-              nvleft2: "",
-              nvright2: "",
-              cv: "",
-
-              // gallaryCategoryTitle9: "",
+              distandVisionWithRightEye: "",
+              distandVisionWithoutRightEye: "",
+              distandVisionWithLeftEye: "",
+              distandVisionWithoutLeftEye: "",
+              nearVisionWithRightEye: "",
+              nearVisionWithoutRightEye: "",
+              nearVisionWithLeftEye: "",
+              nearVisionWithoutLeftEye: "",
+              colourVision: "",
+              remark: "",
             }}
             // validationSchema={validationSchema}
             onSubmit={(values) => {
-              // Alert the input values of the form that we filled
-               handleSubmitData(values);
+              handleSubmitData(values);
             }}
           >
             {({
@@ -118,12 +106,12 @@ import UiContent from "../../Components/Common/UiContent";
                                     className="form-control"
                                     id="product-orders-input"
                                     placeholder=""
-                                    name="dvleft"
+                                    name="distandVisionWithoutLeftEye"
                                     aria-label="orders"
                                     aria-describedby="product-orders-addon"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value={values.dvleft}
+                                    value={values.distandVisionWithoutLeftEye}
                                   />
                                   <p className="error text-danger">
                                     {errors.gallaryCategoryTitle &&
@@ -137,12 +125,12 @@ import UiContent from "../../Components/Common/UiContent";
                                     className="form-control"
                                     id="product-orders-input"
                                     placeholder=""
-                                    name="dvright"
+                                    name="distandVisionWithoutRightEye"
                                     aria-label="orders"
                                     aria-describedby="product-orders-addon"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value={values.dvright}
+                                    value={values.distandVisionWithoutRightEye}
                                   />
                                   <p className="error text-danger">
                                     {errors.gallaryCategoryTitle2 &&
@@ -171,12 +159,12 @@ import UiContent from "../../Components/Common/UiContent";
                                     className="form-control"
                                     id="product-orders-input"
                                     placeholder=""
-                                    name="dvleft2"
+                                    name="distandVisionWithLeftEye"
                                     aria-label="orders"
                                     aria-describedby="product-orders-addon"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value={values.dvleft2}
+                                    value={values.distandVisionWithLeftEye}
                                   />
                                   <p className="error text-danger">
                                     {errors.gallaryCategoryTitle3 &&
@@ -190,12 +178,12 @@ import UiContent from "../../Components/Common/UiContent";
                                     className="form-control"
                                     id="product-orders-input"
                                     placeholder=""
-                                    name="dvright2"
+                                    name="distandVisionWithRightEye"
                                     aria-label="orders"
                                     aria-describedby="product-orders-addon"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value={values.dvright2}
+                                    value={values.distandVisionWithRightEye}
                                   />
                                   <p className="error text-danger">
                                     {errors.gallaryCategoryTitle4 &&
@@ -227,12 +215,12 @@ import UiContent from "../../Components/Common/UiContent";
                                     className="form-control"
                                     id="product-orders-input"
                                     placeholder=""
-                                    name="nvleft"
+                                    name="nearVisionWithoutLeftEye"
                                     aria-label="orders"
                                     aria-describedby="product-orders-addon"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value={values.nvleft}
+                                    value={values.nearVisionWithoutLeftEye}
                                   />
                                   <p className="error text-danger">
                                     {errors.gallaryCategoryTitle5 &&
@@ -246,12 +234,12 @@ import UiContent from "../../Components/Common/UiContent";
                                     className="form-control"
                                     id="product-orders-input"
                                     placeholder=""
-                                    name="nvright"
+                                    name="nearVisionWithoutRightEye"
                                     aria-label="orders"
                                     aria-describedby="product-orders-addon"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value={values.nvright}
+                                    value={values.nearVisionWithoutRightEye}
                                   />
                                   <p className="error text-danger">
                                     {errors.gallaryCategoryTitle6 &&
@@ -280,12 +268,12 @@ import UiContent from "../../Components/Common/UiContent";
                                     className="form-control"
                                     id="product-orders-input"
                                     placeholder=""
-                                    name="nvleft2"
+                                    name="nearVisionWithLeftEye"
                                     aria-label="orders"
                                     aria-describedby="product-orders-addon"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value={values.nvleft2}
+                                    value={values.nearVisionWithLeftEye}
                                   />
                                   <p className="error text-danger">
                                     {errors.gallaryCategoryTitle7 &&
@@ -299,12 +287,12 @@ import UiContent from "../../Components/Common/UiContent";
                                     className="form-control"
                                     id="product-orders-input"
                                     placeholder=""
-                                    name="nvright2"
+                                    name="nearVisionWithRightEye"
                                     aria-label="orders"
                                     aria-describedby="product-orders-addon"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value={values.nvright2}
+                                    value={values.nearVisionWithRightEye}
                                   />
                                   <p className="error text-danger">
                                     {errors.gallaryCategoryTitle8 &&
@@ -316,75 +304,78 @@ import UiContent from "../../Components/Common/UiContent";
                             </div>
                           </div>
                         </Col>
-                      </Row>          
-                                    <Col className="col-lg-2 col-md-2 col-12 ">
-                                      <Input
-                                        type="text"
-                                        className="form-control"
-                                        id="product-orders-input"
-                                        placeholder=""
-                                        name="gallaryCategoryTitle"
-                                        aria-label="orders"
-                                        aria-describedby="product-orders-addon"
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        // value={values.gallaryCategoryTitle}
-                                      />
-                                    </Col>
-                                    <Col className="col-lg-2 col-md-2 col-12 ">
-                                      <Input
-                                        type="text"
-                                        className="form-control"
-                                        id="product-orders-input"
-                                        placeholder=""
-                                        name="gallaryCategoryTitle"
-                                        aria-label="orders"
-                                        aria-describedby="product-orders-addon"
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        // value={values.gallaryCategoryTitle}
-                                      />
-                                    </Col>
-                                 
-                                  
-                                
-                            
-                         
-                          <Row className="align-items-center g-3">
-                            <Col className="col-sm">
-                              <div>
-                                <div>
-                                  <Row className="mb-3">
-                                    <Col className="col-lg-2 col-md-2"></Col>
-                                    <Col className="col-lg-2 col-md-2">
-                                      <p>with glasses</p>
-                                    </Col>
+                      </Row>
+                    </div>
 
-                                <Col className="col-lg-4 col-md-4">
-                                  <textarea
-                                    className="form-control"
-                                    id="meassageInput"
-                                    type="text"
-                                    rows="3"
-                                    name="cv"
-                                    placeholder="Enter your message"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.cv}
-                                  ></textarea>
-                                  {/* <p className="error text-danger">
+                    <Row className="align-items-center g-3">
+                      <Col className="col-sm">
+                        <div>
+                          <div>
+                            <Row className="mb-3">
+                              <Col className="col-lg-2 col-md-2"></Col>
+                              <Col className="col-lg-2 col-md-2">
+                                <p>Colour Vision</p>
+                              </Col>
+
+                              <Col className="col-lg-4 col-md-4">
+                                <textarea
+                                  className="form-control"
+                                  id="meassageInput"
+                                  type="text"
+                                  rows="3"
+                                  name="colourVision"
+                                  placeholder="Enter your message"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.colourVision}
+                                ></textarea>
+                                {/* <p className="error text-danger">
                                     {errors.gallaryCategoryTitle9 &&
                                       touched.gallaryCategoryTitle9 &&
                                       errors.gallaryCategoryTitle9}
                                   </p> */}
-                                </Col>
-                              </Row>
-                            </div>
+                              </Col>
+                            </Row>
                           </div>
-                        </Col>
-                      </Row>
-                    </div>
+                        </div>
+                      </Col>
+                    </Row>
+
+                    <Row className="align-items-center g-3">
+                      <Col className="col-sm">
+                        <div>
+                          <div>
+                            <Row className="mb-3">
+                              <Col className="col-lg-2 col-md-2"></Col>
+                              <Col className="col-lg-2 col-md-2">
+                                <p>Remarks</p>
+                              </Col>
+
+                              <Col className="col-lg-4 col-md-4">
+                                <textarea
+                                  className="form-control"
+                                  id="meassageInput"
+                                  type="text"
+                                  rows="3"
+                                  name="remark"
+                                  placeholder="Enter your message"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.remark}
+                                ></textarea>
+                                {/* <p className="error text-danger">
+                                    {errors.gallaryCategoryTitle9 &&
+                                      touched.gallaryCategoryTitle9 &&
+                                      errors.gallaryCategoryTitle9}
+                                  </p> */}
+                              </Col>
+                            </Row>
+                          </div>
+                        </div>
+                      </Col>
+                    </Row>
                   </div>
+
                   <div className="text-end mb-3 me-3">
                     <button className="btn btn-success w-sm" type="submit">
                       Submit

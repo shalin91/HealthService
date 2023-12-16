@@ -35,17 +35,17 @@ const Investigation = ( props ) => {
           <Formik
             initialValues={{
               labReports: "",
-              xRayReport: "",
-              ecgReport: "",
+              xRayReports: "",
+              ecgReports: "",
               spirometry: "",
-              autometry: "",
+              audiometry: "",
               remarks: "",
 
             }}
-            validationSchema={validationSchema}
+            // validationSchema={validationSchema}
             onSubmit={(values) => {
               // Alert the input values of the form that we filled
-              alert(JSON.stringify(values));
+              // alert(JSON.stringify(values));
                handleSubmitData(values);
             }}
           >
@@ -109,7 +109,7 @@ const Investigation = ( props ) => {
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.xRayReport}
+                                value={values.xRayReports}
                               />
                             </div>
                           </div>
@@ -135,7 +135,7 @@ const Investigation = ( props ) => {
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.ecgReport}
+                                value={values.ecgReports}
                               />
                             </div>
                           </div>
@@ -182,12 +182,12 @@ const Investigation = ( props ) => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="autometry"
-                                name="autometry"
+                                name="audiometry"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.autometry}
+                                value={values.audiometry}
                               />
                             </div>
                           </div>

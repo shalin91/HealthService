@@ -42,9 +42,9 @@ const GeneralExam = ( props ) => {
               rs: "",
               cvs: "",
               cns: "",
-              skingenitals: "",
+              skinAndGenitals: "",
               other: "",
-              abdomen: "",
+              abdomenAS: "",
               musculoSkeletal: "",
               ent: "",
             }}
@@ -154,17 +154,17 @@ const GeneralExam = ( props ) => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="Enter Title"
-                                name="abdomen"
+                                name="abdomenAS"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.abdomen}
+                                value={values.abdomenAS}
                               />
                               <p className="error text-danger">
-                                {errors.abdomen &&
-                                  touched.abdomen &&
-                                  errors.abdomen}
+                                {errors.abdomenAS &&
+                                  touched.abdomenAS &&
+                                  errors.abdomenAS}
                               </p>
                             </div>
                           </div>
@@ -285,17 +285,17 @@ const GeneralExam = ( props ) => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="Enter Title"
-                                name="skingenitals"
+                                name="skinAndGenitals"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.skingenitals}
+                                value={values.skinAndGenitals}
                               />
                               <p className="error text-danger">
-                                {errors.skingenitals &&
-                                  touched.skingenitals &&
-                                  errors.skingenitals}
+                                {errors.skinAndGenitals &&
+                                  touched.skinAndGenitals &&
+                                  errors.skinAndGenitals}
                               </p>
                             </div>
                           </div>

@@ -1,20 +1,20 @@
 import { Form, Formik } from "formik";
 import React from "react";
 import { Card, Col, Input, Row } from "reactstrap";
+import SignContext from "../../contextAPI/Context/SignContext";
+import { useContext } from "react";
 import * as Yup from "yup";
 
-const OtherDetails = () => {
+const OtherDetails = (props) => {
+  const { setForm32 } = useContext(SignContext);
 
+  const handleSubmitData = async (values) => {
+    const data = { ...props, ...values };
 
-  // const handleSubmitData = async( values ) => {
-      
-  //   const data = { ...props , ...values };
+    const response = await setForm32(data);
 
-  //   const response = await setVitalAndHistory(data);
-    
-  //   console.log(response);
-
-  // }
+    console.log(response);
+  };
 
   const validationSchema = Yup.object().shape({
     parmanentTemporary: Yup.string().required("company name  is required"),
@@ -36,25 +36,21 @@ const OtherDetails = () => {
         <Col lg={12}>
           <Formik
             initialValues={{
-
               permanatOrTemporary: "",
               periodOfTemporaryUnfit: "",
               department: "",
               exposureTo: "",
               natureOfTests: "",
               dateOFPosting: "",
-              dateOfLeaving :"",
-              reasons:"",
-              signs : "",
-              dateOfDeclaringUnfit :"",
-              dateOfissuingFitness :""
-
+              dateOfLeaving: "",
+              reasons: "",
+              signs: "",
+              dateOfDeclaringUnfit: "",
+              dateOfissuingFitness: "",
             }}
-            validationSchema={validationSchema}
+            // validationSchema={validationSchema}
             onSubmit={(values) => {
-              // Alert the input values of the form that we filled
-              alert(JSON.stringify(values));
-              // handleSubmitData(values);
+              handleSubmitData(values);
             }}
           >
             {({
@@ -83,14 +79,13 @@ const OtherDetails = () => {
                             <div className="mb-3">
                               <select
                                 className="form-select"
-                                name="parmanentTemporary"
+                                name="permanatOrTemporary"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.permanatOrTemporary}
                               >
-                                <option value="">parmanent</option>
-                                <option value="">temporary</option>
-                               
+                                <option value="permanent">parmanent</option>
+                                <option value="temporary">temporary</option>
                               </select>
                             </div>
                           </div>

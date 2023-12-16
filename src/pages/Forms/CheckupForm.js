@@ -31,12 +31,32 @@ import BloodInvestigation from "./BloodInvestigation";
 const CheckupForm = () => {
   const [customActiveTab, setcustomActiveTab] = useState("1");
 
-  const { GetCompany, GetCompanybyId, setNewCheckupName, GetEmpsbyCompAndLoc , getCheckupData , getCheckupType } = useContext(SignContext);
+  const {
+    GetCompany,
+    GetCompanybyId,
+    setNewCheckupName,
+    GetEmpsbyCompAndLoc,
+    getCheckupData,
+    getCheckupType,
+    GetContactDetailsById,
+  } = useContext(SignContext);
 
   const toggleCustom = (tab) => {
     if (customActiveTab !== tab) {
       setcustomActiveTab(tab);
     }
+  };
+
+  const getEmpContactDetails = async (id) => {
+    console.log("---id in frontend first---");
+
+    console.log(id);
+
+    const res = await GetContactDetailsById(id);
+
+    console.log(res.data);
+
+    setCurrentEmpContactDetails(res.data);
   };
 
   const [company, setComapny] = useState(null);
@@ -59,7 +79,10 @@ const CheckupForm = () => {
 
   const [checkupName, setCheckupName] = useState(null);
 
-  const [checkupDataId , setCheckupDataId] = useState(null);
+  const [checkupDataId, setCheckupDataId] = useState(null);
+
+  const [currentEmpContactDetails, setCurrentEmpContactDetails] =
+    useState(null);
 
   // const [ allCategory , setAllCategory ] = useState( [] );
 
@@ -102,19 +125,16 @@ const CheckupForm = () => {
     setLocation(val.companyLocation);
 
     const res = await GetEmpsbyCompAndLoc(val);
-    
-    console.log(res.data)
-    
-    setEmpbyCompandLoc(res.data)
 
+    console.log(res.data);
+
+    setEmpbyCompandLoc(res.data);
   };
 
- 
   const addCheckupDetails = async (val) => {
+    console.log(val);
 
-    console.log(val)
-
-    setCheckupType(val.checkupType)
+    setCheckupType(val.checkupType);
 
     const response = await setNewCheckupName({ val, company, location });
 
@@ -123,9 +143,7 @@ const CheckupForm = () => {
     setCheckupName(response.data._id);
 
     console.log(response.data._id);
-
-  }
-
+  };
 
   // const handleSavedCompandLoc = async (Values) => {
 
@@ -138,53 +156,63 @@ const CheckupForm = () => {
 
   // };
 
-
   const getAllCheckupType = async () => {
-
     const responce = await getCheckupType();
 
     console.log(responce);
 
     setAllCheckupType(responce.data);
-  }
- 
-
+  };
 
   const handleEmpData = (e) => {
+    let data = e.target.value;
 
-   let data = e.target.value;
-    
-   const curremp = EmpbyCompandLoc.filter( (emp) =>  emp._id === data )
- 
-   console.log( curremp[0] );
-   
-   setCurrentEmp(curremp[0])
+    const curremp = EmpbyCompandLoc.filter((emp) => emp._id === data);
 
-  }
+    console.log("-----------------------------------");
 
-  const handleSubmitForEmp = async ()=>{
+    getEmpContactDetails({ id: curremp[0].employeeContactDetailsId });
 
+    //  getEmpContactDetails()
+
+    setCurrentEmp(curremp[0]);
+  };
+
+  const handleSubmitForEmp = async () => {
     const chaeckupData = await getCheckupData();
 
-    console.log("dddddaaaatttttaaaaa")
+    console.log("dddddaaaatttttaaaaa");
     console.log(chaeckupData.data._id);
 
-    setCheckupDataId(chaeckupData.data._id  )
+    setCheckupDataId(chaeckupData.data._id);
 
-    console.log( "|||||||||||||||||data|||||||||||||" );
-    console.log( company );
-    console.log( location );
-    console.log( checkupName );
-    console.log( checkupType);
-    console.log( checkupDataId )
-    console.log( "|||||||||||||||||data|||||||||||||" );
-
-  }
+    console.log("|||||||||||||||||data|||||||||||||");
+    console.log(company);
+    console.log(location);
+    console.log(checkupName);
+    console.log(checkupType);
+    console.log(checkupDataId);
+    console.log("|||||||||||||||||data|||||||||||||");
+  };
 
   useEffect(() => {
     getcompanies();
     getAllCheckupType();
   }, []);
+
+  function formatDate(inputDate) {
+    const dateObject = new Date(inputDate);
+
+    // Extract day, month, and year components
+    const day = dateObject.getUTCDate().toString().padStart(2, "0");
+    const month = (dateObject.getUTCMonth() + 1).toString().padStart(2, "0"); // Months are zero-based
+    const year = dateObject.getUTCFullYear();
+
+    // Assemble the formatted date string
+    const formattedDate = `${day}-${month}-${year}`;
+
+    return formattedDate;
+  }
 
   return (
     <>
@@ -327,7 +355,6 @@ const CheckupForm = () => {
           {/* check up details start */}
 
           <Row>
-
             <Col lg={12}>
               <Formik
                 // validationSchema={schema}
@@ -338,7 +365,7 @@ const CheckupForm = () => {
                   checkupType: "",
                 }}
                 onSubmit={(values) => {
-                  addCheckupDetails(values)
+                  addCheckupDetails(values);
                 }}
               >
                 {({
@@ -420,7 +447,9 @@ const CheckupForm = () => {
                                   </div>
 
                                   <p className="error text-danger">
-                                    {errors.checkupNumber && touched.checkupNumber && errors.checkupNumber}
+                                    {errors.checkupNumber &&
+                                      touched.checkupNumber &&
+                                      errors.checkupNumber}
                                   </p>
                                 </Col>
                                 <Col sm={3}>
@@ -445,7 +474,9 @@ const CheckupForm = () => {
                                   </div>
 
                                   <p className="error text-danger">
-                                    {errors.checkupDate && touched.checkupDate && errors.checkupDate}
+                                    {errors.checkupDate &&
+                                      touched.checkupDate &&
+                                      errors.checkupDate}
                                   </p>
                                 </Col>
                                 <Col sm={3}>
@@ -464,12 +495,10 @@ const CheckupForm = () => {
                                       onChange={handleChange}
                                     >
                                       <option value=""> checkup Type</option>
-                                      {allCheckupType && allCheckupType.length > 0 ? (
+                                      {allCheckupType &&
+                                      allCheckupType.length > 0 ? (
                                         allCheckupType.map((type) => (
-                                          <option
-                                            key={type}
-                                            value={type._id}
-                                          >
+                                          <option key={type} value={type._id}>
                                             {type.checkupType}
                                           </option>
                                         ))
@@ -510,16 +539,7 @@ const CheckupForm = () => {
 
           {/* company employee */}
 
-          
-
-
-
-
-
-
           {/* company employee over */}
-
-
 
           <Row>
             <Col lg={12}>
@@ -528,13 +548,13 @@ const CheckupForm = () => {
                 initialValues={{
                   name: "",
                   gender: "",
-                  dob: "",
+                  dateOfBirth: "",
                   age: "",
-                  bloodgroup: "",
+                  bloodGroup: "",
                 }}
                 onSubmit={(values) => {
                   // Alert the input values of the form that we filled
-                  
+
                   handleSubmitForEmp();
 
                   //
@@ -544,6 +564,7 @@ const CheckupForm = () => {
                   values,
                   errors,
                   touched,
+                  setFieldValue,
                   handleChange,
                   handleBlur,
                   handleSubmit,
@@ -585,15 +606,16 @@ const CheckupForm = () => {
                                         handleEmpData(e);
                                       }}
                                       onBlur={handleBlur}
-                                      value={values.name}
+                                      value={values.employeeName}
                                     >
-
-                                      {
-                                        EmpbyCompandLoc && EmpbyCompandLoc.length > 0 && 
-
-                                        EmpbyCompandLoc.map( ( emp , index )=> ( <option value={ emp._id } key={index} > { emp.employeeName } </option> )  )
-                                      }
-                                     
+                                      {EmpbyCompandLoc &&
+                                        EmpbyCompandLoc.length > 0 &&
+                                        EmpbyCompandLoc.map((emp, index) => (
+                                          <option value={emp._id} key={index}>
+                                            {" "}
+                                            {emp.employeeName}{" "}
+                                          </option>
+                                        ))}
                                     </select>
                                     <p className="error text-danger">
                                       {errors.name &&
@@ -620,7 +642,11 @@ const CheckupForm = () => {
                                       aria-describedby="product-orders-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={values.gender}
+                                      value={
+                                        currentEmpContactDetails
+                                          ? currentEmpContactDetails.gender
+                                          : ""
+                                      }
                                     />
                                     <p className="error text-danger">
                                       {errors.gender &&
@@ -647,7 +673,11 @@ const CheckupForm = () => {
                                       aria-describedby="product-orders-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={values.age}
+                                      value={
+                                        currentEmpContactDetails
+                                          ? currentEmpContactDetails.age
+                                          : ""
+                                      }
                                     />
                                     <p className="error text-danger">
                                       {errors.age && touched.age && errors.age}
@@ -663,16 +693,35 @@ const CheckupForm = () => {
                                   </label>
                                   <div className="">
                                     <Input
-                                      type="date"
+                                      type="text"
                                       className="form-control"
                                       id="product-orders-input"
                                       //   placeholder="EC No."
-                                      name="dob"
+                                      name="dateOfBirth"
                                       aria-label="orders"
                                       aria-describedby="product-orders-addon"
-                                      onChange={handleChange}
+                                      onChange={(e) => {
+                                        handleChange(e);
+                                        // Format and set the value using setFieldValue
+                                        setFieldValue(
+                                          "dateOfBirth",
+                                          e.target.value
+                                            .slice(0, 10)
+                                            .split("")
+                                            .reverse()
+                                            .join("")
+                                        );
+                                      }}
                                       onBlur={handleBlur}
-                                      value={values.dob}
+                                      value={
+                                        currentEmpContactDetails
+                                          ? currentEmpContactDetails.dateOfBirth
+                                              .slice(0, 10)
+                                              .split("-")
+                                              .reverse()
+                                              .join("-")
+                                          : ""
+                                      }
                                     />
                                     <p className="error text-danger">
                                       {errors.dob && touched.dob && errors.dob}
@@ -692,12 +741,16 @@ const CheckupForm = () => {
                                       className="form-control"
                                       id="product-orders-input"
                                       //   placeholder="EC No."
-                                      name="bloodgroup"
+                                      name="bloodGroup"
                                       aria-label="orders"
                                       aria-describedby="product-orders-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={values.bloodgroup}
+                                      value={
+                                        currentEmpContactDetails
+                                          ? currentEmpContactDetails.bloodGroup
+                                          : ""
+                                      }
                                     />
                                     <p className="error text-danger">
                                       {errors.bloodgroup &&
@@ -753,7 +806,7 @@ const CheckupForm = () => {
                           toggleCustom("2");
                         }}
                       >
-                       History &  Examination
+                        History & Examination
                       </NavLink>
                     </NavItem>
                     <NavItem>
@@ -824,45 +877,81 @@ const CheckupForm = () => {
                   </Nav>
                 </CardHeader>
 
-
-
-
-
-{/* console.log( company );
+                {/* console.log( company );
     console.log( location );
     console.log( checkupName );
     console.log( checkupType); */}
 
-
-
                 <CardBody>
                   <TabContent activeTab={customActiveTab}>
                     <TabPane id="addproduct-general-info" tabId="1">
-                      <VitalsandHistory companyId = {company} location = {location} chackupNameId = {checkupName} checkupTypeId = { checkupType } checkupDataId = {checkupDataId}  />
+                      <VitalsandHistory
+                        companyId={company}
+                        location={location}
+                        chackupNameId={checkupName}
+                        checkupTypeId={checkupType}
+                        checkupDataId={checkupDataId}
+                      />
                     </TabPane>
 
                     <TabPane id="addproduct-metadata" tabId="2">
-                      <GeneralExam companyId = {company} location = {location} chackupNameId = {checkupName} checkupTypeId = { checkupType } checkupDataId = {checkupDataId}  />
+                      <GeneralExam
+                        companyId={company}
+                        location={location}
+                        chackupNameId={checkupName}
+                        checkupTypeId={checkupType}
+                        checkupDataId={checkupDataId}
+                      />
                     </TabPane>
 
                     <TabPane id="addproduct-general-info" tabId="3">
-                      <Eye companyId = {company} location = {location} chackupNameId = {checkupName} checkupTypeId = { checkupType } checkupDataId = {checkupDataId} />
+                      <Eye
+                        companyId={company}
+                        location={location}
+                        chackupNameId={checkupName}
+                        checkupTypeId={checkupType}
+                        checkupDataId={checkupDataId}
+                      />
                     </TabPane>
 
                     <TabPane id="addproduct-general-info" tabId="4">
-                      <BloodInvestigation companyId = {company} location = {location} chackupNameId = {checkupName} checkupTypeId = { checkupType } checkupDataId = {checkupDataId}  />
+                      <BloodInvestigation
+                        companyId={company}
+                        location={location}
+                        chackupNameId={checkupName}
+                        checkupTypeId={checkupType}
+                        checkupDataId={checkupDataId}
+                      />
                     </TabPane>
 
                     <TabPane id="addproduct-general-info" tabId="5">
-                      <Investigation companyId = {company} location = {location} chackupNameId = {checkupName} checkupTypeId = { checkupType } checkupDataId = {checkupDataId}  />
+                      <Investigation
+                        companyId={company}
+                        location={location}
+                        chackupNameId={checkupName}
+                        checkupTypeId={checkupType}
+                        checkupDataId={checkupDataId}
+                      />
                     </TabPane>
 
                     <TabPane id="addproduct-general-info" tabId="6">
-                      <OtherDetails companyId = {company} location = {location} chackupNameId = {checkupName} checkupTypeId = { checkupType } checkupDataId = {checkupDataId} />
+                      <OtherDetails
+                        companyId={company}
+                        location={location}
+                        chackupNameId={checkupName}
+                        checkupTypeId={checkupType}
+                        checkupDataId={checkupDataId}
+                      />
                     </TabPane>
 
                     <TabPane id="addproduct-general-info" tabId="7">
-                      <Form33 companyId = {company} location = {location} chackupNameId = {checkupName} checkupTypeId = { checkupType } checkupDataId = {checkupDataId} />
+                      <Form33
+                        companyId={company}
+                        location={location}
+                        chackupNameId={checkupName}
+                        checkupTypeId={checkupType}
+                        checkupDataId={checkupDataId}
+                      />
                     </TabPane>
                   </TabContent>
                 </CardBody>
@@ -872,7 +961,6 @@ const CheckupForm = () => {
         </Container>
       </div>
     </>
-
   );
 };
 

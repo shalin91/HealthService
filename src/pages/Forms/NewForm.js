@@ -23,10 +23,14 @@ import UiContent from "../../Components/Common/UiContent";
 import Example from "../../Components/FormModal/FormOne";
 import SignContext from "../../contextAPI/Context/SignContext";
 
-
 const NewForm = () => {
-
-  const { GetCompany, GetCompanybyId, GetEmpsbyCompAndLoc ,GetContactDetailsById , getCheckupData } = useContext(SignContext);
+  const {
+    GetCompany,
+    GetCompanybyId,
+    GetEmpsbyCompAndLoc,
+    GetContactDetailsById,
+    getCheckupData,
+  } = useContext(SignContext);
 
   const [Company, setCompany] = useState([]);
   const [Location, setLocation] = useState([]);
@@ -46,6 +50,8 @@ const NewForm = () => {
     // setLocation(res.data.companyLocation)
     // setRoles(res);
   };
+
+  console.log(EmpbyCompandLoc);
 
   const getEmpContactDetails = async (id) => {
     console.log("---id in frontend first---");
@@ -77,6 +83,8 @@ const NewForm = () => {
     setCurrentLocation(Values.companyLocation);
 
     const res = await GetEmpsbyCompAndLoc(Values);
+    console.log(res.data);
+    console.log("----empdata----");
     console.log(res.data);
     setEmpbyCompandLoc(res.data);
   };
@@ -129,14 +137,14 @@ const NewForm = () => {
 
     console.log("-----------------------------------");
 
-    getEmpContactDetails({ id: curremp[0].employeeContactDetailsId });
+    console.log(curremp);
 
+    getEmpContactDetails({ id: curremp[0].employeeContactDetailsId });
 
     //  getEmpContactDetails()
 
     setCurrentEmp(curremp[0]);
   };
-
 
   useEffect(() => {
     getcompanies();
@@ -159,7 +167,6 @@ const NewForm = () => {
                   companyName: "",
                   companyLocation: "",
                 }}
-              
                 onSubmit={async (values, { resetForm }) => {
                   handleSavedCompandLoc(values);
                   resetForm();
@@ -305,7 +312,7 @@ const NewForm = () => {
                   emer: "",
                   email: "",
                 }}
-                validationSchema={validationSchema}
+                // validationSchema={validationSchema}
                 // onSubmit={async (values, { resetForm }) => {
                 //   //   await handleSavedcat(values);
                 //   // resetForm();
@@ -446,7 +453,7 @@ const NewForm = () => {
                                   aria-describedby="product-orders-addon"
                                   onChange={handleChange}
                                   onBlur={handleBlur}
-                                  value={values.ecNo}
+                                  value={currentEmp ? currentEmp.ecNo : ""}
                                 />
                                 <p className="error text-danger">
                                   {errors.ecNo && touched.ecNo && errors.ecNo}
@@ -526,7 +533,7 @@ const NewForm = () => {
                                   onBlur={handleBlur}
                                   value={
                                     currentEmp
-                                      ? currentEmp.companyJobCategorys
+                                      ? currentEmp.companyDepartments
                                       : ""
                                   }
                                 />
@@ -541,7 +548,10 @@ const NewForm = () => {
                           </Row>
                         </div>
                       </div>
-                      <Example companyId={currentCompanyId} location={currentLocation} />
+                      <Example
+                        companyId={currentCompanyId}
+                        location={currentLocation}
+                      />
                     </Card>
                     <Card>
                       <CardHeader>
