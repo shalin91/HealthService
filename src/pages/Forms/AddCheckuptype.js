@@ -9,6 +9,8 @@ import SignContext from "../../contextAPI/Context/SignContext";
 const AddCheckupType = () => {
   const { AddCheckupType } = useContext(SignContext);
 
+  
+
   const handleSavedCheckupType = async (Values) => {
     console.log(
       "----------------------------------------------------------------------------"

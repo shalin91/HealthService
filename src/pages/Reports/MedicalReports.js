@@ -13,6 +13,7 @@ import {
 import SignContext from "../../contextAPI/Context/SignContext";
 import BreadCrumb from "../../Components/Common/BreadCrumb";
 import axios from "axios";
+import { Link } from "react-router-dom";
 const url = `${process.env.REACT_APP_BASE_URL}`;
 
 const MedicalReports = () => {
@@ -20,7 +21,7 @@ const MedicalReports = () => {
   const [allLocation, setAllLocation] = useState([]);
   const [allName, setAllName] = useState([]);
   const [allCheckupType, setAllCheckupType] = useState(null);
-  const [filterdata,setFilterdata]=useState(null);
+  const [filterdata, setFilterdata] = useState(null);
   const [f1, setf1] = useState(null);
   const [f2, setf2] = useState(null);
   const [f3, setf3] = useState(null);
@@ -90,7 +91,6 @@ const MedicalReports = () => {
     const queryParams = {
       companyId: f1,
       location: f2,
-      
     };
     const queryString = Object.keys(queryParams)
       .map((key) => `${key}=${queryParams[key]}`)
@@ -100,9 +100,8 @@ const MedicalReports = () => {
     // console.log(url1);
     try {
       const response = await axios.get(url1);
-       console.log(">>>> filterdata in array")
-       console.log(response.data[0].employeeData.employeeName
-        );
+      console.log(">>>> filterdata in array");
+      console.log(response.data[0].employeeData.employeeName);
       setFilterdata(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -165,11 +164,12 @@ const MedicalReports = () => {
                       )}
                     </select>
 
-                    
-
-                    
-
-                    <button  onClick={handleFetchData} style={{marginLeft:'24px', width:'100%'}}>Fetch Data</button>
+                    <button
+                      onClick={handleFetchData}
+                      style={{ marginLeft: "24px", width: "100%" }}
+                    >
+                      Fetch Data
+                    </button>
                   </div>
 
                   <Row className="align-items-center">
@@ -190,8 +190,6 @@ const MedicalReports = () => {
                               style={{ width: "250px", textAlign: "center" }}
                             >
                               Name
-
-                              
                             </th>
                             <th
                               className="name"
@@ -221,24 +219,77 @@ const MedicalReports = () => {
                         </thead>
 
                         <tbody className="list form-check-all">
-                            <tr>
-                              <td>
-                             {/* <select>
-                               {filterdata.map((company) => (
-                           <option key={company._id} value={company._id}>
-                            {company.employeeData[0].employeeName}
-                            </option>
-                      ))}
-                              
-                             </select> */}
+                          {filterdata
+                            ? filterdata.map((item, index) => (
+                                <tr
+                                  key={index}
+                                  value={item.employeeData.employeeName}
+                                >
+                                  <td
+                                    className="product-name"
+                                    style={{ textAlign: "center" }}
+                                  >
+                                    {item.employeeData.employeeName}
+                                  </td>
+                                  <td
+                                    className="product-name"
+                                    style={{ textAlign: "center" }}
+                                  >
+                                    <Link to={`/form32/${item._id}`}>
+                                      Go to Another Page
+                                    </Link>
+                                  </td>
 
 
-                              </td>
-                             
+                                  <td
+                                    className="product-name"
+                                    style={{ textAlign: "center" }}
+                                  >
+                                    <Link to={`/form-helth33/${item._id}`}>
+                                      Go to Another Page
+                                    </Link>
+                                  </td>
 
-                            </tr>
 
+                                  <td
+                                    className="product-name"
+                                    style={{ textAlign: "center" }}
+                                  >
+                                    <Link to={`/helth-card/${item._id}`}>
+                                      Go to Another Page
+                                    </Link>
+                                  </td>
+
+                                  <td
+                                    className="product-name"
+                                    style={{ textAlign: "center" }}
+                                  >
+                                    <Link to={`/medical-report/${item._id}`}>
+                                      Go to Another Page
+                                    </Link>
+                                  </td>
+                                </tr>
+                              ))
+                            : null}
                         </tbody>
+
+                        {/* <tbody className="list form-check-all">
+                          {filterdata
+                            ? filterdata.map((item, index) => (
+                                <tr
+                                  key={index}
+                                  value={item.employeeData.employeeName}
+                                >
+                                  <td
+                                    className="product-name"
+                                    style={{ textAlign: "center" }}
+                                  >
+                                    {item.employeeData.employeeName}
+                                  </td>
+                                </tr>
+                              ))
+                            : null}
+                        </tbody> */}
                       </table>
                     </div>
                   </div>

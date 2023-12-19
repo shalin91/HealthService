@@ -238,7 +238,7 @@ const authProtectedRoutes = [
   //   ),
   // },
   {
-    path: "/form32",
+    path: "/form32/:id",
     component: (
       <SignState>
         <Form32Health />
@@ -246,7 +246,7 @@ const authProtectedRoutes = [
     ),
   },
   {
-    path: "/form-helth33",
+    path: "/form-helth33/:id",
     component: (
       <SignState>
         <FormHelth33 />
@@ -254,7 +254,7 @@ const authProtectedRoutes = [
     ),
   },
   {
-    path: "/helth-card",
+    path: "/helth-card/:id",
     component: (
       <SignState>
         <HelthCard />
@@ -262,7 +262,7 @@ const authProtectedRoutes = [
     ),
   },
   {
-    path: "/medical-checkup",
+    path: "/medical-report/:id",
     component: (
       <SignState>
         <MediclaCheckUp />
