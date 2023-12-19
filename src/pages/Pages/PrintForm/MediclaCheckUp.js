@@ -1,9 +1,39 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Col, Container, Row } from "react-bootstrap";
 import "./../../Pages/PrintForm/printForm.css";
+import SignContext from "../../../contextAPI/Context/SignContext";
+import { useParams } from "react-router-dom";
 
 const MediclaCheckUp = () => {
+  const { id } = useParams();
+  const { getCheckupDatabyId } = useContext(SignContext);
+  const [CheckupData, setCheckupData] = useState([]);
+
+  const GetCheckupDatabyId = async () => {
+    try {
+      // Call the API using the id from useParams
+      const data = await getCheckupDatabyId(id);
+      setCheckupData(data);
+      console.log("new>>>> data");
+
+      console.log(">>name data final");
+
+      // console.log(data.employeeData.employeeName)
+      // Update the state with the retrieved data
+      // setCheckupData(data);
+    } catch (error) {
+      console.error("Error fetching checkup data:", error);
+      // Handle errors if needed
+    }
+  };
+  useEffect(() => {
+    GetCheckupDatabyId(id);
+  }, [id]);
+
   return (
     <React.Fragment>
+    <div className="page-content">
+    <Container fluid>
       <div className="mainDivMediclaForm">
         <div className="titleDiv">
           <h3 className="medicalTitle">MEDICAL CHECK UP</h3>
@@ -22,25 +52,49 @@ const MediclaCheckUp = () => {
               </td>
             </tr>
             <tr>
-              <td>DATE:</td>
-              <td>MOB:</td>
-              <td>SEX:</td>
+              <td>DATE: {CheckupData?.checkupname?.checkupDate || "N/A"}</td>
+              <td>
+                MOB:{" "}
+                {CheckupData?.employeecontactdetails?.mobileNumber || "N/A"}
+              </td>
+              <td>
+                SEX: {CheckupData?.employeecontactdetails?.gender || "N/A"}
+              </td>
             </tr>
             <tr>
-              <td>NAME:</td>
-              <td colspan="2">DOB:</td>
+              <td>
+                NAME:{" "}
+                {CheckupData?.employeeData?.employeeNameAbbrevation || "N/A"}{" "}
+                {CheckupData?.employeeData?.employeeName || "N/A"}{" "}
+                {CheckupData?.employeeData?.employeeFatherName || "N/A"}
+              </td>
+              <td colspan="2">
+                DOB: {CheckupData?.employeecontactdetails?.dateOfBirth || "N/A"}
+              </td>
             </tr>
             <tr>
-              <td>COMPANY</td>
-              <td colspan="2">AGE:</td>
+              <td>COMPANY : {CheckupData?.compani?.companyName || "N/A"}</td>
+              <td colspan="2">
+                AGE:{CheckupData?.employeecontactdetails?.age || "N/A"}
+              </td>
             </tr>
             <tr>
-              <td>NATURE OF JOB: </td>
-              <td colspan="2">HT:</td>
+              <td>
+                NATURE OF JOB:{" "}
+                {CheckupData?.employeecontactdetails?.natureOfJob || "N/A"}
+              </td>
+              <td colspan="2">
+                HT: {CheckupData?.employeeVitalAndHistory?.height || "N/A"} CMS
+              </td>
             </tr>
             <tr>
-              <td>IDENTIFICATION</td>
-              <td colspan="2">WT:</td>
+              <td>
+                IDENTIFICATION:{" "}
+                {CheckupData?.employeecontactdetails?.idMark || "N/A"}{" "}
+              </td>
+              <td colspan="2">
+                WT: {CheckupData?.employeeVitalAndHistory?.weight || "N/A"} KG
+              </td>
             </tr>
           </table>
           <table className="mainTable">
@@ -55,16 +109,28 @@ const MediclaCheckUp = () => {
               </td>
             </tr>
             <tr>
-              <td>COMPLANINTS:</td>
+              <td>
+                COMPLANINTS:{" "}
+                {CheckupData?.employeeVitalAndHistory?.complaints || "N/A"}
+              </td>
             </tr>
             <tr>
-              <td>PAST HISTROY:</td>
+              <td>
+                PAST HISTROY:{" "}
+                {CheckupData?.employeeVitalAndHistory?.pastHistory || "N/A"}
+              </td>
             </tr>
             <tr>
-              <td>PERSONAL HISTORY :</td>
+              <td>
+                PERSONAL HISTORY :{" "}
+                {CheckupData?.employeeVitalAndHistory?.personalHistory || "N/A"}
+              </td>
             </tr>
             <tr>
-              <td>FAMILY HISTORY: </td>
+              <td>
+                FAMILY HISTORY:{" "}
+                {CheckupData?.employeeVitalAndHistory?.familyHistory || "N/A"}
+              </td>
             </tr>
           </table>
           <table className="mainTable">
@@ -82,6 +148,7 @@ const MediclaCheckUp = () => {
               <td>
                 <div className="tdData">
                   TEM:{" "}
+                  {CheckupData?.employeeVitalAndHistory?.temperature || "N/A"}
                   <span>
                     <sup>0</sup>f
                   </span>
@@ -89,33 +156,59 @@ const MediclaCheckUp = () => {
               </td>
               <td>
                 <div className="tdData">
-                  BP: <span>mm of Hg</span>
+                  BP: {CheckupData?.employeeVitalAndHistory?.bp || "N/A"}
+                  <span>mm of Hg</span>
                 </div>
               </td>
               <td>
                 <div className="tdData">
-                  PULSE: <span>per Min.</span>
+                  PULSE: {CheckupData?.employeeVitalAndHistory?.pulse || "N/A"}
+                  <span>per Min.</span>
                 </div>
               </td>
             </tr>
             <tr>
-              <td colSpan={3}>General Examination:</td>
+              <td colSpan={3}>
+                General Examination:{" "}
+                {CheckupData?.employeegeneralexamination?.generalExam || "N/A"}
+              </td>
             </tr>
             <tr>
-              <td colSpan={2}>Cardio Vascular Syastem :</td>
-              <td>Respiratory System :</td>
+              <td colSpan={2}>
+                Cardio Vascular Syastem :{" "}
+                {CheckupData?.employeegeneralexamination?.cvs || "N/A"}
+              </td>
+              <td>
+                Respiratory System :{" "}
+                {CheckupData?.employeegeneralexamination?.rs || "N/A"}
+              </td>
             </tr>
             <tr>
-              <td colSpan={2}>Alimentry System :</td>
-              <td>Central Nervous System :</td>
+              <td colSpan={2}>
+                Alimentry System :{" "}
+                {CheckupData?.employeegeneralexamination?.abdomenAS || "N/A"}
+              </td>
+              <td>
+                Central Nervous System :{" "}
+                {CheckupData?.employeegeneralexamination?.cns || "N/A"}
+              </td>
             </tr>
             <tr>
               <td colSpan={2}>Loco-motor System :</td>
-              <td>Skin :</td>
+              <td>
+                Skin :{" "}
+                {CheckupData?.employeegeneralexamination?.skinAndGenitals ||
+                  "N/A"}
+              </td>
             </tr>
             <tr>
-              <td colSpan={2}>ENT :</td>
-              <td>Genitals / Other :</td>
+              <td colSpan={2}>
+                ENT : {CheckupData?.employeegeneralexamination?.ent || "N/A"}
+              </td>
+              <td>
+                Genitals / Other :{" "}
+                {CheckupData?.employeegeneralexamination?.other || "N/A"}
+              </td>
             </tr>
             <tr>
               <td colSpan={3}>Eye Examination (External) :</td>
@@ -170,7 +263,9 @@ const MediclaCheckUp = () => {
               </td>
             </tr>
             <tr>
-              <td colSpan={3}>Remark:</td>
+              <td colSpan={3}>
+                Remark: {CheckupData?.employeeeyeinformation?.remark || "N/A"}
+              </td>
             </tr>
             <tr>
               <td>
@@ -190,7 +285,8 @@ const MediclaCheckUp = () => {
                   </span>
                 </p>
                 <p className="reasonTitle">
-                  Reason for unfit :
+                  Reason for unfit :{" "}
+                  {CheckupData?.employeeform33?.unfitReason || "N/A"}
                   <h5 className="drTitle">
                     Dr.Yatish Shah
                     <p className="mbbsTitle">M.B.B.S,C.I.H</p>
@@ -207,6 +303,8 @@ const MediclaCheckUp = () => {
             Mobile:8320370951 -E-mail:vohs2012@gmail.com
           </h5>
         </div>
+      </div>
+      </Container>
       </div>
     </React.Fragment>
   );

@@ -240,6 +240,15 @@ export const SignState = (props) => {
     }
   };
 
+  const GetCheckUpName = async () => {
+    try {
+      const response = await axios.get(`${url}/checkup/get-checkup-name`, {});
+      return response;
+    } catch (error) {
+      return { success: false, msg: "server Error" };
+    }
+  };
+
   // Get Company by Id
   const GetCompanybyId = async (id) => {
     try {
@@ -343,9 +352,12 @@ export const SignState = (props) => {
 
   // set checkupdata
 
-  const getCheckupData = async () => {
+  const getCheckupData = async (data) => {
     try {
-      const response = await axios.post(`${url}/checkup/add-checkup-data`, {});
+      const response = await axios.post(
+        `${url}/checkup/add-checkup-data`,
+        data
+      );
 
       return response;
     } catch (error) {
@@ -405,8 +417,6 @@ export const SignState = (props) => {
     }
   };
 
-
-
   const setInvestigation = async (data) => {
     try {
       const response = await axios.post(
@@ -463,6 +473,23 @@ export const SignState = (props) => {
     }
   };
 
+  // GetcheckupData by Id
+  const getCheckupDatabyId = async (id) => {
+    try {
+      const response = await axios.get(
+        `${url}/checkup/get-checkupdata/${id}`,
+        {}
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Error adding content:", error);
+      return {
+        success: false,
+        msg: "An error occurred while adding the email.",
+      };
+    }
+  };
+
   return (
     <SignContext.Provider
       value={{
@@ -496,6 +523,8 @@ export const SignState = (props) => {
         AddContact,
         setBloodDetails,
         setForm32,
+        GetCheckUpName,
+        getCheckupDatabyId,
       }}
     >
       {props.children}

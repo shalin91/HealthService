@@ -48,13 +48,14 @@ const CheckupForm = () => {
   };
 
   const getEmpContactDetails = async (id) => {
-    console.log("---id in frontend first---");
+    console.log("------id in frontend first---");
 
-    console.log(id);
+    // console.log(id);
 
     const res = await GetContactDetailsById(id);
-
-    console.log(res.data);
+    // console.log("shalin id>>>>>")
+    // console.log(res.data.employeeId)
+    setShalin(res.data.employeeId);
 
     setCurrentEmpContactDetails(res.data);
   };
@@ -84,6 +85,8 @@ const CheckupForm = () => {
   const [currentEmpContactDetails, setCurrentEmpContactDetails] =
     useState(null);
 
+  const [shalin, setShalin] = useState(null);
+
   // const [ allCategory , setAllCategory ] = useState( [] );
 
   // const [ allDepartment , setAllDepartment ] = useState( [] );
@@ -96,8 +99,7 @@ const CheckupForm = () => {
     const res = await GetCompany();
     console.log(res);
     setAllCompany(res.data);
-    // setLocation(res.data.companyLocation)
-    // setRoles(res);
+    
   };
 
   const handleLocationChange = (e) => {
@@ -169,8 +171,17 @@ const CheckupForm = () => {
     setCurrentEmp(curremp[0]);
   };
 
+  console.log(location);
+
   const handleSubmitForEmp = async () => {
-    const chaeckupData = await getCheckupData();
+    const chaeckupData = await getCheckupData({
+      employeeId: currentEmp._id,
+      companyId: company,
+      location: location,
+      checkupNameId: checkupName,
+      checkupTypeId: checkupType,
+      employeeContactDetailsId: currentEmpContactDetails._id,
+    });
 
     console.log("dddddaaaatttttaaaaa");
     console.log(chaeckupData.data);
@@ -675,7 +686,6 @@ const CheckupForm = () => {
                                       type="text"
                                       className="form-control"
                                       id="product-orders-input"
-                                      //   placeholder="EC No."
                                       name="dateOfBirth"
                                       aria-label="orders"
                                       aria-describedby="product-orders-addon"
@@ -870,6 +880,7 @@ const CheckupForm = () => {
                         chackupNameId={checkupName}
                         checkupTypeId={checkupType}
                         checkupDataId={checkupDataId}
+                        employeeId={shalin}
                       />
                     </TabPane>
 
@@ -880,6 +891,7 @@ const CheckupForm = () => {
                         chackupNameId={checkupName}
                         checkupTypeId={checkupType}
                         checkupDataId={checkupDataId}
+                        employeeId={shalin}
                       />
                     </TabPane>
 
@@ -890,6 +902,7 @@ const CheckupForm = () => {
                         chackupNameId={checkupName}
                         checkupTypeId={checkupType}
                         checkupDataId={checkupDataId}
+                        employeeId={shalin}
                       />
                     </TabPane>
 
@@ -900,6 +913,7 @@ const CheckupForm = () => {
                         chackupNameId={checkupName}
                         checkupTypeId={checkupType}
                         checkupDataId={checkupDataId}
+                        employeeId={shalin}
                       />
                     </TabPane>
 
@@ -910,6 +924,7 @@ const CheckupForm = () => {
                         chackupNameId={checkupName}
                         checkupTypeId={checkupType}
                         checkupDataId={checkupDataId}
+                        employeeId={shalin}
                       />
                     </TabPane>
 
@@ -920,6 +935,7 @@ const CheckupForm = () => {
                         chackupNameId={checkupName}
                         checkupTypeId={checkupType}
                         checkupDataId={checkupDataId}
+                        employeeId={shalin}
                       />
                     </TabPane>
 
@@ -930,6 +946,7 @@ const CheckupForm = () => {
                         chackupNameId={checkupName}
                         checkupTypeId={checkupType}
                         checkupDataId={checkupDataId}
+                        employeeId={shalin}
                       />
                     </TabPane>
                   </TabContent>

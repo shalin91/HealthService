@@ -1,9 +1,43 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./../../Pages/PrintForm/printForm.css";
+import SignContext from "../../../contextAPI/Context/SignContext";
+import { useParams } from "react-router-dom";
+import { Container } from "react-bootstrap";
 
 const FormHelth33 = () => {
+  const { id } = useParams();
+  const { getCheckupDatabyId } = useContext(SignContext);
+  const [CheckupData, setCheckupData] = useState([]);
+
+  const GetCheckupDatabyId = async () => {
+    try {
+      // Call the API using the id from useParams
+      const data = await getCheckupDatabyId(id);
+      setCheckupData(data);
+      console.log("new>>>> data");
+
+      console.log(">>name data final");
+
+      // console.log(data.employeeData.employeeName)
+      // Update the state with the retrieved data
+      // setCheckupData(data);
+    } catch (error) {
+      console.error("Error fetching checkup data:", error);
+      // Handle errors if needed
+    }
+  };
+
+  // console.log(CheckupData);
+
+  useEffect(() => {
+    GetCheckupDatabyId(id);
+  }, [id]);
+
+
   return (
     <React.Fragment>
+    <div className="page-content">
+    <Container fluid>
       <div className="mainDivMediclaForm">
         <div className="formTitleDiv">
           <h5 className="form32Title">FORM NO.32</h5>
@@ -19,36 +53,36 @@ const FormHelth33 = () => {
             <td colSpan={2}>
               <div className="dateDiv">
                 <p>1. Sr. No. :</p>
-                <p style={{ marginRight: "85px" }}>Date:</p>
+                <p style={{ marginRight: "85px" }}>Date: {CheckupData?.checkupname?.checkupDate || "N/A"}</p>
               </div>
             </td>
           </tr>
           <tr>
-            <td colSpan={2}>2. Name:</td>
+            <td colSpan={2}>2. Name: {CheckupData?.employeeData?.employeeName || "N/A"}</td>
           </tr>
           <tr>
-            <td colSpan={2}>3.Father's Name: </td>
+            <td colSpan={2}>3.Father's Name: {CheckupData?.employeeData?.employeeFatherName || "N/A"}</td>
           </tr>
           <tr>
-            <td colSpan={2}>4.Sex:</td>
+            <td colSpan={2}>4.Sex: {CheckupData?.employeecontactdetails?.gender || "N/A"}</td>
           </tr>
           <tr>
-            <td colSpan={2}>5.Residence:</td>s{" "}
+            <td colSpan={2}>5.Residence:{CheckupData?.employeecontactdetails?.address || "N/A"}</td>
           </tr>
           <tr>
-            <td colSpan={2}>6.Date of Birth:</td>
+            <td colSpan={2}>6.Date of Birth:{CheckupData?.employeecontactdetails?.dateOfBirth || "N/A"} </td>
           </tr>
           <tr>
-            <td colSpan={2}>7.Name & Address of the Factory:</td>
+            <td colSpan={2}>7.Name & Address of the Factory:{CheckupData?.employeeData?.companyLocation || "N/A"}</td>
           </tr>
           <tr>
-            <td colSpan={2}>8.Work is Employed / Proposed:</td>
+            <td colSpan={2}>8.Work is Employed / Proposed: {CheckupData?.employeeform33?.employyedOrPrpposed || "N/A"}</td>
           </tr>
           <tr>
-            <td colSpan={2}>a)Hazardous Process</td>
+            <td colSpan={2}>a:Hazardous Process :{CheckupData?.employeeform32?.hazardousProcess || "N/A"}</td>
           </tr>
           <tr>
-            <td colSpan={2}>b)Dangerous Operations</td>
+            <td colSpan={2}>b:Dangerous Operations: {CheckupData?.employeeform32?.dnagerousOperation || "N/A"}</td>
           </tr>
           <tr>
             <td colspan="2">
@@ -59,7 +93,7 @@ const FormHelth33 = () => {
               </p>
               <p>
                 marks are
-                ____________________________________________________________
+            {"   "}    {CheckupData?.employeecontactdetails?.idMark || "N/A"}
               </p>
               <p>
                 and who is desirous of being employed in above mentioned
@@ -67,7 +101,7 @@ const FormHelth33 = () => {
               </p>
               <p>
                 his/her age, as can be ascertained from my examination. is
-                ______________ yesars
+               {" "} {CheckupData?.employeecontactdetails?.age || "N/A"} years
               </p>
               <p>
                 <input type="checkBox" />
@@ -81,7 +115,7 @@ const FormHelth33 = () => {
                 <span style={{ marginLeft: "10px" }}>
                   in my opinion he/she is unfit for employment in the said
                   manufacturing process / operation for the
-                  reason___________________________________
+                  reason {"    "} {CheckupData?.employeeform32?.reasons || "N/A"}
                 </span>
               </p>
               <p>
@@ -103,6 +137,8 @@ const FormHelth33 = () => {
             </td>
           </tr>
         </table>
+      </div>
+      </Container>
       </div>
     </React.Fragment>
   );

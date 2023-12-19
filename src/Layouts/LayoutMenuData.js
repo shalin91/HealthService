@@ -346,14 +346,7 @@ const Navdata = () => {
           parentId: "apps",
           stateVariables: isSupportTickets,
           childItems: [
-            { id: 1, label: "Form32", link: "/form32" },
-            {
-              id: 2,
-              label: "Form 33 Health",
-              link: "/form-helth33",
-            },
-            { id: 3, label: "Health Card", link: "/helth-card" },
-            { id: 4, label: "Medical Check Up", link: "/medical-checkup" },
+            { id: 1, label: "Medical Reports", link: "/medical-report" },
           ],
         },
         // {
