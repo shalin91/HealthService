@@ -354,6 +354,8 @@ const Navdata = () => {
             },
             { id: 3, label: "Health Card", link: "/helth-card" },
             { id: 4, label: "Medical Check Up", link: "/medical-checkup" },
+            { id: 5, label: "Medical Reports", link: "/medical-report" },
+
           ],
         },
         // {

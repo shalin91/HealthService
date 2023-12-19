@@ -240,6 +240,15 @@ export const SignState = (props) => {
     }
   };
 
+  const GetCheckUpName = async () => {
+    try {
+      const response = await axios.get(`${url}/checkup/get-checkup-name`, {});
+      return response;
+    } catch (error) {
+      return { success: false, msg: "server Error" };
+    }
+  };
+
   // Get Company by Id
   const GetCompanybyId = async (id) => {
     try {
@@ -343,9 +352,9 @@ export const SignState = (props) => {
 
   // set checkupdata
 
-  const getCheckupData = async () => {
+  const getCheckupData = async (data) => {
     try {
-      const response = await axios.post(`${url}/checkup/add-checkup-data`, {});
+      const response = await axios.post(`${url}/checkup/add-checkup-data`, data);
 
       return response;
     } catch (error) {
@@ -496,6 +505,7 @@ export const SignState = (props) => {
         AddContact,
         setBloodDetails,
         setForm32,
+        GetCheckUpName,
       }}
     >
       {props.children}

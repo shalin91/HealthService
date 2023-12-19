@@ -122,6 +122,7 @@ import Form32Health from "../pages/Pages/PrintForm/Form32Health.js";
 import FormHelth33 from "../pages/Pages/PrintForm/Form33Health.js";
 import HelthCard from "../pages/Pages/PrintForm/HelthCard.js";
 import MediclaCheckUp from "../pages/Pages/PrintForm/MediclaCheckUp.js";
+import MedicalReports from "../pages/Reports/MedicalReports.js";
 
 // import customerNew from "../pages/Ecommerce/EcommerceCustomers/customerNew";
 const authProtectedRoutes = [
@@ -265,6 +266,14 @@ const authProtectedRoutes = [
     component: (
       <SignState>
         <MediclaCheckUp />
+      </SignState>
+    ),
+  },
+  {
+    path: "/medical-report",
+    component: (
+      <SignState>
+        <MedicalReports />
       </SignState>
     ),
   },
