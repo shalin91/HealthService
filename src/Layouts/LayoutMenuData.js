@@ -218,38 +218,26 @@ const Navdata = () => {
             // { id: 3, label: "Create Project", link: "/apps-projects-create", parentId: "apps", },
           ],
         },
-        // {
-        //   id: "appsprojects",
-        //   label: "manage category",
-        //   link: "/#",
-        //   isChildItem: true,
-        //   click: function (e) {
-        //     e.preventDefault();
-        //     setCategory(!isCategory);
-        //   },
-        //   parentId: "apps",
-        //   stateVariables: isCategory,
-        //   childItems:
-        //     {
-        //       id: 1,
-        //       label: "category",
-        //       link: "/category-master",
-        //       parentId: "apps",
-        //     },
-        //     {
-        //       id: 2,
-        //       label: "sub category",
-        //       link: "/sub-category-master",
-        //       parentId: "apps",
-        //     },
-        //     {
-        //       id: 3,
-        //       label: "sub sub category",
-        //       link: "/sub-sub-category-master",
-        //       parentId: "apps",
-        //     },
-        //   ],
-        // },
+        {
+          id: "appsprojects",
+          label: "Checkup Name Master",
+          link: "/#",
+          isChildItem: true,
+          click: function (e) {
+            e.preventDefault();
+            setCategory(!isCategory);
+          },
+          parentId: "apps",
+          stateVariables: isCategory,
+          childItems: [
+            {
+              id: 1,
+              label: "Checkup Name",
+              link: "/checkup-name",
+              parentId: "apps",
+            },
+          ],
+        },
         {
           id: "tasks",
           label: "Checkup-type Master",

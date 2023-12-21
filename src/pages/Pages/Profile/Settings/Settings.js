@@ -103,7 +103,7 @@ const Settings = () => {
     getspecificUser(id);
   }, []);
 
-  document.title = "Profile Settings | By Shalin";
+  document.title = "Profile Settings";
 
   return (
     <React.Fragment>

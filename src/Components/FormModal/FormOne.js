@@ -5,6 +5,8 @@ import React, { useContext, useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
+
 
 import {
   Card,
@@ -24,11 +26,12 @@ import * as Yup from "yup";
 import { companies } from "../../common/data";
 import SignContext from "../../contextAPI/Context/SignContext";
 
-function Example({ companyId, location }) {
+function Example({ companyId, location,allcompany }) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const navigate = useNavigate();
   const {
     GetCompany,
     GetCompanybyId,
@@ -37,6 +40,10 @@ function Example({ companyId, location }) {
     AddEmployee,
     AddContact,
   } = useContext(SignContext);
+  
+ 
+
+
 
   const [Company, setCompany] = useState([]);
   const [Location, setLocation] = useState([]);
@@ -46,20 +53,38 @@ function Example({ companyId, location }) {
   const [currentEmp, setCurrentEmp] = useState(null);
   const [currentEmpContactDetails, setCurrentEmpContactDetails] =
     useState(null);
-
+  const[a1,seta1]=useState([]);  
+  const [a2,seta2]=useState([]);
   const [empId, setEmpId] = useState(null);
 
+
+
+  console.log(">>>all comapny in final page")
+  console.log(allcompany);
+
+  console.log("company>>> id in final page")
+  console.log(companyId);
+
+  // const res1 = allcompany.find(({ _id }) => _id === companyId);
+  // console.log("res",res1)
+  // seta1(res1.companyJobCategorys)
+  // setDepartment(res1.companyDepartments);
+  
+  
+  
   const getcompanies = async () => {
     const res = await GetCompany();
-    console.log(res);
+   
+
     setCategory(res.data[0].companyJobCategorys);
     // setCategory(res.data.companyJobCategorys);
     setDepartment(res.data[0].companyDepartments);
+    
   };
+   
 
-  console.log(Category);
-  console.log(Department);
-  // console.log(Category);
+   
+
 
   const getEmpContactDetails = async (id) => {
     console.log("---id in frontend first---");
@@ -108,6 +133,7 @@ function Example({ companyId, location }) {
     console.log(res._id);
 
     setEmpId(res._id);
+    
   };
 
   //handle save contact detail...
@@ -116,6 +142,7 @@ function Example({ companyId, location }) {
     const res = await AddContact(data1);
     console.log("--------------data-------");
     console.log(res);
+    navigate('/form');
   };
 
   const validationSchema = Yup.object().shape({
@@ -168,17 +195,7 @@ function Example({ companyId, location }) {
     setCurrentEmp(curremp[0]);
   };
 
-  // const handleSavedEmployee = async (Values) => {
-  //   try {
-  //     const { data } = axios.post(
-  //       "http://localhost:5002/employ/add-employ",
-  //       Values
-  //     );
-  //     console.log("data >>>");
-  //   } catch (error) {
-  //     console.log("error");
-  //   }
-  // };
+  
 
   useEffect(() => {
     getcompanies();
@@ -187,6 +204,27 @@ function Example({ companyId, location }) {
   useEffect(() => {
     console.log("set  data");
   }, [currentEmp]);
+  
+
+
+  useEffect(() => {
+    // Assuming allcompany is already available in your component
+    const res1 = allcompany.find(({ _id }) => _id === companyId);
+
+    // Check if a matching company is found
+    if (res1) {
+      // Set the found company in the state
+      seta1(res1.companyDepartments);
+      seta2(res1.companyJobCategorys)
+      console.log("llllllllllllllllllllll")
+      console.log(res1.companyDepartments)
+      console.log(res1.companyJobCategorys)
+    } else {
+      // Handle the case where the company is not found
+      
+    }
+  }, [allcompany, companyId]);
+  
 
   return (
     <React.Fragment>
@@ -364,7 +402,8 @@ function Example({ companyId, location }) {
                                   onBlur={handleBlur}
                                   value={values.companyJobCategorys}
                                 >
-                                  {Category.map((name, index) => (
+                                 <option >--select--</option>
+                                  {a2.map((name, index) => (
                                     <option key={index} value={name}>
                                       {name}
                                     </option>
@@ -421,7 +460,8 @@ function Example({ companyId, location }) {
                                   onBlur={handleBlur}
                                   value={values.companyDepartments}
                                 >
-                                  {Department.map((name, index) => (
+                                 <option>--select--</option>
+                                  {a1.map((name, index) => (
                                     <option key={index} value={name}>
                                       {name}
                                     </option>

@@ -101,6 +101,7 @@ const MedicalReports = () => {
     try {
       const response = await axios.get(url1);
       console.log(">>>> filterdata in array");
+      console.log(response.data);
       console.log(response.data[0].employeeData.employeeName);
       setFilterdata(response.data);
     } catch (error) {

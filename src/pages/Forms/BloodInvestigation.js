@@ -4,8 +4,7 @@ import { Form, Formik } from "formik";
 import { Card, CardHeader, Col, Input, Row } from "reactstrap";
 import SignContext from "../../contextAPI/Context/SignContext";
 import { useContext } from "react";
-const BloodInvestigation = ( props ) => {
-
+const BloodInvestigation = (props) => {
   const { setBloodDetails } = useContext(SignContext);
 
   const handleSubmitData = async (values) => {
@@ -16,14 +15,9 @@ const BloodInvestigation = ( props ) => {
     console.log(response);
   };
 
-
-    
-
-
   return (
-
     <>
-        <Row>
+      <Row>
         <Col lg={12}>
           <Formik
             initialValues={{
@@ -33,42 +27,41 @@ const BloodInvestigation = ( props ) => {
               differentialCount: "",
               plateletCount: "",
               esr: "",
-              blGroup:"",
-              blSugarFastingOrRandom:"",
-              blSugarPP2BS : "",
-              blUrea : "",
-              bun:"",
-              sCreatinine:"",
-              sgpt : "",
-              sgot:"",
-              sBilirubinTotal :"",
-              sBilirubinDirect  :"",
-              sBilirubinIndirect  :"",
-              alklinePhosphatase  :"",
-              sProteins  :"",
-              albumin  :"",
-              globulin :"",
-              sodium :"",
-              potassuim :"",
-              chloride :"",
-              urineRAndM:
-              {
-              proein  :"",
-              glucose  :"",
-              ketone  :"",
-              bileSalts  :"",
-              bilePigments  :"",
-              pusCells  :"",
-              redCells  :"",
-              epiCells :"",
-              cast :"",
-              crystals :"",
-              },
+              blGroup: "",
+              blSugarFastingOrRandom: "",
+              blSugarPP2BS: "",
+              blUrea: "",
+              bun: "",
+              sCreatinine: "",
+              sgpt: "",
+              sgot: "",
+              sBilirubinTotal: "",
+              sBilirubinDirect: "",
+              sBilirubinIndirect: "",
+              alklinePhosphatase: "",
+              sProteins: "",
+              albumin: "",
+              globulin: "",
+              sodium: "",
+              potassuim: "",
+              chloride: "",
+
+              proein: "",
+              glucose: "",
+              ketone: "",
+              bileSalts: "",
+              bilePigments: "",
+              pusCells: "",
+              redCells: "",
+              epiCells: "",
+              cast: "",
+              crystals: "",
             }}
             // validationSchema={validationSchema}
 
-            onSubmit={(values) => {
+            onSubmit={(values,{ resetForm }) => {
               handleSubmitData(values);
+              resetForm();
             }}
           >
             {({
@@ -90,7 +83,6 @@ const BloodInvestigation = ( props ) => {
                           <h2 className="card-title mb-0 justify-content-sm-start">
                             <strong>Blood Investigation</strong>
                           </h2>
-
                         </div>
                       </Col>
                     </Row>
@@ -178,16 +170,12 @@ const BloodInvestigation = ( props ) => {
                                 value={values.wbc}
                               />
                               <p className="error text-danger">
-
-                                {errors.bmi &&
-                                  touched.bmi &&
-                                  errors.bmi}
-
+                                {errors.bmi && touched.bmi && errors.bmi}
                               </p>
                             </div>
                           </div>
                         </Col>
-                     
+
                         <Col sm={2}>
                           <div className="mb-3">
                             <label
@@ -210,11 +198,7 @@ const BloodInvestigation = ( props ) => {
                                 value={values.differentialCount}
                               />
                               <p className="error text-danger">
-
-                                {errors.pulse &&
-                                  touched.pulse &&
-                                  errors.pulse}
-
+                                {errors.pulse && touched.pulse && errors.pulse}
                               </p>
                             </div>
                           </div>
@@ -241,11 +225,7 @@ const BloodInvestigation = ( props ) => {
                                 value={values.plateletCount}
                               />
                               <p className="error text-danger">
-
-                                {errors.bp &&
-                                  touched.bp &&
-                                  errors.bp}
-
+                                {errors.bp && touched.bp && errors.bp}
                               </p>
                             </div>
                           </div>
@@ -272,11 +252,7 @@ const BloodInvestigation = ( props ) => {
                                 value={values.esr}
                               />
                               <p className="error text-danger">
-
-                                {errors.temp &&
-                                  touched.temp &&
-                                  errors.temp}
-
+                                {errors.temp && touched.temp && errors.temp}
                               </p>
                             </div>
                           </div>
@@ -363,23 +339,19 @@ const BloodInvestigation = ( props ) => {
                                 value={values.blSugarPP2BS}
                               />
                               <p className="error text-danger">
-
-                                {errors.bmi &&
-                                  touched.bmi &&
-                                  errors.bmi}
-
+                                {errors.bmi && touched.bmi && errors.bmi}
                               </p>
                             </div>
                           </div>
                         </Col>
-                     
+
                         <Col sm={2}>
                           <div className="mb-3">
                             <label
                               className="form-label"
                               htmlFor="product-orders-input"
                             >
-                               Blood Urea
+                              Blood Urea
                             </label>
                             <div className="mb-3">
                               <Input
@@ -395,11 +367,7 @@ const BloodInvestigation = ( props ) => {
                                 value={values.blUrea}
                               />
                               <p className="error text-danger">
-
-                                {errors.pulse &&
-                                  touched.pulse &&
-                                  errors.pulse}
-
+                                {errors.pulse && touched.pulse && errors.pulse}
                               </p>
                             </div>
                           </div>
@@ -426,11 +394,7 @@ const BloodInvestigation = ( props ) => {
                                 value={values.bun}
                               />
                               <p className="error text-danger">
-
-                                {errors.bp &&
-                                  touched.bp &&
-                                  errors.bp}
-
+                                {errors.bp && touched.bp && errors.bp}
                               </p>
                             </div>
                           </div>
@@ -457,11 +421,7 @@ const BloodInvestigation = ( props ) => {
                                 value={values.sCreatinine}
                               />
                               <p className="error text-danger">
-
-                                {errors.temp &&
-                                  touched.temp &&
-                                  errors.temp}
-
+                                {errors.temp && touched.temp && errors.temp}
                               </p>
                             </div>
                           </div>
@@ -548,16 +508,12 @@ const BloodInvestigation = ( props ) => {
                                 value={values.sBilirubinTotal}
                               />
                               <p className="error text-danger">
-
-                                {errors.bmi &&
-                                  touched.bmi &&
-                                  errors.bmi}
-
+                                {errors.bmi && touched.bmi && errors.bmi}
                               </p>
                             </div>
                           </div>
                         </Col>
-                     
+
                         <Col sm={2}>
                           <div className="mb-3">
                             <label
@@ -580,11 +536,7 @@ const BloodInvestigation = ( props ) => {
                                 value={values.sBilirubinDirect}
                               />
                               <p className="error text-danger">
-
-                                {errors.pulse &&
-                                  touched.pulse &&
-                                  errors.pulse}
-
+                                {errors.pulse && touched.pulse && errors.pulse}
                               </p>
                             </div>
                           </div>
@@ -611,11 +563,7 @@ const BloodInvestigation = ( props ) => {
                                 value={values.sBilirubinIndirect}
                               />
                               <p className="error text-danger">
-
-                                {errors.bp &&
-                                  touched.bp &&
-                                  errors.bp}
-
+                                {errors.bp && touched.bp && errors.bp}
                               </p>
                             </div>
                           </div>
@@ -642,11 +590,7 @@ const BloodInvestigation = ( props ) => {
                                 value={values.alklinePhosphatase}
                               />
                               <p className="error text-danger">
-
-                                {errors.temp &&
-                                  touched.temp &&
-                                  errors.temp}
-
+                                {errors.temp && touched.temp && errors.temp}
                               </p>
                             </div>
                           </div>
@@ -733,16 +677,12 @@ const BloodInvestigation = ( props ) => {
                                 value={values.globulin}
                               />
                               <p className="error text-danger">
-
-                                {errors.bmi &&
-                                  touched.bmi &&
-                                  errors.bmi}
-
+                                {errors.bmi && touched.bmi && errors.bmi}
                               </p>
                             </div>
                           </div>
                         </Col>
-                     
+
                         <Col sm={2}>
                           <div className="mb-3">
                             <label
@@ -765,11 +705,7 @@ const BloodInvestigation = ( props ) => {
                                 value={values.sodium}
                               />
                               <p className="error text-danger">
-
-                                {errors.pulse &&
-                                  touched.pulse &&
-                                  errors.pulse}
-
+                                {errors.pulse && touched.pulse && errors.pulse}
                               </p>
                             </div>
                           </div>
@@ -796,11 +732,7 @@ const BloodInvestigation = ( props ) => {
                                 value={values.potassuim}
                               />
                               <p className="error text-danger">
-
-                                {errors.bp &&
-                                  touched.bp &&
-                                  errors.bp}
-
+                                {errors.bp && touched.bp && errors.bp}
                               </p>
                             </div>
                           </div>
@@ -827,28 +759,23 @@ const BloodInvestigation = ( props ) => {
                                 value={values.chloride}
                               />
                               <p className="error text-danger">
-
-                                {errors.temp &&
-                                  touched.temp &&
-                                  errors.temp}
-
+                                {errors.temp && touched.temp && errors.temp}
                               </p>
                             </div>
                           </div>
                         </Col>
                       </Row>
                       <CardHeader>
-                    <Row className="g-1 m-1">
-                      <Col className="col-sm">
-                        <div className="d-flex justify-content-sm-between">
-                          <h2 className="card-title mb-0 justify-content-sm-start">
-                            <strong>Urine R&M</strong>
-                          </h2>
-
-                        </div>
-                      </Col>
-                    </Row>
-                  </CardHeader>
+                        <Row className="g-1 m-1">
+                          <Col className="col-sm">
+                            <div className="d-flex justify-content-sm-between">
+                              <h2 className="card-title mb-0 justify-content-sm-start">
+                                <strong>Urine R&M</strong>
+                              </h2>
+                            </div>
+                          </Col>
+                        </Row>
+                      </CardHeader>
                       <Row className="align-items-center g-3 mt-3">
                         <Col sm={2}>
                           <div className="mb-3">
@@ -856,7 +783,7 @@ const BloodInvestigation = ( props ) => {
                               className="form-label"
                               htmlFor="product-orders-input"
                             >
-                             Proein
+                              Proein
                             </label>
                             <div className="mb-3">
                               <Input
@@ -864,12 +791,12 @@ const BloodInvestigation = ( props ) => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="Proein"
-                                name="urineRAndM.proein"
+                                name="proein"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.urineRAndM.proein}
+                                value={values.proein}
                               />
                               <p className="error text-danger">
                                 {errors.height &&
@@ -893,12 +820,12 @@ const BloodInvestigation = ( props ) => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="Glucose"
-                                name="urineRAndM.glucose"
+                                name="glucose"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.urineRAndM.glucose}
+                                value={values.glucose}
                               />
                               <p className="error text-danger">
                                 {errors.weight &&
@@ -922,24 +849,20 @@ const BloodInvestigation = ( props ) => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="ketone"
-                                name="urineRAndM.ketone"
+                                name="ketone"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.urineRAndM.ketone}
+                                value={values.ketone}
                               />
                               <p className="error text-danger">
-
-                                {errors.bmi &&
-                                  touched.bmi &&
-                                  errors.bmi}
-
+                                {errors.bmi && touched.bmi && errors.bmi}
                               </p>
                             </div>
                           </div>
                         </Col>
-                     
+
                         <Col sm={2}>
                           <div className="mb-3">
                             <label
@@ -954,19 +877,15 @@ const BloodInvestigation = ( props ) => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="Bile Salts"
-                                name="urineRAndM.bileSalts"
+                                name="bileSalts"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.urineRAndM.bileSalts}
+                                value={values.bileSalts}
                               />
                               <p className="error text-danger">
-
-                                {errors.pulse &&
-                                  touched.pulse &&
-                                  errors.pulse}
-
+                                {errors.pulse && touched.pulse && errors.pulse}
                               </p>
                             </div>
                           </div>
@@ -985,19 +904,15 @@ const BloodInvestigation = ( props ) => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="Bile Pigments"
-                                name="urineRAndM.bilePigments"
+                                name="bilePigments"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.urineRAndM.bilePigments}
+                                value={values.bilePigments}
                               />
                               <p className="error text-danger">
-
-                                {errors.bp &&
-                                  touched.bp &&
-                                  errors.bp}
-
+                                {errors.bp && touched.bp && errors.bp}
                               </p>
                             </div>
                           </div>
@@ -1016,19 +931,15 @@ const BloodInvestigation = ( props ) => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="Pus Cells"
-                                name="urineRAndM.pusCells"
+                                name="pusCells"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.urineRAndM.pusCells}
+                                value={values.pusCells}
                               />
                               <p className="error text-danger">
-
-                                {errors.temp &&
-                                  touched.temp &&
-                                  errors.temp}
-
+                                {errors.temp && touched.temp && errors.temp}
                               </p>
                             </div>
                           </div>
@@ -1041,7 +952,7 @@ const BloodInvestigation = ( props ) => {
                               className="form-label"
                               htmlFor="product-orders-input"
                             >
-                             Red Cells
+                              Red Cells
                             </label>
                             <div className="mb-3">
                               <Input
@@ -1049,12 +960,12 @@ const BloodInvestigation = ( props ) => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="Red Cells"
-                                name="urineRAndM.redCells"
+                                name="redCells"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.urineRAndM.redCells}
+                                value={values.redCells}
                               />
                               <p className="error text-danger">
                                 {errors.height &&
@@ -1078,12 +989,12 @@ const BloodInvestigation = ( props ) => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="Epi Cells"
-                                name="urineRAndM.epiCells"
+                                name="epiCells"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.urineRAndM.epiCells}
+                                value={values.epiCells}
                               />
                               <p className="error text-danger">
                                 {errors.weight &&
@@ -1107,24 +1018,20 @@ const BloodInvestigation = ( props ) => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="Cast"
-                                name="urineRAndM.cast"
+                                name="cast"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.urineRAndM.cast}
+                                value={values.cast}
                               />
                               <p className="error text-danger">
-
-                                {errors.bmi &&
-                                  touched.bmi &&
-                                  errors.bmi}
-
+                                {errors.bmi && touched.bmi && errors.bmi}
                               </p>
                             </div>
                           </div>
                         </Col>
-                     
+
                         <Col sm={2}>
                           <div className="mb-3">
                             <label
@@ -1139,23 +1046,19 @@ const BloodInvestigation = ( props ) => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="Crystals"
-                                name="urineRAndM.crystals"
+                                name="crystals"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.urineRAndM.crystals}
+                                value={values.crystals}
                               />
                               <p className="error text-danger">
-
-                                {errors.pulse &&
-                                  touched.pulse &&
-                                  errors.pulse}
-
+                                {errors.pulse && touched.pulse && errors.pulse}
                               </p>
                             </div>
                           </div>
-                        </Col>   
+                        </Col>
                       </Row>
                     </div>
                   </div>
@@ -1165,7 +1068,6 @@ const BloodInvestigation = ( props ) => {
                       Submit
                     </button>
                   </div>
-
                 </Card>
               </Form>
             )}
@@ -1173,8 +1075,7 @@ const BloodInvestigation = ( props ) => {
         </Col>
       </Row>
     </>
+  );
+};
 
-  )
-}
-
-export default BloodInvestigation
+export default BloodInvestigation;

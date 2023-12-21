@@ -45,8 +45,9 @@ const Eye = (props) => {
               remark: "",
             }}
             // validationSchema={validationSchema}
-            onSubmit={(values) => {
+            onSubmit={(values,{ resetForm }) => {
               handleSubmitData(values);
+              resetForm();
             }}
           >
             {({

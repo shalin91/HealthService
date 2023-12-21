@@ -45,6 +45,7 @@ const NewForm = () => {
 
   const getcompanies = async () => {
     const res = await GetCompany();
+    console.log(">>> get companies")
     console.log(res);
     setCompany(res.data);
     // setLocation(res.data.companyLocation)
@@ -79,8 +80,12 @@ const NewForm = () => {
     );
 
     console.log(Values);
+
     setCurrentCompanyId(Values.companyName);
     setCurrentLocation(Values.companyLocation);
+    
+    console.log(" >>>>> company ")
+    console.log(Values.companyName);
 
     const res = await GetEmpsbyCompAndLoc(Values);
     console.log(res.data);
@@ -88,6 +93,7 @@ const NewForm = () => {
     console.log(res.data);
     setEmpbyCompandLoc(res.data);
   };
+
 
   const [customActiveTab, setcustomActiveTab] = useState("1");
   const toggleCustom = (tab) => {
@@ -551,6 +557,7 @@ const NewForm = () => {
                       <Example
                         companyId={currentCompanyId}
                         location={currentLocation}
+                        allcompany={Company}
                       />
                     </Card>
                     <Card>
