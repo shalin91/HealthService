@@ -239,7 +239,7 @@ const Login = () => {
                   </CardBody>
                 </Card>
 
-                <div className="mt-4 text-center">
+                {/* <div className="mt-4 text-center">
                   <p className="mb-0">
                     Forgot Password ?{" "}
                     <Link
@@ -250,7 +250,7 @@ const Login = () => {
                       Forgot{" "}
                     </Link>{" "}
                   </p>
-                </div>
+                </div> */}
               </Col>
             </Row>
           </Container>

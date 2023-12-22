@@ -153,16 +153,7 @@ const CheckupForm = () => {
     console.log(response.data._id);
   };
 
-  // const handleSavedCompandLoc = async (Values) => {
-
-  //   console.log( "----------------------------------------------------------------------------" );
-  //   console.log( Values )
-
-  //   const res = await GetEmpsbyCompAndLoc(Values);
-  //   console.log(res.data)
-  //   setEmpbyCompandLoc(res.data)
-
-  // };
+ 
 
   const getAllCheckupType = async () => {
     const responce = await getCheckupType();
@@ -219,19 +210,7 @@ const CheckupForm = () => {
     getCheckUpNameMaster();
   }, []);
 
-  function formatDate(inputDate) {
-    const dateObject = new Date(inputDate);
-
-    // Extract day, month, and year components
-    const day = dateObject.getUTCDate().toString().padStart(2, "0");
-    const month = (dateObject.getUTCMonth() + 1).toString().padStart(2, "0"); // Months are zero-based
-    const year = dateObject.getUTCFullYear();
-
-    // Assemble the formatted date string
-    const formattedDate = `${day}-${month}-${year}`;
-
-    return formattedDate;
-  }
+  
 
   return (
     <>
@@ -275,7 +254,7 @@ const CheckupForm = () => {
                           <Col className="col-sm">
                             <div className="d-flex justify-content-sm-between">
                               <h2 className="card-title mb-0 justify-content-sm-start">
-                                <strong>COMPANY DETAILS</strong>
+                                <strong>Company & Location</strong>
                               </h2>
                             </div>
                           </Col>
@@ -410,7 +389,7 @@ const CheckupForm = () => {
                               <Col className="col-sm">
                                 <div className="d-flex justify-content-sm-between">
                                   <h2 className="card-title mb-0 justify-content-sm-start">
-                                    <strong>CHECK UP DETAILS</strong>
+                                    <strong>Checkup Master</strong>
                                   </h2>
                                 </div>
                               </Col>
@@ -628,7 +607,7 @@ const CheckupForm = () => {
                               <Col className="col-sm">
                                 <div className="d-flex justify-content-sm-between">
                                   <h2 className="card-title mb-0 justify-content-sm-start">
-                                    <strong>Title</strong>
+                                    <strong>Select Employee</strong>
                                   </h2>
                                 </div>
                               </Col>
@@ -849,7 +828,7 @@ const CheckupForm = () => {
                           toggleCustom("1");
                         }}
                       >
-                        Vitals
+                        Vitals & History
                       </NavLink>
                     </NavItem>
                     <NavItem>
@@ -862,7 +841,7 @@ const CheckupForm = () => {
                           toggleCustom("2");
                         }}
                       >
-                        History & Examination
+                         Examination
                       </NavLink>
                     </NavItem>
                     <NavItem>
