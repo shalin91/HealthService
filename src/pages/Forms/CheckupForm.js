@@ -88,7 +88,7 @@ const CheckupForm = () => {
 
   const [shalin, setShalin] = useState(null);
 
-  const[finalcheckupname,setfinalcheckupname]=useState(null);
+  const [finalcheckupname, setfinalcheckupname] = useState(null);
   // const [ allCategory , setAllCategory ] = useState( [] );
 
   // const [ allDepartment , setAllDepartment ] = useState( [] );
@@ -96,19 +96,16 @@ const CheckupForm = () => {
   // const [ category , setCategory ] = useState( null );
 
   // const [ department , setDepartment ] = useState( null );
-   
 
-   //onchange event
-   
-   const [checknameid,setchecknameid]=useState(null)
-   const [checktypeid,setchecktypeid]=useState(null)
+  //onchange event
 
+  const [checknameid, setchecknameid] = useState(null);
+  const [checktypeid, setchecktypeid] = useState(null);
 
   const getcompanies = async () => {
     const res = await GetCompany();
     console.log(res);
     setAllCompany(res.data);
-    
   };
 
   const handleLocationChange = (e) => {
@@ -177,10 +174,9 @@ const CheckupForm = () => {
 
   const getCheckUpNameMaster = async () => {
     const responce = await GetCheckUpNameMaster();
-    console.log("companies form backend >>>>>")
+    console.log("companies form backend >>>>>");
     console.log(responce);
     setfinalcheckupname(responce.data);
-     
   };
 
   const handleEmpData = (e) => {
@@ -214,13 +210,7 @@ const CheckupForm = () => {
 
     setCheckupDataId(chaeckupData.data._id);
 
-    console.log("|||||||||||||||||data|||||||||||||");
-    console.log(company);
-    console.log(location);
-    console.log(checkupName);
-    console.log(checkupType);
-    console.log(checkupDataId);
-    console.log("|||||||||||||||||data|||||||||||||");
+    
   };
 
   useEffect(() => {
@@ -312,7 +302,7 @@ const CheckupForm = () => {
                                   onBlur={handleBlur}
                                   value={values.companyName}
                                 >
-                                  <option value="">Company Name</option>
+                                  <option value="">--select--</option>
                                   {allCompany.map((company) => (
                                     <option
                                       key={company._id}
@@ -344,7 +334,7 @@ const CheckupForm = () => {
                                   value={values.companyLocation}
                                   onChange={handleChange}
                                 >
-                                  <option value=""> Location</option>
+                                  <option value="">--select--</option>
                                   {allLocation && allLocation.length > 0 ? (
                                     allLocation.map((location) => (
                                       <option key={location} value={location}>
@@ -429,7 +419,7 @@ const CheckupForm = () => {
                           <div className="card-body">
                             <div className="live-preview">
                               <Row className="align-items-center g-3">
-                              <Col sm={3}>
+                                <Col sm={6}>
                                   <label
                                     className="form-label mt-3"
                                     htmlFor="product-orders-input"
@@ -443,19 +433,21 @@ const CheckupForm = () => {
                                       onBlur={handleBlur}
                                       value={values.checkupName}
                                       onChange={(e) => {
-                                       handleChange(e);
-                                      // Add your additional logic here
-                                      setchecknameid(e.target.value)
-                                      console.log("Selected Check-up Name:", e.target.value);
-                                       }}
+                                        handleChange(e);
+                                        // Add your additional logic here
+                                        setchecknameid(e.target.value);
+                                        console.log(
+                                          "Selected Check-up Name:",
+                                          e.target.value
+                                        );
+                                      }}
                                     >
-                                      <option value=""> checkup name</option>
+                                      <option value=""> --select-- </option>
                                       {finalcheckupname &&
-                                        finalcheckupname.length > 0 ? (
-                                          finalcheckupname.map((type) => (
+                                      finalcheckupname.length > 0 ? (
+                                        finalcheckupname.map((type) => (
                                           <option key={type} value={type._id}>
-                                            {type.checkupName
-                                            }
+                                            {type.checkupName}
                                           </option>
                                         ))
                                       ) : (
@@ -526,7 +518,7 @@ const CheckupForm = () => {
                                       errors.checkupDate}
                                   </p>
                                 </Col> */}
-                                <Col sm={3}>
+                                <Col sm={6}>
                                   <label
                                     className="form-label mt-3"
                                     htmlFor="product-orders-input"
@@ -540,13 +532,16 @@ const CheckupForm = () => {
                                       onBlur={handleBlur}
                                       value={values.checkupType}
                                       onChange={(e) => {
-                                       handleChange(e);
-                                      // Add your additional logic here
-                                      setchecktypeid(e.target.value)
-                                      console.log("Selected Check-up Type:", e.target.value);
-                                       }}
+                                        handleChange(e);
+                                        // Add your additional logic here
+                                        setchecktypeid(e.target.value);
+                                        console.log(
+                                          "Selected Check-up Type:",
+                                          e.target.value
+                                        );
+                                      }}
                                     >
-                                      <option value=""> checkup Type</option>
+                                      <option value="">--select--</option>
                                       {allCheckupType &&
                                       allCheckupType.length > 0 ? (
                                         allCheckupType.map((type) => (
@@ -659,7 +654,9 @@ const CheckupForm = () => {
                                       }}
                                       onBlur={handleBlur}
                                       value={values.employeeName}
+                                      
                                     >
+                                     <option >--select--</option>
                                       {EmpbyCompandLoc &&
                                         EmpbyCompandLoc.length > 0 &&
                                         EmpbyCompandLoc.map((emp, index) => (
@@ -694,6 +691,8 @@ const CheckupForm = () => {
                                       aria-describedby="product-orders-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
+                                      disabled
+                                      readOnly
                                       value={
                                         currentEmpContactDetails
                                           ? currentEmpContactDetails.gender
@@ -725,6 +724,8 @@ const CheckupForm = () => {
                                       aria-describedby="product-orders-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
+                                      disabled
+                                      readOnly
                                       value={
                                         currentEmpContactDetails
                                           ? currentEmpContactDetails.age
@@ -751,6 +752,8 @@ const CheckupForm = () => {
                                       name="dateOfBirth"
                                       aria-label="orders"
                                       aria-describedby="product-orders-addon"
+                                      disabled
+                                      readOnly
                                       onChange={(e) => {
                                         handleChange(e);
                                         // Format and set the value using setFieldValue
@@ -793,7 +796,7 @@ const CheckupForm = () => {
                                       id="product-orders-input"
                                       //   placeholder="EC No."
                                       name="bloodGroup"
-                                      aria-label="orders"
+                                      aria-label="readOnly orders"
                                       aria-describedby="product-orders-addon"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
@@ -802,6 +805,8 @@ const CheckupForm = () => {
                                           ? currentEmpContactDetails.bloodGroup
                                           : ""
                                       }
+                                      disabled
+                                      readOnly
                                     />
                                     <p className="error text-danger">
                                       {errors.bloodgroup &&

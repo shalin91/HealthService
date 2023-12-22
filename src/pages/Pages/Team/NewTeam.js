@@ -28,7 +28,6 @@ import { color } from "echarts";
 
 const ITEMS_PER_PAGE = 10;
 
-
 const NewTeam = () => {
   const url = `${process.env.REACT_APP_BASE_URL}`;
   const { id } = useParams();
@@ -67,7 +66,9 @@ const NewTeam = () => {
     email: Yup.string()
       .email("Invalid email address")
       .required("Email is required"),
-    password: Yup.string().required("Password is required"),
+    password: Yup.string()
+      .required("Password is required")
+      .min(6, "Password must be at least 6 characters"),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("password"), null], "Passwords must match")
       .required("Confirm Password is required"),
@@ -230,7 +231,7 @@ const NewTeam = () => {
       <div className="page-content">
         <Container fluid>
           <BreadCrumb
-          grandParent="Profile"
+            grandParent="Profile"
             parent="Team"
             child="Users"
             grandChild="All users"
@@ -299,73 +300,80 @@ const NewTeam = () => {
                           </tr>
                         </thead>
                         <tbody className="list form-check-all">
-                          {currentItems?currentItems.map((user, key) => (
-                            <tr key={user._id}>
-                              <th scope="row">
-                                <div className="form-check">
-                                  <td className="name">{key + 1}</td>
-                                </div>
-                              </th>
-                              <td className="name">{user.name}</td>
-                              <td className="Image">
-                                <div
-                                  style={{
-                                    maxWidth: "50px",
-                                    maxHeight: "50px",
-                                    overflow: "hidden",
-                                    display: "inline-block",
-                                  }}
-                                >
-                                  <img
-                                    src={`${url}/${user.photo}`}
-                                    alt="userImage"
-                                    style={{
-                                      width: "100%",
-                                      height: "auto",
-                                    }}
-                                  />
-                                </div>
-                              </td>
-                              <td className="Email" style={{ width: "120px" }}>
-                                {user.email}
-                              </td>
-                              <td className="roles">{user.roles}</td>
-                              <td className="status">
-                                {user.active === true ? (
-                                  <div>
-                                    <span className="badge badge-soft-success badge-border">
-                                      Active
-                                    </span>
-                                  </div>
-                                ) : (
-                                  <div>
-                                    <span className="badge badge-soft-danger badge-border">
-                                      InActive
-                                    </span>
-                                  </div>
-                                )}
-                              </td>
-                              <td className="action">
-                                <button
-                                  className="btn btn-soft-info btn-sm me-2"
-                                  onClick={() => toggleEditmodal(user._id)}
-                                >
-                                  <i className="ri-pencil-line"></i>
-                                </button>
-                                <button
-                                  className="btn btn-soft-danger btn-sm"
-                                  onClick={() => {
-                                    toggledeletemodal();
-                                    setUserToDelete(user);
-                                  }}
-                                >
-                                  <i className="ri-delete-bin-line"></i>
-                                </button>
-                              </td>
-                              {/* Add other columns here as needed */}
-                              <td>{/* Add edit and remove buttons here */}</td>
-                            </tr>
-                          )):null}
+                          {currentItems
+                            ? currentItems.map((user, key) => (
+                                <tr key={user._id}>
+                                  <th scope="row">
+                                    <div className="form-check">
+                                      <td className="name">{key + 1}</td>
+                                    </div>
+                                  </th>
+                                  <td className="name">{user.name}</td>
+                                  <td className="Image">
+                                    <div
+                                      style={{
+                                        maxWidth: "50px",
+                                        maxHeight: "50px",
+                                        overflow: "hidden",
+                                        display: "inline-block",
+                                      }}
+                                    >
+                                      <img
+                                        src={`${url}/${user.photo}`}
+                                        alt="userImage"
+                                        style={{
+                                          width: "100%",
+                                          height: "auto",
+                                        }}
+                                      />
+                                    </div>
+                                  </td>
+                                  <td
+                                    className="Email"
+                                    style={{ width: "120px" }}
+                                  >
+                                    {user.email}
+                                  </td>
+                                  <td className="roles">{user.roles}</td>
+                                  <td className="status">
+                                    {user.active === true ? (
+                                      <div>
+                                        <span className="badge badge-soft-success badge-border">
+                                          Active
+                                        </span>
+                                      </div>
+                                    ) : (
+                                      <div>
+                                        <span className="badge badge-soft-danger badge-border">
+                                          InActive
+                                        </span>
+                                      </div>
+                                    )}
+                                  </td>
+                                  <td className="action">
+                                    <button
+                                      className="btn btn-soft-info btn-sm me-2"
+                                      onClick={() => toggleEditmodal(user._id)}
+                                    >
+                                      <i className="ri-pencil-line"></i>
+                                    </button>
+                                    <button
+                                      className="btn btn-soft-danger btn-sm"
+                                      onClick={() => {
+                                        toggledeletemodal();
+                                        setUserToDelete(user);
+                                      }}
+                                    >
+                                      <i className="ri-delete-bin-line"></i>
+                                    </button>
+                                  </td>
+                                  {/* Add other columns here as needed */}
+                                  <td>
+                                    {/* Add edit and remove buttons here */}
+                                  </td>
+                                </tr>
+                              ))
+                            : null}
                         </tbody>
                       </table>
                     </div>
@@ -608,13 +616,13 @@ const NewTeam = () => {
                   <div>
                     <div className="form-check form-check-inline">
                       <Field
-                        type="radio"
+                        type="checkbox"
                         className="form-check-input"
                         id="activeStatus"
                         name="active"
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        value={values.active}
+                        checked={values.active}
                       />
                       <Label
                         className="form-check-label"
@@ -731,7 +739,7 @@ const NewTeam = () => {
                 Status
               </Label>
               <div>
-                <div className="form-check form-check-inline">
+              <div className="form-check form-check-inline">
                   <Input
                     type="checkbox"
                     className="form-check-input"
@@ -801,7 +809,6 @@ const NewTeam = () => {
             </div>
           </div>
           <div className="d-flex gap-2 justify-content-center mt-4 mb-2">
-            
             <button
               type="button"
               className="btn w-sm btn-danger"

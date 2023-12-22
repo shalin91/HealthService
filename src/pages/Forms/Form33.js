@@ -132,7 +132,7 @@ const Form33 = ( props ) => {
                                 type="text"
                                 className="form-control"
                                 id="product-orders-input"
-                                placeholder="hazardous process"
+                                placeholder="dangerous process"
                                 name="dangerous"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"

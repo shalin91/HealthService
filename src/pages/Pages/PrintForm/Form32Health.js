@@ -97,7 +97,10 @@ const Form32Health = () => {
           <tr>
             <td>Date of Leaving / Transfer to or Transfer</td>
             <td colspan="2">
-              {CheckupData?.employeeform32?.dateOfLeaving || "N/A"}
+              {CheckupData?.employeeform32?.dateOfLeaving.slice(0, 10)
+                                              .split("-")
+                                              .reverse()
+                                              .join("-") || "N/A"}
             </td>
           </tr>
           <tr>
@@ -112,7 +115,10 @@ const Form32Health = () => {
           <tr>
             <td>Date</td>
             <td colspan="2">
-              {CheckupData?.employeeform32?.dateOFPosting || "N/A"}
+              {CheckupData?.employeeform32?.dateOFPosting.slice(0, 10)
+                                              .split("-")
+                                              .reverse()
+                                              .join("-") || "N/A"}
             </td>
           </tr>
           <tr>
@@ -151,13 +157,19 @@ const Form32Health = () => {
             <td>Date of decalring unfit</td>
             <td colspan="2">
               {" "}
-              {CheckupData?.employeeform32?.dateOfDeclaringUnfit || "N/A"}
+              {CheckupData?.employeeform32?.dateOfDeclaringUnfit.slice(0, 10)
+                                              .split("-")
+                                              .reverse()
+                                              .join("-") || "N/A"}
             </td>
           </tr>
           <tr>
             <td>Date of issuing fitness certificate</td>
             <td colspan="2">
-              {CheckupData?.employeeform32?.dateOfissuingFitness || "N/A"}
+              {CheckupData?.employeeform32?.dateOfissuingFitness.slice(0, 10)
+                                              .split("-")
+                                              .reverse()
+                                              .join("-") || "N/A"}
             </td>
           </tr>
           <tr>

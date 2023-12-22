@@ -74,7 +74,7 @@ const OtherDetails = (props) => {
                               className="form-label"
                               htmlFor="product-orders-input"
                             >
-                              Parmanent / Temporary
+                              Permanent / Temporary
                             </label>
                             <div className="mb-3">
                               <select
@@ -84,6 +84,7 @@ const OtherDetails = (props) => {
                                 onBlur={handleBlur}
                                 value={values.permanatOrTemporary}
                               >
+                                <option>--select--</option>
                                 <option value="permanent">parmanent</option>
                                 <option value="temporary">temporary</option>
                               </select>
@@ -155,7 +156,7 @@ const OtherDetails = (props) => {
                                 type="text"
                                 className="form-control"
                                 id="product-orders-input"
-                                placeholder="department"
+                                placeholder="exposureTo"
                                 name="exposureTo"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
@@ -198,7 +199,7 @@ const OtherDetails = (props) => {
                               className="form-label"
                               htmlFor="product-orders-input"
                             >
-                              Date of Leavinf/Transfer
+                              Date of Leaving/Transfer
                             </label>
                             <div className="mb-3">
                               <Input
@@ -231,7 +232,7 @@ const OtherDetails = (props) => {
                                 type="text"
                                 className="form-control"
                                 id="product-orders-input"
-                                placeholder="department"
+                                placeholder="reasons for discharge"
                                 name="reasons"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
@@ -257,7 +258,7 @@ const OtherDetails = (props) => {
                                 type="text"
                                 className="form-control"
                                 id="product-orders-input"
-                                placeholder="department"
+                                placeholder="signs&sympton"
                                 name="signs"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
@@ -283,7 +284,7 @@ const OtherDetails = (props) => {
                                 type="text"
                                 className="form-control"
                                 id="product-orders-input"
-                                placeholder="department"
+                                placeholder="nature of tests"
                                 name="natureOfTests"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"

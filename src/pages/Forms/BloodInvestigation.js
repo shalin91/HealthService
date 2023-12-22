@@ -4,10 +4,22 @@ import { Form, Formik } from "formik";
 import { Card, CardHeader, Col, Input, Row } from "reactstrap";
 import SignContext from "../../contextAPI/Context/SignContext";
 import { useContext } from "react";
+
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const BloodInvestigation = (props) => {
   const { setBloodDetails } = useContext(SignContext);
 
   const handleSubmitData = async (values) => {
+
+    toast.success('Data submitted successfully!', {
+      position: 'top-right',
+      autoClose: 3000, // Close the toast after 3 seconds
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+    });
     const data = { ...props, ...values };
 
     const response = await setBloodDetails(data);
@@ -17,6 +29,7 @@ const BloodInvestigation = (props) => {
 
   return (
     <>
+     <ToastContainer />
       <Row>
         <Col lg={12}>
           <Formik

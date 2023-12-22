@@ -237,7 +237,7 @@ const MedicalReports = () => {
                                     style={{ textAlign: "center" }}
                                   >
                                     <Link to={`/form32/${item._id}`}>
-                                      Go to Another Page
+                                       Form 32 Report
                                     </Link>
                                   </td>
 
@@ -247,7 +247,7 @@ const MedicalReports = () => {
                                     style={{ textAlign: "center" }}
                                   >
                                     <Link to={`/form-helth33/${item._id}`}>
-                                      Go to Another Page
+                                      Form-Health33 Report
                                     </Link>
                                   </td>
 
@@ -257,7 +257,7 @@ const MedicalReports = () => {
                                     style={{ textAlign: "center" }}
                                   >
                                     <Link to={`/helth-card/${item._id}`}>
-                                      Go to Another Page
+                                       Health Card 
                                     </Link>
                                   </td>
 
@@ -266,7 +266,7 @@ const MedicalReports = () => {
                                     style={{ textAlign: "center" }}
                                   >
                                     <Link to={`/medical-report/${item._id}`}>
-                                      Go to Another Page
+                                       Medical Report
                                     </Link>
                                   </td>
                                 </tr>

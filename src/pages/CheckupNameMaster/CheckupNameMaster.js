@@ -168,7 +168,7 @@ const CheckupNameMaster = () => {
                                   </label>
                                   <div className="">
                                     <Input
-                                      type="text"
+                                      type="date"
                                       className="form-control"
                                       id="product-orders-input"
                                       name="checkupDate"
