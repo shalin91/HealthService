@@ -74,7 +74,7 @@ const OtherDetails = (props) => {
                               className="form-label"
                               htmlFor="product-orders-input"
                             >
-                              Parmanent / Temporary
+                              Permanent / Temporary
                             </label>
                             <div className="mb-3">
                               <select
@@ -84,7 +84,7 @@ const OtherDetails = (props) => {
                                 onBlur={handleBlur}
                                 value={values.permanatOrTemporary}
                               >
-                                <option value="permanent">parmanent</option>
+                                <option value="permanent">permanent</option>
                                 <option value="temporary">temporary</option>
                               </select>
                             </div>
@@ -198,7 +198,7 @@ const OtherDetails = (props) => {
                               className="form-label"
                               htmlFor="product-orders-input"
                             >
-                              Date of Leavinf/Transfer
+                              Date of Leaving/Transfer
                             </label>
                             <div className="mb-3">
                               <Input

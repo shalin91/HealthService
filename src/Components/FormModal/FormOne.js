@@ -26,7 +26,6 @@ import SignContext from "../../contextAPI/Context/SignContext";
 
 function Example({ companyId, location }) {
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const {
@@ -190,7 +189,7 @@ function Example({ companyId, location }) {
 
   return (
     <React.Fragment>
-      <div className="text-end mb-3 me-3">
+      <div className="text-end mb-3 me-4">
         <Button className="btn btn-success w-sm" onClick={handleShow}>
           Add
         </Button>
@@ -198,9 +197,7 @@ function Example({ companyId, location }) {
 
       <Modal size="lg" show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Modal heading
-          </Modal.Title>
+          
         </Modal.Header>
         <Modal.Body>
           <Row>
@@ -241,7 +238,7 @@ function Example({ companyId, location }) {
                           <Col className="col-sm">
                             <div className="d-flex justify-content-sm-between">
                               <h2 className="card-title mb-0 justify-content-sm-start">
-                                <strong>Title</strong>
+                                <strong>Add Employee</strong>
                               </h2>
                             </div>
                           </Col>
@@ -273,7 +270,7 @@ function Example({ companyId, location }) {
                                 <select
                                   className="form-select"
                                   name="employeeNameAbbrevation"
-                                  onClick={(e) => {
+                                  onChange={(e) => {
                                     handleChange(e);
                                     handleEmpData(e);
                                   }}
@@ -282,11 +279,7 @@ function Example({ companyId, location }) {
                                 >
                                   <option value="Mr.">Mr</option>
                                   <option value="Mrs.">Mrs</option>
-                                  {/* {EmpbyCompandLoc.map((i, index) => (
-                                    <option value={i._id} key={index}>
-                                      {i.employeeName}
-                                    </option>
-                                  ))} */}
+                                 
                                 </select>
                               </div>
                             </Col>
@@ -518,6 +511,28 @@ function Example({ companyId, location }) {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.address}
+                                  />
+                                </div>
+                              </Col>
+                            </Row>
+                            <Row>
+                              <Col lg={8}>
+                                <div className="mb-3">
+                                  <label
+                                    className="form-label"
+                                    htmlFor="manufacturer-name-input"
+                                  >
+                                    Email
+                                  </label>
+                                  <Input
+                                    type="text"
+                                    className="form-control"
+                                    id="manufacturer-name-input"
+                                    name="address"
+                                    placeholder="email"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.email}
                                   />
                                 </div>
                               </Col>
@@ -795,30 +810,7 @@ function Example({ companyId, location }) {
                                 </div>
                               </Col>
 
-                              <Col sm={2}>
-                                <div className="mb-3">
-                                  <label
-                                    className="form-label"
-                                    htmlFor="product-orders-input"
-                                  >
-                                    Email
-                                  </label>
-                                  <div className="input-group mb-3">
-                                    <Input
-                                      type="text"
-                                      className="form-control"
-                                      id="product-orders-input"
-                                      placeholder="email"
-                                      name="email"
-                                      aria-label="orders"
-                                      aria-describedby="product-orders-addon"
-                                      onChange={handleChange}
-                                      onBlur={handleBlur}
-                                      value={values.email}
-                                    />
-                                  </div>
-                                </div>
-                              </Col>
+                              
                             </Row>
 
                             <Row>
@@ -908,7 +900,7 @@ function Example({ companyId, location }) {
                         <button
                           type="submit"
                           className="btn btn-success w-sm"
-                          //   onClick={togglesuccessmodal}
+                          // onClick={togglesuccessmodal}
                         >
                           Submit
                         </button>

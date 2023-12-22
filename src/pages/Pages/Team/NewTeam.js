@@ -67,27 +67,46 @@ const NewTeam = () => {
     email: Yup.string()
       .email("Invalid email address")
       .required("Email is required"),
-    password: Yup.string().required("Password is required"),
+    password: Yup.string()
+    .required("Password is required").min(6, 'Password must be at least 6 characters'),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("password"), null], "Passwords must match")
       .required("Confirm Password is required"),
     roles: Yup.string().required("Role is required"),
     photo: Yup.mixed()
-      .test("fileSize", "File size is too large", (value) => {
-        if (!value) return true; // No file is selected, so it's valid
-        return value.size <= 5242880; // 5MB maximum file size
-      })
-      .test("fileType", "Invalid file type", (value) => {
-        if (!value) return true; // No file is selected, so it's valid
-        return (
-          ["image/jpeg", "image/jpg", "image/png"].includes(value.type) ||
-          value.photo.endsWith(".jpeg") ||
-          value.photo.endsWith(".jpg") ||
-          value.photo.endsWith(".png")
-        );
-      })
-      .required("Photo is required"),
+      // .test("fileSize", "File size is too large", (value) => {
+      //   if (!value) return true; // No file is selected, so it's valid
+      //   return value.size <= 5242880; // 5MB maximum file size
+      // })
+      // .test("fileType", "Invalid file type", (value) => {
+      //   if (!value) return true; // No file is selected, so it's valid
+      //   return (
+      //     ["image/jpeg", "image/jpg", "image/png"].includes(value.type) ||
+      //     value.photo.endsWith(".jpeg") ||
+      //     value.photo.endsWith(".jpg") ||
+      //     value.photo.endsWith(".png")
+      //   );
+      // })
+      // .required("Photo is required"),
     // status: Yup.string().required("Status is required"),
+
+    .test('file', 'Photo is required', (value) => {
+      return value !== undefined && value !== null; // Check if a file is selected
+    })
+    .test('fileSize', 'File size is too large', (value) => {
+      if (!value) return true; // No file is selected, so it's valid
+      return value.size <= 5242880; // 5MB maximum file size
+    })
+    .test('fileType', 'Invalid file type', (value) => {
+      if (!value) return true; // No file is selected, so it's valid
+      return (
+        ['image/jpeg', 'image/jpg', 'image/png'].includes(value.type) ||
+        value.name.endsWith('.jpeg') ||
+        value.name.endsWith('.jpg') ||
+        value.name.endsWith('.png')
+      );
+    })
+    .required('Photo is required'),
   });
 
   const getusers = async () => {
@@ -223,7 +242,7 @@ const NewTeam = () => {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  document.title = "Team | Pushtishangar";
+  document.title = "Team";
 
   return (
     <>
@@ -363,7 +382,7 @@ const NewTeam = () => {
                                 </button>
                               </td>
                               {/* Add other columns here as needed */}
-                              <td>{/* Add edit and remove buttons here */}</td>
+                              
                             </tr>
                           )):null}
                         </tbody>

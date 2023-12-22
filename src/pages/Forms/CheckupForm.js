@@ -246,7 +246,7 @@ const CheckupForm = () => {
                           <Col className="col-sm">
                             <div className="d-flex justify-content-sm-between">
                               <h2 className="card-title mb-0 justify-content-sm-start">
-                                <strong>COMPANY DETAILS</strong>
+                                <strong>Company & Location</strong>
                               </h2>
                             </div>
                           </Col>
@@ -378,7 +378,7 @@ const CheckupForm = () => {
                               <Col className="col-sm">
                                 <div className="d-flex justify-content-sm-between">
                                   <h2 className="card-title mb-0 justify-content-sm-start">
-                                    <strong>CHECK UP DETAILS</strong>
+                                    <strong>Checkup Master</strong>
                                   </h2>
                                 </div>
                               </Col>
@@ -571,7 +571,7 @@ const CheckupForm = () => {
                               <Col className="col-sm">
                                 <div className="d-flex justify-content-sm-between">
                                   <h2 className="card-title mb-0 justify-content-sm-start">
-                                    <strong>Title</strong>
+                                    <strong>Select Employee</strong>
                                   </h2>
                                 </div>
                               </Col>
@@ -782,7 +782,7 @@ const CheckupForm = () => {
                           toggleCustom("1");
                         }}
                       >
-                        Vitals
+                        Vitals & History
                       </NavLink>
                     </NavItem>
                     <NavItem>
@@ -795,7 +795,7 @@ const CheckupForm = () => {
                           toggleCustom("2");
                         }}
                       >
-                        History & Examination
+                         Examination
                       </NavLink>
                     </NavItem>
                     <NavItem>
