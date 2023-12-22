@@ -22,6 +22,7 @@ import BreadCrumb from "../../Components/Common/BreadCrumb";
 import UiContent from "../../Components/Common/UiContent";
 import Example from "../../Components/FormModal/FormOne";
 import SignContext from "../../contextAPI/Context/SignContext";
+import { useNavigate } from "react-router-dom";
 
 const NewForm = () => {
   const {
@@ -31,7 +32,7 @@ const NewForm = () => {
     GetContactDetailsById,
     getCheckupData,
   } = useContext(SignContext);
-
+  const navigate = useNavigate();
   const [Company, setCompany] = useState([]);
   const [Location, setLocation] = useState([]);
   const [Category, setCategory] = useState([]);
@@ -152,6 +153,10 @@ const NewForm = () => {
     setCurrentEmp(curremp[0]);
   };
 
+  const handleNavigatetoCheckup = () => {
+    navigate('/form');
+  };
+
   useEffect(() => {
     getcompanies();
   }, []);
@@ -165,7 +170,7 @@ const NewForm = () => {
       <UiContent />
       <div className="page-content">
         <Container fluid>
-          <BreadCrumb grandParent="Setup" parent="Forms" child="Form-1" />
+          <BreadCrumb grandParent="Setup" parent="Forms" child="Patient-Details" />
           <Row>
             <Col lg={12}>
               <Formik
@@ -198,7 +203,7 @@ const NewForm = () => {
                           <Col className="col-sm">
                             <div className="d-flex justify-content-sm-between">
                               <h2 className="card-title mb-0 justify-content-sm-start">
-                                <strong>Title</strong>
+                                <strong>Company & Location</strong>
                               </h2>
                             </div>
                           </Col>
@@ -342,7 +347,7 @@ const NewForm = () => {
                           <Col className="col-sm">
                             <div className="d-flex justify-content-sm-between">
                               <h2 className="card-title mb-0 justify-content-sm-start">
-                                <strong>Title</strong>
+                                <strong>Employees</strong>
                               </h2>
                             </div>
                           </Col>
@@ -564,7 +569,15 @@ const NewForm = () => {
                           </Row>
                         </div>
                       </div>
+                      <label
+                                className="form-label mt-3 me-3 text-end"
+                                htmlFor="product-orders-input"
+                                style={{fontSize : "20px" , color : "blue"}}
+                              >
+                               Click on Add if no employees 
+                              </label>
                       <Example
+                        
                         companyId={currentCompanyId}
                         location={currentLocation}
                         allcompany={Company}
@@ -1185,7 +1198,7 @@ const NewForm = () => {
                       <button
                         type="submit"
                         className="btn btn-success w-sm"
-                        //   onClick={togglesuccessmodal}
+                        onClick={handleNavigatetoCheckup}
                       >
                         Submit
                       </button>

@@ -67,28 +67,48 @@ const NewTeam = () => {
       .email("Invalid email address")
       .required("Email is required"),
     password: Yup.string()
+
       .required("Password is required")
       .min(6, "Password must be at least 6 characters"),
+
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("password"), null], "Passwords must match")
       .required("Confirm Password is required"),
     roles: Yup.string().required("Role is required"),
     photo: Yup.mixed()
-      .test("fileSize", "File size is too large", (value) => {
-        if (!value) return true; // No file is selected, so it's valid
-        return value.size <= 5242880; // 5MB maximum file size
-      })
-      .test("fileType", "Invalid file type", (value) => {
-        if (!value) return true; // No file is selected, so it's valid
-        return (
-          ["image/jpeg", "image/jpg", "image/png"].includes(value.type) ||
-          value.photo.endsWith(".jpeg") ||
-          value.photo.endsWith(".jpg") ||
-          value.photo.endsWith(".png")
-        );
-      })
-      .required("Photo is required"),
+      // .test("fileSize", "File size is too large", (value) => {
+      //   if (!value) return true; // No file is selected, so it's valid
+      //   return value.size <= 5242880; // 5MB maximum file size
+      // })
+      // .test("fileType", "Invalid file type", (value) => {
+      //   if (!value) return true; // No file is selected, so it's valid
+      //   return (
+      //     ["image/jpeg", "image/jpg", "image/png"].includes(value.type) ||
+      //     value.photo.endsWith(".jpeg") ||
+      //     value.photo.endsWith(".jpg") ||
+      //     value.photo.endsWith(".png")
+      //   );
+      // })
+      // .required("Photo is required"),
     // status: Yup.string().required("Status is required"),
+
+    .test('file', 'Photo is required', (value) => {
+      return value !== undefined && value !== null; // Check if a file is selected
+    })
+    .test('fileSize', 'File size is too large', (value) => {
+      if (!value) return true; // No file is selected, so it's valid
+      return value.size <= 5242880; // 5MB maximum file size
+    })
+    .test('fileType', 'Invalid file type', (value) => {
+      if (!value) return true; // No file is selected, so it's valid
+      return (
+        ['image/jpeg', 'image/jpg', 'image/png'].includes(value.type) ||
+        value.name.endsWith('.jpeg') ||
+        value.name.endsWith('.jpg') ||
+        value.name.endsWith('.png')
+      );
+    })
+    .required('Photo is required'),
   });
 
   const getusers = async () => {
@@ -224,7 +244,7 @@ const NewTeam = () => {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  document.title = "Team | Pushtishangar";
+  document.title = "Team";
 
   return (
     <>
@@ -300,6 +320,7 @@ const NewTeam = () => {
                           </tr>
                         </thead>
                         <tbody className="list form-check-all">
+
                           {currentItems
                             ? currentItems.map((user, key) => (
                                 <tr key={user._id}>
@@ -374,6 +395,75 @@ const NewTeam = () => {
                                 </tr>
                               ))
                             : null}
+
+                          {currentItems?currentItems.map((user, key) => (
+                            <tr key={user._id}>
+                              <th scope="row">
+                                <div className="form-check">
+                                  <td className="name">{key + 1}</td>
+                                </div>
+                              </th>
+                              <td className="name">{user.name}</td>
+                              <td className="Image">
+                                <div
+                                  style={{
+                                    maxWidth: "50px",
+                                    maxHeight: "50px",
+                                    overflow: "hidden",
+                                    display: "inline-block",
+                                  }}
+                                >
+                                  <img
+                                    src={`${url}/${user.photo}`}
+                                    alt="userImage"
+                                    style={{
+                                      width: "100%",
+                                      height: "auto",
+                                    }}
+                                  />
+                                </div>
+                              </td>
+                              <td className="Email" style={{ width: "120px" }}>
+                                {user.email}
+                              </td>
+                              <td className="roles">{user.roles}</td>
+                              <td className="status">
+                                {user.active === true ? (
+                                  <div>
+                                    <span className="badge badge-soft-success badge-border">
+                                      Active
+                                    </span>
+                                  </div>
+                                ) : (
+                                  <div>
+                                    <span className="badge badge-soft-danger badge-border">
+                                      InActive
+                                    </span>
+                                  </div>
+                                )}
+                              </td>
+                              <td className="action">
+                                <button
+                                  className="btn btn-soft-info btn-sm me-2"
+                                  onClick={() => toggleEditmodal(user._id)}
+                                >
+                                  <i className="ri-pencil-line"></i>
+                                </button>
+                                <button
+                                  className="btn btn-soft-danger btn-sm"
+                                  onClick={() => {
+                                    toggledeletemodal();
+                                    setUserToDelete(user);
+                                  }}
+                                >
+                                  <i className="ri-delete-bin-line"></i>
+                                </button>
+                              </td>
+                              {/* Add other columns here as needed */}
+                              
+                            </tr>
+                          )):null}
+
                         </tbody>
                       </table>
                     </div>

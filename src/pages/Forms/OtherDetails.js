@@ -84,8 +84,10 @@ const OtherDetails = (props) => {
                                 onBlur={handleBlur}
                                 value={values.permanatOrTemporary}
                               >
+
                                 <option>--select--</option>
                                 <option value="permanent">parmanent</option>
+
                                 <option value="temporary">temporary</option>
                               </select>
                             </div>
