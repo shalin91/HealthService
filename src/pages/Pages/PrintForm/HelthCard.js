@@ -7,16 +7,18 @@ const HelthCard = () => {
   const { id } = useParams();
   const { getCheckupDatabyId } = useContext(SignContext);
   const [CheckupData, setCheckupData] = useState([]);
-
+  const [company,setcompany]=useState([]);
+  const [location,setlocation]=useState([]);
   const GetCheckupDatabyId = async () => {
     try {
       // Call the API using the id from useParams
       const data = await getCheckupDatabyId(id);
       setCheckupData(data);
-      console.log("new>>>> data");
-
-      console.log(">>name data final");
-
+      console.log(" >>>>>>final company name")
+      console.log(data.location
+        );
+        setcompany(data.compani.companyName)
+        setlocation(data.location)
       // console.log(data.employeeData.employeeName)
       // Update the state with the retrieved data
       // setCheckupData(data);
@@ -39,9 +41,9 @@ const HelthCard = () => {
               <table className="mainTable">
                 <tr>
                   <td style={{ backgroundColor: "#d2d2d2" }}>
-                    <div style={{ textAlign: "center" }}>
-                      YCS-APPSIL PUCARO CANTEEN <br />
-                      HALOL
+                    <div style={{ textAlign: "center",fontWeight: "bold"}}>
+                      {company} <br />
+                      {location}
                     </div>
                   </td>
                 </tr>
@@ -58,7 +60,10 @@ const HelthCard = () => {
                       <h5 className="cardtitle">Check Up Date: </h5>
                       <span style={{ fontSize: "13px" }}>
                         {" "}
-                        {CheckupData?.checkupname?.checkupDate || "N/A"}
+                        {CheckupData?.checkupname?.checkupDate.slice(0, 10)
+                                              .split("-")
+                                              .reverse()
+                                              .join("-") || "N/A"}
                       </span>
                     </div>
                   </td>
@@ -87,7 +92,10 @@ const HelthCard = () => {
                     <div className="cardDataDiv">
                       <h5 className="cardtitle">Birth Date: </h5>
                       <span style={{ fontSize: "13px" }}>
-                        {CheckupData?.employeecontactdetails?.dateOfBirth ||
+                        {CheckupData?.employeecontactdetails?.dateOfBirth.slice(0, 10)
+                                              .split("-")
+                                              .reverse()
+                                              .join("-") ||
                           "N/A"}
                       </span>
                     </div>
@@ -164,7 +172,7 @@ const HelthCard = () => {
                     <span style={{ fontSize: "13px" }}>
                       {CheckupData?.employeeVitalAndHistory?.height || "N/A"}{" "}
                     </span>
-                    <span style={{ fontSize: "13px" }}>cms </span>
+                    <span style={{ fontSize: "13px" ,fontWeight:'bold'}}>cms </span>
                   </div>
                 </td>
               </tr>
@@ -173,11 +181,11 @@ const HelthCard = () => {
                   {" "}
                   <div className="cardDataDiv">
                     <h5 className="cardtitle">Wight </h5>
-                    <span style={{ fontSize: "13px" }}>
+                    <span style={{ fontSize: "13px"}}>
                       {" "}
                       {CheckupData?.employeeVitalAndHistory?.weight || "N/A"}
                     </span>
-                    <span style={{ fontSize: "13px" }}> kg</span>
+                    <span style={{ fontSize: "13px" ,fontWeight:'bold'}}> kg</span>
                   </div>
                 </td>
               </tr>
@@ -188,7 +196,7 @@ const HelthCard = () => {
                     <span style={{ fontSize: "13px" }}>
                       {CheckupData?.employeeVitalAndHistory?.bmi || "N/A"}{" "}
                     </span>
-                    <span style={{ fontSize: "13px" }}>(N:18-25) </span>
+                    <span style={{ fontSize: "13px",fontWeight:'bold'}}>(N:18-25) </span>
                   </div>
                 </td>
               </tr>
@@ -199,7 +207,7 @@ const HelthCard = () => {
                     <span style={{ fontSize: "13px" }}>
                       {CheckupData?.employeeVitalAndHistory?.bp || "N/A"}
                     </span>
-                    <span style={{ fontSize: "13px" }}>mm of Hg</span>
+                    <span style={{ fontSize: "13px",fontWeight:'bold' }}>mm of Hg</span>
                   </div>
                 </td>
               </tr>
@@ -213,7 +221,7 @@ const HelthCard = () => {
                         "N/A"}
                     </span>
                   </div>
-                </td>
+                </td>   
               </tr>
               <tr>
                 <td>
@@ -226,7 +234,9 @@ const HelthCard = () => {
                 <td>
                   <div className="cardDataDiv">
                     <h5 className="cardtitle">Haemoglobin </h5>
-                    <span style={{ fontSize: "13px" }}></span>
+                    <span style={{ fontSize: "13px" }}>{CheckupData?.employeebloodinformation?.hb
+ ||
+                        "N/A"}</span>
                   </div>
                 </td>
               </tr>
@@ -234,7 +244,9 @@ const HelthCard = () => {
                 <td>
                   <div className="cardDataDiv">
                     <h5 className="cardtitle">Blood Sugar </h5>
-                    <span style={{ fontSize: "13px" }}>88</span>
+                    <span style={{ fontSize: "13px" }}>{CheckupData?.employeebloodinformation?.blSugarPP2BS
+ ||
+                        "N/A"}</span>
                   </div>
                 </td>
               </tr>
@@ -249,7 +261,9 @@ const HelthCard = () => {
                 <td>
                   <div className="cardDataDiv">
                     <h5 className="cardtitle">S.Ceratinine</h5>
-                    <span style={{ fontSize: "13px" }}>0.6</span>
+                    <span style={{ fontSize: "13px" }}>{CheckupData?.employeebloodinformation?.sCreatinine
+ ||
+                        "N/A"}</span>
                   </div>
                 </td>
               </tr>
@@ -257,7 +271,9 @@ const HelthCard = () => {
                 <td>
                   <div className="cardDataDiv">
                     <h5 className="cardtitle">S.G.P.T</h5>
-                    <span style={{ fontSize: "13px" }}>27</span>
+                    <span style={{ fontSize: "13px" }}>{CheckupData?.employeebloodinformation?.sgpt
+ ||
+                        "N/A"}</span>
                   </div>
                 </td>
               </tr>
@@ -265,7 +281,7 @@ const HelthCard = () => {
                 <td>
                   <div className="cardDataDiv">
                     <h5 className="cardtitle">Urine Analysis</h5>
-                    <span style={{ fontSize: "13px" }}>Normal</span>
+                    <span style={{ fontSize: "13px" }}></span>
                   </div>
                 </td>
               </tr>
@@ -298,7 +314,7 @@ const HelthCard = () => {
                 <td>
                   <div className="cardDataDiv">
                     <h5 className="cardtitle">X-Ray Chest</h5>
-                    <span style={{ fontSize: "13px" }}>Normal</span>
+                    <span style={{ fontSize: "13px" }}></span>
                   </div>
                 </td>
               </tr>

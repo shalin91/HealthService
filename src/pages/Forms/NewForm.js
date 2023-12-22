@@ -46,6 +46,7 @@ const NewForm = () => {
 
   const getcompanies = async () => {
     const res = await GetCompany();
+    console.log(">>> get companies")
     console.log(res);
     setCompany(res.data);
     // setLocation(res.data.companyLocation)
@@ -80,8 +81,12 @@ const NewForm = () => {
     );
 
     console.log(Values);
+
     setCurrentCompanyId(Values.companyName);
     setCurrentLocation(Values.companyLocation);
+    
+    console.log(" >>>>> company ")
+    console.log(Values.companyName);
 
     const res = await GetEmpsbyCompAndLoc(Values);
     console.log(res.data);
@@ -89,6 +94,7 @@ const NewForm = () => {
     console.log(res.data);
     setEmpbyCompandLoc(res.data);
   };
+
 
   const [customActiveTab, setcustomActiveTab] = useState("1");
   const toggleCustom = (tab) => {
@@ -224,7 +230,7 @@ const NewForm = () => {
                                   onBlur={handleBlur}
                                   value={values.companyName}
                                 >
-                                  <option value="">Company Name</option>
+                                  <option value="">--select--</option>
                                   {Company.map((company) => (
                                     <option
                                       key={company._id}
@@ -256,7 +262,7 @@ const NewForm = () => {
                                   value={values.companyLocation}
                                   onChange={handleChange}
                                 >
-                                  <option value=""> Location</option>
+                                  <option value="">--select--</option>
                                   {Location && Location.length > 0 ? (
                                     Location.map((location) => (
                                       <option key={location} value={location}>
@@ -380,7 +386,7 @@ const NewForm = () => {
                                   onBlur={handleBlur}
                                   value={values.employeeName}
                                 >
-                                  <option value="">Employees</option>
+                                  <option value="">--select--</option>
                                   {EmpbyCompandLoc.map((i, index) => (
                                     <option value={i._id} key={index}>
                                       {i.employeeName}
@@ -404,6 +410,8 @@ const NewForm = () => {
                                   aria-describedby="product-orders-addon"
                                   onChange={handleChange}
                                   onBlur={handleBlur}
+                                  disabled
+                                  readOnly
                                   value={
                                     currentEmp ? currentEmp.employeeName : ""
                                   }
@@ -430,6 +438,8 @@ const NewForm = () => {
                                       ? currentEmp.employeeFatherName
                                       : ""
                                   }
+                                  disabled
+                                  readOnly
                                 />
                               </div>
                               <p className="error text-danger">
@@ -459,6 +469,8 @@ const NewForm = () => {
                                   onChange={handleChange}
                                   onBlur={handleBlur}
                                   value={currentEmp ? currentEmp.ecNo : ""}
+                                  disabled
+                                  readOnly
                                 />
                                 <p className="error text-danger">
                                   {errors.ecNo && touched.ecNo && errors.ecNo}
@@ -488,6 +500,8 @@ const NewForm = () => {
                                       ? currentEmp.companyJobCategorys
                                       : ""
                                   }
+                                  disabled
+                                  readOnly
                                 />
 
                                 <p className="error text-danger">
@@ -541,6 +555,8 @@ const NewForm = () => {
                                       ? currentEmp.companyDepartments
                                       : ""
                                   }
+                                  disabled
+                                  readOnly
                                 />
 
                                 <p className="error text-danger">
@@ -564,6 +580,7 @@ const NewForm = () => {
                         
                         companyId={currentCompanyId}
                         location={currentLocation}
+                        allcompany={Company}
                       />
                     </Card>
                     <Card>
@@ -610,6 +627,8 @@ const NewForm = () => {
                                         ? currentEmpContactDetails.address
                                         : ""
                                     }
+                                    disabled
+                                  readOnly
                                   />
                                   <p className="error text-danger">
                                     {errors.address &&
@@ -661,6 +680,8 @@ const NewForm = () => {
                                           ? currentEmpContactDetails.age
                                           : ""
                                       }
+                                      disabled
+                                      readOnly
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -691,8 +712,14 @@ const NewForm = () => {
                                       value={
                                         currentEmpContactDetails
                                           ? currentEmpContactDetails.dateOfBirth
+                                              .slice(0, 10)
+                                              .split("-")
+                                              .reverse()
+                                              .join("-")
                                           : ""
                                       }
+                                      disabled
+                                      readOnly
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -725,6 +752,8 @@ const NewForm = () => {
                                           ? currentEmpContactDetails.gender
                                           : ""
                                       }
+                                      disabled
+                                      readOnly
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -759,6 +788,8 @@ const NewForm = () => {
                                           ? currentEmpContactDetails.height
                                           : ""
                                       }
+                                      disabled
+                                      readOnly
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -792,6 +823,8 @@ const NewForm = () => {
                                           ? currentEmpContactDetails.bloodGroup
                                           : ""
                                       } // bloodGroup
+                                      disabled
+                                  readOnly
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -825,6 +858,8 @@ const NewForm = () => {
                                           ? currentEmpContactDetails.mentalStatus
                                           : ""
                                       } // mentalStatus
+                                      disabled
+                                     readOnly
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -858,6 +893,8 @@ const NewForm = () => {
                                           ? currentEmpContactDetails.res
                                           : ""
                                       } // res
+                                      disabled
+                                  readOnly
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -890,6 +927,8 @@ const NewForm = () => {
                                           ? currentEmpContactDetails.mobileNumber
                                           : ""
                                       } //mobileNumber
+                                      disabled
+                                  readOnly
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -922,6 +961,8 @@ const NewForm = () => {
                                           ? currentEmpContactDetails.office
                                           : ""
                                       } //office
+                                      disabled
+                                  readOnly
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -956,6 +997,8 @@ const NewForm = () => {
                                           ? currentEmpContactDetails.pp
                                           : ""
                                       } //pp
+                                      disabled
+                                  readOnly
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -989,6 +1032,8 @@ const NewForm = () => {
                                           ? currentEmpContactDetails.emer
                                           : ""
                                       } // emer
+                                      disabled
+                                  readOnly
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -1020,6 +1065,8 @@ const NewForm = () => {
                                           ? currentEmpContactDetails.email
                                           : ""
                                       } //email
+                                      disabled
+                                  readOnly
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -1054,8 +1101,14 @@ const NewForm = () => {
                                       value={
                                         currentEmpContactDetails
                                           ? currentEmpContactDetails.dateOfJoin
+                                              .slice(0, 10)
+                                              .split("-")
+                                              .reverse()
+                                              .join("-")
                                           : ""
                                       } //dateOfJoin
+                                      disabled
+                                  readOnly
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -1087,6 +1140,8 @@ const NewForm = () => {
                                           ? currentEmpContactDetails.idMark
                                           : ""
                                       } // idMark
+                                      disabled
+                                  readOnly
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -1123,6 +1178,8 @@ const NewForm = () => {
                                           ? currentEmpContactDetails.natureOfJob
                                           : ""
                                       } // "no"
+                                      disabled
+                                  readOnly
                                     />
                                   </div>
                                   <p className="error text-danger">

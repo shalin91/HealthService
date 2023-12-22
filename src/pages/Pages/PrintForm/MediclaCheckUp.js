@@ -52,7 +52,10 @@ const MediclaCheckUp = () => {
               </td>
             </tr>
             <tr>
-              <td>DATE: {CheckupData?.checkupname?.checkupDate || "N/A"}</td>
+              <td>DATE: {CheckupData?.checkupname?.checkupDate.slice(0, 10)
+                                              .split("-")
+                                              .reverse()
+                                              .join("-") || "N/A"}</td>
               <td>
                 MOB:{" "}
                 {CheckupData?.employeecontactdetails?.mobileNumber || "N/A"}

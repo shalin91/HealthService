@@ -45,8 +45,9 @@ const Eye = (props) => {
               remark: "",
             }}
             // validationSchema={validationSchema}
-            onSubmit={(values) => {
+            onSubmit={(values,{ resetForm }) => {
               handleSubmitData(values);
+              resetForm();
             }}
           >
             {({
@@ -324,7 +325,7 @@ const Eye = (props) => {
                                   type="text"
                                   rows="3"
                                   name="colourVision"
-                                  placeholder="Enter your message"
+                                  placeholder="colourvision"  
                                   onChange={handleChange}
                                   onBlur={handleBlur}
                                   value={values.colourVision}
@@ -358,7 +359,7 @@ const Eye = (props) => {
                                   type="text"
                                   rows="3"
                                   name="remark"
-                                  placeholder="Enter your message"
+                                  placeholder="remarks"
                                   onChange={handleChange}
                                   onBlur={handleBlur}
                                   value={values.remark}

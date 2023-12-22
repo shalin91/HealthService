@@ -101,6 +101,7 @@ const MedicalReports = () => {
     try {
       const response = await axios.get(url1);
       console.log(">>>> filterdata in array");
+      console.log(response.data);
       console.log(response.data[0].employeeData.employeeName);
       setFilterdata(response.data);
     } catch (error) {
@@ -236,7 +237,7 @@ const MedicalReports = () => {
                                     style={{ textAlign: "center" }}
                                   >
                                     <Link to={`/form32/${item._id}`}>
-                                      Go to Another Page
+                                       Form 32 Report
                                     </Link>
                                   </td>
 
@@ -246,7 +247,7 @@ const MedicalReports = () => {
                                     style={{ textAlign: "center" }}
                                   >
                                     <Link to={`/form-helth33/${item._id}`}>
-                                      Go to Another Page
+                                      Form-Health33 Report
                                     </Link>
                                   </td>
 
@@ -256,7 +257,7 @@ const MedicalReports = () => {
                                     style={{ textAlign: "center" }}
                                   >
                                     <Link to={`/helth-card/${item._id}`}>
-                                      Go to Another Page
+                                       Health Card 
                                     </Link>
                                   </td>
 
@@ -265,7 +266,7 @@ const MedicalReports = () => {
                                     style={{ textAlign: "center" }}
                                   >
                                     <Link to={`/medical-report/${item._id}`}>
-                                      Go to Another Page
+                                       Medical Report
                                     </Link>
                                   </td>
                                 </tr>

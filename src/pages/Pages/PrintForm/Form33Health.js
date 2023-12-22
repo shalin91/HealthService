@@ -40,7 +40,7 @@ const FormHelth33 = () => {
     <Container fluid>
       <div className="mainDivMediclaForm">
         <div className="formTitleDiv">
-          <h5 className="form32Title">FORM NO.32</h5>
+          <h5 className="form32Title">FORM NO.33</h5>
         </div>
         <h5 className="form32SubTitle">
           (Prescribed under Rules 68-T and 102)
@@ -70,7 +70,10 @@ const FormHelth33 = () => {
             <td colSpan={2}>5.Residence:{CheckupData?.employeecontactdetails?.address || "N/A"}</td>
           </tr>
           <tr>
-            <td colSpan={2}>6.Date of Birth:{CheckupData?.employeecontactdetails?.dateOfBirth || "N/A"} </td>
+            <td colSpan={2}>6.Date of Birth:{CheckupData?.employeecontactdetails?.dateOfBirth.slice(0, 10)
+                                              .split("-")
+                                              .reverse()
+                                              .join("-") || "N/A"} </td>
           </tr>
           <tr>
             <td colSpan={2}>7.Name & Address of the Factory:{CheckupData?.employeeData?.companyLocation || "N/A"}</td>

@@ -84,7 +84,10 @@ const OtherDetails = (props) => {
                                 onBlur={handleBlur}
                                 value={values.permanatOrTemporary}
                               >
-                                <option value="permanent">permanent</option>
+
+                                <option>--select--</option>
+                                <option value="permanent">parmanent</option>
+
                                 <option value="temporary">temporary</option>
                               </select>
                             </div>
@@ -155,7 +158,7 @@ const OtherDetails = (props) => {
                                 type="text"
                                 className="form-control"
                                 id="product-orders-input"
-                                placeholder="department"
+                                placeholder="exposureTo"
                                 name="exposureTo"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
@@ -231,7 +234,7 @@ const OtherDetails = (props) => {
                                 type="text"
                                 className="form-control"
                                 id="product-orders-input"
-                                placeholder="department"
+                                placeholder="reasons for discharge"
                                 name="reasons"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
@@ -257,7 +260,7 @@ const OtherDetails = (props) => {
                                 type="text"
                                 className="form-control"
                                 id="product-orders-input"
-                                placeholder="department"
+                                placeholder="signs&sympton"
                                 name="signs"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
@@ -283,7 +286,7 @@ const OtherDetails = (props) => {
                                 type="text"
                                 className="form-control"
                                 id="product-orders-input"
-                                placeholder="department"
+                                placeholder="nature of tests"
                                 name="natureOfTests"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"

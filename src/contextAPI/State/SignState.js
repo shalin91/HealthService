@@ -249,6 +249,16 @@ export const SignState = (props) => {
     }
   };
 
+  //vaishal 
+  const GetCheckUpNameMaster = async () => {
+    try {
+      const response = await axios.get(`${url}/checkup/get-checkupname-master`, {});
+      return response;
+    } catch (error) {
+      return { success: false, msg: "server Error" };
+    }
+  };
+
   // Get Company by Id
   const GetCompanybyId = async (id) => {
     try {
@@ -350,6 +360,23 @@ export const SignState = (props) => {
     }
   };
 
+
+  //vaishal
+
+  const setCheckupNameMaster = async (data) => {
+    try {
+      const response = await axios.post(
+        `${url}/checkup/add-checkupname-master`,
+        data
+      );
+
+      return response;
+    } catch (error) {
+      console.error("Error during API call:", error);
+    }
+  };
+
+
   // set checkupdata
 
   const getCheckupData = async (data) => {
@@ -408,7 +435,7 @@ export const SignState = (props) => {
     try {
       const response = await axios.post(
         `${url}/employ/set-employ-blood-information`,
-        { data }
+        data
       );
 
       return response;
@@ -525,6 +552,8 @@ export const SignState = (props) => {
         setForm32,
         GetCheckUpName,
         getCheckupDatabyId,
+        setCheckupNameMaster,
+        GetCheckUpNameMaster
       }}
     >
       {props.children}

@@ -254,14 +254,14 @@ const VitalsandHistory = (props) => {
                               className="form-label"
                               htmlFor="product-orders-input"
                             >
-                              Tempreature
+                              Temperature
                             </label>
                             <div className="mb-3">
                               <Input
                                 type="text"
                                 className="form-control"
                                 id="product-orders-input"
-                                placeholder="tempreature"
+                                placeholder="temperature"
                                 name="temperature"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
