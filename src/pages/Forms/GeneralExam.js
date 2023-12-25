@@ -49,10 +49,11 @@ const GeneralExam = ( props ) => {
               ent: "",
             }}
             // validationSchema={validationSchema}
-            onSubmit={(values) => {
+            onSubmit={(values , { resetForm }) => {
               // Alert the input values of the form that we filled
               //  alert(JSON.stringify(values));
               handleSubmitData( values );
+              resetForm();
             }}
           >
             {({

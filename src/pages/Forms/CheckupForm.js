@@ -578,11 +578,11 @@ const CheckupForm = () => {
                   age: "",
                   bloodGroup: "",
                 }}
-                onSubmit={(values) => {
+                onSubmit={(values ,{ resetForm }) => {
                   // Alert the input values of the form that we filled
 
                   handleSubmitForEmp();
-
+                  resetForm();
                   //
                 }}
               >

@@ -9,6 +9,12 @@ const MediclaCheckUp = () => {
   const { getCheckupDatabyId } = useContext(SignContext);
   const [CheckupData, setCheckupData] = useState([]);
 
+  const [withGlassChecked, setWithGlassChecked] = useState(false);
+  const [withoutGlassChecked, setWithoutGlassChecked] = useState(false);
+  const[nearwith,setNearwith]=useState(false);
+  const[nearwithout,setNearwithout]=useState(false);
+  const[fit,setfit]=useState(false);
+  const[unfit,setunfit]=useState(false);
   const GetCheckupDatabyId = async () => {
     try {
       
@@ -18,18 +24,55 @@ const MediclaCheckUp = () => {
 
       console.log(">>name data final");
 
+
+
+      if(CheckupData?.employeeeyeinformation?.nearVisionWithRightEye !== "")
+      {
+        setNearwith(true)
+      }
+      else{
+        setNearwithout(true);
+      }
+
       
     } catch (error) {
       console.error("Error fetching checkup data:", error);
       
     }
   };
+
+  
+
+
+
   useEffect(() => {
-    GetCheckupDatabyId(id);
-  }, [id]);
+    const fetchData = async () => {
+      await GetCheckupDatabyId(id);
+      // Once the data is fetched, update the checkbox state
+      if (CheckupData?.employeeeyeinformation?.distandVisionWithLeftEye !== "") {
+        setWithGlassChecked(true);
+        setWithoutGlassChecked(false);
+      }  if (CheckupData?.employeeeyeinformation?.distandVisionWithoutRightEye !== "") {
+        setWithGlassChecked(false);
+        setWithoutGlassChecked(true);
+      }
+      if(CheckupData?.employeeform33?.fitOrUnfit==="Unfit")
+      {
+            setunfit(true);
+      }
+      if(CheckupData?.employeeform33?.fitOrUnfit==="Fit"){
+        setfit(true);
+      }
+    };
+  
+    fetchData();
+  }, [id ]);
+
+  
 
   return (
     <React.Fragment>
+
     <div className="page-content">
     <Container fluid>
       <div className="mainDivMediclaForm">
@@ -311,6 +354,8 @@ const MediclaCheckUp = () => {
 
 
       </Container>
+
+ 
       </div>
     </React.Fragment>
   );

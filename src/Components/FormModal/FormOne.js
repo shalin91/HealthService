@@ -229,7 +229,7 @@ function Example({ companyId, location,allcompany }) {
     <React.Fragment>
       <div className="text-end mb-3 me-4">
         <Button className="btn btn-success w-sm" onClick={handleShow}>
-          Add
+         Add Employee here 
         </Button>
       </div>
 
@@ -568,7 +568,7 @@ function Example({ companyId, location,allcompany }) {
                                     type="text"
                                     className="form-control"
                                     id="manufacturer-name-input"
-                                    name="address"
+                                    name="email"
                                     placeholder="email"
                                     onChange={handleChange}
                                     onBlur={handleBlur}

@@ -41,10 +41,13 @@ const Form33 = ( props ) => {
               referedTo: "",
             }}
             // validationSchema={validationSchema}
-            onSubmit={(values) => {
+            onSubmit={(values , { resetForm }) => {
               // Alert the input values of the form that we filled
               //  alert(JSON.stringify(values));
-              handleSubmitData(values);
+
+               handleSubmitData( values );
+              resetForm();
+
             }}
           >
             {({

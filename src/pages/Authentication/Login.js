@@ -15,7 +15,7 @@ import {
   Alert,
 } from "reactstrap";
 import ParticlesAuth from "../AuthenticationInner/ParticlesAuth";
-import logo from "../../assets/images/PushtiShangarLight.png";
+import logo from "../../assets/images/opd-main-logo.png";
 
 //redux
 import { Link, useNavigate } from "react-router-dom";
@@ -102,11 +102,11 @@ const Login = () => {
               <Col lg={12}>
                 <div className="text-center mt-sm-5 mb-4 text-white-50">
                   <div>
-                    {/* <img
+                    <img
                       src={logo}
-                      alt="pushti shangar"
+                      alt="Viraj"
                       style={{ maxHeight: "200px" }}
-                    ></img> */}
+                    ></img>
                   </div>
                   {/* <p className="mt-3 fs-15 fw-medium">
                     Premium Admin & Dashboard Template
@@ -174,6 +174,8 @@ const Login = () => {
                               className="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted"
                               type="button"
                               id="password-addon"
+                              style={{backgroundColor: "rgb(236,228,230)",
+                                border: "1px solid #fff" , color:"black"}}
                               onClick={() =>
                                 setConfrimPasswordShow(!confrimPasswordShow)
                               }
@@ -201,9 +203,11 @@ const Login = () => {
                         {!buttnLoading ? (
                           <div className="mt-4">
                             <Button
-                              color="success"
+                              style={{backgroundColor: "rgb(236 228 230)",
+                              border: "1px solid #fff" , color:"black"}}
                               className="btn btn-success w-100"
                               type="submit"
+                              
                             >
                               Sign In
                             </Button>

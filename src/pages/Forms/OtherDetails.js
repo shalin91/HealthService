@@ -49,8 +49,9 @@ const OtherDetails = (props) => {
               dateOfissuingFitness: "",
             }}
             // validationSchema={validationSchema}
-            onSubmit={(values) => {
+            onSubmit={(values , { resetForm }) => {
               handleSubmitData(values);
+              resetForm();
             }}
           >
             {({
