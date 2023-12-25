@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import "./../../Pages/PrintForm/printForm.css";
 import SignContext from "../../../contextAPI/Context/SignContext";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const MediclaCheckUp = () => {
   const { id } = useParams();
@@ -15,6 +15,9 @@ const MediclaCheckUp = () => {
   const[nearwithout,setNearwithout]=useState(false);
   const[fit,setfit]=useState(false);
   const[unfit,setunfit]=useState(false);
+  const handlePrint = () => {
+    window.print();
+  };
   const GetCheckupDatabyId = async () => {
     try {
       
@@ -362,12 +365,24 @@ const MediclaCheckUp = () => {
             Mobile:8320370951 -E-mail:vohs2012@gmail.com
           </h5>
         </div>
+
+
+        <div className="hstack gap-2 justify-content-end d-print-none mt-4">
+                      <Link
+                        to="#"
+                        onClick={handlePrint}
+                        className="btn btn-success"
+                      >
+                        <i className="ri-printer-line align-bottom me-1"></i>{" "}
+                        Print
+                      </Link>
+           </div>
       </div>
 
 
       </Container>
 
- 
+                
       </div>
     </React.Fragment>
   );
