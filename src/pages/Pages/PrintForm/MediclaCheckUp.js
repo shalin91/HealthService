@@ -269,8 +269,8 @@ const MediclaCheckUp = () => {
               <td>
                 <div className="titleDiv">
                   Distant Vision
-                  With Glass <input type="checkBox" />
-                  Without Glass <input type="checkBox" />
+                  With Glass <input type="checkBox" checked={withGlassChecked} />
+                  Without Glass <input type="checkBox" checked={withoutGlassChecked} />
                 </div>
               </td>
               <td> 6/</td>
@@ -280,9 +280,9 @@ const MediclaCheckUp = () => {
             <tr>
               <td>
                 <div className="titleDiv">
-                  Near Vision <input type="checkBox" />
-                  With Glass <input type="checkBox" />
-                  Without Glass <input type="checkBox" />
+                  Near Vision 
+                  With Glass <input type="checkBox"  checked={nearwith}/>
+                  Without Glass <input type="checkBox" checked={nearwithout}/>
                 </div>
               </td>
               <td> N/</td>
@@ -322,11 +322,11 @@ const MediclaCheckUp = () => {
                   my opinion
                 </p>
                 <p>
-                  <input type="checkBox" />{" "}
+                  <input type="checkBox" checked={CheckupData?.employeeform33?.unfitReason !== ""} />{" "}
                   <span>He/She is fit the employment</span>
                 </p>
                 <p>
-                  <input type="checkBox" />{" "}
+                  <input type="checkBox" checked={CheckupData?.employeeform33?.unfitReason === ""}/>{" "}
                   <span>
                     He/She not fit the employment (Temporary/Permanent)
                   </span>
