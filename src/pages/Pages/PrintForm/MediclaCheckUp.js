@@ -273,8 +273,14 @@ const MediclaCheckUp = () => {
                   Without Glass <input type="checkBox" checked={withoutGlassChecked} />
                 </div>
               </td>
-              <td> 6/</td>
-              <td>6/</td>
+              <td> 6/
+              { 
+  CheckupData?.employeeeyeinformation?.distandVisionWithoutRightEye || CheckupData?.employeeeyeinformation?.distandVisionWithRightEye || "N/A"
+}
+              </td>
+              <td>6/{ 
+  CheckupData?.employeeeyeinformation?.distandVisionWithoutLeftEye || CheckupData?.employeeeyeinformation?.distandVisionWithLeftEye || "N/A"
+}</td>
             </tr>
 
             <tr>
@@ -285,8 +291,14 @@ const MediclaCheckUp = () => {
                   Without Glass <input type="checkBox" checked={nearwithout}/>
                 </div>
               </td>
-              <td> N/</td>
-              <td>N/</td>
+              <td> N/{ 
+  CheckupData?.employeeeyeinformation?.nearVisionWithoutRightEye || CheckupData?.employeeeyeinformation?.nearVisionWithRightEye || "N/A"
+}</td>
+              <td>N/{ 
+  CheckupData?.employeeeyeinformation?.nearVisionWithoutLeftEye || CheckupData?.employeeeyeinformation?.nearVisionWithLeftEye || "N/A"
+}
+              
+              </td>
             </tr>
             <tr>
               <td colSpan={3}>
