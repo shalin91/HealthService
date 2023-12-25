@@ -3,7 +3,8 @@ import "./../../Pages/PrintForm/printForm.css";
 import SignContext from "../../../contextAPI/Context/SignContext";
 import { useParams } from "react-router-dom";
 import { Container } from "react-bootstrap";
-
+import { Link } from "react-router-dom";
+import ReactDOMServer from "react-dom/server";
 
 const Form32Health = () => {
   const { id } = useParams();
@@ -12,19 +13,15 @@ const Form32Health = () => {
 
   const GetCheckupDatabyId = async () => {
     try {
-      // Call the API using the id from useParams
       const data = await getCheckupDatabyId(id);
       setCheckupData(data);
       console.log("new>>>> data");
 
       console.log(">>name data final");
 
-      // console.log(data.employeeData.employeeName)
-      // Update the state with the retrieved data
-      // setCheckupData(data);
+      
     } catch (error) {
       console.error("Error fetching checkup data:", error);
-      // Handle errors if needed
     }
   };
 
@@ -37,6 +34,17 @@ const Form32Health = () => {
   useEffect(() => {
     GetCheckupDatabyId(id);
   }, [id]);
+  const printStyles = `
+    @media print {
+      .print-button-container {
+        display: none;
+      }
+    }
+  `;
+  const printButtonStyles = {
+    display: 'block', // Show the button by default
+  };
+
 
   return (
     <React.Fragment>
@@ -202,10 +210,21 @@ const Form32Health = () => {
               </tr>
             </table>
             <div></div>
-            <button type="button" class="btn btn-primary" onClick={handlePrint}>
-              Print
-            </button>
-           
+       
+
+            <div className="hstack gap-2 justify-content-end d-print-none mt-4">
+                      <Link
+                        to="#"
+                        onClick={handlePrint}
+                        className="btn btn-success"
+                      >
+                        <i className="ri-printer-line align-bottom me-1"></i>{" "}
+                        Print
+                      </Link>
+           </div>
+
+            
+            
           </div>
         </Container>
       </div>

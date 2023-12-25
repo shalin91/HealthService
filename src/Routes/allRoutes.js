@@ -124,6 +124,7 @@ import HelthCard from "../pages/Pages/PrintForm/HelthCard.js";
 import MediclaCheckUp from "../pages/Pages/PrintForm/MediclaCheckUp.js";
 import MedicalReports from "../pages/Reports/MedicalReports.js";
 import CheckupNameMaster from "../pages/CheckupNameMaster/CheckupNameMaster.js";
+import CustomersByDate from "../pages/Reports/CustomersByDate.js";
 
 // import customerNew from "../pages/Ecommerce/EcommerceCustomers/customerNew";
 const authProtectedRoutes = [
@@ -283,6 +284,14 @@ const authProtectedRoutes = [
     component: (
       <SignState>
         <CheckupNameMaster />
+      </SignState>
+    ),
+  },
+  {
+    path: "/medical-reportbydate",
+    component: (
+      <SignState>
+        <CustomersByDate />
       </SignState>
     ),
   },

@@ -127,7 +127,7 @@ const MedicalReports = () => {
             <Col lg={12}>
               <Card>
                 <CardHeader className="d-flex justify-content-between align-items-center">
-                  <h4 className="card-title mb-0">Customer Reports</h4>
+                  <h4 className="card-title mb-0">Medical Reports</h4>
                   <div className="filter-dropdown " style={{ display: "flex" }}>
                     {/* <label htmlFor="filterSelect">Filter:</label> */}
                     <select
