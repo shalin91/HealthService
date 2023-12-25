@@ -121,7 +121,7 @@ const MedicalReports = () => {
           <BreadCrumb
             grandParent="Setup"
             parent="Reports"
-            child="CustomerReports"
+            child="Reports"
           />
           <Row>
             <Col lg={12}>

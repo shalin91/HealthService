@@ -92,7 +92,7 @@ const CustomersByDate = () => {
     }
   };
 
-  document.title = "Customer Report by Date";
+  document.title = "Report by Date";
 
   return (
     <>
