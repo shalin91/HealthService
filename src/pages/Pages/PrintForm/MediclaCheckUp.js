@@ -11,19 +11,17 @@ const MediclaCheckUp = () => {
 
   const GetCheckupDatabyId = async () => {
     try {
-      // Call the API using the id from useParams
+      
       const data = await getCheckupDatabyId(id);
       setCheckupData(data);
       console.log("new>>>> data");
 
       console.log(">>name data final");
 
-      // console.log(data.employeeData.employeeName)
-      // Update the state with the retrieved data
-      // setCheckupData(data);
+      
     } catch (error) {
       console.error("Error fetching checkup data:", error);
-      // Handle errors if needed
+      
     }
   };
   useEffect(() => {
@@ -72,7 +70,10 @@ const MediclaCheckUp = () => {
                 {CheckupData?.employeeData?.employeeFatherName || "N/A"}
               </td>
               <td colspan="2">
-                DOB: {CheckupData?.employeecontactdetails?.dateOfBirth || "N/A"}
+                DOB: {CheckupData?.employeecontactdetails?.dateOfBirth.slice(0, 10)
+                                              .split("-")
+                                              .reverse()
+                                              .join("-") || "N/A"}
               </td>
             </tr>
             <tr>
@@ -108,7 +109,7 @@ const MediclaCheckUp = () => {
                 }}
                 rowspan="6"
               >
-                <div className="sideTitle"> HISTORY</div>
+                <div className="sideTitle">HISTORY</div>
               </td>
             </tr>
             <tr>
@@ -153,20 +154,20 @@ const MediclaCheckUp = () => {
                   TEM:{" "}
                   {CheckupData?.employeeVitalAndHistory?.temperature || "N/A"}
                   <span>
-                    <sup>0</sup>f
+                    <sup className="abc">0</sup>f
                   </span>
                 </div>
               </td>
               <td>
                 <div className="tdData">
                   BP: {CheckupData?.employeeVitalAndHistory?.bp || "N/A"}
-                  <span>mm of Hg</span>
+                  <span className="abc">mm of Hg</span>
                 </div>
               </td>
               <td>
                 <div className="tdData">
                   PULSE: {CheckupData?.employeeVitalAndHistory?.pulse || "N/A"}
-                  <span>per Min.</span>
+                  <span className="abc">per Min.</span>
                 </div>
               </td>
             </tr>
@@ -224,7 +225,7 @@ const MediclaCheckUp = () => {
             <tr>
               <td>
                 <div className="titleDiv">
-                  Distant Vision <input type="checkBox" />
+                  Distant Vision
                   With Glass <input type="checkBox" />
                   Without Glass <input type="checkBox" />
                 </div>
@@ -307,6 +308,8 @@ const MediclaCheckUp = () => {
           </h5>
         </div>
       </div>
+
+
       </Container>
       </div>
     </React.Fragment>

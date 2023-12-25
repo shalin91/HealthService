@@ -16,11 +16,9 @@ import {
 import BreadCrumb from "../../Components/Common/BreadCrumb";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { saveAs } from 'file-saver';
-
+import { saveAs } from "file-saver";
 
 const ITEMS_PER_PAGE = 10;
-
 
 const CustomersByDate = () => {
   const url = `${process.env.REACT_APP_BASE_URL}`;
@@ -31,54 +29,53 @@ const CustomersByDate = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
   const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
-  const currentItems = customerData.slice(
-    indexOfFirstItem,
-    indexOfLastItem
-  );
+  const currentItems = customerData.slice(indexOfFirstItem, indexOfLastItem);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const exportReport = (data, filename) => {
     const csvData = arrayToCSV(data);
-  
-   
-    const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8' });
-  
+
+    const blob = new Blob([csvData], { type: "text/csv;charset=utf-8" });
+
     saveAs(blob, filename);
   };
-  
+
   const arrayToCSV = (data) => {
     const header = Object.keys(data[0]);
-    const csv = [header.join(',')];
+    const csv = [header.join(",")];
     data.forEach((row) => {
       const rowValues = header.map((field) => row[field]);
-      csv.push(rowValues.join(','));
+      csv.push(rowValues.join(","));
     });
-    return csv.join('\n');
+    return csv.join("\n");
   };
 
   const fetchCustomerData = async () => {
     try {
       setLoading(true);
 
-      // Convert the selected dates to the "MM/dd/yyyy" format for the API
-      const formattedStartDate = startDate.toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-      });
-      const formattedEndDate = endDate.toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-      });
+      const formattedStartDate = startDate
+        .toLocaleDateString("en-US", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+        })
+        .replace(/(\d+)\/(\d+)\/(\d+)/, "$2/$1/$3");
+      const formattedEndDate = endDate
+        .toLocaleDateString("en-US", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+        })
+        .replace(/(\d+)\/(\d+)\/(\d+)/, "$2/$1/$3");
 
-      const fullUrl = `${url}/customer/getcustomerreport/?startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
+      const fullUrl = `${url}/checkup/get-all-checkup-data?startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
       console.log(fullUrl);
 
-      const response = await Axios.post(fullUrl);
+      const response = await Axios.get(fullUrl);
       console.log(response);
-      setCustomerData(response.customers);
+      // setCustomerData(response.data); // Assuming the data is in the response's data property
     } catch (error) {
       console.error("Error fetching customer data", error);
       // Handle error state or display an error message
@@ -110,14 +107,14 @@ const CustomersByDate = () => {
             <Col lg={12}>
               <Card>
                 <CardHeader className="d-flex justify-content-between align-items-center">
-                  <h4 className="card-title mb-0">Customer by Date Range</h4>
-                  < Row className="align-items-center">
+                  <h4 className="card-title mb-0">Reports by Date Range</h4>
+                  <Row className="align-items-center">
                     <Col className="lg-auto">
                       <DatePicker
                         className="form-control"
                         selected={startDate}
                         onChange={(date) => handleDateChange(date, "start")}
-                        dateFormat="MM/dd/yyyy"
+                        dateFormat="dd/MM/yyyy"
                         placeholderText="Select Start Date"
                       />
                     </Col>
@@ -126,31 +123,31 @@ const CustomersByDate = () => {
                         className="form-control"
                         selected={endDate}
                         onChange={(date) => handleDateChange(date, "end")}
-                        dateFormat="MM/dd/yyyy" // Set the desired date format
+                        dateFormat="dd/MM/yyyy" // Set the desired date format
                         placeholderText="Select End Date"
                       />
                     </Col>
-                    
-                  
 
                     <Col className="lg-auto">
-                    <Link
+                      <Link
                         className="btn btn-primary add-btn me-1"
                         onClick={fetchCustomerData}
                         id="create-btn"
                       >
-                       Apply
+                        Apply
                       </Link>
-                      </Col>
+                    </Col>
                     <Col className="lg-auto">
-                    <Link
+                      <Link
                         className="btn btn-primary add-btn me-1"
-                        onClick={() => exportReport(currentItems, 'customer_report.csv')}
+                        onClick={() =>
+                          exportReport(currentItems, "customer_report.csv")
+                        }
                         id="create-btn"
                       >
-                       Export Report
+                        Export Report
                       </Link>
-                      </Col>
+                    </Col>
                   </Row>
                 </CardHeader>
                 <CardBody>
@@ -162,33 +159,37 @@ const CustomersByDate = () => {
                       >
                         <thead className="table-light">
                           <tr>
-                            <th className="name">Index</th>
-                            <th className="name">Username</th>
-                            <th className="name">email</th>
-                            <th className="name">Phone No.</th>
-                            <th className="name">Registered At</th>
-                            <th className="name">Status</th>
+                            <th className="name">Name</th>
+                            <th className="name">Form 32</th>
+                            <th className="name">Form 33 Health</th>
+                            <th className="name">Health Card.</th>
+                            <th className="name">Medical Check Up</th>
                           </tr>
                         </thead>
 
                         <tbody className="list form-check-all">
-                        {currentItems?currentItems.map((customer, index) => (
-                <tr key={customer.id}>
-                  <td>{index + 1}</td>
-                  <td>{customer.username}</td>
-                  <td>{customer.email}</td>
-                  <td>{customer.phone}</td>
-                  <td>{new Date(customer.createdAt).toLocaleDateString(
-                              "en-US",
-                              {
-                                year: "numeric",
-                                month: "short",
-                                day: "numeric",
-                              }
-                            )}</td>
-                  <td>{customer.active ? 'Active' : 'Inactive'}</td>
-                </tr>
-              )):null}
+                          {currentItems
+                            ? currentItems.map((customer, index) => (
+                                <tr key={customer.id}>
+                                  <td>{index + 1}</td>
+                                  <td>{customer.username}</td>
+                                  <td>{customer.email}</td>
+                                  <td>{customer.phone}</td>
+                                  <td>
+                                    {new Date(
+                                      customer.createdAt
+                                    ).toLocaleDateString("en-US", {
+                                      year: "numeric",
+                                      month: "short",
+                                      day: "numeric",
+                                    })}
+                                  </td>
+                                  <td>
+                                    {customer.active ? "Active" : "Inactive"}
+                                  </td>
+                                </tr>
+                              ))
+                            : null}
                         </tbody>
                       </table>
                     </div>
@@ -205,9 +206,7 @@ const CustomersByDate = () => {
                       />
                     </PaginationItem>
                     {Array.from({
-                      length: Math.ceil(
-                        customerData.length / ITEMS_PER_PAGE
-                      ),
+                      length: Math.ceil(customerData.length / ITEMS_PER_PAGE),
                     }).map((_, index) => (
                       <PaginationItem
                         key={index + 1}

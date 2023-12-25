@@ -3,7 +3,7 @@ import "./../../Pages/PrintForm/printForm.css";
 import SignContext from "../../../contextAPI/Context/SignContext";
 import { useParams } from "react-router-dom";
 import { Container } from "react-bootstrap";
-
+import { Link } from "react-router-dom";
 const FormHelth33 = () => {
   const { id } = useParams();
   const { getCheckupDatabyId } = useContext(SignContext);
@@ -28,6 +28,10 @@ const FormHelth33 = () => {
   };
 
   // console.log(CheckupData);
+
+  const handlePrint = () => {
+    window.print();
+  };
 
   useEffect(() => {
     GetCheckupDatabyId(id);
@@ -178,6 +182,17 @@ const FormHelth33 = () => {
                 </td>
               </tr>
             </table>
+
+            <div className="hstack gap-2 justify-content-end d-print-none mt-4">
+                      <Link
+                        to="#"
+                        onClick={handlePrint}
+                        className="btn btn-success"
+                      >
+                        <i className="ri-printer-line align-bottom me-1"></i>{" "}
+                        Print
+                      </Link>
+           </div>
           </div>
         </Container>
       </div>

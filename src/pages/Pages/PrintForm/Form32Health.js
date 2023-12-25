@@ -3,7 +3,7 @@ import "./../../Pages/PrintForm/printForm.css";
 import SignContext from "../../../contextAPI/Context/SignContext";
 import { useParams } from "react-router-dom";
 import { Container } from "react-bootstrap";
-import html2pdf from "html2pdf.js";
+import { Link } from "react-router-dom";
 import ReactDOMServer from "react-dom/server";
 
 const Form32Health = () => {
@@ -13,19 +13,15 @@ const Form32Health = () => {
 
   const GetCheckupDatabyId = async () => {
     try {
-      // Call the API using the id from useParams
       const data = await getCheckupDatabyId(id);
       setCheckupData(data);
       console.log("new>>>> data");
 
       console.log(">>name data final");
 
-      // console.log(data.employeeData.employeeName)
-      // Update the state with the retrieved data
-      // setCheckupData(data);
+      
     } catch (error) {
       console.error("Error fetching checkup data:", error);
-      // Handle errors if needed
     }
   };
 
@@ -34,43 +30,21 @@ const Form32Health = () => {
     window.print();
   };
 
-  const handleGeneratePDF = () => {
-    const htmlString = `<!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Hello, World!</title>
-    </head>
-    <body>
-      <h1>Hello, World!</h1>
-    </body>
-    </html>`;
-
-    const content = document.getElementById("pdfContent");
-    const pdfOptions = {
-      margin: 10,
-      filename: "Form32Health.pdf",
-      image: { type: "jpeg", quality: 0.98 },
-      html2canvas: { scale: 2 },
-    };
-
-    html2pdf()
-      .from(htmlString)
-      .set(pdfOptions)
-      .outputPdf((pdf) => {
-        const blob = new Blob([pdf], { type: "application/pdf" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "Form32Health.pdf";
-        a.click();
-        URL.revokeObjectURL(url);
-      });
-  };
+  
   useEffect(() => {
     GetCheckupDatabyId(id);
   }, [id]);
+  const printStyles = `
+    @media print {
+      .print-button-container {
+        display: none;
+      }
+    }
+  `;
+  const printButtonStyles = {
+    display: 'block', // Show the button by default
+  };
+
 
   return (
     <React.Fragment>
@@ -236,17 +210,21 @@ const Form32Health = () => {
               </tr>
             </table>
             <div></div>
-            <button type="button" class="btn btn-primary" onClick={handlePrint}>
-              Print
-            </button>
-            <button
-              type="button"
-              class="btn btn-primary"
-              style={{ marginLeft: "4px" }}
-              onClick={handleGeneratePDF}
-            >
-              Pdf
-            </button>
+       
+
+            <div className="hstack gap-2 justify-content-end d-print-none mt-4">
+                      <Link
+                        to="#"
+                        onClick={handlePrint}
+                        className="btn btn-success"
+                      >
+                        <i className="ri-printer-line align-bottom me-1"></i>{" "}
+                        Print
+                      </Link>
+           </div>
+
+            
+            
           </div>
         </Container>
       </div>
