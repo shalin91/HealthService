@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { Dropdown, DropdownMenu, DropdownToggle, Form } from "reactstrap";
 
 //import images
-import logoSm from "../assets/images/logo-sm.png";
+import logoSm from "../assets/images/opd-small-logo.png";
 import logoDark from "../assets/images/logo-dark.png";
-import logoLight from "../assets/images/logo-light.png";
+import logoLight from "../assets/images/inside-admin-logo (1).png";
 
 //import Components
 import SearchOption from "../Components/Common/SearchOption";
@@ -67,19 +67,19 @@ const Header = ({ onChangeLayoutMode, layoutModeType, headerClass }) => {
               <div className="navbar-brand-box horizontal-logo">
                 <Link to="/" className="logo logo-dark">
                   <span className="logo-sm">
-                    {/* <img src={logoSm} alt="" height="22" /> */}
+                    <img src={logoSm} alt="" height="22" />
                   </span>
                   <span className="logo-lg">
-                    {/* <img src={logoDark} alt="" height="17" /> */}
+                    <img src={logoLight} alt="" height="17" />
                   </span>
                 </Link>
 
                 <Link to="/" className="logo logo-light">
                   <span className="logo-sm">
-                    {/* <img src={logoSm} alt="" height="22" /> */}
+                    <img src={logoSm} alt="" height="22" />
                   </span>
                   <span className="logo-lg">
-                    {/* <img src={logoLight} alt="" height="17" /> */}
+                    <img src={logoLight} alt="" height="17" />
                   </span>
                 </Link>
               </div>

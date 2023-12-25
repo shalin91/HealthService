@@ -174,7 +174,7 @@ const Login = () => {
                               className="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted"
                               type="button"
                               id="password-addon"
-                              style={{backgroundColor: "#eadfbf",
+                              style={{backgroundColor: "rgb(236,228,230)",
                                 border: "1px solid #fff" , color:"black"}}
                               onClick={() =>
                                 setConfrimPasswordShow(!confrimPasswordShow)
@@ -203,7 +203,7 @@ const Login = () => {
                         {!buttnLoading ? (
                           <div className="mt-4">
                             <Button
-                              style={{backgroundColor: "#eadfbf",
+                              style={{backgroundColor: "rgb(236 228 230)",
                               border: "1px solid #fff" , color:"black"}}
                               className="btn btn-success w-100"
                               type="submit"

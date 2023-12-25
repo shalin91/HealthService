@@ -46,10 +46,11 @@ const Form33 = ( props ) => {
               referedTo: "",
             }}
             // validationSchema={validationSchema}
-            onSubmit={(values) => {
+            onSubmit={(values , { resetForm }) => {
               // Alert the input values of the form that we filled
               //  alert(JSON.stringify(values));
                handleSubmitData( values );
+              resetForm();
             }}
           >
             {({
@@ -81,12 +82,12 @@ const Form33 = ( props ) => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="employed/propose"
-                                name="employed"
+                                name="employyedOrPrpposed"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.employed}
+                                value={values.employyedOrPrpposed}
                               />
                             </div>
                           </div>
@@ -107,12 +108,12 @@ const Form33 = ( props ) => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="hazardous process"
-                                name="hazardous"
+                                name="hazardousProcess"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.hazardous}
+                                value={values.hazardousProcess}
                               />
                             </div>
                           </div>
@@ -133,12 +134,12 @@ const Form33 = ( props ) => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="dangerous process"
-                                name="dangerous"
+                                name="dnagerousOperation"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.dangerous}
+                                value={values.dnagerousOperation}
                               />
                             </div>
                           </div>
@@ -156,14 +157,14 @@ const Form33 = ( props ) => {
                             <div className="mb-3">
                               <select
                                 className="form-select"
-                                name="fitUnfit"
+                                name="fitOrUnfit"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.fitUnfit}
+                                value={values.fitOrUnfit}
                               >
                                 <option value="">Select</option>
-                                <option value="Mr.">Mr.</option>
-                                <option value="Mrs.">Mrs.</option>
+                                <option value="Fit">Fit</option>
+                                <option value="Unfit">Unfit</option>
                               </select>
                             </div>
                           </div>
@@ -181,12 +182,12 @@ const Form33 = ( props ) => {
                               className="form-control"
                               id="product-orders-input"
                               placeholder="reason"
-                              name="reason"
+                              name="unfitReason"
                               aria-label="orders"
                               aria-describedby="product-orders-addon"
                               onChange={handleChange}
                               onBlur={handleBlur}
-                              value={values.reason}
+                              value={values.unfitReason}
                             />
                           </div>
                         </Col>
@@ -206,12 +207,12 @@ const Form33 = ( props ) => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="referred to"
-                                name="reffered"
+                                name="referedTo"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.reffered}
+                                value={values.referedTo}
                               />
                             </div>
                           </div>

@@ -569,13 +569,6 @@ const NewForm = () => {
                           </Row>
                         </div>
                       </div>
-                      <label
-                                className="form-label mt-3 me-3 text-end"
-                                htmlFor="product-orders-input"
-                                style={{fontSize : "20px" , color : "blue"}}
-                              >
-                               Click on Add if no employees 
-                              </label>
                       <Example
                         
                         companyId={currentCompanyId}
