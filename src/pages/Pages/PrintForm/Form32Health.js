@@ -3,8 +3,7 @@ import "./../../Pages/PrintForm/printForm.css";
 import SignContext from "../../../contextAPI/Context/SignContext";
 import { useParams } from "react-router-dom";
 import { Container } from "react-bootstrap";
-import html2pdf from "html2pdf.js";
-import ReactDOMServer from "react-dom/server";
+
 
 const Form32Health = () => {
   const { id } = useParams();
@@ -34,40 +33,7 @@ const Form32Health = () => {
     window.print();
   };
 
-  const handleGeneratePDF = () => {
-    const htmlString = `<!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Hello, World!</title>
-    </head>
-    <body>
-      <h1>Hello, World!</h1>
-    </body>
-    </html>`;
-
-    const content = document.getElementById("pdfContent");
-    const pdfOptions = {
-      margin: 10,
-      filename: "Form32Health.pdf",
-      image: { type: "jpeg", quality: 0.98 },
-      html2canvas: { scale: 2 },
-    };
-
-    html2pdf()
-      .from(htmlString)
-      .set(pdfOptions)
-      .outputPdf((pdf) => {
-        const blob = new Blob([pdf], { type: "application/pdf" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "Form32Health.pdf";
-        a.click();
-        URL.revokeObjectURL(url);
-      });
-  };
+  
   useEffect(() => {
     GetCheckupDatabyId(id);
   }, [id]);
@@ -239,14 +205,7 @@ const Form32Health = () => {
             <button type="button" class="btn btn-primary" onClick={handlePrint}>
               Print
             </button>
-            <button
-              type="button"
-              class="btn btn-primary"
-              style={{ marginLeft: "4px" }}
-              onClick={handleGeneratePDF}
-            >
-              Pdf
-            </button>
+           
           </div>
         </Container>
       </div>
