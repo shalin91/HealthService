@@ -335,6 +335,11 @@ const Navdata = () => {
           stateVariables: isSupportTickets,
           childItems: [
             { id: 1, label: "Medical Reports", link: "/medical-report" },
+            {
+              id: 2,
+              label: "Medical Reports by Date",
+              link: "/medical-reportbydate",
+            },
           ],
         },
         // {

@@ -3,6 +3,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import "./../../Pages/PrintForm/printForm.css";
 import SignContext from "../../../contextAPI/Context/SignContext";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 const HelthCard = () => {
   const { id } = useParams();
   const { getCheckupDatabyId } = useContext(SignContext);
@@ -11,7 +12,7 @@ const HelthCard = () => {
   const [location,setlocation]=useState([]);
   const GetCheckupDatabyId = async () => {
     try {
-      // Call the API using the id from useParams
+      
       const data = await getCheckupDatabyId(id);
       setCheckupData(data);
       console.log(" >>>>>>final company name")
@@ -19,13 +20,14 @@ const HelthCard = () => {
         );
         setcompany(data.compani.companyName)
         setlocation(data.location)
-      // console.log(data.employeeData.employeeName)
-      // Update the state with the retrieved data
-      // setCheckupData(data);
+      
     } catch (error) {
       console.error("Error fetching checkup data:", error);
-      // Handle errors if needed
+      
     }
+  };
+  const handlePrint = () => {
+    window.print();
   };
   useEffect(() => {
     GetCheckupDatabyId(id);
@@ -180,7 +182,7 @@ const HelthCard = () => {
                 <td>
                   {" "}
                   <div className="cardDataDiv">
-                    <h5 className="cardtitle">Wight </h5>
+                    <h5 className="cardtitle">Weight </h5>
                     <span style={{ fontSize: "13px"}}>
                       {" "}
                       {CheckupData?.employeeVitalAndHistory?.weight || "N/A"}
@@ -321,6 +323,17 @@ const HelthCard = () => {
             </table>
           </Col>
         </Row>
+
+        <div className="hstack gap-2 justify-content-end d-print-none mt-4">
+                      <Link
+                        to="#"
+                        onClick={handlePrint}
+                        className="btn btn-success"
+                      >
+                        <i className="ri-printer-line align-bottom me-1"></i>{" "}
+                        Print
+                      </Link>
+           </div>
       </div>
       </Container>
       </div>
