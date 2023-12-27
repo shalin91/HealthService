@@ -147,8 +147,9 @@ const MedicalReports = () => {
   
 
   const handleExportReport = () => {
+    
     if (filterdata && filterdata.length > 0) {
-      const headers = ["NAME", "AGE", "SEX", "DATE", "HEIGHT" ,"WEIGHT" , "PRESENT COMPLAINT" , "PAST ILLNESS" , "CURRENT MEDICATION" , "ALLERGY" , "ADDICTION" , "B.P" , "PULSE" , "WITHOUT GLASS DISTANT RIGHT" , "WITHOUT GLASS DISTANT LEFT" , "WITHOUT GLASS NEAR RIGHT" , "WITHOUT GLASS NEAR LEFT" , "WITH GLASS DISTANT RIGHT" , "WITH GLASS DISTANT LEFT" , "WITH GLASS NEAR RIGHT" , "WITH GLASS NEAR LEFT" , "COLOUR BLINDNESS" , "HAEMOGLOBIN" , "W.B.C" , "PLATELET COUNT" , "BLOOD GROUP" , "RANDOM SUGAR" , "SGPT" , "S.CREATINE" , "PROTEIN" , "GLUCOSE" , "KETONE" , "PUS CELLS" , "RED CELLS" , "SPIROMETRY" , "AUDIOMETRY", "X-RAY(CHEST)" , "FINAL REMARK" , "FIT" , "SHOE SIZE" , "CELL NO" , "DOB" , "VACCINE DOSE" , "MC CODE"];
+      const headers = ["NAME", "AGE", "SEX", "DATE", "HEIGHT" ,"WEIGHT" , "PRESENT COMPLAINT" , "PAST ILLNESS" , "CURRENT MEDICATION" , "ALLERGY" , "ADDICTION" , "B.P" , "PULSE" , "W/O GLASS DISTANT RIGHT" , "W/O GLASS DISTANT LEFT" , "W/O GLASS NEAR RIGHT" , "W/O GLASS NEAR LEFT" , "WITH GLASS DISTANT RIGHT" , "WITH GLASS DISTANT LEFT" , "WITH GLASS NEAR RIGHT" , "WITH GLASS NEAR LEFT" , "COLOUR BLINDNESS" , "HAEMOGLOBIN" , "W.B.C" , "PLATELET COUNT" , "BLOOD GROUP" , "RANDOM SUGAR" , "SGPT" , "S.CREATINE" , "PROTEIN" , "GLUCOSE" , "KETONE" , "PUS CELLS" , "RED CELLS" , "SPIROMETRY" , "AUDIOMETRY", "X-RAY(CHEST)" , "FINAL REMARK" , "FIT" ,  "CELL NO" , "DOB" , "VACCINE DOSE" , "MC CODE" , "SHOE SIZE"];
       const data = filterdata?filterdata.map(item => [
         item.employeeData.employeeName,
         item.employeecontactdetails.age,
@@ -192,14 +193,35 @@ const MedicalReports = () => {
          item.employeeinvestigationinformation.audiometry,
          item.employeeinvestigationinformation.remarks,
          item.employeeform33.fitOrUnfit,
+        //  item.employeeform33.fitOrUnfit,
          item.employeecontactdetails.mobileNumber,
          item.employeecontactdetails.dateOfBirth.slice(0, 10)
          .split("-")
          .reverse()
          .join("-"),
       ]):null
+
+      const headerStyle = {
+        alignment: {
+          horizontal: "center",
+          vertical: "center",
+        },
+        font: { bold: true },
+      };
+    
+      const dataStyle = {
+        alignment: {
+          horizontal: "center",
+          vertical: "center",
+        },
+      };
+    
+      const styles = [headerStyle]; // Apply the header style to the first row
+      for (let i = 1; i < data.length; i++) {
+        styles.push(dataStyle); // Apply the data style to the remaining rows
+      }
   
-      const worksheet = XLSX.utils.aoa_to_sheet([headers, ...data]);
+      const worksheet = XLSX.utils.aoa_to_sheet([headers, ...data],{ styles });
       const colWidths = [20, 20, 20, 20, 20 , 20 ,20 , 20 , 20, 20 ,20 ,20 , 20 , 20, 20, 20, 20, 20, 20 ,20 , 20 , 20, 20 , 20, 20, 20 , 20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20];
       worksheet["!cols"] = colWidths.map(width => ({ width }));
       const workbook = XLSX.utils.book_new();

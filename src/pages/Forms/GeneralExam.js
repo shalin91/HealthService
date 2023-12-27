@@ -278,14 +278,14 @@ const GeneralExam = ( props ) => {
                               className="form-label"
                               htmlFor="product-orders-input"
                             >
-                              Skin & Genitals
+                              Skin
                             </label>
                             <div className="mb-3">
                               <Input
                                 type="text"
                                 className="form-control"
                                 id="product-orders-input"
-                                placeholder="skinAndGenitals"
+                                placeholder="skin"
                                 name="skinAndGenitals"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
@@ -305,14 +305,14 @@ const GeneralExam = ( props ) => {
                               className="form-label"
                               htmlFor="product-orders-input"
                             >
-                              Other
+                              Others & Genitals
                             </label>
                             <div className="mb-3">
                               <Input
                                 type="text"
                                 className="form-control"
                                 id="product-orders-input"
-                                placeholder="other"
+                                placeholder="Others & Genitals"
                                 name="other"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"

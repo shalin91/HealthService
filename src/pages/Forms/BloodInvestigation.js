@@ -796,14 +796,14 @@ const BloodInvestigation = (props) => {
                               className="form-label"
                               htmlFor="product-orders-input"
                             >
-                              Proein
+                              Protein
                             </label>
                             <div className="mb-3">
                               <Input
                                 type="text"
                                 className="form-control"
                                 id="product-orders-input"
-                                placeholder="Proein"
+                                placeholder="Protein"
                                 name="proein"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
