@@ -110,13 +110,7 @@ const CustomersByDate = () => {
                   <h4 className="card-title mb-0">Reports by Date Range</h4>
                   <Row className="align-items-center">
                     <Col className="lg-auto">
-                      <DatePicker
-                        className="form-control"
-                        selected={startDate}
-                        onChange={(date) => handleDateChange(date, "start")}
-                        dateFormat="dd/MM/yyyy"
-                        placeholderText="Select Start Date"
-                      />
+                      
                     </Col>
                     <Col className="lg-auto">
                       <DatePicker

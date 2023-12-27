@@ -242,7 +242,7 @@ export const SignState = (props) => {
 
   const GetCheckUpName = async () => {
     try {
-      const response = await axios.get(`${url}/checkup/get-checkup-name`, {});
+      const response = await axios.get(`${url}/checkup/get-checkupname-master`, {});
       return response;
     } catch (error) {
       return { success: false, msg: "server Error" };
@@ -375,6 +375,8 @@ export const SignState = (props) => {
       console.error("Error during API call:", error);
     }
   };
+
+
 
 
   // set checkupdata

@@ -29,13 +29,7 @@ const MediclaCheckUp = () => {
 
 
 
-      if(CheckupData?.employeeeyeinformation?.nearVisionWithRightEye !== "")
-      {
-        setNearwith(true)
-      }
-      else{
-        setNearwithout(true);
-      }
+      
 
       
     } catch (error) {
@@ -66,10 +60,21 @@ const MediclaCheckUp = () => {
       if(CheckupData?.employeeform33?.fitOrUnfit==="Fit"){
         setfit(true);
       }
+      if(CheckupData?.employeeeyeinformation?.nearVisionWithRightEye !== "")
+      {
+        setNearwith(true)
+        setNearwithout(false)
+      }
+      else{
+        setNearwithout(true);
+        setNearwith(false);
+      }
     };
   
     fetchData();
   }, [id ]);
+
+  
 
   
 
@@ -84,7 +89,7 @@ const MediclaCheckUp = () => {
           <h3 className="medicalSubTitle">Sr.No.:</h3>
         </div>
         <div class="table-container">
-          <table className="mainTable">
+          <table className="Medical-checkup">
             <tr>
               <td
                 style={{
@@ -96,7 +101,7 @@ const MediclaCheckUp = () => {
               </td>
             </tr>
             <tr>
-              <td>DATE: {CheckupData?.checkupname?.checkupDate.slice(0, 10)
+              <td>DATE: {CheckupData?.createdAt?.slice(0, 10)
                                               .split("-")
                                               .reverse()
                                               .join("-") || "N/A"}</td>
@@ -147,7 +152,7 @@ const MediclaCheckUp = () => {
               </td>
             </tr>
           </table>
-          <table className="mainTable">
+          <table className="Medical-checkup">
             <tr>
               <td
                 style={{
@@ -183,7 +188,7 @@ const MediclaCheckUp = () => {
               </td>
             </tr>
           </table>
-          <table className="mainTable">
+          <table  className="Medical-checkup">
             <tr>
               <td
                 style={{
@@ -304,16 +309,19 @@ const MediclaCheckUp = () => {
               </td>
             </tr>
             <tr>
-              <td colSpan={3}>
+              <td colSpan={2}>
                 <div className="inputDiv">
-                  Colour Vision: <input type="checkBox" />
-                  Normal <input type="checkBox" />
-                  colour vision deficiency
+                  Colour Vision: <input type="checkBox" checked = {CheckupData?.employeeeyeinformation?.colourVision === "normal"}/>
+                  Normal <input type="checkBox"  />
+                  colour deficiency
                 </div>
+              </td>
+              <td colSpan={2}>
+                Remark: {CheckupData?.employeeinvestigationinformation?.remarks || "N/A"}  
               </td>
             </tr>
           </table>
-          <table className="mainTable">
+          <table className="Medical-checkup">
             <tr>
               <td
                 style={{
@@ -325,23 +333,33 @@ const MediclaCheckUp = () => {
               </td>
             </tr>
             <tr>
-              <td colSpan={3}>
-                Remark: {CheckupData?.employeeeyeinformation?.remark || "N/A"}
+             
+              <td colSpan={2} >
+                Labreports: {CheckupData?.employeeinvestigationinformation?.labReports || "N/A"}  
+              </td>
+              <td colSpan={2} >
+                Spirometry: {CheckupData?.employeeinvestigationinformation?.spirometry || "N/A"}  
+              </td>
+              <td colSpan={2} >
+                Audiometry: {CheckupData?.employeeinvestigationinformation?.audiometry || "N/A"}  
               </td>
             </tr>
+            
+           
+            
             <tr>
-              <td>
+              <td colSpan={8}>
                 <h5 className="drTitle">CERTIFICATE OF FITNESS:</h5>
                 <p>
                   i certify that i have personally examined him / her and as per
                   my opinion
                 </p>
                 <p>
-                  <input type="checkBox" checked={CheckupData?.employeeform33?.unfitReason !== ""} />{" "}
+                  <input type="checkBox" checked={CheckupData?.employeeform33?.unfitReason === ""} />{" "}
                   <span>He/She is fit the employment</span>
                 </p>
                 <p>
-                  <input type="checkBox" checked={CheckupData?.employeeform33?.unfitReason === ""}/>{" "}
+                  <input type="checkBox" checked={CheckupData?.employeeform33?.unfitReason !== ""}/>{" "}
                   <span>
                     He/She not fit the employment (Temporary/Permanent)
                   </span>

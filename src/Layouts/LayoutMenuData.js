@@ -219,26 +219,6 @@ const Navdata = () => {
           ],
         },
         {
-          id: "appsprojects",
-          label: "Checkup Name Master",
-          link: "/#",
-          isChildItem: true,
-          click: function (e) {
-            e.preventDefault();
-            setCategory(!isCategory);
-          },
-          parentId: "apps",
-          stateVariables: isCategory,
-          childItems: [
-            {
-              id: 1,
-              label: "Checkup Name",
-              link: "/checkup-name",
-              parentId: "apps",
-            },
-          ],
-        },
-        {
           id: "tasks",
           label: "Checkup-type Master",
           link: "/#",
@@ -254,6 +234,26 @@ const Navdata = () => {
               id: 2,
               label: "Add Checkup-type",
               link: "/checkuptype",
+              parentId: "apps",
+            },
+          ],
+        },
+        {
+          id: "appsprojects",
+          label: "Checkup Name Master",
+          link: "/#",
+          isChildItem: true,
+          click: function (e) {
+            e.preventDefault();
+            setCategory(!isCategory);
+          },
+          parentId: "apps",
+          stateVariables: isCategory,
+          childItems: [
+            {
+              id: 1,
+              label: "Checkup Name",
+              link: "/checkup-name",
               parentId: "apps",
             },
           ],
@@ -335,11 +335,11 @@ const Navdata = () => {
           stateVariables: isSupportTickets,
           childItems: [
             { id: 1, label: "Medical Reports", link: "/medical-report" },
-            {
-              id: 2,
-              label: "Medical Reports by Date",
-              link: "/medical-reportbydate",
-            },
+            // {
+            //   id: 2,
+            //   label: "Medical Reports by Date",
+            //   link: "/medical-reportbydate",
+            // },
           ],
         },
         // {
