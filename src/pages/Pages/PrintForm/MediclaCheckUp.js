@@ -65,8 +65,12 @@ const MediclaCheckUp = () => {
         setNearwith(true)
         setNearwithout(false)
       }
-      else{
+      if(CheckupData?.employeeeyeinformation?.nearVisionWithoutRightEye !== ""){
         setNearwithout(true);
+        setNearwith(false);
+      }
+      else{
+        setNearwithout(false);
         setNearwith(false);
       }
     };
@@ -312,7 +316,7 @@ const MediclaCheckUp = () => {
               <td colSpan={2}>
                 <div className="inputDiv">
                   Colour Vision: <input type="checkBox" checked = {CheckupData?.employeeeyeinformation?.colourVision === "normal"}/>
-                  Normal <input type="checkBox"  />
+                  Normal <input type="checkBox"  checked = {CheckupData?.employeeeyeinformation?.colourVision !== "normal"} />
                   colour deficiency
                 </div>
               </td>
