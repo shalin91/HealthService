@@ -364,7 +364,7 @@ const MediclaCheckUp = () => {
                     He/She not fit the employment (Temporary/Permanent)
                   </span>
                 </p>
-                <p className="reasonTitle">
+                <p className="reasonTitle m-0">
                   Reason for unfit :{" "}
                   {CheckupData?.employeeform33?.unfitReason || "N/A"}
                   <h5 className="drTitle">
