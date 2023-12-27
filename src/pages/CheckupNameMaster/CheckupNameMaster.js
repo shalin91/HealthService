@@ -71,8 +71,9 @@ const CheckupNameMaster = () => {
                   checkupDate: "",
                   checkupType: "",
                 }}
-                onSubmit={(values) => {
+                onSubmit={(values , { resetForm }) => {
                   addCheckupDetails(values);
+                  resetForm();
                 }}
               >
                 {({
