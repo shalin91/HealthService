@@ -35,18 +35,18 @@ const Investigation = ( props ) => {
           <Formik
             initialValues={{
               labReports: "",
-              xRayReports: "",
-              ecgReports: "",
+              xRayReport: "",
+              ecgReport: "",
               spirometry: "",
               audiometry: "",
               remarks: "",
 
             }}
             // validationSchema={validationSchema}
-            onSubmit={(values) => {
-              // Alert the input values of the form that we filled
-              // alert(JSON.stringify(values));
+            onSubmit={(values ,{ resetForm }) => {
+              
                handleSubmitData(values);
+               resetForm();
             }}
           >
             {({
@@ -104,12 +104,12 @@ const Investigation = ( props ) => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="X-Ray reports"
-                                name="xRayReports"
+                                name="xRayReport"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.xRayReports}
+                                value={values.xRayReport}
                               />
                             </div>
                           </div>
@@ -130,12 +130,12 @@ const Investigation = ( props ) => {
                                 className="form-control"
                                 id="product-orders-input"
                                 placeholder="ECG reports"
-                                name="ecgReports"
+                                name="ecgReport"
                                 aria-label="orders"
                                 aria-describedby="product-orders-addon"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.ecgReports}
+                                value={values.ecgReport}
                               />
                             </div>
                           </div>

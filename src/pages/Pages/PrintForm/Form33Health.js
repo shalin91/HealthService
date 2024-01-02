@@ -54,41 +54,57 @@ const FormHelth33 = () => {
             </h5>
             <table className="mainTable">
               <tr>
-                <td colSpan={2}>
-                  <div className="dateDiv">
-                    <p>1. Sr. No. :</p>
-                    <p style={{ marginRight: "85px" }}>
-                      Date: {CheckupData?.checkupname?.checkupDate || "N/A"}
-                    </p>
-                  </div>
+                <td colSpan={2}  >
+                 <div style={{display:'flex'}}>  
+                 <p>Sr No: </p>
+                 <p style={{marginLeft:'auto'}}>Date:02-01-2024</p>
+                 </div>
+                </td>
+                {/* <td>
+                  Date:
+                </td> */}
+              </tr>
+              <tr>
+                <td >
+                  2.Name
+                </td>
+                <td>
+                 {CheckupData?.employeeData?.employeeName || "N/A"}
                 </td>
               </tr>
               <tr>
-                <td colSpan={2}>
-                  2. Name: {CheckupData?.employeeData?.employeeName || "N/A"}
-                </td>
-              </tr>
-              <tr>
-                <td colSpan={2}>
+                <td>
                   3.Father's Name:{" "}
-                  {CheckupData?.employeeData?.employeeFatherName || "N/A"}
+                  
+                </td>
+                <td>
+                {CheckupData?.employeeData?.employeeFatherName || "N/A"}
                 </td>
               </tr>
               <tr>
-                <td colSpan={2}>
-                  4.Sex: {CheckupData?.employeecontactdetails?.gender || "N/A"}
+                <td >
+                  4.Sex: 
+                </td>
+                <td>
+                {CheckupData?.employeecontactdetails?.gender || "N/A"}
                 </td>
               </tr>
               <tr>
-                <td colSpan={2}>
+                <td >
                   5.Residence:
-                  {CheckupData?.employeecontactdetails?.address || "N/A"}
+                 
+                </td>
+                <td>
+                {CheckupData?.employeecontactdetails?.address || "N/A"}
                 </td>
               </tr>
               <tr>
-                <td colSpan={2}>
+                <td >
                   6.Date of Birth:
-                  {CheckupData?.employeecontactdetails?.dateOfBirth
+                  
+                </td>
+                <td>
+                {CheckupData?.employeecontactdetails?.dateOfBirth
                     .slice(0, 10)
                     .split("-")
                     .reverse()
@@ -96,27 +112,39 @@ const FormHelth33 = () => {
                 </td>
               </tr>
               <tr>
-                <td colSpan={2}>
+                <td >
                   7.Name & Address of the Factory:
-                  {CheckupData?.employeeData?.companyLocation || "N/A"}
+                  
+                </td>
+                <td>
+                {CheckupData?.employeeData?.companyLocation || "N/A"}
                 </td>
               </tr>
               <tr>
-                <td colSpan={2}>
+                <td >
                   8.Work is Employed / Proposed:{" "}
-                  {CheckupData?.employeeform33?.employyedOrPrpposed || "N/A"}
+                 
+                </td>
+                <td>
+                {CheckupData?.employeeform33?.employyedOrPrpposed || "N/A"}
                 </td>
               </tr>
               <tr>
-                <td colSpan={2}>
+                <td >
                   a:Hazardous Process :
-                  {CheckupData?.employeeform33?.hazardousProcess || "N/A"}
+                  
                 </td>
+               <td>
+               {CheckupData?.employeeform33?.hazardousProcess || "N/A"}
+               </td>
               </tr>
               <tr>
-                <td colSpan={2}>
+                <td >
                   b:Dangerous Operations:{" "}
-                  {CheckupData?.employeeform33?.dnagerousOperation || "N/A"}
+                 
+                </td>
+                <td>
+                {CheckupData?.employeeform33?.dnagerousOperation || "N/A"}
                 </td>
               </tr>
               <tr>
