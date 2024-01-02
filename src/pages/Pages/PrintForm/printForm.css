@@ -43,6 +43,9 @@ td {
   border-bottom: 1px solid #000;
   padding: 4px 20px;
 }
+.abc{
+  width: 50%;
+}
 .titleDiv {
   display: flex;
   align-items: center;

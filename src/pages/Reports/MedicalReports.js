@@ -151,9 +151,9 @@ const MedicalReports = () => {
     if (filterdata && filterdata.length > 0) {
       const headers = ["NAME", "AGE", "SEX", "DATE", "HEIGHT" ,"WEIGHT" , "PRESENT COMPLAINT" , "PAST ILLNESS" , "CURRENT MEDICATION" , "ALLERGY" , "ADDICTION" , "B.P" , "PULSE" , "W/O GLASS DISTANT RIGHT" , "W/O GLASS DISTANT LEFT" , "W/O GLASS NEAR RIGHT" , "W/O GLASS NEAR LEFT" , "WITH GLASS DISTANT RIGHT" , "WITH GLASS DISTANT LEFT" , "WITH GLASS NEAR RIGHT" , "WITH GLASS NEAR LEFT" , "COLOUR BLINDNESS" , "HAEMOGLOBIN" , "W.B.C" , "PLATELET COUNT" , "BLOOD GROUP" , "RANDOM SUGAR" , "SGPT" , "S.CREATINE" , "PROTEIN" , "GLUCOSE" , "KETONE" , "PUS CELLS" , "RED CELLS" , "SPIROMETRY" , "AUDIOMETRY", "X-RAY(CHEST)" , "FINAL REMARK" , "FIT" ,  "CELL NO" , "DOB" , "VACCINE DOSE" , "MC CODE" , "SHOE SIZE"];
       const data = filterdata?filterdata.map(item => [
-        item.employeeData.employeeName,
-        item.employeecontactdetails.age,
-        item.employeecontactdetails.gender,
+        item.employeeData.employeeName ,
+        item.employeecontactdetails.age ,
+        item.employeecontactdetails.gender ,
         item.createdAt.slice(0, 10)
         .split("-")
         .reverse()
