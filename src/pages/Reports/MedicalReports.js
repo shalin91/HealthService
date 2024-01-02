@@ -147,59 +147,53 @@ const MedicalReports = () => {
   
 
   const handleExportReport = () => {
-    
-    if (filterdata && filterdata.length > 0) {
+    console.log("excel nai thatu")
+    if (filterdata) {
       const headers = ["NAME", "AGE", "SEX", "DATE", "HEIGHT" ,"WEIGHT" , "PRESENT COMPLAINT" , "PAST ILLNESS" , "CURRENT MEDICATION" , "ALLERGY" , "ADDICTION" , "B.P" , "PULSE" , "W/O GLASS DISTANT RIGHT" , "W/O GLASS DISTANT LEFT" , "W/O GLASS NEAR RIGHT" , "W/O GLASS NEAR LEFT" , "WITH GLASS DISTANT RIGHT" , "WITH GLASS DISTANT LEFT" , "WITH GLASS NEAR RIGHT" , "WITH GLASS NEAR LEFT" , "COLOUR BLINDNESS" , "HAEMOGLOBIN" , "W.B.C" , "PLATELET COUNT" , "BLOOD GROUP" , "RANDOM SUGAR" , "SGPT" , "S.CREATINE" , "PROTEIN" , "GLUCOSE" , "KETONE" , "PUS CELLS" , "RED CELLS" , "SPIROMETRY" , "AUDIOMETRY", "X-RAY(CHEST)" , "FINAL REMARK" , "FIT" ,  "CELL NO" , "DOB" , "VACCINE DOSE" , "MC CODE" , "SHOE SIZE"];
-      const data = filterdata?filterdata.map(item => [
-        item.employeeData.employeeName,
-        item.employeecontactdetails.age,
-        item.employeecontactdetails.gender,
-        item.createdAt.slice(0, 10)
-        .split("-")
-        .reverse()
-        .join("-"),
-        item.employeeVitalAndHistory.height,
-        item.employeeVitalAndHistory.weight,
-        item.employeeVitalAndHistory.complaints,
-        item.employeeVitalAndHistory.pastHistory,
-        item.employeeVitalAndHistory.pastHistory,
-        item.employeeVitalAndHistory.pastHistory,
-        item.employeeVitalAndHistory.pastHistory,
-        item.employeeVitalAndHistory.bp,
-        item.employeeVitalAndHistory.pulse,
-        item.employeeeyeinformation.distandVisionWithoutRightEye,
-        item.employeeeyeinformation.distandVisionWithoutLeftEye,
-        item.employeeeyeinformation.nearVisionWithoutRightEye,
-        item.employeeeyeinformation.nearVisionWithoutLeftEye,
-        item.employeeeyeinformation.distandVisionWithRightEye,
-        item.employeeeyeinformation.distandVisionWithLeftEye,
-        item.employeeeyeinformation.nearVisionWithRightEye,
-        item.employeeeyeinformation.nearVisionWithLefttEye,
-        item.employeeeyeinformation.colourVision,
-        item.employeebloodinformation.hb,
-         item.employeebloodinformation.wbc,
-         item.employeebloodinformation.plateletCount,
-         item.employeecontactdetails.bloodGroup,
-         item.employeebloodinformation.blSugarFastingOrRandom,
-         item.employeebloodinformation.sgpt,
-         item.employeebloodinformation.sCreatinine,
-         item.employeebloodinformation.proein,
-         item.employeebloodinformation.glucose,
-         item.employeebloodinformation.ketone,
-         item.employeebloodinformation.pusCells,
-         item.employeebloodinformation.redCells,
-         item.employeeinvestigationinformation.spirometry,
-         item.employeeinvestigationinformation.audiometry,
-         item.employeeinvestigationinformation.audiometry,
-         item.employeeinvestigationinformation.remarks,
-         item.employeeform33.fitOrUnfit,
-        //  item.employeeform33.fitOrUnfit,
-         item.employeecontactdetails.mobileNumber,
-         item.employeecontactdetails.dateOfBirth.slice(0, 10)
-         .split("-")
-         .reverse()
-         .join("-"),
-      ]):null
+      const data =  filterdata.map(item => [
+        item.employeeData.employeeName || "NA",
+        item.employeecontactdetails.age || "NA",
+        item.employeecontactdetails.gender || "NA",
+        item.createdAt.slice(0, 10).split("-").reverse().join("-") || "NA",
+        item.employeeVitalAndHistory.height || "NA",
+        item.employeeVitalAndHistory.weight || "NA",
+        item.employeeVitalAndHistory.complaints || "NA",
+        item.employeeVitalAndHistory.pastHistory || "NA",
+        item.employeeVitalAndHistory.pastHistory || "NA",
+        item.employeeVitalAndHistory.pastHistory || "NA",
+        item.employeeVitalAndHistory.pastHistory || "NA",
+        item.employeeVitalAndHistory.bp || "NA",
+        item.employeeVitalAndHistory.pulse || "NA",
+        (item.employeeeyeinformation && item.employeeeyeinformation.distandVisionWithoutRightEye) || "NA",
+      (item.employeeeyeinformation && item.employeeeyeinformation.distandVisionWithoutLeftEye) || "NA",
+        (item.employeeeyeinformation && item.employeeeyeinformation.nearVisionWithoutRightEye) || "NA",
+        (item.employeeeyeinformation && item.employeeeyeinformation.nearVisionWithoutLeftEye) || "NA",
+        (item.employeeeyeinformation && item.employeeeyeinformation.distandVisionWithRightEye) || "NA",
+        (item.employeeeyeinformation && item.employeeeyeinformation.distandVisionWithLeftEye) || "NA",
+        (item.employeeeyeinformation && item.employeeeyeinformation.nearVisionWithRightEye) || "NA",
+        (item.employeeeyeinformation && item.employeeeyeinformation.nearVisionWithLefttEye) || "NA",
+        item.employeeeyeinformation.colourVision || "NA",
+        item.employeebloodinformation.hb || "NA",
+        item.employeebloodinformation.wbc || "NA",
+        item.employeebloodinformation.plateletCount || "NA",
+        item.employeecontactdetails.bloodGroup || "NA",
+        item.employeebloodinformation.blSugarFastingOrRandom || "NA",
+        item.employeebloodinformation.sgpt || "NA",
+        item.employeebloodinformation.sCreatinine || "NA",
+        item.employeebloodinformation.proein || "NA",
+        item.employeebloodinformation.glucose || "NA",
+        item.employeebloodinformation.ketone || "NA",
+        item.employeebloodinformation.pusCells || "NA",
+        item.employeebloodinformation.redCells || "NA",
+        item.employeeinvestigationinformation.spirometry || "NA",
+        item.employeeinvestigationinformation.audiometry || "NA",
+        item.employeeinvestigationinformation.audiometry || "NA",
+        item.employeeinvestigationinformation.remarks || "NA",
+        item.employeeform33.fitOrUnfit || "NA",
+        item.employeecontactdetails.mobileNumber || "NA",
+        item.employeecontactdetails.dateOfBirth.slice(0, 10)
+          .split("-").reverse().join("-") || "NA",
+      ]);
 
       const headerStyle = {
         alignment: {
@@ -216,9 +210,9 @@ const MedicalReports = () => {
         },
       };
     
-      const styles = [headerStyle]; // Apply the header style to the first row
+      const styles = [headerStyle]; 
       for (let i = 1; i < data.length; i++) {
-        styles.push(dataStyle); // Apply the data style to the remaining rows
+        styles.push(dataStyle); 
       }
   
       const worksheet = XLSX.utils.aoa_to_sheet([headers, ...data],{ styles });
