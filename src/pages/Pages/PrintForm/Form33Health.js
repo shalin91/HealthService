@@ -54,41 +54,57 @@ const FormHelth33 = () => {
             </h5>
             <table className="mainTable">
               <tr>
-                <td colSpan={2}>
-                  <div className="dateDiv">
-                    <p>1. Sr. No. :</p>
-                    <p style={{ marginRight: "85px" }}>
-                      Date: {CheckupData?.checkupname?.checkupDate || "N/A"}
-                    </p>
-                  </div>
+                <td colSpan={3}  >
+                 <div style={{display:'flex'}}>  
+                 <p>1.{" "}Sr No: </p>
+                 <p style={{marginLeft:'auto'}}>Date:02-01-2024</p>
+                 </div>
+                </td>
+                {/* <td>
+                  Date:
+                </td> */}
+              </tr>
+              <tr>
+                <td style={{width:'40%'}}>
+                  2. {" "}Name
+                </td>
+                <td>
+                 {CheckupData?.employeeData?.employeeName || "N/A"}
                 </td>
               </tr>
               <tr>
-                <td colSpan={2}>
-                  2. Name: {CheckupData?.employeeData?.employeeName || "N/A"}
+                <td>
+                  3.{" "}Father's Name:{" "}
+                  
+                </td>
+                <td>
+                {CheckupData?.employeeData?.employeeFatherName || "N/A"}
                 </td>
               </tr>
               <tr>
-                <td colSpan={2}>
-                  3.Father's Name:{" "}
-                  {CheckupData?.employeeData?.employeeFatherName || "N/A"}
+                <td >
+                  4. {" "}Sex: 
+                </td>
+                <td>
+                {CheckupData?.employeecontactdetails?.gender || "N/A"}
                 </td>
               </tr>
               <tr>
-                <td colSpan={2}>
-                  4.Sex: {CheckupData?.employeecontactdetails?.gender || "N/A"}
+                <td >
+                  5.{" "}Residence:
+                 
+                </td>
+                <td>
+                {CheckupData?.employeecontactdetails?.address || "N/A"}
                 </td>
               </tr>
               <tr>
-                <td colSpan={2}>
-                  5.Residence:
-                  {CheckupData?.employeecontactdetails?.address || "N/A"}
+                <td >
+                  6. {" "}Date of Birth:
+                  
                 </td>
-              </tr>
-              <tr>
-                <td colSpan={2}>
-                  6.Date of Birth:
-                  {CheckupData?.employeecontactdetails?.dateOfBirth
+                <td>
+                {CheckupData?.employeecontactdetails?.dateOfBirth
                     .slice(0, 10)
                     .split("-")
                     .reverse()
@@ -96,27 +112,39 @@ const FormHelth33 = () => {
                 </td>
               </tr>
               <tr>
-                <td colSpan={2}>
-                  7.Name & Address of the Factory:
-                  {CheckupData?.employeeData?.companyLocation || "N/A"}
+                <td >
+                  7.{" "}Name & Address of the Factory:
+                  
+                </td>
+                <td>
+                {CheckupData?.employeeData?.companyLocation || "N/A"}
                 </td>
               </tr>
               <tr>
-                <td colSpan={2}>
-                  8.Work is Employed / Proposed:{" "}
-                  {CheckupData?.employeeform33?.employyedOrPrpposed || "N/A"}
+                <td >
+                  8.{" "}Work is Employed / Proposed:{" "}
+                 
+                </td>
+                <td>
+                {CheckupData?.employeeform33?.employyedOrPrpposed || "N/A"}
                 </td>
               </tr>
               <tr>
-                <td colSpan={2}>
-                  a:Hazardous Process :
-                  {CheckupData?.employeeform33?.hazardousProcess || "N/A"}
+                <td >
+                  a:{" "}Hazardous Process :
+                  
                 </td>
+               <td>
+               {CheckupData?.employeeform33?.hazardousProcess || "N/A"}
+               </td>
               </tr>
               <tr>
-                <td colSpan={2}>
-                  b:Dangerous Operations:{" "}
-                  {CheckupData?.employeeform33?.dnagerousOperation || "N/A"}
+                <td >
+                  b:{" "}Dangerous Operations:{" "}
+                 
+                </td>
+                <td>
+                {CheckupData?.employeeform33?.dnagerousOperation || "N/A"}
                 </td>
               </tr>
               <tr>
@@ -128,7 +156,9 @@ const FormHelth33 = () => {
                   <p>
                     marks are
                     {"   "}{" "}
+                    <span style={{textDecoration:'underline '}}>
                     {CheckupData?.employeecontactdetails?.idMark || "N/A"}
+                    </span>
                   </p>
                   <p>
                     and who is desirous of being employed in above mentioned
@@ -171,7 +201,7 @@ const FormHelth33 = () => {
                     <p>
                       Signature of left hand thumb
                       <br />
-                      imperssion ogf the person examined
+                      imperssion of the person examined
                     </p>
                     <p>
                       Signature with stamp of
