@@ -92,7 +92,9 @@ const MediclaCheckUp = () => {
                   </td>
                 </tr>
                 <tr>
-                  <td>
+
+                  <td colSpan="6">
+
                     DATE:{" "}
                     {CheckupData?.createdAt
                       ?.slice(0, 10)
@@ -100,11 +102,13 @@ const MediclaCheckUp = () => {
                       .reverse()
                       .join("-") || "N/A"}
                   </td>
-                  <td>
+
+                  <td colSpan="3">
                     MOB:{" "}
                     {CheckupData?.employeecontactdetails?.mobileNumber || "N/A"}
                   </td>
-                  <td>
+                  <td colSpan="3">
+
                     DOB:{" "}
                     {CheckupData?.employeecontactdetails?.dateOfBirth
                       .slice(0, 10)
@@ -114,47 +118,59 @@ const MediclaCheckUp = () => {
                   </td>
                 </tr>
                 <tr>
-                  <td colSpan="1">
+
+                  <td colSpan="9">
+
                     NAME:{" "}
                     {CheckupData?.employeeData?.employeeNameAbbrevation ||
                       "N/A"}{" "}
                     {CheckupData?.employeeData?.employeeName || "N/A"}{" "}
                     {CheckupData?.employeeData?.employeeFatherName || "N/A"}
                   </td>
-                  <td colspan="2">
+
+                  <td colSpan="3">
+
                     SEX: {CheckupData?.employeecontactdetails?.gender || "N/A"}
                   </td>
                 </tr>
                 <tr>
-                  <td>
+
+                  <td colSpan="9">
                     COMPANY : {CheckupData?.compani?.companyName || "N/A"}
                   </td>
-                  <td colspan="2">
+                  <td colSpan="3">
+
                     AGE:{CheckupData?.employeecontactdetails?.age || "N/A"}
                   </td>
                 </tr>
                 <tr>
-                  <td>
+
+                  <td colSpan="9">
                     NATURE OF JOB:{" "}
                     {CheckupData?.employeecontactdetails?.natureOfJob || "N/A"}
                   </td>
-                  <td colspan="2">
+                  <td colSpan="3">
+
                     HT: {CheckupData?.employeeVitalAndHistory?.height || "N/A"}{" "}
                     CMS
                   </td>
                 </tr>
                 <tr>
-                  <td>
-                    IDENTIFICATION:{" "}
+
+                  <td colSpan="9">
+                    IDENTIFICATION MARK:{" "}
                     {CheckupData?.employeecontactdetails?.idMark || "N/A"}{" "}
                   </td>
-                  <td colspan="2">
+                  <td colSpan="3">
+
                     WT: {CheckupData?.employeeVitalAndHistory?.weight || "N/A"}{" "}
                     KG
                   </td>
                 </tr>
-              </table>
-              <table className="Medical-checkup">
+
+                {/* </table>
+
+              <table className="Medical-checkup"> */}
                 <tr>
                   <td
                     style={{
@@ -166,49 +182,29 @@ const MediclaCheckUp = () => {
                   </td>
                 </tr>
                 <tr>
-                  <td>
-                    COMPLANINTS:{" "}
+                  <td colSpan="12">
+                  COMPLAINTS :{" "}
                     {CheckupData?.employeeVitalAndHistory?.complaints || "N/A"}
-                  </td>
-                  <td colspan="2">
-                    ECG REPORT:{" "}
-                    {CheckupData?.employeeinvestigationinformation?.ecgReport ||
-                      "N/A"}
                   </td>
                 </tr>
                 <tr>
-                  <td>
+                  <td colSpan="12">
                     PAST HISTROY:{" "}
                     {CheckupData?.employeeVitalAndHistory?.pastHistory || "N/A"}
                   </td>
-                  <td>
-                    LAB REPORTS:{" "}
-                    {CheckupData?.employeeinvestigationinformation
-                      ?.labReports || "N/A"}
-                  </td>
                 </tr>
                 <tr>
-                  <td>
+                  <td colSpan="12">
                     PERSONAL HISTORY :{" "}
                     {CheckupData?.employeeVitalAndHistory?.personalHistory ||
                       "N/A"}
                   </td>
-                  <td>
-                    XRAY REPORTS:{" "}
-                    {CheckupData?.employeeinvestigationinformation
-                      ?.xRayReport || "N/A"}
-                  </td>
                 </tr>
                 <tr>
-                  <td>
+                  <td colSpan="12">
                     FAMILY HISTORY:{" "}
                     {CheckupData?.employeeVitalAndHistory?.familyHistory ||
                       "N/A"}
-                  </td>
-                  <td>
-                    SPIROMETRY:{" "}
-                    {CheckupData?.employeeinvestigationinformation
-                      ?.spirometry || "N/A"}
                   </td>
                 </tr>
               </table>
@@ -224,86 +220,79 @@ const MediclaCheckUp = () => {
                   </td>
                 </tr>
                 <tr>
-                  <td>
-                    <div className="tdData">
-                      TEM:{" "}
-                      {CheckupData?.employeeVitalAndHistory?.temperature ||
-                        "N/A"}
-                      <span>
-                        <sup className="abc">0</sup>f
-                      </span>
-                    </div>
+                  <td colSpan="6">
+                    BP: {CheckupData?.employeeVitalAndHistory?.bp || "N/A"}
+                    <span className="abc">mm of Hg</span>
                   </td>
-                  <td>
-                    <div className="tdData">
-                      BP: {CheckupData?.employeeVitalAndHistory?.bp || "N/A"}
-                      <span className="abc">mm of Hg</span>
-                    </div>
+                  <td colSpan="3">
+                    PULSE:{" "}
+                    {CheckupData?.employeeVitalAndHistory?.pulse || "N/A"}
+                    <span className="abc">per Min.</span>
                   </td>
-                  <td>
-                    <div className="tdData">
-                      PULSE:{" "}
-                      {CheckupData?.employeeVitalAndHistory?.pulse || "N/A"}
-                      <span className="abc">per Min.</span>
-                    </div>
+                  <td colSpan="3">
+                    TEM:{" "}
+                    {CheckupData?.employeeVitalAndHistory?.temperature || "N/A"}
+                    <span>
+                      <sup className="abc">0</sup>f
+                    </span>
                   </td>
                 </tr>
                 <tr>
-                  <td colSpan={3}>
+                  <td colSpan="12">
                     General Examination:{" "}
                     {CheckupData?.employeegeneralexamination?.generalExam ||
                       "N/A"}
                   </td>
                 </tr>
                 <tr>
-                  <td colSpan={1}>
+                  <td colSpan="6">
                     Cardio Vascular Syastem :{" "}
                     {CheckupData?.employeegeneralexamination?.cvs || "N/A"}
                   </td>
-                  <td colSpan={2}>
+                  <td colSpan="6">
                     Respiratory System :{" "}
                     {CheckupData?.employeegeneralexamination?.rs || "N/A"}
                   </td>
                 </tr>
                 <tr>
-                  <td colSpan={1}>
+                  <td colSpan="6">
                     Alimentry System :{" "}
                     {CheckupData?.employeegeneralexamination?.abdomenAS ||
                       "N/A"}
                   </td>
-                  <td colSpan={2}>
+                  <td colSpan="6">
                     Central Nervous System :{" "}
                     {CheckupData?.employeegeneralexamination?.cns || "N/A"}
                   </td>
                 </tr>
                 <tr>
-                  <td colSpan={1}>Loco-motor System :</td>
-                  <td colSpan={2}>
+                  <td colSpan="6">Loco-motor System :</td>
+                  <td colSpan="6">
                     Skin :{" "}
                     {CheckupData?.employeegeneralexamination?.skinAndGenitals ||
                       "N/A"}
                   </td>
                 </tr>
                 <tr>
-                  <td colSpan={1}>
+                  <td colSpan="6">
                     ENT :{" "}
                     {CheckupData?.employeegeneralexamination?.ent || "N/A"}
                   </td>
-                  <td colSpan={2}>
+                  <td colSpan="6">
                     Genitals / Other :{" "}
                     {CheckupData?.employeegeneralexamination?.other || "N/A"}
                   </td>
                 </tr>
                 <tr>
-                  <td colSpan={3}>Eye Examination (External) :</td>
+                  <td colSpan="12">Eye Examination (External) :</td>
                 </tr>
                 <tr>
-                  <td>Acuity od Vision:</td>
-                  <td>RT EYE:</td>
-                  <td>LT EYE:</td>
+                  <td colSpan="6">Acuity of Vision:</td>
+                  <td colSpan="3">RT EYE:</td>
+                  <td colSpan="3">LT EYE:</td>
                 </tr>
                 <tr>
-                  <td>
+                  <td colSpan="6">
                     <div className="titleDiv">
                       Distant Vision With Glass{" "}
                       <input type="checkBox" checked={withGlassChecked} />
@@ -311,7 +300,7 @@ const MediclaCheckUp = () => {
                       <input type="checkBox" checked={withoutGlassChecked} />
                     </div>
                   </td>
-                  <td>
+                  <td colSpan="3">
                     {" "}
                     6/
                     {CheckupData?.employeeeyeinformation
@@ -320,7 +309,7 @@ const MediclaCheckUp = () => {
                         ?.distandVisionWithRightEye ||
                       "N/A"}
                   </td>
-                  <td>
+                  <td colSpan="3">
                     6/
                     {CheckupData?.employeeeyeinformation
                       ?.distandVisionWithoutLeftEye ||
@@ -331,15 +320,18 @@ const MediclaCheckUp = () => {
                 </tr>
 
                 <tr>
-                  <td>
+                  <td colSpan="6">
                     <div className="titleDiv">
-                      Near Vision With Glass{" "}
-                      <input type="checkBox" checked={nearwith} />
+                      Near Vision With Glass{" "}{" "}
+                      <input type="checkBox" checked={nearwith} style={{marginLeft:'15px'}} />
+
                       Without Glass{" "}
                       <input type="checkBox" checked={nearwithout} />
                     </div>
                   </td>
-                  <td>
+
+                  <td colSpan="3">
+
                     {" "}
                     N/
                     {CheckupData?.employeeeyeinformation
@@ -348,7 +340,9 @@ const MediclaCheckUp = () => {
                         ?.nearVisionWithRightEye ||
                       "N/A"}
                   </td>
-                  <td>
+
+                  <td colSpan="3">
+
                     N/
                     {CheckupData?.employeeeyeinformation
                       ?.nearVisionWithoutLeftEye ||
@@ -358,7 +352,9 @@ const MediclaCheckUp = () => {
                   </td>
                 </tr>
                 <tr>
-                  <td colSpan={2}>
+
+                  <td colSpan="12">
+
                     <div className="inputDiv">
                       Colour Vision:{" "}
                       <input
@@ -379,40 +375,64 @@ const MediclaCheckUp = () => {
                       colour deficiency
                     </div>
                   </td>
-                  
-                  <td colSpan={2}>
-                    Audiometry:{" "}
-                    {CheckupData?.employeeinvestigationinformation
-                      ?.audiometry || "N/A"}
-                  </td>
+
                 </tr>
-              </table>
-              <table className="Medical-checkup">
+                {/* </table>
+              <table className="Medical-checkup"> */}
                 <tr>
                   <td
                     style={{
-                      width: "2%",
+                      width: "5%",
                     }}
-                    rowspan="12"
+                    rowspan="6"
+
                   >
                     <div className="sideTitle">CONSULATION</div>
                   </td>
                 </tr>
                 <tr>
-                  <td colSpan={2}>
-                    Labreports:{" "}
-                    {CheckupData?.employeeinvestigationinformation
-                      ?.labReports || "N/A"}
-                  </td>
-                  <td colSpan={2}>
+
+                  <td colSpan="6">
                     Remark:{" "}
                     {CheckupData?.employeeinvestigationinformation?.remarks ||
                       "N/A"}
                   </td>
-                </tr>
 
+                  <td colSpan="6">
+                    Audiometry:{" "}
+                    {CheckupData?.employeeinvestigationinformation
+                      ?.audiometry || "N/A"}
+                  </td>
+                </tr>
                 <tr>
-                  <td colSpan={8}>
+                  <td colSpan="6">
+                    ECG REPORT:{" "}
+                    {CheckupData?.employeeinvestigationinformation?.ecgReport ||
+                      "N/A"}
+                  </td>
+
+                  <td colSpan="6">
+                    LAB REPORTS:{" "}
+                    {CheckupData?.employeeinvestigationinformation
+                      ?.labReports || "N/A"}
+                  </td>
+                </tr>
+                <tr>
+                  <td colSpan="6">
+                    XRAY REPORTS:{" "}
+                    {CheckupData?.employeeinvestigationinformation
+                      ?.xRayReport || "N/A"}
+                  </td>
+
+                  <td colSpan="6">
+                    SPIROMETRY:{" "}
+                    {CheckupData?.employeeinvestigationinformation
+                      ?.spirometry || "N/A"}
+                  </td>
+                </tr>
+                <tr>
+                  <td colSpan="12">
+
                     <h5 className="drTitle">CERTIFICATE OF FITNESS:</h5>
                     <p>
                       i certify that i have personally examined him / her and as

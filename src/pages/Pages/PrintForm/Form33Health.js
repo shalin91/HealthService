@@ -54,9 +54,11 @@ const FormHelth33 = () => {
             </h5>
             <table className="mainTable">
               <tr>
-                <td colSpan={2}  >
+
+                <td colSpan={3}  >
                  <div style={{display:'flex'}}>  
-                 <p>Sr No: </p>
+                 <p>1.{" "}Sr No: </p>
+
                  <p style={{marginLeft:'auto'}}>Date:02-01-2024</p>
                  </div>
                 </td>
@@ -65,8 +67,10 @@ const FormHelth33 = () => {
                 </td> */}
               </tr>
               <tr>
-                <td >
-                  2.Name
+
+                <td style={{width:'40%'}}>
+                  2. {" "}Name
+
                 </td>
                 <td>
                  {CheckupData?.employeeData?.employeeName || "N/A"}
@@ -74,7 +78,9 @@ const FormHelth33 = () => {
               </tr>
               <tr>
                 <td>
-                  3.Father's Name:{" "}
+
+                  3.{" "}Father's Name:{" "}
+
                   
                 </td>
                 <td>
@@ -83,7 +89,9 @@ const FormHelth33 = () => {
               </tr>
               <tr>
                 <td >
-                  4.Sex: 
+
+                  4. {" "}Sex: 
+
                 </td>
                 <td>
                 {CheckupData?.employeecontactdetails?.gender || "N/A"}
@@ -91,7 +99,9 @@ const FormHelth33 = () => {
               </tr>
               <tr>
                 <td >
-                  5.Residence:
+
+                  5.{" "}Residence:
+
                  
                 </td>
                 <td>
@@ -100,7 +110,9 @@ const FormHelth33 = () => {
               </tr>
               <tr>
                 <td >
-                  6.Date of Birth:
+
+                  6. {" "}Date of Birth:
+
                   
                 </td>
                 <td>
@@ -113,7 +125,9 @@ const FormHelth33 = () => {
               </tr>
               <tr>
                 <td >
-                  7.Name & Address of the Factory:
+
+                  7.{" "}Name & Address of the Factory:
+
                   
                 </td>
                 <td>
@@ -122,7 +136,9 @@ const FormHelth33 = () => {
               </tr>
               <tr>
                 <td >
-                  8.Work is Employed / Proposed:{" "}
+
+                  8.{" "}Work is Employed / Proposed:{" "}
+
                  
                 </td>
                 <td>
@@ -131,7 +147,9 @@ const FormHelth33 = () => {
               </tr>
               <tr>
                 <td >
-                  a:Hazardous Process :
+
+                  a:{" "}Hazardous Process :
+
                   
                 </td>
                <td>
@@ -140,7 +158,9 @@ const FormHelth33 = () => {
               </tr>
               <tr>
                 <td >
-                  b:Dangerous Operations:{" "}
+
+                  b:{" "}Dangerous Operations:{" "}
+
                  
                 </td>
                 <td>
@@ -156,7 +176,9 @@ const FormHelth33 = () => {
                   <p>
                     marks are
                     {"   "}{" "}
+                    <span style={{textDecoration:'underline '}}>
                     {CheckupData?.employeecontactdetails?.idMark || "N/A"}
+                    </span>
                   </p>
                   <p>
                     and who is desirous of being employed in above mentioned
@@ -199,7 +221,7 @@ const FormHelth33 = () => {
                     <p>
                       Signature of left hand thumb
                       <br />
-                      imperssion ogf the person examined
+                      imperssion of the person examined
                     </p>
                     <p>
                       Signature with stamp of

@@ -18,8 +18,6 @@ const Form32Health = () => {
       console.log("new>>>> data");
 
       console.log(">>name data final");
-
-      
     } catch (error) {
       console.error("Error fetching checkup data:", error);
     }
@@ -30,7 +28,6 @@ const Form32Health = () => {
     window.print();
   };
 
-  
   useEffect(() => {
     GetCheckupDatabyId(id);
   }, [id]);
@@ -42,9 +39,8 @@ const Form32Health = () => {
     }
   `;
   const printButtonStyles = {
-    display: 'block', // Show the button by default
+    display: "block", // Show the button by default
   };
-
 
   return (
     <React.Fragment>
@@ -78,16 +74,186 @@ const Form32Health = () => {
                 <span>Yrs</span>
               </div>
             </div>
-            <table className="mainTable">
+            <table id="customers">
               <tr>
-                <td>Department</td>
-                <td colspan="2">
+                <td id="abc">1</td>
+                <td style={{ width: "41%" }}>Department</td>
+                <td>
                   {CheckupData?.employeeData?.companyDepartments || "N/A"}
                 </td>
               </tr>
               <tr>
+                <td id="abc">2.</td>
                 <td>Hazardous Operations</td>
+                <td>
+                  {CheckupData?.employeeform32?.hazardousProcess || "N/A"}
+                </td>
+              </tr>
+              <tr>
+                <td id="abc">3</td>
+                <td>Dangerous Operation </td>
+                <td>
+                  {CheckupData?.employeeform32?.dnagerousOperation || "N/A"}
+                </td>
+              </tr>
+              <tr>
+                <td id="abc">4</td>
+                <td>Nature of job of Occupation</td>
+                <td>
+                  {CheckupData?.employeecontactdetails?.natureOfJob || "N/A"}
+                </td>
+              </tr>
+              <tr>
+                <td id="abc">5</td>
+                <td>Raw Materials Products or by Products likely to be exposed to</td>
+                <td>
+                  {CheckupData?.employeeData?.rawMaterialsProducts || "N/A"}
+                </td>
+              </tr>
+              <tr>
+                <td id="abc">6</td>
+                <td>Date of Posting</td>
+                <td>
+                  {CheckupData?.employeeform32?.dateOfLeaving
+                    .slice(0, 10)
+                    .split("-")
+                    .reverse()
+                    .join("-") || "N/A"}
+                </td>
+              </tr>
+              <tr>
+                <td id="abc">7</td>
+                <td>Date of Leaving / Transfer to or Transfer</td>
+                <td>
+                  {CheckupData?.employeeform32?.dateOfLeaving
+                    .slice(0, 10)
+                    .split("-")
+                    .reverse()
+                    .join("-") || "N/A"}
+                </td>
+              </tr>
+              <tr>
+                <td id="abc">8</td>
+                <td>Reasons for Discharge,Leave/or Transfer</td>
                 <td colspan="2">
+                  {CheckupData?.employeeform32?.reasons || "N/A"}
+                </td>
+              </tr>
+              <tr>
+                <td colSpan={3}>
+                  <div style={{marginLeft:'10%'}}>MEDICAL EXAMINATION AND THE RESULT THEREOF</div>
+                </td>
+              </tr>
+
+              <tr>
+                <td id="abc">9</td>
+                <td>Date</td>
+                <td>
+                  {CheckupData?.employeeform32?.dateOFPosting
+                    .slice(0, 10)
+                    .split("-")
+                    .reverse()
+                    .join("-") || "N/A"}
+                </td>
+              </tr>
+              <tr>
+                <td id="abc">10</td>
+                <td>Sign & Symptoms </td>
+                <td colspan="2">
+                  {CheckupData?.employeeform32?.signs || "N/A"}
+                </td>
+              </tr>
+              <tr>
+              <td id="abc">11</td>
+                <td>Nature of Tests and results thereof</td>
+                <td colspan="2">
+                  {CheckupData?.employeeform32?.natureOfTests || "N/A"}
+                </td>
+              </tr>
+
+              <tr>
+                <td id="abc">12</td>
+                <td>Results Fit/Unfit</td>
+                <td colspan="2">
+                  {CheckupData?.employeeform33?.fitOrUnfit || "N/A"}
+                </td>
+              </tr>
+
+              <tr>
+                 
+                <td colSpan={3}>
+                <div style={{marginLeft:'10%'}}>
+                IF DECLARED UNFIT FOR WORK
+                </div>
+                </td>
+              </tr>
+              <tr>
+              <td id="abc">13</td>
+                <td>Period of temporary withdrawal form that work</td>
+                <td colspan="2">
+                  {CheckupData?.employeeform32?.periodOfTemporaryUnfit || "N/A"}
+                </td>
+              </tr>
+              <tr>
+                <td id="abc">14</td>
+                <td>Reasons for withdrawal form that work</td>
+                <td >
+                  {" "}
+                  {CheckupData?.employeeform32?.reasons || "N/A"}
+                </td>
+              </tr>
+              <tr>
+                <td id="abc">15</td>
+                <td>Date of decalring unfit</td>
+                <td>
+                  {" "}
+                  {CheckupData?.employeeform32?.dateOfDeclaringUnfit
+                    .slice(0, 10)
+                    .split("-")
+                    .reverse()
+                    .join("-") || "N/A"}
+                </td>
+              </tr>
+
+              <tr>
+                <td id="abc">16</td>
+                <td>Date of issuing fitness certificate</td>
+                <td colspan="2">
+                  {CheckupData?.employeeform32?.dateOfissuingFitness
+                    .slice(0, 10)
+                    .split("-")
+                    .reverse()
+                    .join("-") || "N/A"}
+                </td>
+              </tr>
+
+              <tr>
+                <td colSpan={3}>
+                  <div style={{ marginTop: "60px" }}>
+                    <div className="signatureTitle">
+                      Signature with stamp of the
+                    </div>
+                    <div className="signatureTitle">
+                      Factory Medical Officer
+                    </div>
+                    
+                  </div>
+                </td>
+              </tr>  
+
+            </table>
+            {/* <table className="mainTable">
+              <tr>
+                <td>1</td>
+                <td>Department</td>
+                <td>
+                  {CheckupData?.employeeData?.companyDepartments || "N/A"}
+                </td>
+              </tr>
+              <tr>
+                <td>2.</td>
+                <td>Hazardous Operations</td>
+                <td>
                   {CheckupData?.employeeform32?.hazardousProcess || "N/A"}
                 </td>
               </tr>
@@ -197,7 +363,7 @@ const Form32Health = () => {
               </tr>
               <tr>
                 <td colSpan={2}>
-                  <div>
+                  <div style={{ marginTop: "64px" }}>
                     <div className="signatureTitle">
                       Signature with stamp of the
                     </div>
@@ -208,23 +374,14 @@ const Form32Health = () => {
                   </div>
                 </td>
               </tr>
-            </table>
+            </table> */}
             <div></div>
-       
 
             <div className="hstack gap-2 justify-content-end d-print-none mt-4">
-                      <Link
-                        to="#"
-                        onClick={handlePrint}
-                        className="btn btn-success"
-                      >
-                        <i className="ri-printer-line align-bottom me-1"></i>{" "}
-                        Print
-                      </Link>
-           </div>
-
-            
-            
+              <Link to="#" onClick={handlePrint} className="btn btn-success">
+                <i className="ri-printer-line align-bottom me-1"></i> Print
+              </Link>
+            </div>
           </div>
         </Container>
       </div>
