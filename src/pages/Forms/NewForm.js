@@ -41,8 +41,8 @@ const NewForm = () => {
   const [currentEmp, setCurrentEmp] = useState(null);
   const [currentCompanyId, setCurrentCompanyId] = useState(null);
   const [currentLocation, setCurrentLocation] = useState(null);
-  const [currentEmpContactDetails, setCurrentEmpContactDetails] =
-    useState(null);
+  const [currentEmpContactDetails, setCurrentEmpContactDetails] = useState(null);
+
 
   const getcompanies = async () => {
     const res = await GetCompany();
