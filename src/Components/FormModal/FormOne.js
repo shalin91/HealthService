@@ -245,6 +245,7 @@ function Example({ companyId, location,allcompany }) {
                   employeeNameAbbrevation: "",
                   employeeName: "",
                   employeeFatherName: "",
+                  employeeSurname:"",
                   ecNo: "",
                   companyJobCategorys: "",
                   companyDepartments: "",
@@ -294,7 +295,7 @@ function Example({ companyId, location,allcompany }) {
                                   Name
                                 </label>
                               </Col>
-                              <Col sm={6}>
+                              <Col sm={3}>
                                 <label
                                   className="form-label mt-3"
                                   htmlFor="product-orders-input"
@@ -302,8 +303,16 @@ function Example({ companyId, location,allcompany }) {
                                   Father's Name
                                 </label>
                               </Col>
+                              <Col sm={3}>
+                                <label
+                                  className="form-label mt-3"
+                                  htmlFor="product-orders-input"
+                                >
+                                  Surname
+                                </label>
+                              </Col>
                             </Row>
-                            <Col sm={2}>
+                            <Col sm={3}>
                               <div className="">
                                 <select
                                   className="form-select"
@@ -315,13 +324,15 @@ function Example({ companyId, location,allcompany }) {
                                   onBlur={handleBlur}
                                   value={values.employeeNameAbbrevation}
                                 >
+                                  <option value="">---select---</option>
                                   <option value="Mr.">Mr</option>
+                                  <option value="Mr.">Ms</option>
                                   <option value="Mrs.">Mrs</option>
                                  
                                 </select>
                               </div>
                             </Col>
-                            <Col sm={4}>
+                            <Col sm={3}>
                               <div className="">
                                 <Input
                                   type="text"
@@ -337,7 +348,7 @@ function Example({ companyId, location,allcompany }) {
                                 />
                               </div>
                             </Col>
-                            <Col sm={4}>
+                            <Col sm={3}>
                               <div className="">
                                 <Input
                                   type="text"
@@ -350,6 +361,22 @@ function Example({ companyId, location,allcompany }) {
                                   onChange={handleChange}
                                   onBlur={handleBlur}
                                   value={values.employeeFatherName}
+                                />
+                              </div>
+                            </Col>
+                            <Col sm={3}>
+                              <div className="">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="Surname"
+                                  name="employeeSurname"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.employeeSurname}
                                 />
                               </div>
                             </Col>
@@ -487,7 +514,7 @@ function Example({ companyId, location,allcompany }) {
                   dateOfJoin: "",
                   idMark: "",
                   natureOfJob: "",
-                  res: "",
+                  // res: "",
                   mobileNumber: "",
                   office: "",
                   pp: "",
@@ -576,8 +603,6 @@ function Example({ companyId, location,allcompany }) {
                                   />
                                 </div>
                               </Col>
-                            </Row>
-                            <Row>
                               <Col sm={2}>
                                 <div className="mb-3">
                                   <label
@@ -600,8 +625,11 @@ function Example({ companyId, location,allcompany }) {
                                   </div>
                                 </div>
                               </Col>
+                            </Row>
+                            <Row>
+                              
 
-                              <Col sm={2}>
+                              <Col sm={3}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -649,6 +677,7 @@ function Example({ companyId, location,allcompany }) {
                                       </option>
                                       <option value="male">Male</option>
                                       <option value="female">Female</option>
+                                      <option value="others">Others</option>
                                     </select>
                                   </div>
                                 </div>
@@ -702,33 +731,37 @@ function Example({ companyId, location,allcompany }) {
                                   </div>
                                 </div>
                               </Col>
-                              <Col sm={2}>
+                              <Col sm={3}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
-                                    htmlFor="product-orders-input"
+                                    htmlFor="product-Discount-input"
                                   >
                                     Martial Status
                                   </label>
                                   <div className="input-group mb-3">
-                                    <Input
-                                      type="text"
-                                      className="form-control"
-                                      id="product-orders-input"
-                                      placeholder="martial status"
+                                    <select
+                                      className="form-select"
+                                      id="product-gender-input"
                                       name="mentalStatus"
-                                      aria-label="orders"
-                                      aria-describedby="product-orders-addon"
+                                      aria-label="Gender"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={values.mentalStatus} // mentalStatus
-                                    />
+                                      value={values.mentalStatus}
+                                    >
+                                      <option value="" disabled>
+                                        --select-- 
+                                      </option>
+                                      <option value="Married">Married</option>
+                                      <option value="Unmarried">Unmarried</option>
+                                      <option value="Others">Others</option>
+                                    </select>
                                   </div>
                                 </div>
                               </Col>
                             </Row>
                             <Row>
-                              <Col sm={2}>
+                              {/* <Col sm={2}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -749,9 +782,9 @@ function Example({ companyId, location,allcompany }) {
                                     />
                                   </div>
                                 </div>
-                              </Col>
+                              </Col> */}
 
-                              <Col sm={2}>
+                              <Col sm={3}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -776,7 +809,7 @@ function Example({ companyId, location,allcompany }) {
                                 </div>
                               </Col>
 
-                              <Col sm={2}>
+                              <Col sm={3}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -825,13 +858,13 @@ function Example({ companyId, location,allcompany }) {
                                   </div>
                                 </div>
                               </Col>
-                              <Col sm={2}>
+                              <Col sm={3}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
                                     htmlFor="product-orders-input"
                                   >
-                                    Emer
+                                    Emergency Number
                                   </label>
                                   <div className="input-group mb-3">
                                     <Input

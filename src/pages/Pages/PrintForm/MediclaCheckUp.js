@@ -22,9 +22,7 @@ const MediclaCheckUp = () => {
     try {
       const data = await getCheckupDatabyId(id);
       setCheckupData(data);
-      console.log("new>>>> data");
-
-      console.log(">>name data final");
+      
     } catch (error) {
       console.error("Error fetching checkup data:", error);
     }
@@ -37,6 +35,7 @@ const MediclaCheckUp = () => {
       if (
         CheckupData?.employeeeyeinformation?.distandVisionWithLeftEye !== ""
       ) {
+        console.log(">>>",CheckupData?.employeeeyeinformation?.distandVisionWithLeftEye);
         setWithGlassChecked(true);
         setWithoutGlassChecked(false);
       }
@@ -168,7 +167,7 @@ const MediclaCheckUp = () => {
                 </tr>
                 <tr>
                   <td colSpan="12">
-                  COMPLAINTS :{" "}
+                    COMPLAINTS :{" "}
                     {CheckupData?.employeeVitalAndHistory?.complaints || "N/A"}
                   </td>
                 </tr>
@@ -307,8 +306,12 @@ const MediclaCheckUp = () => {
                 <tr>
                   <td colSpan="6">
                     <div className="titleDiv">
-                      Near Vision With Glass{" "}{" "}
-                      <input type="checkBox" checked={nearwith} style={{marginLeft:'15px'}} />
+                      Near Vision With Glass{" "}
+                      <input
+                        type="checkBox"
+                        checked={nearwith}
+                        style={{ marginLeft: "15px" }}
+                      />
                       Without Glass{" "}
                       <input type="checkBox" checked={nearwithout} />
                     </div>

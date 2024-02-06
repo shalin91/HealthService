@@ -89,19 +89,16 @@ const CheckupForm = () => {
   const [shalin, setShalin] = useState(null);
 
   const [finalcheckupname, setfinalcheckupname] = useState(null);
-  // const [ allCategory , setAllCategory ] = useState( [] );
-
-  // const [ allDepartment , setAllDepartment ] = useState( [] );
-
-  // const [ category , setCategory ] = useState( null );
-
-  // const [ department , setDepartment ] = useState( null );
-
-  //onchange event
 
   const [checknameid, setchecknameid] = useState(null);
   const [checktypeid, setchecktypeid] = useState(null);
-
+  const [vitals, setvitals] = useState(null);
+  const [examnination, setexamination] = useState(null);
+  const [eye, seteye] = useState(null);
+  const [blood, setbloodgrp] = useState(null);
+  const [other, setother] = useState(null);
+  const [form32, setform32] = useState(null);
+  const [form33, setform33] = useState(null);
   const getcompanies = async () => {
     const res = await GetCompany();
     console.log(res);
@@ -153,8 +150,6 @@ const CheckupForm = () => {
     console.log(response.data._id);
   };
 
- 
-
   const getAllCheckupType = async () => {
     const responce = await getCheckupType();
 
@@ -196,12 +191,16 @@ const CheckupForm = () => {
       employeeContactDetailsId: currentEmpContactDetails._id,
     });
 
-    console.log("dddddaaaatttttaaaaa");
+    console.log("vaishallllllllllll");
     console.log(chaeckupData.data);
+    console.log(chaeckupData.data.employeeReports.employeeVitalAndHistoryId);
 
     setCheckupDataId(chaeckupData.data._id);
-
-    
+    setvitals(chaeckupData.data.employeeReports.employeeVitalAndHistoryId);
+    setexamination(
+      chaeckupData.data.employeeReports.employeeGenerelExaminationId
+    );
+    setother(chaeckupData.data.employeeReports.employeeInvestigationDetailsId)
   };
 
   useEffect(() => {
@@ -210,7 +209,9 @@ const CheckupForm = () => {
     getCheckUpNameMaster();
   }, []);
 
-  
+  useEffect(() => {
+    console.log(">>>", vitals);
+  }, [vitals]);
 
   return (
     <>
@@ -218,8 +219,6 @@ const CheckupForm = () => {
       <div className="page-content">
         <Container fluid>
           <BreadCrumb grandParent="Setup" parent="Forms" child="Form-2" />
-
-          {/* company componemnt we get companyid and location name */}
 
           <Row>
             <Col lg={12}>
@@ -231,7 +230,7 @@ const CheckupForm = () => {
                 //validationSchema={validationSchema}
                 onSubmit={async (values, { resetForm }) => {
                   handleSaveCompanyAndLocation(values);
-                  resetForm();
+                  // resetForm();
                   // Additional actions after form submission
                   // togglemodal();
                 }}
@@ -578,7 +577,7 @@ const CheckupForm = () => {
                   age: "",
                   bloodGroup: "",
                 }}
-                onSubmit={(values ,{ resetForm }) => {
+                onSubmit={(values, { resetForm }) => {
                   // Alert the input values of the form that we filled
 
                   handleSubmitForEmp();
@@ -633,9 +632,8 @@ const CheckupForm = () => {
                                       }}
                                       onBlur={handleBlur}
                                       value={values.employeeName}
-                                      
                                     >
-                                     <option >--select--</option>
+                                      <option>--select--</option>
                                       {EmpbyCompandLoc &&
                                         EmpbyCompandLoc.length > 0 &&
                                         EmpbyCompandLoc.map((emp, index) => (
@@ -841,7 +839,7 @@ const CheckupForm = () => {
                           toggleCustom("2");
                         }}
                       >
-                         Examination
+                        Examination
                       </NavLink>
                     </NavItem>
                     <NavItem>
@@ -880,20 +878,7 @@ const CheckupForm = () => {
                           toggleCustom("5");
                         }}
                       >
-                        Investigation
-                      </NavLink>
-                    </NavItem>
-                    <NavItem>
-                      <NavLink
-                        style={{ cursor: "pointer" }}
-                        className={classnames({
-                          active: customActiveTab === "6",
-                        })}
-                        onClick={() => {
-                          toggleCustom("6");
-                        }}
-                      >
-                        Form-32
+                        Other Investigation
                       </NavLink>
                     </NavItem>
                     <NavItem>
@@ -907,6 +892,19 @@ const CheckupForm = () => {
                         }}
                       >
                         Form-33
+                      </NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink
+                        style={{ cursor: "pointer" }}
+                        className={classnames({
+                          active: customActiveTab === "6",
+                        })}
+                        onClick={() => {
+                          toggleCustom("6");
+                        }}
+                      >
+                        Form-32
                       </NavLink>
                     </NavItem>
                   </Nav>
@@ -927,6 +925,7 @@ const CheckupForm = () => {
                         checkupTypeId={checkupType}
                         checkupDataId={checkupDataId}
                         employeeId={shalin}
+                        vitalid={vitals}
                       />
                     </TabPane>
 
@@ -938,6 +937,7 @@ const CheckupForm = () => {
                         checkupTypeId={checkupType}
                         checkupDataId={checkupDataId}
                         employeeId={shalin}
+                        generalexamId={examnination}
                       />
                     </TabPane>
 
@@ -971,6 +971,7 @@ const CheckupForm = () => {
                         checkupTypeId={checkupType}
                         checkupDataId={checkupDataId}
                         employeeId={shalin}
+                        otherinv={other}
                       />
                     </TabPane>
 

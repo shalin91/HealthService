@@ -19,7 +19,6 @@ import { Link } from "react-router-dom";
 import * as XLSX from "xlsx";
 const url = `${process.env.REACT_APP_BASE_URL}`;
 
-
 const MedicalReports = () => {
   const [allCompany, setAllCompany] = useState([]);
   const [allLocation, setAllLocation] = useState([]);
@@ -92,6 +91,7 @@ const MedicalReports = () => {
   };
 
   const handleDateChange = (date, field) => {
+    console.log(">>>>", date);
     if (field === "start") {
       setStartDate(date);
     } else if (field === "end") {
@@ -108,14 +108,17 @@ const MedicalReports = () => {
     };
 
     if (startDate) {
-      const formattedStartDate = new Date(startDate).toLocaleDateString("en-US", {
-        month: "2-digit",
-        day: "2-digit",
-        year: "numeric",
-      });
+      const formattedStartDate = new Date(startDate).toLocaleDateString(
+        "en-US",
+        {
+          month: "2-digit",
+          day: "2-digit",
+          year: "numeric",
+        }
+      );
       queryParams.startDate = formattedStartDate;
     }
-  
+
     if (endDate) {
       const formattedEndDate = new Date(endDate).toLocaleDateString("en-US", {
         month: "2-digit",
@@ -137,69 +140,180 @@ const MedicalReports = () => {
       const response = await axios.get(url1);
       console.log(">>>> filterdata in array");
       console.log(response.data);
+      console.log(response.data[0].checkupNameId);
       setFilterdata(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
-
-  
-
   const handleExportReport = () => {
-    
-    if (filterdata && filterdata.length > 0) {
-      const headers = ["NAME", "AGE", "SEX", "DATE", "HEIGHT" ,"WEIGHT" , "PRESENT COMPLAINT" , "PAST ILLNESS" , "CURRENT MEDICATION" , "ALLERGY" , "ADDICTION" , "B.P" , "PULSE" , "W/O GLASS DISTANT RIGHT" , "W/O GLASS DISTANT LEFT" , "W/O GLASS NEAR RIGHT" , "W/O GLASS NEAR LEFT" , "WITH GLASS DISTANT RIGHT" , "WITH GLASS DISTANT LEFT" , "WITH GLASS NEAR RIGHT" , "WITH GLASS NEAR LEFT" , "COLOUR BLINDNESS" , "HAEMOGLOBIN" , "W.B.C" , "PLATELET COUNT" , "BLOOD GROUP" , "RANDOM SUGAR" , "SGPT" , "S.CREATINE" , "PROTEIN" , "GLUCOSE" , "KETONE" , "PUS CELLS" , "RED CELLS" , "SPIROMETRY" , "AUDIOMETRY", "X-RAY(CHEST)" , "FINAL REMARK" , "FIT" ,  "CELL NO" , "DOB" , "VACCINE DOSE" , "MC CODE" , "SHOE SIZE"];
-      const data = filterdata?filterdata.map(item => [
-        item.employeeData.employeeName ,
-        item.employeecontactdetails.age ,
-        item.employeecontactdetails.gender ,
-        item.createdAt.slice(0, 10)
-        .split("-")
-        .reverse()
-        .join("-"),
-        item.employeeVitalAndHistory.height,
-        item.employeeVitalAndHistory.weight,
-        item.employeeVitalAndHistory.complaints,
-        item.employeeVitalAndHistory.pastHistory,
-        item.employeeVitalAndHistory.pastHistory,
-        item.employeeVitalAndHistory.pastHistory,
-        item.employeeVitalAndHistory.pastHistory,
-        item.employeeVitalAndHistory.bp,
-        item.employeeVitalAndHistory.pulse,
-        item.employeeeyeinformation.distandVisionWithoutRightEye,
-        item.employeeeyeinformation.distandVisionWithoutLeftEye,
-        item.employeeeyeinformation.nearVisionWithoutRightEye,
-        item.employeeeyeinformation.nearVisionWithoutLeftEye,
-        item.employeeeyeinformation.distandVisionWithRightEye,
-        item.employeeeyeinformation.distandVisionWithLeftEye,
-        item.employeeeyeinformation.nearVisionWithRightEye,
-        item.employeeeyeinformation.nearVisionWithLefttEye,
-        item.employeeeyeinformation.colourVision,
-        item.employeebloodinformation.hb,
-         item.employeebloodinformation.wbc,
-         item.employeebloodinformation.plateletCount,
-         item.employeecontactdetails.bloodGroup,
-         item.employeebloodinformation.blSugarFastingOrRandom,
-         item.employeebloodinformation.sgpt,
-         item.employeebloodinformation.sCreatinine,
-         item.employeebloodinformation.proein,
-         item.employeebloodinformation.glucose,
-         item.employeebloodinformation.ketone,
-         item.employeebloodinformation.pusCells,
-         item.employeebloodinformation.redCells,
-         item.employeeinvestigationinformation.spirometry,
-         item.employeeinvestigationinformation.audiometry,
-         item.employeeinvestigationinformation.audiometry,
-         item.employeeinvestigationinformation.remarks,
-         item.employeeform33.fitOrUnfit,
-        //  item.employeeform33.fitOrUnfit,
-         item.employeecontactdetails.mobileNumber,
-         item.employeecontactdetails.dateOfBirth.slice(0, 10)
-         .split("-")
-         .reverse()
-         .join("-"),
-      ]):null
+    // console.log("excel nai thatu")
+    if (filterdata) {
+      const headers = [
+        "NAME",
+        "AGE",
+        "SEX",
+        "DATE",
+        "HEIGHT",
+        "WEIGHT",
+        "PRESENT COMPLAINT",
+        "PAST ILLNESS",
+        "CURRENT MEDICATION",
+        "ALLERGY",
+        "ADDICTION",
+        "B.P",
+        "PULSE",
+        "W/O GLASS DISTANT RIGHT",
+        "W/O GLASS DISTANT LEFT",
+        "W/O GLASS NEAR RIGHT",
+        "W/O GLASS NEAR LEFT",
+        "WITH GLASS DISTANT RIGHT",
+        "WITH GLASS DISTANT LEFT",
+        "WITH GLASS NEAR RIGHT",
+        "WITH GLASS NEAR LEFT",
+        "COLOUR BLINDNESS",
+        "HAEMOGLOBIN",
+        "W.B.C",
+        "PLATELET COUNT",
+        "BLOOD GROUP",
+        "RANDOM SUGAR",
+        "SGPT",
+        "S.CREATINE",
+        "PROTEIN",
+        "GLUCOSE",
+        "KETONE",
+        "PUS CELLS",
+        "RED CELLS",
+        "SPIROMETRY",
+        "AUDIOMETRY",
+        "X-RAY(CHEST)",
+        "FINAL REMARK",
+        "FIT",
+        "CELL NO",
+        "DOB",
+        "VACCINE DOSE",
+        "MC CODE",
+        "SHOE SIZE",
+      ];
+
+      const data = filterdata.map((item) => [
+        (item.employeeData && item.employeeData.employeeName) || "NA",
+        (item.employeecontactdetails && item.employeecontactdetails.age) ||
+          "NA",
+        (item.employeecontactdetails && item.employeecontactdetails.gender) ||
+          "NA",
+        (item.createdAt &&
+          item.createdAt.slice(0, 10).split("-").reverse().join("-")) ||
+          "NA",
+        (item.employeeVitalAndHistory && item.employeeVitalAndHistory.height) ||
+          "NA",
+        (item.employeeVitalAndHistory && item.employeeVitalAndHistory.weight) ||
+          "NA",
+        (item.employeeVitalAndHistory &&
+          item.employeeVitalAndHistory.complaints) ||
+          "NA",
+        (item.employeeVitalAndHistory &&
+          item.employeeVitalAndHistory.pastHistory) ||
+          "NA",
+        (item.employeeVitalAndHistory &&
+          item.employeeVitalAndHistory.currentMedication) ||
+          "NA",
+        (item.employeeVitalAndHistory &&
+          item.employeeVitalAndHistory.allergy) ||
+          "NA",
+        (item.employeeVitalAndHistory &&
+          item.employeeVitalAndHistory.addiction) ||
+          "NA",
+        (item.employeeVitalAndHistory && item.employeeVitalAndHistory.bp) ||
+          "NA",
+        (item.employeeVitalAndHistory && item.employeeVitalAndHistory.pulse) ||
+          "NA",
+        (item.employeeeyeinformation &&
+          item.employeeeyeinformation.distandVisionWithoutRightEye) ||
+          "NA",
+        (item.employeeeyeinformation &&
+          item.employeeeyeinformation.distandVisionWithoutLeftEye) ||
+          "NA",
+        (item.employeeeyeinformation &&
+          item.employeeeyeinformation.nearVisionWithoutRightEye) ||
+          "NA",
+        (item.employeeeyeinformation &&
+          item.employeeeyeinformation.nearVisionWithoutLeftEye) ||
+          "NA",
+        (item.employeeeyeinformation &&
+          item.employeeeyeinformation.distandVisionWithRightEye) ||
+          "NA",
+        (item.employeeeyeinformation &&
+          item.employeeeyeinformation.distandVisionWithLeftEye) ||
+          "NA",
+        (item.employeeeyeinformation &&
+          item.employeeeyeinformation.nearVisionWithRightEye) ||
+          "NA",
+        (item.employeeeyeinformation &&
+          item.employeeeyeinformation.nearVisionWithLefttEye) ||
+          "NA",
+        (item.employeeeyeinformation &&
+          item.employeeeyeinformation.colourVision) ||
+          "NA",
+        (item.employeebloodinformation && item.employeebloodinformation.hb) ||
+          "NA",
+        (item.employeebloodinformation && item.employeebloodinformation.wbc) ||
+          "NA",
+        (item.employeebloodinformation &&
+          item.employeebloodinformation.plateletCount) ||
+          "NA",
+        (item.employeecontactdetails &&
+          item.employeecontactdetails.bloodGroup) ||
+          "NA",
+        (item.employeebloodinformation &&
+          item.employeebloodinformation.blSugarFastingOrRandom) ||
+          "NA",
+        (item.employeebloodinformation && item.employeebloodinformation.sgpt) ||
+          "NA",
+        (item.employeebloodinformation &&
+          item.employeebloodinformation.sCreatinine) ||
+          "NA",
+        (item.employeebloodinformation &&
+          item.employeebloodinformation.protein) ||
+          "NA",
+        (item.employeebloodinformation &&
+          item.employeebloodinformation.glucose) ||
+          "NA",
+        (item.employeebloodinformation &&
+          item.employeebloodinformation.ketone) ||
+          "NA",
+        (item.employeebloodinformation &&
+          item.employeebloodinformation.pusCells) ||
+          "NA",
+        (item.employeebloodinformation &&
+          item.employeebloodinformation.redCells) ||
+          "NA",
+        (item.employeeinvestigationinformation &&
+          item.employeeinvestigationinformation.spirometry) ||
+          "NA",
+        (item.employeeinvestigationinformation &&
+          item.employeeinvestigationinformation.audiometry) ||
+          "NA",
+        (item.employeeinvestigationinformation &&
+          item.employeeinvestigationinformation.xRayChest) ||
+          "NA",
+        (item.employeeinvestigationinformation &&
+          item.employeeinvestigationinformation.remarks) ||
+          "NA",
+        (item.employeeform33 && item.employeeform33.fitOrUnfit) || "NA",
+        (item.employeecontactdetails &&
+          item.employeecontactdetails.mobileNumber) ||
+          "NA",
+        (item.employeecontactdetails &&
+          item.employeecontactdetails.dateOfBirth &&
+          item.employeecontactdetails.dateOfBirth
+            .slice(0, 10)
+            .split("-")
+            .reverse()
+            .join("-")) ||
+          "NA",
+      ]);
 
       const headerStyle = {
         alignment: {
@@ -208,25 +322,29 @@ const MedicalReports = () => {
         },
         font: { bold: true },
       };
-    
+
       const dataStyle = {
         alignment: {
           horizontal: "center",
           vertical: "center",
         },
       };
-    
-      const styles = [headerStyle]; // Apply the header style to the first row
+
+      const styles = [headerStyle];
       for (let i = 1; i < data.length; i++) {
-        styles.push(dataStyle); // Apply the data style to the remaining rows
+        styles.push(dataStyle);
       }
-  
-      const worksheet = XLSX.utils.aoa_to_sheet([headers, ...data],{ styles });
-      const colWidths = [20, 20, 20, 20, 20 , 20 ,20 , 20 , 20, 20 ,20 ,20 , 20 , 20, 20, 20, 20, 20, 20 ,20 , 20 , 20, 20 , 20, 20, 20 , 20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20];
-      worksheet["!cols"] = colWidths.map(width => ({ width }));
+
+      const worksheet = XLSX.utils.aoa_to_sheet([headers, ...data], { styles });
+      const colWidths = [
+        20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
+        20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
+        20, 20, 20, 20, 20, 20, 20, 20, 20,
+      ];
+      worksheet["!cols"] = colWidths.map((width) => ({ width }));
       const workbook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(workbook, worksheet, "MedicalReports");
-  
+
       // Save the file
       XLSX.writeFile(workbook, "MedicalReports.xlsx");
     } else {
@@ -234,7 +352,6 @@ const MedicalReports = () => {
       console.log("No data to export");
     }
   };
-  
 
   useEffect(() => {
     getcompanies();
@@ -254,111 +371,130 @@ const MedicalReports = () => {
             <Col lg={12}>
               <Card>
                 <CardHeader className="d-flex justify-content-between align-items-center">
-                  
-                    {/* <label htmlFor="filterSelect">Filter:</label> */}
-                    <Row className="align-items-center">
+                  {/* <label htmlFor="filterSelect">Filter:</label> */}
+                  <Row className="align-items-center">
                     <Col className="lg-2">
-                    <select
-                      className="form-select"
-                      id="filterSelect"
-                      style={{ marginLeft: "4px" }}
-                      //   value={filterOption}
-                      onChange={handleLocationChange}
-                    >
-                      <option value="">Select Company</option>
-                      {allCompany
-                        ? allCompany.map((company) => (
-                            <option key={company._id} value={company._id}>
-                              {company.companyName}
-                            </option>
-                          ))
-                        : null}
-                    </select>
+                      <select
+                        className="form-select"
+                        id="filterSelect"
+                        style={{ marginLeft: "4px" }}
+                        //   value={filterOption}
+                        onChange={handleLocationChange}
+                      >
+                        <option value="">Select Company</option>
+                        {allCompany
+                          ? allCompany.map((company) => (
+                              <option key={company._id} value={company._id}>
+                                {company.companyName}
+                              </option>
+                            ))
+                          : null}
+                      </select>
                     </Col>
                     <Col className="lg-2">
-                    <select
-                      className="form-select"
-                      id="filterSelect"
-                      style={{ marginLeft: "14px" }}
-                      onChange={handle1}
-                    >
-                      <option value="">Select Location</option>
-                      {allLocation && allLocation.length > 0 ? (
-                        allLocation.map((location) => (
-                          <option key={location} value={location}>
-                            {location}
+                      <select
+                        className="form-select"
+                        id="filterSelect"
+                        style={{ marginLeft: "14px" }}
+                        onChange={handle1}
+                      >
+                        <option value="">Select Location</option>
+                        {allLocation && allLocation.length > 0 ? (
+                          allLocation.map((location) => (
+                            <option key={location} value={location}>
+                              {location}
+                            </option>
+                          ))
+                        ) : (
+                          <option value="" disabled>
+                            No locations available
                           </option>
-                        ))
-                      ) : (
-                        <option value="" disabled>
-                          No locations available
-                        </option>
-                      )}
-                    </select>
+                        )}
+                      </select>
                     </Col>
                     <Col className="lg-2">
-                    <select
-                      className="form-select"
-                      id="filterSelect"
-                      style={{ marginLeft: "14px" }}
-                      onChange={handle2}
-                    >
-                      <option value="">Select Checkup</option>
-                      {allName.length
-                        ? allName.map((checkupName) => (
-                            <option key={checkupName} value={checkupName._id}>
-                              {checkupName.checkupName}
-                            </option>
-                          ))
-                        : null}
-                    </select>
+                      <select
+                        className="form-select"
+                        id="filterSelect"
+                        style={{ marginLeft: "14px" }}
+                        onChange={handle2}
+                      >
+                        <option value="">Select Checkup</option>
+                        {allName.length
+                          ? allName.map((checkupName) => (
+                              <option key={checkupName} value={checkupName._id}>
+                                {checkupName.checkupName}
+                              </option>
+                            ))
+                          : null}
+                      </select>
                     </Col>
                     <Col className="lg-2">
-                    <select
-                      className="form-select"
-                      id="filterSelect"
-                      style={{ marginLeft: "14px" }}
-                      onChange={handle3}
-                    >
-                      <option value="">Select Type</option>
-                      {allCheckupType
-                        ? allCheckupType.map((checkupType) => (
-                            <option key={checkupType} value={checkupType._id}>
-                              {checkupType.checkupType}
-                            </option>
-                          ))
-                        : null}
-                    </select>
+                      <select
+                        className="form-select"
+                        id="filterSelect"
+                        style={{ marginLeft: "14px" }}
+                        onChange={handle3}
+                      >
+                        <option value="">Select Type</option>
+                        {allCheckupType
+                          ? allCheckupType.map((checkupType) => (
+                              <option key={checkupType} value={checkupType._id}>
+                                {checkupType.checkupType}
+                              </option>
+                            ))
+                          : null}
+                      </select>
                     </Col>
                     <Col className="lg-2">
-                    <DatePicker
-                      className="form-control"
-                      selected={startDate}
-                      onChange={(date) => handleDateChange(date, "start")}
-                      dateFormat="dd/MM/yyyy"
-                      placeholderText="Select Start Date"
-                    />
+                      <DatePicker
+                        className="form-control"
+                        selected={startDate}
+                        onChange={(date) => handleDateChange(date, "start")}
+                        dateFormat="dd/MM/yyyy"
+                        placeholderText="Select Start Date"
+                      />
                     </Col>
                     <Col className="lg-2">
-                    <DatePicker
-                      className="form-control"
-                      selected={endDate}
-                      onChange={(date) => handleDateChange(date, "end")}
-                      dateFormat="dd/MM/yyyy" // Set the desired date format
-                      placeholderText="Select End Date"
-                    />
+                      <DatePicker
+                        className="form-control"
+                        selected={endDate}
+                        onChange={(date) => handleDateChange(date, "end")}
+                        dateFormat="dd/MM/yyyy" // Set the desired date format
+                        placeholderText="Select End Date"
+                      />
                     </Col>
-                    </Row>
-                    
+                  </Row>
 
-                    <div className="filter-dropdown " style={{ display: "flex" }}>
+                  {/* <div className="filter-dropdown " style={{ display: "flex" }}>
                     <button
                       onClick={handleFetchData}
                       style={{ marginLeft: "24px", width: "100%" }}
                     >
                       Apply
                     </button>
-                  </div>
+                  </div> */}
+                  <div className="filter-dropdown" style={{ display: "flex" }}>
+  <button
+    onClick={handleFetchData}
+    style={{
+      marginLeft: "24px",
+      width: "100%",
+      padding: "10px 20px",
+      backgroundColor: "#4CAF50", /* Green background color */
+      color: "white", /* White text color */
+      border: "none", /* Remove borders */
+      borderRadius: "5px", /* Rounded corners */
+      cursor: "pointer", /* Add a pointer cursor on hover */
+      transition: "background-color 0.3s", /* Smooth transition on hover */
+    }}
+    onMouseOver={(e) => e.target.style.backgroundColor = "#45a049"} /* Darken the button on hover */
+    onMouseOut={(e) => e.target.style.backgroundColor = "#4CAF50"} /* Revert the color on hover out */
+  >
+    Apply
+  </button>
+</div>
+
 
                   <Row className="align-items-center">
                     <Col className="col-lg-auto"></Col>
@@ -403,7 +539,6 @@ const MedicalReports = () => {
                             >
                               Health Card.
                             </th>
-                            
                           </tr>
                         </thead>
 
@@ -424,7 +559,11 @@ const MedicalReports = () => {
                                     className="product-name"
                                     style={{ textAlign: "center" }}
                                   >
-                                    <Link to={`/medical-report/${item._id}`}>
+                                    <Link
+                                      to={`/medical-report/${item._id}`}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                    >
                                       Medical Report
                                     </Link>
                                   </td>
@@ -432,7 +571,11 @@ const MedicalReports = () => {
                                     className="product-name"
                                     style={{ textAlign: "center" }}
                                   >
-                                    <Link to={`/form32/${item._id}`}>
+                                    <Link
+                                      to={`/form32/${item._id}`}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                    >
                                       Form 32 Report
                                     </Link>
                                   </td>
@@ -441,7 +584,11 @@ const MedicalReports = () => {
                                     className="product-name"
                                     style={{ textAlign: "center" }}
                                   >
-                                    <Link to={`/form-helth33/${item._id}`}>
+                                    <Link
+                                      to={`/form-helth33/${item._id}`}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                    >
                                       Form-Health33 Report
                                     </Link>
                                   </td>
@@ -450,12 +597,14 @@ const MedicalReports = () => {
                                     className="product-name"
                                     style={{ textAlign: "center" }}
                                   >
-                                    <Link to={`/helth-card/${item._id}`}>
+                                    <Link
+                                      to={`/helth-card/${item._id}`}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                    >
                                       Health Card
                                     </Link>
                                   </td>
-
-                                  
                                 </tr>
                               ))
                             : null}
@@ -482,15 +631,15 @@ const MedicalReports = () => {
                     </div>
                   </div>
                   <div className="hstack gap-2 justify-content-end d-print-none mt-4">
-                      <Link
-                        to="#"
-                        onClick={handleExportReport}
-                        className="btn btn-success"
-                      >
-                        <i className="ri-printer-line align-bottom me-1"></i>{" "}
-                        Export Report
-                      </Link>
-           </div>
+                    <Link
+                      to="#"
+                      onClick={handleExportReport}
+                      className="btn btn-success"
+                    >
+                      <i className="ri-printer-line align-bottom me-1"></i>{" "}
+                      Export Report
+                    </Link>
+                  </div>
                 </CardBody>
               </Card>
             </Col>

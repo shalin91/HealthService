@@ -242,17 +242,23 @@ export const SignState = (props) => {
 
   const GetCheckUpName = async () => {
     try {
-      const response = await axios.get(`${url}/checkup/get-checkupname-master`, {});
+      const response = await axios.get(
+        `${url}/checkup/get-checkupname-master`,
+        {}
+      );
       return response;
     } catch (error) {
       return { success: false, msg: "server Error" };
     }
   };
 
-  //vaishal 
+  //vaishal
   const GetCheckUpNameMaster = async () => {
     try {
-      const response = await axios.get(`${url}/checkup/get-checkupname-master`, {});
+      const response = await axios.get(
+        `${url}/checkup/get-checkupname-master`,
+        {}
+      );
       return response;
     } catch (error) {
       return { success: false, msg: "server Error" };
@@ -360,7 +366,6 @@ export const SignState = (props) => {
     }
   };
 
-
   //vaishal
 
   const setCheckupNameMaster = async (data) => {
@@ -375,9 +380,6 @@ export const SignState = (props) => {
       console.error("Error during API call:", error);
     }
   };
-
-
-
 
   // set checkupdata
 
@@ -406,7 +408,30 @@ export const SignState = (props) => {
       console.error("Error during API call:", error);
     }
   };
+  const editVital = async (id, data) => {
+    //edit-vital
+    try {
+      const response = await axios.post(`${url}/employ/edit-vital/${id}`, {
+        data,
+      });
 
+      return response;
+    } catch (error) {
+      console.error("Error during API call:", error);
+    }
+  };
+  const editexamination = async (id, data) => {
+    //edit-vital
+    try {
+      const response = await axios.post(`${url}/employ/edit-examination/${id}`, {
+        data,
+      });
+
+      return response;
+    } catch (error) {
+      console.error("Error during API call:", error);
+    }
+  };
   const setGeneralExamination = async (data) => {
     try {
       const response = await axios.post(
@@ -518,7 +543,31 @@ export const SignState = (props) => {
       };
     }
   };
+  const GetSpecificVital = async (id) => {
+    try {
+      const response = await axios.get(`${url}/employ/get-specificvital/${id}`);
+      return response;
+    } catch (error) {
+      return { success: false, msg: "server Error" };
+    }
+  };
 
+const GetSpecificOtherDetail = async (id) => {
+  try {
+    const response = await axios.get(`${url}/employ/get-specificvital/${id}`);
+    return response;
+  } catch (error) {
+    return { success: false, msg: "server Error" };
+  }
+};
+  const GetSpecificExamination = async (id) => {
+    try {
+      const response = await axios.get(`${url}/employ/get-specificgeneral/${id}`);
+      return response;
+    } catch (error) {
+      return { success: false, msg: "server Error" };
+    }
+  };
   return (
     <SignContext.Provider
       value={{
@@ -555,7 +604,12 @@ export const SignState = (props) => {
         GetCheckUpName,
         getCheckupDatabyId,
         setCheckupNameMaster,
-        GetCheckUpNameMaster
+        GetCheckUpNameMaster,
+        GetSpecificVital,
+        GetSpecificExamination,
+        GetSpecificOtherDetail,
+        editVital,
+        editexamination,
       }}
     >
       {props.children}
