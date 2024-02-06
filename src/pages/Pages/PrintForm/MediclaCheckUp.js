@@ -91,7 +91,9 @@ const MediclaCheckUp = () => {
                   </td>
                 </tr>
                 <tr>
+
                   <td colSpan="6">
+
                     DATE:{" "}
                     {CheckupData?.createdAt
                       ?.slice(0, 10)
@@ -99,11 +101,13 @@ const MediclaCheckUp = () => {
                       .reverse()
                       .join("-") || "N/A"}
                   </td>
+
                   <td colSpan="3">
                     MOB:{" "}
                     {CheckupData?.employeecontactdetails?.mobileNumber || "N/A"}
                   </td>
                   <td colSpan="3">
+
                     DOB:{" "}
                     {CheckupData?.employeecontactdetails?.dateOfBirth
                       .slice(0, 10)
@@ -113,45 +117,56 @@ const MediclaCheckUp = () => {
                   </td>
                 </tr>
                 <tr>
+
                   <td colSpan="9">
+
                     NAME:{" "}
                     {CheckupData?.employeeData?.employeeNameAbbrevation ||
                       "N/A"}{" "}
                     {CheckupData?.employeeData?.employeeName || "N/A"}{" "}
                     {CheckupData?.employeeData?.employeeFatherName || "N/A"}
                   </td>
+
                   <td colSpan="3">
+
                     SEX: {CheckupData?.employeecontactdetails?.gender || "N/A"}
                   </td>
                 </tr>
                 <tr>
+
                   <td colSpan="9">
                     COMPANY : {CheckupData?.compani?.companyName || "N/A"}
                   </td>
                   <td colSpan="3">
+
                     AGE:{CheckupData?.employeecontactdetails?.age || "N/A"}
                   </td>
                 </tr>
                 <tr>
+
                   <td colSpan="9">
                     NATURE OF JOB:{" "}
                     {CheckupData?.employeecontactdetails?.natureOfJob || "N/A"}
                   </td>
                   <td colSpan="3">
+
                     HT: {CheckupData?.employeeVitalAndHistory?.height || "N/A"}{" "}
                     CMS
                   </td>
                 </tr>
                 <tr>
+
                   <td colSpan="9">
                     IDENTIFICATION MARK:{" "}
                     {CheckupData?.employeecontactdetails?.idMark || "N/A"}{" "}
                   </td>
                   <td colSpan="3">
+
                     WT: {CheckupData?.employeeVitalAndHistory?.weight || "N/A"}{" "}
                     KG
                   </td>
                 </tr>
+
                 {/* </table>
 
               <table className="Medical-checkup"> */}
@@ -306,7 +321,7 @@ const MediclaCheckUp = () => {
                 <tr>
                   <td colSpan="6">
                     <div className="titleDiv">
-                      Near Vision With Glass{" "}
+                    Near Vision With Glass{" "}
                       <input
                         type="checkBox"
                         checked={nearwith}
@@ -316,7 +331,9 @@ const MediclaCheckUp = () => {
                       <input type="checkBox" checked={nearwithout} />
                     </div>
                   </td>
+
                   <td colSpan="3">
+
                     {" "}
                     N/
                     {CheckupData?.employeeeyeinformation
@@ -325,7 +342,9 @@ const MediclaCheckUp = () => {
                         ?.nearVisionWithRightEye ||
                       "N/A"}
                   </td>
+
                   <td colSpan="3">
+
                     N/
                     {CheckupData?.employeeeyeinformation
                       ?.nearVisionWithoutLeftEye ||
@@ -335,7 +354,9 @@ const MediclaCheckUp = () => {
                   </td>
                 </tr>
                 <tr>
+
                   <td colSpan="12">
+
                     <div className="inputDiv">
                       Colour Vision:{" "}
                       <input
@@ -356,6 +377,7 @@ const MediclaCheckUp = () => {
                       colour deficiency
                     </div>
                   </td>
+
                 </tr>
                 {/* </table>
               <table className="Medical-checkup"> */}
@@ -365,11 +387,13 @@ const MediclaCheckUp = () => {
                       width: "5%",
                     }}
                     rowspan="6"
+
                   >
                     <div className="sideTitle">CONSULATION</div>
                   </td>
                 </tr>
                 <tr>
+
                   <td colSpan="6">
                     Remark:{" "}
                     {CheckupData?.employeeinvestigationinformation?.remarks ||
@@ -410,6 +434,7 @@ const MediclaCheckUp = () => {
                 </tr>
                 <tr>
                   <td colSpan="12">
+
                     <h5 className="drTitle">CERTIFICATE OF FITNESS:</h5>
                     <p>
                       i certify that i have personally examined him / her and as
