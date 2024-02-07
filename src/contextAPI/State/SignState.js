@@ -420,12 +420,41 @@ export const SignState = (props) => {
       console.error("Error during API call:", error);
     }
   };
+  const editForm33 = async (id, data) => {
+    
+    try {
+      const response = await axios.post(`${url}/employ/edit-form33/${id}`, {
+        data,
+      });
+
+      return response;
+    } catch (error) {
+      console.error("Error during API call:", error);
+    }
+  };
+
+  const editOther = async (id, data) => {
+   
+    try {
+      const response = await axios.post(`${url}/employ/edit-other/${id}`, {
+        data,
+      });
+
+      return response;
+    } catch (error) {
+      console.error("Error during API call:", error);
+    }
+  };
+
   const editexamination = async (id, data) => {
     //edit-vital
     try {
-      const response = await axios.post(`${url}/employ/edit-examination/${id}`, {
-        data,
-      });
+      const response = await axios.post(
+        `${url}/employ/edit-examination/${id}`,
+        {
+          data,
+        }
+      );
 
       return response;
     } catch (error) {
@@ -470,7 +499,14 @@ export const SignState = (props) => {
       console.error("Error during API call:", error);
     }
   };
-
+  const GetallEmployeee = async () => {
+    try {
+      const response = await axios.get(`${url}/employ/get-all-employee`, {});
+      return response;
+    } catch (error) {
+      return { success: false, msg: "server Error" };
+    }
+  };
   const setInvestigation = async (data) => {
     try {
       const response = await axios.post(
@@ -551,18 +587,29 @@ export const SignState = (props) => {
       return { success: false, msg: "server Error" };
     }
   };
-
-const GetSpecificOtherDetail = async (id) => {
-  try {
-    const response = await axios.get(`${url}/employ/get-specificvital/${id}`);
-    return response;
-  } catch (error) {
-    return { success: false, msg: "server Error" };
-  }
-};
+  const GetSpecificForm33 = async (id) => {
+    try {
+      const response = await axios.get(`${url}/employ/get-specificform33/${id}`);
+      return response;
+    } catch (error) {
+      return { success: false, msg: "server Error" };
+    }
+  };
+  const GetSpecificOtherDetail = async (id) => {
+    try {
+      const response = await axios.get(
+        `${url}/employ/get-specificotherinvsetigation/${id}`
+      );
+      return response;
+    } catch (error) {
+      return { success: false, msg: "server Error" };
+    }
+  };
   const GetSpecificExamination = async (id) => {
     try {
-      const response = await axios.get(`${url}/employ/get-specificgeneral/${id}`);
+      const response = await axios.get(
+        `${url}/employ/get-specificgeneral/${id}`
+      );
       return response;
     } catch (error) {
       return { success: false, msg: "server Error" };
@@ -584,6 +631,7 @@ const GetSpecificOtherDetail = async (id) => {
         GetRoles,
         GetRoleSpecificPermission,
         AddComapany,
+        GetallEmployeee,
         AddEmployee,
         GetCompany,
         GetCompanybyId,
@@ -606,10 +654,13 @@ const GetSpecificOtherDetail = async (id) => {
         setCheckupNameMaster,
         GetCheckUpNameMaster,
         GetSpecificVital,
+        GetSpecificForm33,
         GetSpecificExamination,
         GetSpecificOtherDetail,
         editVital,
+        editOther,
         editexamination,
+        editForm33,
       }}
     >
       {props.children}

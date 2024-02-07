@@ -77,7 +77,7 @@ const Form32Health = () => {
             <table id="customers">
               <tr>
                 <td id="abc">1</td>
-                <td style={{ width: "41%" }}>Department</td>
+                <td style={{ width: "60%" }}>Department</td>
                 <td>
                   {CheckupData?.employeeData?.companyDepartments || "N/A"}
                 </td>
@@ -105,7 +105,9 @@ const Form32Health = () => {
               </tr>
               <tr>
                 <td id="abc">5</td>
-                <td>Raw Materials Products or by Products likely to be exposed to</td>
+                <td>
+                  Raw Materials Products or by Products likely to be exposed to
+                </td>
                 <td>
                   {CheckupData?.employeeData?.rawMaterialsProducts || "N/A"}
                 </td>
@@ -141,7 +143,9 @@ const Form32Health = () => {
               </tr>
               <tr>
                 <td colSpan={3}>
-                  <div style={{marginLeft:'10%'}}>MEDICAL EXAMINATION AND THE RESULT THEREOF</div>
+                  <div style={{ marginLeft: "10%" }}>
+                    MEDICAL EXAMINATION AND THE RESULT THEREOF
+                  </div>
                 </td>
               </tr>
 
@@ -164,7 +168,7 @@ const Form32Health = () => {
                 </td>
               </tr>
               <tr>
-              <td id="abc">11</td>
+                <td id="abc">11</td>
                 <td>Nature of Tests and results thereof</td>
                 <td colspan="2">
                   {CheckupData?.employeeform32?.natureOfTests || "N/A"}
@@ -180,15 +184,14 @@ const Form32Health = () => {
               </tr>
 
               <tr>
-                 
                 <td colSpan={3}>
-                <div style={{marginLeft:'10%'}}>
-                IF DECLARED UNFIT FOR WORK
-                </div>
+                  <div style={{ marginLeft: "10%" }}>
+                    IF DECLARED UNFIT FOR WORK
+                  </div>
                 </td>
               </tr>
               <tr>
-              <td id="abc">13</td>
+                <td id="abc">13</td>
                 <td>Period of temporary withdrawal form that work</td>
                 <td colspan="2">
                   {CheckupData?.employeeform32?.periodOfTemporaryUnfit || "N/A"}
@@ -197,10 +200,7 @@ const Form32Health = () => {
               <tr>
                 <td id="abc">14</td>
                 <td>Reasons for withdrawal form that work</td>
-                <td >
-                  {" "}
-                  {CheckupData?.employeeform32?.reasons || "N/A"}
-                </td>
+                <td> {CheckupData?.employeeform32?.reasons || "N/A"}</td>
               </tr>
               <tr>
                 <td id="abc">15</td>
@@ -236,11 +236,9 @@ const Form32Health = () => {
                     <div className="signatureTitle">
                       Factory Medical Officer
                     </div>
-                    
                   </div>
                 </td>
-              </tr>  
-
+              </tr>
             </table>
             {/* <table className="mainTable">
               <tr>

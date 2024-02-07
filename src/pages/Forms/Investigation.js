@@ -17,7 +17,7 @@ const Investigation = (props) => {
 
   );
   console.log(">>>other",props.otherinv);
-  const { setInvestigation,GetSpecificOtherDetail } = useContext(SignContext);
+  const { setInvestigation,GetSpecificOtherDetail,editOther} = useContext(SignContext);
 
   const handleSubmitData = async (values) => {
     const data = { ...props, ...values };
@@ -57,11 +57,17 @@ const Investigation = (props) => {
               otherinv
             }}
             // validationSchema={validationSchema}
-            onSubmit={(values) => {
-              // Alert the input values of the form that we filled
-              // alert(JSON.stringify(values));
-              handleSubmitData(values);
-            }}
+            onSubmit={async (values, { resetForm }) => {
+                
+
+                const data = { ...props, ...otherinv };
+                console.log(data);
+                const res = await editOther(props.otherinv, data);
+                if (res) {
+                  console.log("hello");
+                }
+                resetForm();
+              }}
           >
             {({
               isSubmitting,
