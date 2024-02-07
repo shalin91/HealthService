@@ -5,8 +5,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate } from "react-router-dom";
 
 import {
   Card,
@@ -26,7 +25,7 @@ import * as Yup from "yup";
 import { companies } from "../../common/data";
 import SignContext from "../../contextAPI/Context/SignContext";
 
-function Example({ companyId, location,allcompany }) {
+function Example({ companyId, location, allcompany }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -38,12 +37,10 @@ function Example({ companyId, location,allcompany }) {
     GetContactDetailsById,
     AddEmployee,
     AddContact,
+    GetallEmployeee,
   } = useContext(SignContext);
-  
- 
 
-
-
+  const [employeelength, setemployeelenght] = useState(null);
   const [Company, setCompany] = useState([]);
   const [Location, setLocation] = useState([]);
   const [Category, setCategory] = useState([]);
@@ -52,38 +49,28 @@ function Example({ companyId, location,allcompany }) {
   const [currentEmp, setCurrentEmp] = useState(null);
   const [currentEmpContactDetails, setCurrentEmpContactDetails] =
     useState(null);
-  const[a1,seta1]=useState([]);  
-  const [a2,seta2]=useState([]);
+  const [a1, seta1] = useState([]);
+  const [a2, seta2] = useState([]);
   const [empId, setEmpId] = useState(null);
 
-
-
-  console.log(">>>all comapny in final page")
+  console.log(">>>all comapny in final page");
   console.log(allcompany);
 
-  console.log("company>>> id in final page")
+  console.log("company>>> id in final page");
   console.log(companyId);
 
   // const res1 = allcompany.find(({ _id }) => _id === companyId);
   // console.log("res",res1)
   // seta1(res1.companyJobCategorys)
   // setDepartment(res1.companyDepartments);
-  
-  
-  
+
   const getcompanies = async () => {
     const res = await GetCompany();
-   
 
     setCategory(res.data[0].companyJobCategorys);
     // setCategory(res.data.companyJobCategorys);
     setDepartment(res.data[0].companyDepartments);
-    
   };
-   
-
-   
-
 
   const getEmpContactDetails = async (id) => {
     console.log("---id in frontend first---");
@@ -124,15 +111,19 @@ function Example({ companyId, location,allcompany }) {
   };
 
   const handleSavedEmployee = async (Values) => {
-    const data = { ...Values, companyId, companyLocation: location };
+    const data = {
+      ...Values,
+      companyId,
+      companyLocation: location,
+      srNo: employeelength,
+    };
     console.log("--------------------------------------data");
-    // console.log(data);
+
     const res = await AddEmployee(data);
     console.log("empid>>>>>");
     console.log(res._id);
 
     setEmpId(res._id);
-    
   };
 
   //handle save contact detail...
@@ -141,7 +132,7 @@ function Example({ companyId, location,allcompany }) {
     const res = await AddContact(data1);
     console.log("--------------data-------");
     console.log(res);
-    navigate('/form');
+    navigate("/form");
   };
 
   const validationSchema = Yup.object().shape({
@@ -194,8 +185,15 @@ function Example({ companyId, location,allcompany }) {
     setCurrentEmp(curremp[0]);
   };
 
-  
-
+  const getemployeelenght = async () => {
+    const res = await GetallEmployeee();
+    console.log(">>>>lenght", res.data.length);
+    const aa = res.data.length;
+    setemployeelenght(aa + 1);
+  };
+  useEffect(() => {
+    getemployeelenght();
+  });
   useEffect(() => {
     getcompanies();
   }, []);
@@ -203,8 +201,6 @@ function Example({ companyId, location,allcompany }) {
   useEffect(() => {
     console.log("set  data");
   }, [currentEmp]);
-  
-
 
   useEffect(() => {
     // Assuming allcompany is already available in your component
@@ -214,43 +210,42 @@ function Example({ companyId, location,allcompany }) {
     if (res1) {
       // Set the found company in the state
       seta1(res1.companyDepartments);
-      seta2(res1.companyJobCategorys)
-      console.log("llllllllllllllllllllll")
-      console.log(res1.companyDepartments)
-      console.log(res1.companyJobCategorys)
+      seta2(res1.companyJobCategorys);
+      console.log("llllllllllllllllllllll");
+      console.log(res1.companyDepartments);
+      console.log(res1.companyJobCategorys);
     } else {
       // Handle the case where the company is not found
-      
     }
   }, [allcompany, companyId]);
-  
 
   return (
     <React.Fragment>
       <div className="text-end mb-3 me-4">
         <Button className="btn btn-success w-sm" onClick={handleShow}>
-         Add Employee here 
+          Add Employee here
         </Button>
       </div>
 
       <Modal size="lg" show={show} onHide={handleClose} animation={false}>
-        <Modal.Header closeButton>
-          
-        </Modal.Header>
+        <Modal.Header closeButton></Modal.Header>
         <Modal.Body>
           <Row>
             <Col lg={12}>
               <Formik
                 initialValues={{
+                  srNo: "",
                   employeeNameAbbrevation: "",
                   employeeName: "",
                   employeeFatherName: "",
+                  employeeSurname: "",
                   ecNo: "",
                   companyJobCategorys: "",
                   companyDepartments: "",
                 }}
                 // validationSchema={validationSchema}
                 onSubmit={async (values, { resetForm }) => {
+                  console.log(employeelength + 1);
                   await handleSavedEmployee(values);
                   resetForm();
                   // togglemodal();
@@ -286,6 +281,14 @@ function Example({ companyId, location,allcompany }) {
                         <div className="live-preview">
                           <Row className="align-items-center g-3">
                             <Row>
+                              <Col sm={2}>
+                                <label
+                                  className="form-label mt-3"
+                                  htmlFor="product-orders-input"
+                                >
+                                  Sr No.
+                                </label>
+                              </Col>
                               <Col sm={6}>
                                 <label
                                   className="form-label mt-3"
@@ -294,7 +297,7 @@ function Example({ companyId, location,allcompany }) {
                                   Name
                                 </label>
                               </Col>
-                              <Col sm={6}>
+                              <Col sm={2}>
                                 <label
                                   className="form-label mt-3"
                                   htmlFor="product-orders-input"
@@ -302,8 +305,32 @@ function Example({ companyId, location,allcompany }) {
                                   Father's Name
                                 </label>
                               </Col>
+                              <Col sm={2}>
+                                <label
+                                  className="form-label mt-3"
+                                  htmlFor="product-orders-input"
+                                >
+                                  Surname
+                                </label>
+                              </Col>
                             </Row>
                             <Col sm={2}>
+                              <div className="">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="sr no"
+                                  name="srNo"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={employeelength}
+                                />
+                              </div>
+                            </Col>
+                            <Col sm={3}>
                               <div className="">
                                 <select
                                   className="form-select"
@@ -315,13 +342,14 @@ function Example({ companyId, location,allcompany }) {
                                   onBlur={handleBlur}
                                   value={values.employeeNameAbbrevation}
                                 >
+                                  <option value="">---select---</option>
                                   <option value="Mr.">Mr</option>
+                                  <option value="Mr.">Ms</option>
                                   <option value="Mrs.">Mrs</option>
-                                 
                                 </select>
                               </div>
                             </Col>
-                            <Col sm={4}>
+                            <Col sm={3}>
                               <div className="">
                                 <Input
                                   type="text"
@@ -337,7 +365,7 @@ function Example({ companyId, location,allcompany }) {
                                 />
                               </div>
                             </Col>
-                            <Col sm={4}>
+                            <Col sm={2}>
                               <div className="">
                                 <Input
                                   type="text"
@@ -350,6 +378,22 @@ function Example({ companyId, location,allcompany }) {
                                   onChange={handleChange}
                                   onBlur={handleBlur}
                                   value={values.employeeFatherName}
+                                />
+                              </div>
+                            </Col>
+                            <Col sm={2}>
+                              <div className="">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="Surname"
+                                  name="employeeSurname"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.employeeSurname}
                                 />
                               </div>
                             </Col>
@@ -395,7 +439,7 @@ function Example({ companyId, location,allcompany }) {
                                   onBlur={handleBlur}
                                   value={values.companyJobCategorys}
                                 >
-                                 <option >--select--</option>
+                                  <option>--select--</option>
                                   {a2.map((name, index) => (
                                     <option key={index} value={name}>
                                       {name}
@@ -453,7 +497,7 @@ function Example({ companyId, location,allcompany }) {
                                   onBlur={handleBlur}
                                   value={values.companyDepartments}
                                 >
-                                 <option>--select--</option>
+                                  <option>--select--</option>
                                   {a1.map((name, index) => (
                                     <option key={index} value={name}>
                                       {name}
@@ -487,7 +531,7 @@ function Example({ companyId, location,allcompany }) {
                   dateOfJoin: "",
                   idMark: "",
                   natureOfJob: "",
-                  res: "",
+                  // res: "",
                   mobileNumber: "",
                   office: "",
                   pp: "",
@@ -576,8 +620,6 @@ function Example({ companyId, location,allcompany }) {
                                   />
                                 </div>
                               </Col>
-                            </Row>
-                            <Row>
                               <Col sm={2}>
                                 <div className="mb-3">
                                   <label
@@ -600,8 +642,9 @@ function Example({ companyId, location,allcompany }) {
                                   </div>
                                 </div>
                               </Col>
-
-                              <Col sm={2}>
+                            </Row>
+                            <Row>
+                              <Col sm={3}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -649,6 +692,7 @@ function Example({ companyId, location,allcompany }) {
                                       </option>
                                       <option value="male">Male</option>
                                       <option value="female">Female</option>
+                                      <option value="others">Others</option>
                                     </select>
                                   </div>
                                 </div>
@@ -702,33 +746,39 @@ function Example({ companyId, location,allcompany }) {
                                   </div>
                                 </div>
                               </Col>
-                              <Col sm={2}>
+                              <Col sm={3}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
-                                    htmlFor="product-orders-input"
+                                    htmlFor="product-Discount-input"
                                   >
                                     Martial Status
                                   </label>
                                   <div className="input-group mb-3">
-                                    <Input
-                                      type="text"
-                                      className="form-control"
-                                      id="product-orders-input"
-                                      placeholder="martial status"
+                                    <select
+                                      className="form-select"
+                                      id="product-gender-input"
                                       name="mentalStatus"
-                                      aria-label="orders"
-                                      aria-describedby="product-orders-addon"
+                                      aria-label="Gender"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      value={values.mentalStatus} // mentalStatus
-                                    />
+                                      value={values.mentalStatus}
+                                    >
+                                      <option value="" disabled>
+                                        --select--
+                                      </option>
+                                      <option value="Married">Married</option>
+                                      <option value="Unmarried">
+                                        Unmarried
+                                      </option>
+                                      <option value="Others">Others</option>
+                                    </select>
                                   </div>
                                 </div>
                               </Col>
                             </Row>
                             <Row>
-                              <Col sm={2}>
+                              {/* <Col sm={2}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -749,9 +799,9 @@ function Example({ companyId, location,allcompany }) {
                                     />
                                   </div>
                                 </div>
-                              </Col>
+                              </Col> */}
 
-                              <Col sm={2}>
+                              <Col sm={3}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -776,7 +826,7 @@ function Example({ companyId, location,allcompany }) {
                                 </div>
                               </Col>
 
-                              <Col sm={2}>
+                              <Col sm={3}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -825,13 +875,13 @@ function Example({ companyId, location,allcompany }) {
                                   </div>
                                 </div>
                               </Col>
-                              <Col sm={2}>
+                              <Col sm={3}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
                                     htmlFor="product-orders-input"
                                   >
-                                    Emer
+                                    Emergency Number
                                   </label>
                                   <div className="input-group mb-3">
                                     <Input
@@ -849,8 +899,6 @@ function Example({ companyId, location,allcompany }) {
                                   </div>
                                 </div>
                               </Col>
-
-                              
                             </Row>
 
                             <Row>

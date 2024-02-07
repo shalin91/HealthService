@@ -46,7 +46,7 @@ const NewForm = () => {
 
   const getcompanies = async () => {
     const res = await GetCompany();
-    console.log(">>> get companies")
+    console.log(">>> get companies");
     console.log(res);
     setCompany(res.data);
     // setLocation(res.data.companyLocation)
@@ -84,8 +84,8 @@ const NewForm = () => {
 
     setCurrentCompanyId(Values.companyName);
     setCurrentLocation(Values.companyLocation);
-    
-    console.log(" >>>>> company ")
+
+    console.log(" >>>>> company ");
     console.log(Values.companyName);
 
     const res = await GetEmpsbyCompAndLoc(Values);
@@ -94,7 +94,6 @@ const NewForm = () => {
     console.log(res.data);
     setEmpbyCompandLoc(res.data);
   };
-
 
   const [customActiveTab, setcustomActiveTab] = useState("1");
   const toggleCustom = (tab) => {
@@ -154,7 +153,7 @@ const NewForm = () => {
   };
 
   const handleNavigatetoCheckup = () => {
-    navigate('/form');
+    navigate("/form");
   };
 
   useEffect(() => {
@@ -170,7 +169,11 @@ const NewForm = () => {
       <UiContent />
       <div className="page-content">
         <Container fluid>
-          <BreadCrumb grandParent="Setup" parent="Forms" child="Patient-Details" />
+          <BreadCrumb
+            grandParent="Setup"
+            parent="Forms"
+            child="Patient-Details"
+          />
           <Row>
             <Col lg={12}>
               <Formik
@@ -303,6 +306,7 @@ const NewForm = () => {
                   title: "",
                   name: "",
                   fathersName: "",
+                  surname: "",
                   ecNo: "",
                   companyJobCategorys: "",
                   companyDepartments: "",
@@ -365,12 +369,20 @@ const NewForm = () => {
                                   Name
                                 </label>
                               </Col>
-                              <Col sm={6}>
+                              <Col sm={3}>
                                 <label
                                   className="form-label mt-3"
                                   htmlFor="product-orders-input"
                                 >
                                   Father's Name
+                                </label>
+                              </Col>
+                              <Col sm={3}>
+                                <label
+                                  className="form-label mt-3"
+                                  htmlFor="product-orders-input"
+                                >
+                                  SurName
                                 </label>
                               </Col>
                             </Row>
@@ -398,7 +410,7 @@ const NewForm = () => {
                                 {errors.title && touched.title && errors.title}
                               </p>
                             </Col>
-                            <Col sm={4}>
+                            <Col sm={3}>
                               <div className="">
                                 <Input
                                   type="text"
@@ -421,7 +433,7 @@ const NewForm = () => {
                                 {errors.name && touched.name && errors.name}
                               </p>
                             </Col>
-                            <Col sm={4}>
+                            <Col sm={3}>
                               <div className="">
                                 <Input
                                   type="text"
@@ -437,6 +449,31 @@ const NewForm = () => {
                                     currentEmp
                                       ? currentEmp.employeeFatherName
                                       : ""
+                                  }
+                                  disabled
+                                  readOnly
+                                />
+                              </div>
+                              <p className="error text-danger">
+                                {errors.fathersName &&
+                                  touched.fathersName &&
+                                  errors.fathersName}
+                              </p>
+                            </Col>
+                            <Col sm={3}>
+                              <div className="">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="SurName"
+                                  name="surname"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={
+                                    currentEmp ? currentEmp.employeeSurname : ""
                                   }
                                   disabled
                                   readOnly
@@ -570,7 +607,6 @@ const NewForm = () => {
                         </div>
                       </div>
                       <Example
-                        
                         companyId={currentCompanyId}
                         location={currentLocation}
                         allcompany={Company}
@@ -621,7 +657,7 @@ const NewForm = () => {
                                         : ""
                                     }
                                     disabled
-                                  readOnly
+                                    readOnly
                                   />
                                   <p className="error text-danger">
                                     {errors.address &&
@@ -817,7 +853,7 @@ const NewForm = () => {
                                           : ""
                                       } // bloodGroup
                                       disabled
-                                  readOnly
+                                      readOnly
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -852,7 +888,7 @@ const NewForm = () => {
                                           : ""
                                       } // mentalStatus
                                       disabled
-                                     readOnly
+                                      readOnly
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -864,37 +900,7 @@ const NewForm = () => {
                               </Col>
                             </Row>
                             <Row>
-                              <Col sm={2}>
-                                <div className="mb-3">
-                                  <label
-                                    className="form-label"
-                                    htmlFor="product-stock-input"
-                                  >
-                                    Res
-                                  </label>
-                                  <div className="input-group mb-3">
-                                    <Input
-                                      type="text"
-                                      className="form-control"
-                                      id="product-stock-input"
-                                      placeholder="res"
-                                      name="res"
-                                      onChange={handleChange}
-                                      onBlur={handleBlur}
-                                      value={
-                                        currentEmpContactDetails
-                                          ? currentEmpContactDetails.res
-                                          : ""
-                                      } // res
-                                      disabled
-                                  readOnly
-                                    />
-                                  </div>
-                                  <p className="error text-danger">
-                                    {errors.res && touched.res && errors.res}
-                                  </p>
-                                </div>
-                              </Col>
+                              
 
                               <Col sm={2}>
                                 <div className="mb-3">
@@ -921,7 +927,7 @@ const NewForm = () => {
                                           : ""
                                       } //mobileNumber
                                       disabled
-                                  readOnly
+                                      readOnly
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -955,7 +961,7 @@ const NewForm = () => {
                                           : ""
                                       } //office
                                       disabled
-                                  readOnly
+                                      readOnly
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -991,7 +997,7 @@ const NewForm = () => {
                                           : ""
                                       } //pp
                                       disabled
-                                  readOnly
+                                      readOnly
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -1026,7 +1032,7 @@ const NewForm = () => {
                                           : ""
                                       } // emer
                                       disabled
-                                  readOnly
+                                      readOnly
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -1059,7 +1065,7 @@ const NewForm = () => {
                                           : ""
                                       } //email
                                       disabled
-                                  readOnly
+                                      readOnly
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -1101,7 +1107,7 @@ const NewForm = () => {
                                           : ""
                                       } //dateOfJoin
                                       disabled
-                                  readOnly
+                                      readOnly
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -1134,7 +1140,7 @@ const NewForm = () => {
                                           : ""
                                       } // idMark
                                       disabled
-                                  readOnly
+                                      readOnly
                                     />
                                   </div>
                                   <p className="error text-danger">
@@ -1172,7 +1178,7 @@ const NewForm = () => {
                                           : ""
                                       } // "no"
                                       disabled
-                                  readOnly
+                                      readOnly
                                     />
                                   </div>
                                   <p className="error text-danger">

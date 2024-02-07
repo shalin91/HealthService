@@ -93,7 +93,7 @@ const Eye = (props) => {
                         <Col className="col-sm">
                           <div>
                             <div>
-                              <Row className="mb-3">
+                              <Row >
                                 <Col className="col-lg-2 col-md-2">
                                   Distant vision
                                 </Col>
@@ -148,7 +148,7 @@ const Eye = (props) => {
                         <Col className="col-sm">
                           <div>
                             <div>
-                              <Row className="mb-3">
+                              <Row>
                                 <Col className="col-lg-2 col-md-2"></Col>
                                 <Col className="col-lg-2 col-md-2">
                                   <p>with glasses</p>
@@ -198,11 +198,11 @@ const Eye = (props) => {
                         </Col>
                       </Row>
 
-                      <Row className="align-items-center g-3 mt-2">
+                      <Row className="align-items-center g-3 ">
                         <Col className="col-sm">
                           <div>
                             <div>
-                              <Row className="mb-3">
+                              <Row>
                                 <Col className="col-lg-2 col-md-2">
                                   Near vision
                                 </Col>
@@ -257,7 +257,7 @@ const Eye = (props) => {
                         <Col className="col-sm">
                           <div>
                             <div>
-                              <Row className="mb-3">
+                              <Row>
                                 <Col className="col-lg-2 col-md-2"></Col>
                                 <Col className="col-lg-2 col-md-2">
                                   <p>with glasses</p>
@@ -377,7 +377,7 @@ const Eye = (props) => {
                     </Row>
                   </div>
 
-                  <div className="text-end mb-3 me-3">
+                  <div className="text-end mb-1 me-3">
                     <button className="btn btn-success w-sm" type="submit">
                       Submit
                     </button>

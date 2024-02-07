@@ -242,17 +242,23 @@ export const SignState = (props) => {
 
   const GetCheckUpName = async () => {
     try {
-      const response = await axios.get(`${url}/checkup/get-checkupname-master`, {});
+      const response = await axios.get(
+        `${url}/checkup/get-checkupname-master`,
+        {}
+      );
       return response;
     } catch (error) {
       return { success: false, msg: "server Error" };
     }
   };
 
-  //vaishal 
+  //vaishal
   const GetCheckUpNameMaster = async () => {
     try {
-      const response = await axios.get(`${url}/checkup/get-checkupname-master`, {});
+      const response = await axios.get(
+        `${url}/checkup/get-checkupname-master`,
+        {}
+      );
       return response;
     } catch (error) {
       return { success: false, msg: "server Error" };
@@ -360,7 +366,6 @@ export const SignState = (props) => {
     }
   };
 
-
   //vaishal
 
   const setCheckupNameMaster = async (data) => {
@@ -375,9 +380,6 @@ export const SignState = (props) => {
       console.error("Error during API call:", error);
     }
   };
-
-
-
 
   // set checkupdata
 
@@ -406,7 +408,59 @@ export const SignState = (props) => {
       console.error("Error during API call:", error);
     }
   };
+  const editVital = async (id, data) => {
+    //edit-vital
+    try {
+      const response = await axios.post(`${url}/employ/edit-vital/${id}`, {
+        data,
+      });
 
+      return response;
+    } catch (error) {
+      console.error("Error during API call:", error);
+    }
+  };
+  const editForm33 = async (id, data) => {
+    
+    try {
+      const response = await axios.post(`${url}/employ/edit-form33/${id}`, {
+        data,
+      });
+
+      return response;
+    } catch (error) {
+      console.error("Error during API call:", error);
+    }
+  };
+
+  const editOther = async (id, data) => {
+   
+    try {
+      const response = await axios.post(`${url}/employ/edit-other/${id}`, {
+        data,
+      });
+
+      return response;
+    } catch (error) {
+      console.error("Error during API call:", error);
+    }
+  };
+
+  const editexamination = async (id, data) => {
+    //edit-vital
+    try {
+      const response = await axios.post(
+        `${url}/employ/edit-examination/${id}`,
+        {
+          data,
+        }
+      );
+
+      return response;
+    } catch (error) {
+      console.error("Error during API call:", error);
+    }
+  };
   const setGeneralExamination = async (data) => {
     try {
       const response = await axios.post(
@@ -445,7 +499,14 @@ export const SignState = (props) => {
       console.error("Error during API call:", error);
     }
   };
-
+  const GetallEmployeee = async () => {
+    try {
+      const response = await axios.get(`${url}/employ/get-all-employee`, {});
+      return response;
+    } catch (error) {
+      return { success: false, msg: "server Error" };
+    }
+  };
   const setInvestigation = async (data) => {
     try {
       const response = await axios.post(
@@ -518,7 +579,42 @@ export const SignState = (props) => {
       };
     }
   };
-
+  const GetSpecificVital = async (id) => {
+    try {
+      const response = await axios.get(`${url}/employ/get-specificvital/${id}`);
+      return response;
+    } catch (error) {
+      return { success: false, msg: "server Error" };
+    }
+  };
+  const GetSpecificForm33 = async (id) => {
+    try {
+      const response = await axios.get(`${url}/employ/get-specificform33/${id}`);
+      return response;
+    } catch (error) {
+      return { success: false, msg: "server Error" };
+    }
+  };
+  const GetSpecificOtherDetail = async (id) => {
+    try {
+      const response = await axios.get(
+        `${url}/employ/get-specificotherinvsetigation/${id}`
+      );
+      return response;
+    } catch (error) {
+      return { success: false, msg: "server Error" };
+    }
+  };
+  const GetSpecificExamination = async (id) => {
+    try {
+      const response = await axios.get(
+        `${url}/employ/get-specificgeneral/${id}`
+      );
+      return response;
+    } catch (error) {
+      return { success: false, msg: "server Error" };
+    }
+  };
   return (
     <SignContext.Provider
       value={{
@@ -535,6 +631,7 @@ export const SignState = (props) => {
         GetRoles,
         GetRoleSpecificPermission,
         AddComapany,
+        GetallEmployeee,
         AddEmployee,
         GetCompany,
         GetCompanybyId,
@@ -555,7 +652,15 @@ export const SignState = (props) => {
         GetCheckUpName,
         getCheckupDatabyId,
         setCheckupNameMaster,
-        GetCheckUpNameMaster
+        GetCheckUpNameMaster,
+        GetSpecificVital,
+        GetSpecificForm33,
+        GetSpecificExamination,
+        GetSpecificOtherDetail,
+        editVital,
+        editOther,
+        editexamination,
+        editForm33,
       }}
     >
       {props.children}

@@ -76,6 +76,7 @@ const CheckupForm = () => {
   const [EmpbyCompandLoc, setEmpbyCompandLoc] = useState([]);
 
   const [currentEmp, setCurrentEmp] = useState(null);
+  const [date,setdate]=useState(null);
 
   const [currentUser, setCurrentUser] = useState(null);
 
@@ -89,19 +90,16 @@ const CheckupForm = () => {
   const [shalin, setShalin] = useState(null);
 
   const [finalcheckupname, setfinalcheckupname] = useState(null);
-  // const [ allCategory , setAllCategory ] = useState( [] );
-
-  // const [ allDepartment , setAllDepartment ] = useState( [] );
-
-  // const [ category , setCategory ] = useState( null );
-
-  // const [ department , setDepartment ] = useState( null );
-
-  //onchange event
 
   const [checknameid, setchecknameid] = useState(null);
   const [checktypeid, setchecktypeid] = useState(null);
-
+  const [vitals, setvitals] = useState(null);
+  const [examnination, setexamination] = useState(null);
+  const [eye, seteye] = useState(null);
+  const [blood, setbloodgrp] = useState(null);
+  const [other, setother] = useState(null);
+  const [form32, setform32] = useState(null);
+  const [form33, setform33] = useState(null);
   const getcompanies = async () => {
     const res = await GetCompany();
     console.log(res);
@@ -153,8 +151,6 @@ const CheckupForm = () => {
     console.log(response.data._id);
   };
 
- 
-
   const getAllCheckupType = async () => {
     const responce = await getCheckupType();
 
@@ -187,21 +183,30 @@ const CheckupForm = () => {
   console.log(location);
 
   const handleSubmitForEmp = async () => {
+
     const chaeckupData = await getCheckupData({
       employeeId: currentEmp._id,
       companyId: company,
       location: location,
       checkupNameId: checknameid,
       checkupTypeId: checktypeid,
+      checkupDate:date,
+      //createdAt ni field ahiya add karviiii.....
+     
       employeeContactDetailsId: currentEmpContactDetails._id,
     });
 
-    console.log("dddddaaaatttttaaaaa");
+    console.log("vaishallllllllllll");
     console.log(chaeckupData.data);
+    console.log(chaeckupData.data.employeeReports.employeeVitalAndHistoryId);
 
     setCheckupDataId(chaeckupData.data._id);
-
-    
+    setvitals(chaeckupData.data.employeeReports.employeeVitalAndHistoryId);
+    setexamination(
+      chaeckupData.data.employeeReports.employeeGenerelExaminationId
+    );
+    setother(chaeckupData.data.employeeReports.employeeInvestigationDetailsId);
+    setform33(chaeckupData.data.employeeReports.employeeForm33Id);
   };
 
   useEffect(() => {
@@ -210,7 +215,9 @@ const CheckupForm = () => {
     getCheckUpNameMaster();
   }, []);
 
-  
+  useEffect(() => {
+    console.log(">>>", vitals);
+  }, [vitals]);
 
   return (
     <>
@@ -218,8 +225,6 @@ const CheckupForm = () => {
       <div className="page-content">
         <Container fluid>
           <BreadCrumb grandParent="Setup" parent="Forms" child="Form-2" />
-
-          {/* company componemnt we get companyid and location name */}
 
           <Row>
             <Col lg={12}>
@@ -231,9 +236,7 @@ const CheckupForm = () => {
                 //validationSchema={validationSchema}
                 onSubmit={async (values, { resetForm }) => {
                   handleSaveCompanyAndLocation(values);
-                  resetForm();
-                  // Additional actions after form submission
-                  // togglemodal();
+                  
                 }}
               >
                 {({
@@ -573,14 +576,16 @@ const CheckupForm = () => {
                 // validationSchema={validationSchema}
                 initialValues={{
                   name: "",
+                  dateOfExamination:"",
                   gender: "",
                   dateOfBirth: "",
                   age: "",
                   bloodGroup: "",
                 }}
-                onSubmit={(values ,{ resetForm }) => {
+                onSubmit={(values, { resetForm }) => {
                   // Alert the input values of the form that we filled
-
+                  console.log(">>>>>>>>>>>>>>>",values.dateOfExamination);
+                  setdate(values.dateOfExamination);
                   handleSubmitForEmp();
                   resetForm();
                   //
@@ -616,7 +621,7 @@ const CheckupForm = () => {
                           <div className="card-body">
                             <div className="live-preview">
                               <Row className="align-items-center g-3">
-                                <Col sm={3}>
+                                <Col sm={2}>
                                   <label
                                     className="form-label mt-3"
                                     htmlFor="product-orders-input"
@@ -633,9 +638,8 @@ const CheckupForm = () => {
                                       }}
                                       onBlur={handleBlur}
                                       value={values.employeeName}
-                                      
                                     >
-                                     <option >--select--</option>
+                                      <option>--select--</option>
                                       {EmpbyCompandLoc &&
                                         EmpbyCompandLoc.length > 0 &&
                                         EmpbyCompandLoc.map((emp, index) => (
@@ -652,6 +656,31 @@ const CheckupForm = () => {
                                     </p>
                                   </div>
                                 </Col>
+
+                                <Col sm={2}>
+                                <div>
+                                  <label
+                                    className="form-label"
+                                    htmlFor="product-price-input"
+                                  >
+                                    Date of Examination
+                                  </label>
+                                  <div className="input-group">
+                                    <Input
+                                      type="date"
+                                      className="form-control"
+                                      id="product-price-input"
+                                      placeholder="DD/MM/YYYY"
+                                      name="dateOfExamination"
+                                      aria-label="Price"
+                                      aria-describedby="product-price-addon"
+                                      onChange={handleChange}
+                                      onBlur={handleBlur}
+                                      value={values.dateOfExamination}
+                                    />
+                                  </div>
+                                </div>
+                              </Col>
                                 <Col sm={2}>
                                   <label
                                     className="form-label mt-3"
@@ -813,6 +842,10 @@ const CheckupForm = () => {
               </Formik>
             </Col>
           </Row>
+
+
+
+
           <Row>
             <Col lg={12}>
               <Card>
@@ -841,7 +874,7 @@ const CheckupForm = () => {
                           toggleCustom("2");
                         }}
                       >
-                         Examination
+                        Examination
                       </NavLink>
                     </NavItem>
                     <NavItem>
@@ -880,20 +913,7 @@ const CheckupForm = () => {
                           toggleCustom("5");
                         }}
                       >
-                        Investigation
-                      </NavLink>
-                    </NavItem>
-                    <NavItem>
-                      <NavLink
-                        style={{ cursor: "pointer" }}
-                        className={classnames({
-                          active: customActiveTab === "6",
-                        })}
-                        onClick={() => {
-                          toggleCustom("6");
-                        }}
-                      >
-                        Form-32
+                        Other Investigation
                       </NavLink>
                     </NavItem>
                     <NavItem>
@@ -907,6 +927,19 @@ const CheckupForm = () => {
                         }}
                       >
                         Form-33
+                      </NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink
+                        style={{ cursor: "pointer" }}
+                        className={classnames({
+                          active: customActiveTab === "6",
+                        })}
+                        onClick={() => {
+                          toggleCustom("6");
+                        }}
+                      >
+                        Form-32
                       </NavLink>
                     </NavItem>
                   </Nav>
@@ -927,6 +960,7 @@ const CheckupForm = () => {
                         checkupTypeId={checkupType}
                         checkupDataId={checkupDataId}
                         employeeId={shalin}
+                        vitalid={vitals}
                       />
                     </TabPane>
 
@@ -938,6 +972,7 @@ const CheckupForm = () => {
                         checkupTypeId={checkupType}
                         checkupDataId={checkupDataId}
                         employeeId={shalin}
+                        generalexamId={examnination}
                       />
                     </TabPane>
 
@@ -971,6 +1006,7 @@ const CheckupForm = () => {
                         checkupTypeId={checkupType}
                         checkupDataId={checkupDataId}
                         employeeId={shalin}
+                        otherinv={other}
                       />
                     </TabPane>
 
@@ -993,6 +1029,7 @@ const CheckupForm = () => {
                         checkupTypeId={checkupType}
                         checkupDataId={checkupDataId}
                         employeeId={shalin}
+                        form33={form33}
                       />
                     </TabPane>
                   </TabContent>

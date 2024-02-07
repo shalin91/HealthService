@@ -160,32 +160,6 @@ const Navdata = () => {
       stateVariables: isApps,
       subItems: [
         {
-          id: "appsecommerce",
-          label: "Forms",
-          link: "/#",
-          isChildItem: true,
-          click: function (e) {
-            e.preventDefault();
-            setIsEcommerce(!isEcommerce);
-          },
-          parentId: "apps",
-          stateVariables: isEcommerce,
-          childItems: [
-            {
-              id: 5,
-              label: "Patient-Details",
-              link: "/newform",
-              parentId: "apps",
-            },
-            {
-              id: 6,
-              label: "Check-up Form",
-              link: "/form",
-              parentId: "apps",
-            },
-          ],
-        },
-        {
           id: "appsprojects",
           label: "Company Master",
           link: "/#",
@@ -258,70 +232,36 @@ const Navdata = () => {
             },
           ],
         },
-        // {
-        //   id: "appscrm",
-        //   label: "CMS",
-        //   link: "/#",
-        //   isChildItem: true,
-        //   click: function (e) {
-        //     e.preventDefault();
-        //     setIsCRM(!isCRM);
-        //   },
-        //   parentId: "apps",
-        //   stateVariables: isCRM,
-        //   childItems: [{ id: 1, label: "Content", link: "/contentmanage" },{ id: 1, label: "Banner Master", link: "/banner-master" },{ id: 3, label: "Blogs Category", link: "/blog-category" },{ id: 4, label: "Blogs Master", link: "/blog-master" }],
-        // },
-        // {
-        //   id: "NFTMarketplace",
-        //   label: "Gallery",
-        //   link: "/#",
-        //   isChildItem: true,
-        //   click: function (e) {
-        //     e.preventDefault();
-        //     setIsNFTMarketplace(!isNFTMarketplace);
-        //   },
-        //   parentId: "apps",
-        //   stateVariables: isNFTMarketplace,
-        //   childItems: [
-        //     { id: 1, label: "Gallery-Category", link: "/gallerycatcontent" },
-        //     { id: 1, label: "Gallery-Details", link: "/gallerycontent" },
-        //   ],
-        // },
-        // {
-        //   id: "appscrypto",
-        //   label: "Inventory",
-        //   link: "/#",
-        //   isChildItem: true,
-        //   click: function (e) {
-        //     e.preventDefault();
-        //     setIsCrypto(!isCrypto);
-        //   },
-        //   parentId: "apps",
-        //   stateVariables: isCrypto,
-        //   childItems: [
-        //     { id: 1, label: "Stocks", link: "/stocks" },
-        //     { id: 2, label: "Daily Rates", link: "/dailyrates" },
-        //     // { id: 3, label: "Deals", link: "/apps-crm-deals" },
-        //     // { id: 4, label: "Leads", link: "/apps-crm-leads" },
-        //   ],
-        // },
-        // {
-        //     id: "invoices",
-        //     label: "Coupons",
-        //     link: "/#",
-        //     isChildItem: true,
-        //     click: function (e) {
-        //         e.preventDefault();
-        //         setIsInvoices(!isInvoices);
-        //     },
-        //     parentId: "apps",
-        //     stateVariables: isInvoices,
-        //     childItems: [
-        //         { id: 1, label: "Coupons", link: "/coupons" },
-        //         // { id: 2, label: "Details", link: "/apps-invoices-details" },
-        //         // { id: 3, label: "Create Invoice", link: "/apps-invoices-create" },
-        //     ]
-        // },
+        {
+          id: "appsecommerce",
+          label: "Forms",
+          link: "/#",
+          isChildItem: true,
+          click: function (e) {
+            e.preventDefault();
+            setIsEcommerce(!isEcommerce);
+          },
+          parentId: "apps",
+          stateVariables: isEcommerce,
+          childItems: [
+            {
+              id: 5,
+              label: "Patient-Details",
+              link: "/newform",
+              parentId: "apps",
+            },
+            {
+              id: 6,
+              label: "Check-up Form",
+              link: "/form",
+              parentId: "apps",
+            },
+          ],
+        },
+        
+        
+        
+        
         {
           id: "supportTickets",
           label: "Reports",

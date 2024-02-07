@@ -6,7 +6,7 @@ import { Link, useParams } from "react-router-dom";
 
 const MediclaCheckUp = () => {
   const { id } = useParams();
-  const { getCheckupDatabyId } = useContext(SignContext);
+  const { getCheckupDatabyId,GetallEmployeee } = useContext(SignContext);
   const [CheckupData, setCheckupData] = useState([]);
 
   const [withGlassChecked, setWithGlassChecked] = useState(false);
@@ -22,14 +22,12 @@ const MediclaCheckUp = () => {
     try {
       const data = await getCheckupDatabyId(id);
       setCheckupData(data);
-      console.log("new>>>> data");
-
-      console.log(">>name data final");
+      
     } catch (error) {
       console.error("Error fetching checkup data:", error);
     }
   };
-
+  
   useEffect(() => {
     const fetchData = async () => {
       await GetCheckupDatabyId(id);
@@ -37,6 +35,7 @@ const MediclaCheckUp = () => {
       if (
         CheckupData?.employeeeyeinformation?.distandVisionWithLeftEye !== ""
       ) {
+        console.log(">>>",CheckupData?.employeeeyeinformation?.distandVisionWithLeftEye);
         setWithGlassChecked(true);
         setWithoutGlassChecked(false);
       }
@@ -76,11 +75,11 @@ const MediclaCheckUp = () => {
         <Container fluid>
           <div className="mainDivMediclaForm">
             <div className="titleDiv">
-              <h3 className="medicalTitle">MEDICAL CHECK UP</h3>
-              <h3 className="medicalSubTitle">Sr.No.:</h3>
+              <h5 className="medicalTitle" style={{marginLeft:'439px'}}>MEDICAL CHECK UP</h5>
+              <h6 className="medicalSubTitle">Sr.No.:</h6>
             </div>
             <div class="table-container">
-              <table className="Medical-checkup">
+              <table className="Medical-checkup1">
                 <tr>
                   <td
                     style={{
@@ -183,7 +182,7 @@ const MediclaCheckUp = () => {
                 </tr>
                 <tr>
                   <td colSpan="12">
-                  COMPLAINTS :{" "}
+                    COMPLAINTS :{" "}
                     {CheckupData?.employeeVitalAndHistory?.complaints || "N/A"}
                   </td>
                 </tr>
@@ -322,9 +321,12 @@ const MediclaCheckUp = () => {
                 <tr>
                   <td colSpan="6">
                     <div className="titleDiv">
-                      Near Vision With Glass{" "}{" "}
-                      <input type="checkBox" checked={nearwith} style={{marginLeft:'15px'}} />
-
+                    Near Vision With Glass{" "}
+                      <input
+                        type="checkBox"
+                        checked={nearwith}
+                        style={{ marginLeft: "15px" }}
+                      />
                       Without Glass{" "}
                       <input type="checkBox" checked={nearwithout} />
                     </div>
