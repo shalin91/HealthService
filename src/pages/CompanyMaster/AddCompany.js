@@ -96,7 +96,7 @@ const AddCompany = () => {
                       <div className="card-body">
                         <div className="live-preview">
                           <Row className="align-items-center g-3">
-                            <Col sm={6}>
+                            <Col lg={6}>
                               <div className="mb-3">
                                 <label
                                   className="form-label"
@@ -125,7 +125,7 @@ const AddCompany = () => {
                                   </p>
                               </div>
                             </Col>
-                            <Col sm={6}>
+                            <Col lg={6}>
                               <div className="mb-3">
                                 <label
                                   className="form-label"
@@ -155,7 +155,7 @@ const AddCompany = () => {
                             </Col>
                           </Row>
                           <Row className="align-items-center g-3">
-                            <Col sm={6}>
+                            <Col lg={6}>
                               <div className="mb-3">
                                 <label
                                   className="form-label"
@@ -183,7 +183,7 @@ const AddCompany = () => {
                                   </p>
                               </div>
                             </Col>
-                            <Col sm={6}>
+                            <Col lg={6}>
                               <div className="mb-3">
                                 <label
                                   className="form-label"
@@ -213,7 +213,7 @@ const AddCompany = () => {
                             </Col>
                           </Row>
                           <Row className="align-items-center g-3 mt-3">
-                            <Col sm={3}>
+                            <Col lg={3} md={6}>
                               <div className="mb-3">
                                 <label
                                   className="form-label"
@@ -242,7 +242,7 @@ const AddCompany = () => {
                                   </p> */}
                               </div>
                             </Col>
-                            <Col sm={3}>
+                            <Col lg={3} md={6}>
                               <div className="mb-3">
                                 <label
                                   className="form-label"
@@ -271,7 +271,7 @@ const AddCompany = () => {
                                   </p> */}
                               </div>
                             </Col>
-                            <Col sm={3}>
+                            <Col lg={3} md={6}>
                               <div className="mb-3">
                                 <label
                                   className="form-label"
@@ -300,7 +300,7 @@ const AddCompany = () => {
                                   </p> */}
                               </div>
                             </Col>
-                            <Col sm={3}>
+                            <Col lg={3} md={6}>
                               <div className="mb-3">
                                 <label
                                   className="form-label"
@@ -331,7 +331,7 @@ const AddCompany = () => {
                             </Col>
                           </Row>
                           <Row className="align-items-center g-3">
-                            <Col sm={3}>
+                            <Col lg={3} md={6}>
                               <div className="mb-3">
                                 <label
                                   className="form-label"
@@ -360,7 +360,7 @@ const AddCompany = () => {
                                   </p> */}
                               </div>
                             </Col>
-                            <Col sm={3}>
+                            <Col lg={3} md={6}>
                               <div className="mb-3">
                                 <label
                                   className="form-label"
@@ -389,7 +389,7 @@ const AddCompany = () => {
                                   </p> */}
                               </div>
                             </Col>
-                            <Col sm={3}>
+                            <Col lg={3} md={6}>
                               <div className="mb-3">
                                 <label
                                   className="form-label"
@@ -418,7 +418,7 @@ const AddCompany = () => {
                                   </p> */}
                               </div>
                             </Col>
-                            <Col sm={3}>
+                            <Col lg={3} md={6}>
                               <div className="mb-3">
                                 <label
                                   className="form-label"
@@ -449,7 +449,7 @@ const AddCompany = () => {
                             </Col>
                           </Row>
                           <Row className="align-items-center g-3">
-                            <Col sm={3}>
+                            <Col lg={3} md={6}>
                               <div className="mb-3">
                                 <label
                                   className="form-label"
@@ -478,7 +478,7 @@ const AddCompany = () => {
                                   </p> */}
                               </div>
                             </Col>
-                            <Col sm={3}>
+                            <Col lg={3} md={6}>
                               <div className="mb-3">
                                 <label
                                   className="form-label"
@@ -507,7 +507,7 @@ const AddCompany = () => {
                                   </p> */}
                               </div>
                             </Col>
-                            <Col sm={3}>
+                            <Col lg={3} md={6}>
                               <div className="mb-3">
                                 <label
                                   className="form-label"
@@ -536,7 +536,7 @@ const AddCompany = () => {
                                   </p> */}
                               </div>
                             </Col>
-                            <Col sm={3}>
+                            <Col lg={3} md={6}>
                               <div className="mb-3">
                                 <label
                                   className="form-label"

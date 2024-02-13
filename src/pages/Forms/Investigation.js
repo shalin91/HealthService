@@ -42,7 +42,7 @@ const Investigation = (props) => {
     console.log(">>>other", res.data);
     setotherinv(res.data);
     }
-    // console.log(vital.temperature);
+   
   };
   useEffect(() => {
     gettingid();
@@ -84,7 +84,7 @@ const Investigation = (props) => {
                   <div className="card-body">
                     <div className="live-preview">
                       <Row className=" m-1">
-                        <Col sm={4}>
+                        <Col lg={4} md={8}>
                           <div className="mb-3">
                             <label
                               className="form-label"
@@ -122,7 +122,7 @@ const Investigation = (props) => {
                         </Col>
                       </Row>
                       <Row className="m-1">
-                        <Col sm={4}>
+                        <Col lg={4} md={8}>
                           <div className="mb-3">
                             <label
                               className="form-label"
@@ -160,7 +160,7 @@ const Investigation = (props) => {
                         </Col>
                       </Row>
                       <Row className="m-1">
-                        <Col sm={4}>
+                        <Col lg={4} md={8}>
                           <div className="mb-3">
                             <label
                               className="form-label"
@@ -198,7 +198,7 @@ const Investigation = (props) => {
                         </Col>
                       </Row>
                       <Row className="m-1">
-                        <Col sm={4}>
+                        <Col lg={4} md={8}>
                           <div className="mb-3">
                             <label
                               className="form-label"
@@ -236,7 +236,7 @@ const Investigation = (props) => {
                         </Col>
                       </Row>
                       <Row className="m-1">
-                        <Col sm={4}>
+                        <Col lg={4} md={8}>
                           <div className="mb-3">
                             <label
                               className="form-label"
@@ -274,7 +274,7 @@ const Investigation = (props) => {
                         </Col>
                       </Row>
                       <Row className="m-1">
-                        <Col sm={4}>
+                        <Col lg={4} md={8}>
                           <div className="mb-3">
                             <label
                               className="form-label"
@@ -359,7 +359,7 @@ const Investigation = (props) => {
                   <div className="card-body">
                     <div className="live-preview">
                       <Row className=" m-1">
-                        <Col sm={4}>
+                        <Col lg={4} md={8}>
                           <div className="mb-3">
                             <label
                               className="form-label"
@@ -385,7 +385,7 @@ const Investigation = (props) => {
                         </Col>
                       </Row>
                       <Row className="m-1">
-                        <Col sm={4}>
+                        <Col lg={4} md={8}>
                           <div className="mb-3">
                             <label
                               className="form-label"
@@ -411,7 +411,7 @@ const Investigation = (props) => {
                         </Col>
                       </Row>
                       <Row className="m-1">
-                        <Col sm={4}>
+                        <Col lg={4} md={8}>
                           <div className="mb-3">
                             <label
                               className="form-label"
@@ -437,7 +437,7 @@ const Investigation = (props) => {
                         </Col>
                       </Row>
                       <Row className="m-1">
-                        <Col sm={4}>
+                        <Col lg={4} md={8}>
                           <div className="mb-3">
                             <label
                               className="form-label"
@@ -463,7 +463,7 @@ const Investigation = (props) => {
                         </Col>
                       </Row>
                       <Row className="m-1">
-                        <Col sm={4}>
+                        <Col lg={4} md={8}>
                           <div className="mb-3">
                             <label
                               className="form-label"
@@ -489,7 +489,7 @@ const Investigation = (props) => {
                         </Col>
                       </Row>
                       <Row className="m-1">
-                        <Col sm={4}>
+                        <Col lg={4} md={8}>
                           <div className="mb-3">
                             <label
                               className="form-label"

@@ -96,7 +96,7 @@ const CheckupForm = () => {
   const [vitals, setvitals] = useState(null);
   const [examnination, setexamination] = useState(null);
   const [eye, seteye] = useState(null);
-  const [blood, setbloodgrp] = useState(null);
+  const [blood, setblood] = useState(null);
   const [other, setother] = useState(null);
   const [form32, setform32] = useState(null);
   const [form33, setform33] = useState(null);
@@ -182,7 +182,7 @@ const CheckupForm = () => {
 
   console.log(location);
 
-  const handleSubmitForEmp = async () => {
+  const handleSubmitForEmp = async (date1) => {
 
     const chaeckupData = await getCheckupData({
       employeeId: currentEmp._id,
@@ -190,7 +190,7 @@ const CheckupForm = () => {
       location: location,
       checkupNameId: checknameid,
       checkupTypeId: checktypeid,
-      checkupDate:date,
+      checkupDate:date1,
       //createdAt ni field ahiya add karviiii.....
      
       employeeContactDetailsId: currentEmpContactDetails._id,
@@ -207,6 +207,9 @@ const CheckupForm = () => {
     );
     setother(chaeckupData.data.employeeReports.employeeInvestigationDetailsId);
     setform33(chaeckupData.data.employeeReports.employeeForm33Id);
+    seteye(chaeckupData.data.employeeReports.employeeEyeDetailsId);
+    setblood(chaeckupData.data.employeeReports.employeeBloodInvestigationDetailsId);
+    setform32(chaeckupData.data.employeeReports.employeeForm32Id);
   };
 
   useEffect(() => {
@@ -586,7 +589,7 @@ const CheckupForm = () => {
                   // Alert the input values of the form that we filled
                   console.log(">>>>>>>>>>>>>>>",values.dateOfExamination);
                   setdate(values.dateOfExamination);
-                  handleSubmitForEmp();
+                  handleSubmitForEmp(values.dateOfExamination);
                   resetForm();
                   //
                 }}
@@ -621,7 +624,7 @@ const CheckupForm = () => {
                           <div className="card-body">
                             <div className="live-preview">
                               <Row className="align-items-center g-3">
-                                <Col sm={2}>
+                                <Col lg={2} md={4}>
                                   <label
                                     className="form-label mt-3"
                                     htmlFor="product-orders-input"
@@ -657,31 +660,31 @@ const CheckupForm = () => {
                                   </div>
                                 </Col>
 
-                                <Col sm={2}>
-                                <div>
-                                  <label
-                                    className="form-label"
-                                    htmlFor="product-price-input"
-                                  >
-                                    Date of Examination
-                                  </label>
-                                  <div className="input-group">
-                                    <Input
-                                      type="date"
-                                      className="form-control"
-                                      id="product-price-input"
-                                      placeholder="DD/MM/YYYY"
-                                      name="dateOfExamination"
-                                      aria-label="Price"
-                                      aria-describedby="product-price-addon"
-                                      onChange={handleChange}
-                                      onBlur={handleBlur}
-                                      value={values.dateOfExamination}
-                                    />
-                                  </div>
-                                </div>
-                              </Col>
-                                <Col sm={2}>
+                                <Col lg={2} md={4}>
+                            <div className="">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                Date of Examination
+                              </label>
+                              <div className="">
+                                <Input
+                                  type="date"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="DD/MM/YYYY"
+                                  name="dateOfExamination"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.dateOfExamination}
+                                />
+                              </div>
+                            </div>
+                          </Col>
+                                <Col lg={2} md={4}>
                                   <label
                                     className="form-label mt-3"
                                     htmlFor="product-orders-input"
@@ -714,7 +717,7 @@ const CheckupForm = () => {
                                     </p>
                                   </div>
                                 </Col>
-                                <Col sm={2}>
+                                <Col lg={2} md={4}>
                                   <label
                                     className="form-label mt-3"
                                     htmlFor="product-orders-input"
@@ -745,7 +748,7 @@ const CheckupForm = () => {
                                     </p>
                                   </div>
                                 </Col>
-                                <Col sm={2}>
+                                <Col lg={2} md={4}>
                                   <label
                                     className="form-label mt-3"
                                     htmlFor="product-orders-input"
@@ -790,7 +793,7 @@ const CheckupForm = () => {
                                     </p>
                                   </div>
                                 </Col>
-                                <Col sm={2}>
+                                <Col lg={2} md={4}>
                                   <label
                                     className="form-label mt-3"
                                     htmlFor="product-orders-input"
@@ -945,10 +948,7 @@ const CheckupForm = () => {
                   </Nav>
                 </CardHeader>
 
-                {/* console.log( company );
-    console.log( location );
-    console.log( checkupName );
-    console.log( checkupType); */}
+             
 
                 <CardBody>
                   <TabContent activeTab={customActiveTab}>
@@ -984,6 +984,7 @@ const CheckupForm = () => {
                         checkupTypeId={checkupType}
                         checkupDataId={checkupDataId}
                         employeeId={shalin}
+                        eye={eye}
                       />
                     </TabPane>
 
@@ -995,6 +996,7 @@ const CheckupForm = () => {
                         checkupTypeId={checkupType}
                         checkupDataId={checkupDataId}
                         employeeId={shalin}
+                        blood={blood}
                       />
                     </TabPane>
 
@@ -1018,6 +1020,7 @@ const CheckupForm = () => {
                         checkupTypeId={checkupType}
                         checkupDataId={checkupDataId}
                         employeeId={shalin}
+                        form32id={form32}
                       />
                     </TabPane>
 

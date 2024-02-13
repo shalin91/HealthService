@@ -56,6 +56,16 @@ width:1px
   width: 100%;
   margin: 15px 0px;
 }
+.mainTable1{
+  border-spacing: 0;
+  border-left: 1px solid #000;
+  border-top: 1px solid #000;
+  border-right:1px solid black;
+  border-bottom: 1px solid #000;
+  
+  width: 100%;
+  margin: 15px 0px;
+}
 
 /* th,
 td {
@@ -171,4 +181,22 @@ td {
 
 .Medical-checkup p{
   margin: 5px,0px;
+}
+.mainTable1 tr,
+.mainTable1 td{
+   border:1px solid black;
+   padding:5px
+}
+
+@media only screen and (max-width: 768px) {
+  .tablet-responsive {
+    margin-left: 0;
+    margin-top: 10px;
+    
+  }
+}
+@media only screen and (max-width: 576px) {
+  .mobile-resp {
+    max-width:220px;    
+  }
 }

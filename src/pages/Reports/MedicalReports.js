@@ -17,6 +17,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Link } from "react-router-dom";
 import * as XLSX from "xlsx";
+import "../Pages/PrintForm/printForm.css";
 const url = `${process.env.REACT_APP_BASE_URL}`;
 
 const MedicalReports = () => {
@@ -203,8 +204,8 @@ const MedicalReports = () => {
           "NA",
         (item.employeecontactdetails && item.employeecontactdetails.gender) ||
           "NA",
-        (item.createdAt &&
-          item.createdAt.slice(0, 10).split("-").reverse().join("-")) ||
+        (item.checkupDate &&
+          item.checkupDate.slice(0, 10).split("-").reverse().join("-")) ||
           "NA",
         (item.employeeVitalAndHistory && item.employeeVitalAndHistory.height) ||
           "NA",
@@ -371,13 +372,12 @@ const MedicalReports = () => {
             <Col lg={12}>
               <Card>
                 <CardHeader className="d-flex justify-content-between align-items-center">
-                  {/* <label htmlFor="filterSelect">Filter:</label> */}
                   <Row className="align-items-center">
-                    <Col className="lg-2">
+                    <Col lg={2} md={6} className="tablet-responsive">
                       <select
                         className="form-select"
                         id="filterSelect"
-                        style={{ marginLeft: "4px" }}
+                        // style={{ marginLeft: "4px" }}
                         //   value={filterOption}
                         onChange={handleLocationChange}
                       >
@@ -391,11 +391,11 @@ const MedicalReports = () => {
                           : null}
                       </select>
                     </Col>
-                    <Col className="lg-2">
+                    <Col lg={2} md={6} className="tablet-responsive">
                       <select
                         className="form-select"
                         id="filterSelect"
-                        style={{ marginLeft: "14px" }}
+                        // style={{ marginLeft: "14px" }}
                         onChange={handle1}
                       >
                         <option value="">Select Location</option>
@@ -412,11 +412,11 @@ const MedicalReports = () => {
                         )}
                       </select>
                     </Col>
-                    <Col className="lg-2">
+                    <Col lg={2} md={6} className="tablet-responsive">
                       <select
                         className="form-select"
                         id="filterSelect"
-                        style={{ marginLeft: "14px" }}
+                        // style={{ marginLeft: "14px" }}
                         onChange={handle2}
                       >
                         <option value="">Select Checkup</option>
@@ -429,11 +429,11 @@ const MedicalReports = () => {
                           : null}
                       </select>
                     </Col>
-                    <Col className="lg-2">
+                    <Col lg={2} md={6} className="tablet-responsive">
                       <select
                         className="form-select"
                         id="filterSelect"
-                        style={{ marginLeft: "14px" }}
+                        // style={{ marginLeft: "14px" }}
                         onChange={handle3}
                       >
                         <option value="">Select Type</option>
@@ -446,7 +446,7 @@ const MedicalReports = () => {
                           : null}
                       </select>
                     </Col>
-                    <Col className="lg-2">
+                    <Col lg={2} md={6} className="tablet-responsive">
                       <DatePicker
                         className="form-control"
                         selected={startDate}
@@ -455,7 +455,7 @@ const MedicalReports = () => {
                         placeholderText="Select Start Date"
                       />
                     </Col>
-                    <Col className="lg-2">
+                    <Col lg={2} md={6} className="tablet-responsive">
                       <DatePicker
                         className="form-control"
                         selected={endDate}
@@ -475,26 +475,30 @@ const MedicalReports = () => {
                     </button>
                   </div> */}
                   <div className="filter-dropdown" style={{ display: "flex" }}>
-  <button
-    onClick={handleFetchData}
-    style={{
-      marginLeft: "24px",
-      width: "100%",
-      padding: "10px 20px",
-      backgroundColor: "#4CAF50", /* Green background color */
-      color: "white", /* White text color */
-      border: "none", /* Remove borders */
-      borderRadius: "5px", /* Rounded corners */
-      cursor: "pointer", /* Add a pointer cursor on hover */
-      transition: "background-color 0.3s", /* Smooth transition on hover */
-    }}
-    onMouseOver={(e) => e.target.style.backgroundColor = "#45a049"} /* Darken the button on hover */
-    onMouseOut={(e) => e.target.style.backgroundColor = "#4CAF50"} /* Revert the color on hover out */
-  >
-    Apply
-  </button>
-</div>
-
+                    <button
+                      onClick={handleFetchData}
+                      style={{
+                        marginLeft: "24px",
+                        width: "100%",
+                        padding: "10px 20px",
+                        backgroundColor: "#4CAF50" /* Green background color */,
+                        color: "white" /* White text color */,
+                        border: "none" /* Remove borders */,
+                        borderRadius: "5px" /* Rounded corners */,
+                        cursor: "pointer" /* Add a pointer cursor on hover */,
+                        transition:
+                          "background-color 0.3s" /* Smooth transition on hover */,
+                      }}
+                      onMouseOver={(e) =>
+                        (e.target.style.backgroundColor = "#45a049")
+                      } /* Darken the button on hover */
+                      onMouseOut={(e) =>
+                        (e.target.style.backgroundColor = "#4CAF50")
+                      } /* Revert the color on hover out */
+                    >
+                      Apply
+                    </button>
+                  </div>
 
                   <Row className="align-items-center">
                     <Col className="col-lg-auto"></Col>
@@ -525,13 +529,13 @@ const MedicalReports = () => {
                               className="name"
                               style={{ textAlign: "center" }}
                             >
-                              Form 32
+                              Form 33 Health
                             </th>
                             <th
                               className="name"
                               style={{ textAlign: "center" }}
                             >
-                              Form 33 Health
+                              Form 32
                             </th>
                             <th
                               className="name"
@@ -567,18 +571,6 @@ const MedicalReports = () => {
                                       Medical Report
                                     </Link>
                                   </td>
-                                  <td
-                                    className="product-name"
-                                    style={{ textAlign: "center" }}
-                                  >
-                                    <Link
-                                      to={`/form32/${item._id}`}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                    >
-                                      Form 32 Report
-                                    </Link>
-                                  </td>
 
                                   <td
                                     className="product-name"
@@ -590,6 +582,18 @@ const MedicalReports = () => {
                                       rel="noopener noreferrer"
                                     >
                                       Form-Health33 Report
+                                    </Link>
+                                  </td>
+                                  <td
+                                    className="product-name"
+                                    style={{ textAlign: "center" }}
+                                  >
+                                    <Link
+                                      to={`/form32/${item._id}`}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                    >
+                                      Form 32 Report
                                     </Link>
                                   </td>
 

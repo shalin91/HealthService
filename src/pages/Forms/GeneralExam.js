@@ -7,17 +7,17 @@ import { useContext } from "react";
 
 const GeneralExam = (props) => {
   const [examination, setexamination] = useState({
-                generalExam: "",
-                rs: "",
-                cvs: "",
-                cns: "",
-                skinAndGenitals: "",
-                other: "",
-                abdomenAS: "",
-                musculoSkeletal: "",
-                ent: "",
-                });
-  const { GetSpecificExamination,editexamination } = useContext(SignContext);
+    generalExam: "",
+    rs: "",
+    cvs: "",
+    cns: "",
+    skinAndGenitals: "",
+    other: "",
+    abdomenAS: "",
+    musculoSkeletal: "",
+    ent: "",
+  });
+  const { GetSpecificExamination, editexamination } = useContext(SignContext);
   console.log(">>>>>", props.generalexamId);
   const { setGeneralExamination } = useContext(SignContext);
 
@@ -58,12 +58,10 @@ const GeneralExam = (props) => {
           <Col lg={12}>
             <Formik
               initialValues={{
-                  examination
+                examination,
               }}
               // validationSchema={validationSchema}
               onSubmit={async (values, { resetForm }) => {
-                
-
                 const data = { ...props, ...examination };
                 console.log(data);
                 const res = await editexamination(props.generalexamId, data);
@@ -88,7 +86,7 @@ const GeneralExam = (props) => {
                     <div className="card-body">
                       <div className="live-preview">
                         <Row className="align-items-center g-3">
-                          <Col sm={6}>
+                          <Col lg={6} md={12}>
                             <div className="mb-3">
                               <label
                                 className="form-label"
@@ -131,7 +129,7 @@ const GeneralExam = (props) => {
                           </Col>
                         </Row>
                         <Row className="align-items-center g-3">
-                          <Col sm={3}>
+                          <Col lg={3} md={5}>
                             <div className="mb-3">
                               <label
                                 className="form-label"
@@ -285,7 +283,7 @@ const GeneralExam = (props) => {
                               </div>
                             </div>
                           </Col>
-                          <Col sm={3}>
+                          <Col lg={3} md={5}>
                             <div className="mb-3">
                               <label
                                 className="form-label"
@@ -503,7 +501,7 @@ const GeneralExam = (props) => {
                     <div className="card-body">
                       <div className="live-preview">
                         <Row className="align-items-center g-3">
-                          <Col sm={6}>
+                          <Col lg={6} md={8}>
                             <div className="mb-3">
                               <label
                                 className="form-label"
@@ -534,7 +532,7 @@ const GeneralExam = (props) => {
                           </Col>
                         </Row>
                         <Row className="align-items-center g-3">
-                          <Col sm={3}>
+                          <Col lg={3} md={5}>
                             <div className="mb-3">
                               <label
                                 className="form-label"
@@ -640,7 +638,7 @@ const GeneralExam = (props) => {
                               </div>
                             </div>
                           </Col>
-                          <Col sm={3}>
+                          <Col lg={3} md={5}>
                             <div className="mb-3">
                               <label
                                 className="form-label"

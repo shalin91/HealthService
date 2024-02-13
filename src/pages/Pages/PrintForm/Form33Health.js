@@ -52,71 +52,48 @@ const FormHelth33 = () => {
               Cerificate of fitnees of employment in hazardous process and
               operation
             </h5>
-            <table className="mainTable">
+            <table className="mainTable1">
               <tr>
+                <td colSpan={3}>
+                  <div style={{ display: "flex" }}>
+                    <p>1. Sr No: {CheckupData?.employeeData?.srNo}</p>
 
-                <td colSpan={3}  >
-                 <div style={{display:'flex'}}>  
-                 <p>1.{" "}Sr No: </p>
-
-                 <p style={{marginLeft:'auto'}}>Date:02-01-2024</p>
-                 </div>
-                </td>
-                {/* <td>
-                  Date:
-                </td> */}
-              </tr>
-              <tr>
-
-                <td style={{width:'40%'}}>
-                  2. {" "}Name
-
-                </td>
-                <td>
-                 {CheckupData?.employeeData?.employeeName || "N/A"}
+                    <p style={{ marginLeft: "auto" }}>
+                      Date:
+                      {CheckupData?.checkupDate
+                        ? CheckupData.checkupDate
+                            .slice(0, 10)
+                            .split("-")
+                            .reverse()
+                            .join("-")
+                        : "N/A"}
+                    </p>
+                  </div>
                 </td>
               </tr>
+
               <tr>
+                <td style={{ width: "40%" }}>2. Name</td>
+                <td>{CheckupData?.employeeData?.employeeName || "N/A"}</td>
+              </tr>
+              <tr>
+                <td>3. Father's Name: </td>
                 <td>
-
-                  3.{" "}Father's Name:{" "}
-
-                  
-                </td>
-                <td>
-                {CheckupData?.employeeData?.employeeFatherName || "N/A"}
+                  {CheckupData?.employeeData?.employeeFatherName || "N/A"}
                 </td>
               </tr>
               <tr>
-                <td >
-
-                  4. {" "}Sex: 
-
-                </td>
-                <td>
-                {CheckupData?.employeecontactdetails?.gender || "N/A"}
-                </td>
+                <td>4. Sex:</td>
+                <td>{CheckupData?.employeecontactdetails?.gender || "N/A"}</td>
               </tr>
               <tr>
-                <td >
-
-                  5.{" "}Residence:
-
-                 
-                </td>
-                <td>
-                {CheckupData?.employeecontactdetails?.address || "N/A"}
-                </td>
+                <td>5. Residence:</td>
+                <td>{CheckupData?.employeecontactdetails?.address || "N/A"}</td>
               </tr>
               <tr>
-                <td >
-
-                  6. {" "}Date of Birth:
-
-                  
-                </td>
+                <td>6. Date of Birth:</td>
                 <td>
-                {CheckupData?.employeecontactdetails?.dateOfBirth
+                  {CheckupData?.employeecontactdetails?.dateOfBirth
                     .slice(0, 10)
                     .split("-")
                     .reverse()
@@ -124,69 +101,49 @@ const FormHelth33 = () => {
                 </td>
               </tr>
               <tr>
-                <td >
-
-                  7.{" "}Name & Address of the Factory:
-
-                  
-                </td>
+                <td>7. Name & Address of the Factory:</td>
+                <td>{CheckupData?.employeeData?.companyLocation || "N/A"}</td>
+              </tr>
+              <tr>
+                <td>8. Work is Employed / Proposed: </td>
                 <td>
-                {CheckupData?.employeeData?.companyLocation || "N/A"}
+                  {CheckupData?.employeeform33?.employyedOrPrpposed || "N/A"}
                 </td>
               </tr>
               <tr>
-                <td >
-
-                  8.{" "}Work is Employed / Proposed:{" "}
-
-                 
-                </td>
+                <td>a: Hazardous Process :</td>
                 <td>
-                {CheckupData?.employeeform33?.employyedOrPrpposed || "N/A"}
+                  {CheckupData?.employeeform33?.hazardousProcess || "N/A"}
                 </td>
               </tr>
               <tr>
-                <td >
-
-                  a:{" "}Hazardous Process :
-
-                  
-                </td>
-               <td>
-               {CheckupData?.employeeform33?.hazardousProcess || "N/A"}
-               </td>
-              </tr>
-              <tr>
-                <td >
-
-                  b:{" "}Dangerous Operations:{" "}
-
-                 
-                </td>
+                <td>b: Dangerous Operations: </td>
                 <td>
-                {CheckupData?.employeeform33?.dnagerousOperation || "N/A"}
+                  {CheckupData?.employeeform33?.dnagerousOperation || "N/A"}
                 </td>
               </tr>
               <tr>
                 <td colspan="2">
                   <p>
-                    i certify that i have personally examined the above named
+                    I certify that I have personally examined the above named
                     person whose identification
                   </p>
                   <p>
-                    marks are
+                    marks are:
                     {"   "}{" "}
-                    <span style={{textDecoration:'underline '}}>
-                    {CheckupData?.employeecontactdetails?.idMark || "N/A"}
+                    <span style={{ textDecoration: "underline " }}>
+                      {CheckupData?.employeecontactdetails?.idMark || "N/A"}
                     </span>
                   </p>
                   <p>
-                    and who is desirous of being employed in above mentioned
+                    And who is desirous of being employed in above mentioned
                     process/operation and that
                   </p>
                   <p>
-                    his/her age, as can be ascertained from my examination. is{" "}
-                    {CheckupData?.employeecontactdetails?.age || "N/A"} years
+                    His/her age, as can be ascertained from my examination. is{" "}
+                    <span style={{ textDecoration: "underline" }}>
+                      {CheckupData?.employeecontactdetails?.age || "N/A"} years
+                    </span>
                   </p>
                   <p>
                     <input
@@ -196,7 +153,7 @@ const FormHelth33 = () => {
                       }
                     />
                     <span style={{ marginLeft: "10px" }}>
-                      in my opinion he/she is fit for employment in the said
+                      In my opinion he/she is fit for employment in the said
                       manufacturing process / operation
                     </span>
                   </p>
@@ -208,8 +165,8 @@ const FormHelth33 = () => {
                       }
                     />
                     <span style={{ marginLeft: "10px" }}>
-                      in my opinion he/she is unfit for employment in the said
-                      manufacturing process / operation for the reason {"    "}{" "}
+                      In my opinion he/she is unfit for employment in the said
+                      manufacturing process / operation for the reason: {"    "}{" "}
                       {CheckupData?.employeeform33?.unfitReason || "N/A"}
                     </span>
                   </p>
@@ -234,15 +191,10 @@ const FormHelth33 = () => {
             </table>
 
             <div className="hstack gap-2 justify-content-end d-print-none mt-4">
-                      <Link
-                        to="#"
-                        onClick={handlePrint}
-                        className="btn btn-success"
-                      >
-                        <i className="ri-printer-line align-bottom me-1"></i>{" "}
-                        Print
-                      </Link>
-           </div>
+              <Link to="#" onClick={handlePrint} className="btn btn-success">
+                <i className="ri-printer-line align-bottom me-1"></i> Print
+              </Link>
+            </div>
           </div>
         </Container>
       </div>

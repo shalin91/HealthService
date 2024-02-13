@@ -1,4 +1,4 @@
-import React,{ useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import UiContent from "../../Components/Common/UiContent";
@@ -7,7 +7,6 @@ import BreadCrumb from "../../Components/Common/BreadCrumb";
 import { TagsInput } from "react-tag-input-component";
 import SignContext from "../../contextAPI/Context/SignContext";
 const CheckupNameMaster = () => {
-  
   const {
     GetCompany,
     GetCompanybyId,
@@ -17,7 +16,6 @@ const CheckupNameMaster = () => {
     getCheckupType,
     setCheckupNameMaster,
     GetContactDetailsById,
-    
   } = useContext(SignContext);
   const [checkupType, setCheckupType] = useState(null);
   const [checkupName, setCheckupName] = useState(null);
@@ -35,7 +33,7 @@ const CheckupNameMaster = () => {
 
     const data = { ...val };
 
-    const response = await setCheckupNameMaster (data);
+    const response = await setCheckupNameMaster(data);
 
     console.log(response);
 
@@ -44,10 +42,7 @@ const CheckupNameMaster = () => {
     console.log(response.data._id);
   };
 
-
-
   useEffect(() => {
-    
     getAllCheckupType();
   }, []);
 
@@ -71,7 +66,7 @@ const CheckupNameMaster = () => {
                   checkupDate: "",
                   checkupType: "",
                 }}
-                onSubmit={(values , { resetForm }) => {
+                onSubmit={(values, { resetForm }) => {
                   addCheckupDetails(values);
                   resetForm();
                 }}
@@ -105,12 +100,12 @@ const CheckupNameMaster = () => {
                           <div className="card-body">
                             <div className="live-preview">
                               <Row className="align-items-center g-3">
-                                <Col sm={3}>
+                                <Col sm={6}>
                                   <label
                                     className="form-label mt-3"
                                     htmlFor="product-orders-input"
                                   >
-                                    checkup name
+                                    CheckUp Name
                                   </label>
                                   <div className="">
                                     <Input
@@ -132,7 +127,7 @@ const CheckupNameMaster = () => {
                                       errors.checkupName}
                                   </p>
                                 </Col>
-                                <Col sm={3}>
+                                {/* <Col sm={3}>
                                   <label
                                     className="form-label mt-3"
                                     htmlFor="product-orders-input"
@@ -186,8 +181,8 @@ const CheckupNameMaster = () => {
                                       touched.checkupDate &&
                                       errors.checkupDate}
                                   </p>
-                                </Col>
-                                <Col sm={3}>
+                                </Col> */}
+                                <Col sm={6}>
                                   <label
                                     className="form-label mt-3"
                                     htmlFor="product-orders-input"
@@ -203,8 +198,7 @@ const CheckupNameMaster = () => {
                                       onChange={handleChange}
                                     >
                                       <option value=""> checkup Type</option>
-                                      {checkupType &&
-                                      checkupType.length > 0 ? (
+                                      {checkupType && checkupType.length > 0 ? (
                                         checkupType.map((type) => (
                                           <option key={type} value={type._id}>
                                             {type.checkupType}
@@ -245,7 +239,7 @@ const CheckupNameMaster = () => {
         </Container>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default CheckupNameMaster
+export default CheckupNameMaster;

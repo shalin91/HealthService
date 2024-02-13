@@ -41,8 +41,8 @@ const NewForm = () => {
   const [currentEmp, setCurrentEmp] = useState(null);
   const [currentCompanyId, setCurrentCompanyId] = useState(null);
   const [currentLocation, setCurrentLocation] = useState(null);
-  const [currentEmpContactDetails, setCurrentEmpContactDetails] = useState(null);
-
+  const [currentEmpContactDetails, setCurrentEmpContactDetails] =
+    useState(null);
 
   const getcompanies = async () => {
     const res = await GetCompany();
@@ -487,7 +487,7 @@ const NewForm = () => {
                             </Col>
                           </Row>
                           <Row className="align-items-center g-3">
-                            <Col sm={2}>
+                            <Col lg={2} md={4}>
                               <label
                                 className="form-label mt-3"
                                 htmlFor="product-orders-input"
@@ -514,7 +514,7 @@ const NewForm = () => {
                                 </p>
                               </div>
                             </Col>
-                            <Col sm={3}>
+                            <Col lg={3} md={4}>
                               <label
                                 className="form-label mt-3"
                                 htmlFor="product-orders-inputrd"
@@ -548,7 +548,7 @@ const NewForm = () => {
                                 </p>
                               </div>
                             </Col>
-                            <Col sm={3}>
+                            <Col lg={3} md={4}>
                               <label
                                 className="form-label mt-3"
                                 htmlFor="product-orders-input"
@@ -635,7 +635,7 @@ const NewForm = () => {
                         <TabContent activeTab={customActiveTab}>
                           <TabPane id="addproduct-general-info" tabId="1">
                             <Row>
-                              <Col lg={8}>
+                              <Col lg={8} md={12}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -687,7 +687,7 @@ const NewForm = () => {
                         </Col> */}
                             </Row>
                             <Row>
-                              <Col sm={2}>
+                              <Col lg={2} md={4}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -719,7 +719,7 @@ const NewForm = () => {
                                 </div>
                               </Col>
 
-                              <Col sm={2}>
+                              <Col lg={2} md={4} >
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -757,7 +757,7 @@ const NewForm = () => {
                                 </div>
                               </Col>
 
-                              <Col sm={2}>
+                              <Col lg={2} md={4} >
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -770,7 +770,7 @@ const NewForm = () => {
                                       type="text"
                                       className="form-control"
                                       id="product-price-input"
-                                      placeholder="gendet"
+                                      placeholder="gender"
                                       name="gender"
                                       aria-label="Price"
                                       aria-describedby="product-price-addon"
@@ -793,7 +793,7 @@ const NewForm = () => {
                                 </div>
                               </Col>
 
-                              <Col sm={2}>
+                              <Col lg={2} md={4} >
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -828,7 +828,7 @@ const NewForm = () => {
                                   </p>
                                 </div>
                               </Col>
-                              <Col sm={2}>
+                              <Col lg={2} md={4} >
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -863,7 +863,7 @@ const NewForm = () => {
                                   </p>
                                 </div>
                               </Col>
-                              <Col sm={2}>
+                              <Col lg={2} md={4}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -900,9 +900,7 @@ const NewForm = () => {
                               </Col>
                             </Row>
                             <Row>
-                              
-
-                              <Col sm={2}>
+                              <Col lg={2} md={4}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -936,7 +934,7 @@ const NewForm = () => {
                                 </div>
                               </Col>
 
-                              <Col sm={2}>
+                              <Col lg={2} md={4}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -972,7 +970,7 @@ const NewForm = () => {
                                 </div>
                               </Col>
 
-                              <Col sm={2}>
+                              <Col lg={2} md={4}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -1007,7 +1005,7 @@ const NewForm = () => {
                                   </p>
                                 </div>
                               </Col>
-                              <Col sm={2}>
+                              <Col lg={2} md={6}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -1040,7 +1038,7 @@ const NewForm = () => {
                                   </p>
                                 </div>
                               </Col>
-                              <Col sm={2}>
+                              <Col lg={2} md={6}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -1078,7 +1076,7 @@ const NewForm = () => {
                             </Row>
 
                             <Row>
-                              <Col sm={3}>
+                              <Col lg={3} md={4}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -1115,7 +1113,7 @@ const NewForm = () => {
                                   </p>
                                 </div>
                               </Col>
-                              <Col sm={3}>
+                              <Col lg={3} md={4}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -1153,7 +1151,7 @@ const NewForm = () => {
                             </Row>
 
                             <Row>
-                              <Col sm={6}>
+                              <Col lg={6} md={8}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"

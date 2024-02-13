@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import '../Pages/PrintForm/printForm.css'
 import {
   Card,
   CardBody,
@@ -106,6 +107,7 @@ const Login = () => {
                       src={logo}
                       alt="Viraj"
                       style={{ maxHeight: "200px" }}
+                      className="mobile-resp"
                     ></img>
                   </div>
                   {/* <p className="mt-3 fs-15 fw-medium">

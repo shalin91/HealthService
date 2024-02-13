@@ -109,7 +109,7 @@ const VitalsandHistory = (props) => {
                     <div className="card-body">
                       <div className="live-preview">
                         <Row className="align-items-center g-3">
-                          <Col sm={2}>
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
                               <label
                                 className="form-label"
@@ -161,7 +161,7 @@ const VitalsandHistory = (props) => {
                               </div>
                             </div>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
                               <label
                                 className="form-label"
@@ -210,7 +210,7 @@ const VitalsandHistory = (props) => {
                               </div>
                             </div>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
                               <label
                                 className="form-label"
@@ -229,7 +229,14 @@ const VitalsandHistory = (props) => {
                                   aria-describedby="product-orders-addon"
                                   onChange={handleChange}
                                   onBlur={handleBlur}
-                                  value={values.bmi}
+                                  value={
+                                    vital
+                                      ? vital.bmi !== null &&
+                                        vital.bmi !== ""
+                                        ? vital.bmi
+                                        : ""
+                                      : ""
+                                  }
                                 />
                                 <p className="error text-danger">
                                   {errors.bmi && touched.bmi && errors.bmi}
@@ -239,7 +246,7 @@ const VitalsandHistory = (props) => {
                           </Col>
                         </Row>
                         <Row className="align-items-center g-3">
-                          <Col sm={2}>
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
                               <label
                                 className="form-label"
@@ -280,7 +287,7 @@ const VitalsandHistory = (props) => {
                               </div>
                             </div>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
                               <label
                                 className="form-label"
@@ -318,7 +325,7 @@ const VitalsandHistory = (props) => {
                               </div>
                             </div>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
                               <label
                                 className="form-label"
@@ -370,7 +377,7 @@ const VitalsandHistory = (props) => {
                           </Row>
                         </CardHeader>
                         <Row className=" m-1">
-                          <Col sm={4}>
+                          <Col lg={4} md={8}>
                             <div className="mb-3">
                               <label
                                 className="form-label"
@@ -414,7 +421,7 @@ const VitalsandHistory = (props) => {
                           </Col>
                         </Row>
                         <Row className="m-1">
-                          <Col sm={4}>
+                          <Col lg={4} md={8}>
                             <div className="mb-3">
                               <label
                                 className="form-label"
@@ -458,7 +465,7 @@ const VitalsandHistory = (props) => {
                           </Col>
                         </Row>
                         <Row className="m-1">
-                          <Col sm={4}>
+                          <Col lg={4} md={8}>
                             <div className="mb-3">
                               <label
                                 className="form-label"
@@ -502,7 +509,7 @@ const VitalsandHistory = (props) => {
                           </Col>
                         </Row>
                         <Row className="m-1">
-                          <Col sm={4}>
+                          <Col lg={4} md={8}>
                             <div className="mb-3">
                               <label
                                 className="form-label"
@@ -610,7 +617,7 @@ const VitalsandHistory = (props) => {
                     <div className="card-body">
                       <div className="live-preview">
                         <Row className="align-items-center g-3">
-                          <Col sm={2}>
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
                               <label
                                 className="form-label"
@@ -648,7 +655,7 @@ const VitalsandHistory = (props) => {
                               </div>
                             </div>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
                               <label
                                 className="form-label"
@@ -686,7 +693,7 @@ const VitalsandHistory = (props) => {
                               </div>
                             </div>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
                               <label
                                 className="form-label"
@@ -715,7 +722,7 @@ const VitalsandHistory = (props) => {
                           </Col>
                         </Row>
                         <Row className="align-items-center g-3">
-                          <Col sm={2}>
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
                               <label
                                 className="form-label"
@@ -744,7 +751,7 @@ const VitalsandHistory = (props) => {
                               </div>
                             </div>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
                               <label
                                 className="form-label"
@@ -771,7 +778,7 @@ const VitalsandHistory = (props) => {
                               </div>
                             </div>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
                               <label
                                 className="form-label"
@@ -811,7 +818,7 @@ const VitalsandHistory = (props) => {
                           </Row>
                         </CardHeader>
                         <Row className=" m-1">
-                          <Col sm={4}>
+                          <Col lg={4} md={8}>
                             <div className="mb-3">
                               <label
                                 className="form-label"
@@ -843,7 +850,7 @@ const VitalsandHistory = (props) => {
                           </Col>
                         </Row>
                         <Row className="m-1">
-                          <Col sm={4}>
+                          <Col lg={4} md={8}>
                             <div className="mb-3">
                               <label
                                 className="form-label"
@@ -875,7 +882,7 @@ const VitalsandHistory = (props) => {
                           </Col>
                         </Row>
                         <Row className="m-1">
-                          <Col sm={4}>
+                          <Col lg={4} md={8}>
                             <div className="mb-3">
                               <label
                                 className="form-label"
@@ -907,7 +914,7 @@ const VitalsandHistory = (props) => {
                           </Col>
                         </Row>
                         <Row className="m-1">
-                          <Col sm={4}>
+                          <Col lg={4} md={8}>
                             <div className="mb-3">
                               <label
                                 className="form-label"

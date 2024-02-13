@@ -281,7 +281,7 @@ function Example({ companyId, location, allcompany }) {
                         <div className="live-preview">
                           <Row className="align-items-center g-3">
                             <Row>
-                              <Col sm={2}>
+                              <Col lg={2} md={2}>
                                 <label
                                   className="form-label mt-3"
                                   htmlFor="product-orders-input"
@@ -289,7 +289,8 @@ function Example({ companyId, location, allcompany }) {
                                   Sr No.
                                 </label>
                               </Col>
-                              <Col sm={6}>
+                              <Col lg={3} md={3}></Col>
+                              <Col lg={3} md={3} >
                                 <label
                                   className="form-label mt-3"
                                   htmlFor="product-orders-input"
@@ -297,7 +298,7 @@ function Example({ companyId, location, allcompany }) {
                                   Name
                                 </label>
                               </Col>
-                              <Col sm={2}>
+                              <Col lg={2} md={4}>
                                 <label
                                   className="form-label mt-3"
                                   htmlFor="product-orders-input"
@@ -305,16 +306,9 @@ function Example({ companyId, location, allcompany }) {
                                   Father's Name
                                 </label>
                               </Col>
-                              <Col sm={2}>
-                                <label
-                                  className="form-label mt-3"
-                                  htmlFor="product-orders-input"
-                                >
-                                  Surname
-                                </label>
-                              </Col>
+                              
                             </Row>
-                            <Col sm={2}>
+                            <Col lg={2} md={2}>
                               <div className="">
                                 <Input
                                   type="text"
@@ -330,7 +324,7 @@ function Example({ companyId, location, allcompany }) {
                                 />
                               </div>
                             </Col>
-                            <Col sm={3}>
+                            <Col lg={3} md={3}>
                               <div className="">
                                 <select
                                   className="form-select"
@@ -349,7 +343,7 @@ function Example({ companyId, location, allcompany }) {
                                 </select>
                               </div>
                             </Col>
-                            <Col sm={3}>
+                            <Col lg={3} md={3}>
                               <div className="">
                                 <Input
                                   type="text"
@@ -365,7 +359,7 @@ function Example({ companyId, location, allcompany }) {
                                 />
                               </div>
                             </Col>
-                            <Col sm={2}>
+                            <Col lg={3} md={4}>
                               <div className="">
                                 <Input
                                   type="text"
@@ -381,13 +375,24 @@ function Example({ companyId, location, allcompany }) {
                                 />
                               </div>
                             </Col>
-                            <Col sm={2}>
+                            
+                          </Row>
+                          
+
+                          <Row className="align-items-center g-3">
+                          <Col lg={3} md={4}>
+                              <label
+                                className="form-label mt-3"
+                                htmlFor="product-orders-input"
+                              >
+                                SurName
+                              </label>
                               <div className="">
                                 <Input
                                   type="text"
                                   className="form-control"
                                   id="product-orders-input"
-                                  placeholder="Surname"
+                                  placeholder="employeeSurname."
                                   name="employeeSurname"
                                   aria-label="orders"
                                   aria-describedby="product-orders-addon"
@@ -397,9 +402,8 @@ function Example({ companyId, location, allcompany }) {
                                 />
                               </div>
                             </Col>
-                          </Row>
-                          <Row className="align-items-center g-3">
-                            <Col sm={2}>
+
+                            <Col lg={2} md={4}>
                               <label
                                 className="form-label mt-3"
                                 htmlFor="product-orders-input"
@@ -422,7 +426,7 @@ function Example({ companyId, location, allcompany }) {
                               </div>
                             </Col>
 
-                            <Col sm={3}>
+                            <Col lg={3} md={4}>
                               <label
                                 className="form-label mt-3"
                                 htmlFor="product-orders-inputrd"
@@ -480,7 +484,7 @@ function Example({ companyId, location, allcompany }) {
 
                             {/* //setting Department */}
 
-                            <Col sm={3}>
+                            <Col lg={3} md={4}>
                               <label
                                 className="form-label mt-3"
                                 htmlFor="product-orders-inputrd"
@@ -531,7 +535,7 @@ function Example({ companyId, location, allcompany }) {
                   dateOfJoin: "",
                   idMark: "",
                   natureOfJob: "",
-                  // res: "",
+                  
                   mobileNumber: "",
                   office: "",
                   pp: "",
@@ -600,7 +604,7 @@ function Example({ companyId, location, allcompany }) {
                               </Col>
                             </Row>
                             <Row>
-                              <Col lg={8}>
+                              <Col lg={8} md={8}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -620,7 +624,7 @@ function Example({ companyId, location, allcompany }) {
                                   />
                                 </div>
                               </Col>
-                              <Col sm={2}>
+                              <Col lg={2} md={4}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -644,7 +648,7 @@ function Example({ companyId, location, allcompany }) {
                               </Col>
                             </Row>
                             <Row>
-                              <Col sm={3}>
+                              <Col lg={3} md={4}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -669,7 +673,7 @@ function Example({ companyId, location, allcompany }) {
                                 </div>
                               </Col>
 
-                              <Col sm={2}>
+                              <Col lg={3} md={6}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -698,7 +702,7 @@ function Example({ companyId, location, allcompany }) {
                                 </div>
                               </Col>
 
-                              <Col sm={2}>
+                              <Col lg={3} md={4}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -722,7 +726,7 @@ function Example({ companyId, location, allcompany }) {
                                   </div>
                                 </div>
                               </Col>
-                              <Col sm={2}>
+                              <Col lg={3} md={4}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -746,7 +750,7 @@ function Example({ companyId, location, allcompany }) {
                                   </div>
                                 </div>
                               </Col>
-                              <Col sm={3}>
+                              <Col lg={3} md={4}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -801,7 +805,7 @@ function Example({ companyId, location, allcompany }) {
                                 </div>
                               </Col> */}
 
-                              <Col sm={3}>
+                              <Col lg={3} md={6}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -826,7 +830,7 @@ function Example({ companyId, location, allcompany }) {
                                 </div>
                               </Col>
 
-                              <Col sm={3}>
+                              <Col lg={3} md={6}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -851,7 +855,7 @@ function Example({ companyId, location, allcompany }) {
                                 </div>
                               </Col>
 
-                              <Col sm={2}>
+                              <Col lg={3} md={6}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -875,7 +879,7 @@ function Example({ companyId, location, allcompany }) {
                                   </div>
                                 </div>
                               </Col>
-                              <Col sm={3}>
+                              <Col lg={3} md={6}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -902,7 +906,7 @@ function Example({ companyId, location, allcompany }) {
                             </Row>
 
                             <Row>
-                              <Col sm={3}>
+                              <Col lg={3} md={6}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -929,7 +933,7 @@ function Example({ companyId, location, allcompany }) {
                                   </p>
                                 </div>
                               </Col>
-                              <Col sm={3}>
+                              <Col lg={3} md={6}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -956,7 +960,7 @@ function Example({ companyId, location, allcompany }) {
                             </Row>
 
                             <Row>
-                              <Col sm={6}>
+                              <Col lg={6} md={8}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"

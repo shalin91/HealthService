@@ -420,8 +420,20 @@ export const SignState = (props) => {
       console.error("Error during API call:", error);
     }
   };
+
+  const editEyeInformation = async (id, data) => {
+    //edit-vital
+    try {
+      const response = await axios.post(`${url}/employ/edit-eye/${id}`, {
+        data,
+      });
+
+      return response;
+    } catch (error) {
+      console.error("Error during API call:", error);
+    }
+  };
   const editForm33 = async (id, data) => {
-    
     try {
       const response = await axios.post(`${url}/employ/edit-form33/${id}`, {
         data,
@@ -434,7 +446,6 @@ export const SignState = (props) => {
   };
 
   const editOther = async (id, data) => {
-   
     try {
       const response = await axios.post(`${url}/employ/edit-other/${id}`, {
         data,
@@ -445,7 +456,17 @@ export const SignState = (props) => {
       console.error("Error during API call:", error);
     }
   };
+  const editBlood = async (id, data) => {
+    try {
+      const response = await axios.post(`${url}/employ/edit-blood/${id}`, {
+        data,
+      });
 
+      return response;
+    } catch (error) {
+      console.error("Error during API call:", error);
+    }
+  };
   const editexamination = async (id, data) => {
     //edit-vital
     try {
@@ -455,6 +476,19 @@ export const SignState = (props) => {
           data,
         }
       );
+
+      return response;
+    } catch (error) {
+      console.error("Error during API call:", error);
+    }
+  };
+  //
+
+  const editForm32 = async (id, data) => {
+    try {
+      const response = await axios.post(`${url}/employ/edit-form32/${id}`, {
+        data,
+      });
 
       return response;
     } catch (error) {
@@ -589,7 +623,36 @@ export const SignState = (props) => {
   };
   const GetSpecificForm33 = async (id) => {
     try {
-      const response = await axios.get(`${url}/employ/get-specificform33/${id}`);
+      const response = await axios.get(
+        `${url}/employ/get-specificform33/${id}`
+      );
+      return response;
+    } catch (error) {
+      return { success: false, msg: "server Error" };
+    }
+  };
+
+  const GetSpecificForm32 = async (id) => {
+    try {
+      const response = await axios.get(
+        `${url}/employ/get-specific-form32/${id}`
+      );
+      return response;
+    } catch (error) {
+      return { success: false, msg: "server Error" };
+    }
+  };
+  const GetSpecificEye = async (id) => {
+    try {
+      const response = await axios.get(`${url}/employ/get-specificeye/${id}`);
+      return response;
+    } catch (error) {
+      return { success: false, msg: "server Error" };
+    }
+  };
+  const GetSpecificBlood = async (id) => {
+    try {
+      const response = await axios.get(`${url}/employ/get-specificblood/${id}`);
       return response;
     } catch (error) {
       return { success: false, msg: "server Error" };
@@ -657,6 +720,12 @@ export const SignState = (props) => {
         GetSpecificForm33,
         GetSpecificExamination,
         GetSpecificOtherDetail,
+        GetSpecificEye,
+        GetSpecificBlood,
+        GetSpecificForm32,
+        editForm32,
+        editBlood,
+        editEyeInformation,
         editVital,
         editOther,
         editexamination,
