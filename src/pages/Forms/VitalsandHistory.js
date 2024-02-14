@@ -45,11 +45,10 @@ const VitalsandHistory = (props) => {
     familyHistory: Yup.string().required("familyHistory is required"),
   });
   const gettingid = async () => {
-    if(props.vitalid!==null)
-    {
-    const res = await GetSpecificVital(props.vitalid);
-    console.log(">>>vital", res.data);
-    setvital(res.data);
+    if (props.vitalid !== null) {
+      const res = await GetSpecificVital(props.vitalid);
+      console.log(">>>vital", res.data);
+      setvital(res.data);
     }
     // console.log(vital.temperature);
   };
@@ -72,8 +71,6 @@ const VitalsandHistory = (props) => {
                 vital,
               }}
               onSubmit={async (values, { resetForm }) => {
-                
-
                 const data = { ...props, ...vital };
                 console.log(data);
                 const res = await editVital(props.vitalid, data);
@@ -130,7 +127,7 @@ const VitalsandHistory = (props) => {
                                     setvital({
                                       ...vital,
                                       height: e.target.value,
-                                    })
+                                    });
                                     handleChange(e);
                                     const bmi = calculateBMI(
                                       e.target.value,
@@ -139,7 +136,6 @@ const VitalsandHistory = (props) => {
                                     handleChange({
                                       target: { name: "bmi", value: bmi },
                                     });
-                                    
                                   }}
                                   onBlur={handleBlur}
                                   value={
@@ -182,7 +178,7 @@ const VitalsandHistory = (props) => {
                                     setvital({
                                       ...vital,
                                       weight: e.target.value,
-                                    })
+                                    });
                                     handleChange(e);
                                     const bmi = calculateBMI(
                                       values.height,
@@ -231,8 +227,7 @@ const VitalsandHistory = (props) => {
                                   onBlur={handleBlur}
                                   value={
                                     vital
-                                      ? vital.bmi !== null &&
-                                        vital.bmi !== ""
+                                      ? vital.bmi !== null && vital.bmi !== ""
                                         ? vital.bmi
                                         : ""
                                       : ""
@@ -761,7 +756,7 @@ const VitalsandHistory = (props) => {
                               </label>
                               <div className="mb-3">
                                 <Input
-                                  type="number"
+                                  type="text"
                                   className="form-control"
                                   id="product-orders-input"
                                   placeholder="bp"

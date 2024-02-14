@@ -550,7 +550,7 @@ const OtherDetails = (props) => {
               // validationSchema={validationSchema}
               onSubmit={(values, { resetForm }) => {
                 handleSubmitData(values);
-                resetForm();
+                // resetForm();
               }}
             >
               {({

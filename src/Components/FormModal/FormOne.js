@@ -336,7 +336,7 @@ function Example({ companyId, location, allcompany }) {
                                   onBlur={handleBlur}
                                   value={values.employeeNameAbbrevation}
                                 >
-                                  <option value="">---select---</option>
+                                  <option value="">-Ab-</option>
                                   <option value="Mr.">Mr</option>
                                   <option value="Mr.">Ms</option>
                                   <option value="Mrs.">Mrs</option>
@@ -349,7 +349,7 @@ function Example({ companyId, location, allcompany }) {
                                   type="text"
                                   className="form-control"
                                   id="product-orders-input"
-                                  placeholder="First Name"
+                                  placeholder="Name"
                                   name="employeeName"
                                   aria-label="orders"
                                   aria-describedby="product-orders-addon"
@@ -392,7 +392,7 @@ function Example({ companyId, location, allcompany }) {
                                   type="text"
                                   className="form-control"
                                   id="product-orders-input"
-                                  placeholder="employeeSurname."
+                                  placeholder="Surname."
                                   name="employeeSurname"
                                   aria-label="orders"
                                   aria-describedby="product-orders-addon"

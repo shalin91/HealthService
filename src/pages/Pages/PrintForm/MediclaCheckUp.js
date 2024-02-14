@@ -3,7 +3,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import "./../../Pages/PrintForm/printForm.css";
 import SignContext from "../../../contextAPI/Context/SignContext";
 import { Link, useParams } from "react-router-dom";
-import img from "./unnamed111111.jpg";
+import img from "./logo.png";
 const MediclaCheckUp = () => {
   const { id } = useParams();
   const { getCheckupDatabyId, GetallEmployeee } = useContext(SignContext);
@@ -18,58 +18,6 @@ const MediclaCheckUp = () => {
   const handlePrint = () => {
     window.print();
   };
-  // const GetCheckupDatabyId = async () => {
-  //   try {
-  //     const data = await getCheckupDatabyId(id);
-  //     setCheckupData(data);
-
-  //   } catch (error) {
-  //     console.error("Error fetching checkup data:", error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const res=await GetCheckupDatabyId(id);
-
-  //     console.log("CheckUpdata",res);
-  //     // Once the data is fetched, update the checkbox state
-  //     if (
-  //       CheckupData?.employeeeyeinformation?.distandVisionWithLeftEye !== ""
-  //     ) {
-  //       console.log(">>>",CheckupData?.employeeeyeinformation?.distandVisionWithLeftEye);
-  //       setWithGlassChecked(true);
-  //       setWithoutGlassChecked(false);
-  //     }
-  //     if (
-  //       CheckupData?.employeeeyeinformation?.distandVisionWithoutRightEye !== ""
-  //     ) {
-  //       setWithGlassChecked(false);
-  //       setWithoutGlassChecked(true);
-  //     }
-  //     if (CheckupData?.employeeform33?.fitOrUnfit === "Unfit") {
-  //       setunfit(true);
-  //     }
-  //     if (CheckupData?.employeeform33?.fitOrUnfit === "Fit") {
-  //       setfit(true);
-  //     }
-  //     if (CheckupData?.employeeeyeinformation?.nearVisionWithRightEye !== "") {
-  //       setNearwith(true);
-  //       setNearwithout(false);
-  //     }
-  //     if (
-  //       CheckupData?.employeeeyeinformation?.nearVisionWithoutRightEye !== ""
-  //     ) {
-  //       setNearwithout(true);
-  //       setNearwith(false);
-  //     } else {
-  //       setNearwithout(false);
-  //       setNearwith(false);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, [id]);
 
   const gettingdata = async () => {
     const data = await getCheckupDatabyId(id);
@@ -124,6 +72,25 @@ const MediclaCheckUp = () => {
       <div className="page-content">
         <Container fluid>
           <div className="mainDivMediclaForm">
+            <div className="header-section">
+              <div className="logo-part" style={{ display: "inline-block" }}>
+                <img style={{ width: "80px", height: "auto" }} src={img} />
+              </div>
+              <div
+                className="heading-part"
+                style={{
+                  display: "inline-block",
+                  position: "relative",
+                  top: "24px",
+                  left: "15px",
+                }}
+              >
+                <h1>VIRAJ</h1>
+                <h5>OCCUPATIONAL HEALTH SERVICE</h5>
+              </div>
+            </div>
+
+            <br></br>
             <div className="titleDiv">
               <h5 className="medicalTitle" style={{ marginLeft: "239px" }}>
                 MEDICAL CHECK UP
@@ -499,19 +466,10 @@ const MediclaCheckUp = () => {
                     <p className="reasonTitle m-0" style={{ height: "80px" }}>
                       Reason for unfit :{" "}
                       {CheckupData?.employeeform33?.unfitReason || "N/A"}
-                      <div
-                        className="dr-detail"
-                        style={{ position: "relative", bottom: "75px" }}
-                      >
-                        <img
-                          src={img}
-                          style={{ width: "auto", height: "90px" }}
-                        />
-                        <h5 className="drTitle">
-                          Dr.Yatish Shah
-                          <p className="mbbsTitle">M.B.B.S,C.I.H</p>
-                        </h5>
-                      </div>
+                      <h5 className="drTitle">
+                        Dr.Yatish Shah
+                        <p className="mbbsTitle">M.B.B.S,C.I.H</p>
+                      </h5>
                     </p>
                   </td>
                 </tr>

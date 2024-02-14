@@ -561,7 +561,7 @@ const Eye = (props) => {
               // validationSchema={validationSchema}
               onSubmit={(values, { resetForm }) => {
                 handleSubmitData(values);
-                resetForm();
+                // resetForm();
               }}
             >
               {({

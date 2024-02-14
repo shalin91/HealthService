@@ -155,7 +155,7 @@ const HelthCard = () => {
                             className="cardtitle"
                             style={{ textAlign: "center" }}
                           >
-                            Dr.YATISH SHAH (M.B.B.S){" "}
+                            Dr.YATISH SHAH (M.B.B.S,C.I.H){" "}
                           </h5>
                         </div>
                       </td>

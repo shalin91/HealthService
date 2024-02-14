@@ -416,7 +416,7 @@ const NewForm = () => {
                                   type="text"
                                   className="form-control"
                                   id="product-orders-input"
-                                  placeholder="First Name"
+                                  placeholder="Name"
                                   name="name"
                                   aria-label="orders"
                                   aria-describedby="product-orders-addon"
@@ -439,7 +439,7 @@ const NewForm = () => {
                                   type="text"
                                   className="form-control"
                                   id="product-orders-input"
-                                  placeholder="Father's Name"
+                                  placeholder=""
                                   name="fathersName"
                                   aria-label="orders"
                                   aria-describedby="product-orders-addon"
@@ -526,7 +526,7 @@ const NewForm = () => {
                                   type="text"
                                   className="form-control"
                                   id="product-orders-input"
-                                  placeholder="company category"
+                                  placeholder="category"
                                   name="companyJobCategorys"
                                   aria-label="orders"
                                   aria-describedby="product-orders-addon"
@@ -581,7 +581,7 @@ const NewForm = () => {
                                   type="text"
                                   className="form-control"
                                   id="product-orders-input"
-                                  placeholder="company Departments"
+                                  placeholder="Departments"
                                   name="companyDepartments"
                                   aria-label="orders"
                                   aria-describedby="product-orders-addon"
@@ -719,7 +719,7 @@ const NewForm = () => {
                                 </div>
                               </Col>
 
-                              <Col lg={2} md={4} >
+                              <Col lg={2} md={4}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -757,7 +757,7 @@ const NewForm = () => {
                                 </div>
                               </Col>
 
-                              <Col lg={2} md={4} >
+                              <Col lg={2} md={4}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -793,7 +793,7 @@ const NewForm = () => {
                                 </div>
                               </Col>
 
-                              <Col lg={2} md={4} >
+                              <Col lg={2} md={4}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"
@@ -828,7 +828,7 @@ const NewForm = () => {
                                   </p>
                                 </div>
                               </Col>
-                              <Col lg={2} md={4} >
+                              <Col lg={2} md={4}>
                                 <div className="mb-3">
                                   <label
                                     className="form-label"

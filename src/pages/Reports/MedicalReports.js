@@ -160,6 +160,7 @@ const MedicalReports = () => {
         "WEIGHT",
         "PRESENT COMPLAINT",
         "PAST ILLNESS",
+        "family history",
         "CURRENT MEDICATION",
         "ALLERGY",
         "ADDICTION",
@@ -179,15 +180,32 @@ const MedicalReports = () => {
         "PLATELET COUNT",
         "BLOOD GROUP",
         "RANDOM SUGAR",
+        "Sugar PP2BS",
+        "Blood Urea",
+        "Bun",
+        "S Creatine",
+
         "SGPT",
-        "S.CREATINE",
-        "PROTEIN",
-        "GLUCOSE",
-        "KETONE",
-        "PUS CELLS",
-        "RED CELLS",
+        "SGot",
+        "S.BilirubinTotal",
+        "S.Bilirubin Direct",
+        "S.Bilirubin InDirect",
+        "Alkaline Phosphatase",
+        "S.protiens",
+        "Albumin",
+        "Globulin",
+        "Sodium",
+        "Potassium",
+        "Chloride",
+        "S.cholesterol",
+        "hdlchloestrol",
+        "ldlchlorestal",
+        "s.triglucerides",
+        "stool r&m",
+
         "SPIROMETRY",
         "AUDIOMETRY",
+        "ECG report",
         "X-RAY(CHEST)",
         "FINAL REMARK",
         "FIT",
@@ -217,6 +235,10 @@ const MedicalReports = () => {
         (item.employeeVitalAndHistory &&
           item.employeeVitalAndHistory.pastHistory) ||
           "NA",
+
+        (item.employeeVitalAndHistory &&
+          item.employeeVitalAndHistory.familyHistory) ||
+          "NA",
         (item.employeeVitalAndHistory &&
           item.employeeVitalAndHistory.currentMedication) ||
           "NA",
@@ -224,7 +246,7 @@ const MedicalReports = () => {
           item.employeeVitalAndHistory.allergy) ||
           "NA",
         (item.employeeVitalAndHistory &&
-          item.employeeVitalAndHistory.addiction) ||
+          item.employeeVitalAndHistory.personalHistory) ||
           "NA",
         (item.employeeVitalAndHistory && item.employeeVitalAndHistory.bp) ||
           "NA",
@@ -270,25 +292,66 @@ const MedicalReports = () => {
         (item.employeebloodinformation &&
           item.employeebloodinformation.blSugarFastingOrRandom) ||
           "NA",
-        (item.employeebloodinformation && item.employeebloodinformation.sgpt) ||
+        (item.employeebloodinformation &&
+          item.employeebloodinformation.blSugarPP2BS) ||
+          "NA",
+        (item.employeebloodinformation &&
+          item.employeebloodinformation.blUrea) ||
+          "NA",
+        (item.employeebloodinformation && item.employeebloodinformation.bun) ||
           "NA",
         (item.employeebloodinformation &&
           item.employeebloodinformation.sCreatinine) ||
           "NA",
-        (item.employeebloodinformation &&
-          item.employeebloodinformation.protein) ||
+        (item.employeebloodinformation && item.employeebloodinformation.sgpt) ||
+          "NA",
+        (item.employeebloodinformation && item.employeebloodinformation.sgot) ||
           "NA",
         (item.employeebloodinformation &&
-          item.employeebloodinformation.glucose) ||
+          item.employeebloodinformation.sBilirubinTotal) ||
           "NA",
         (item.employeebloodinformation &&
-          item.employeebloodinformation.ketone) ||
+          item.employeebloodinformation.sBilirubinDirect) ||
           "NA",
         (item.employeebloodinformation &&
-          item.employeebloodinformation.pusCells) ||
+          item.employeebloodinformation.sBilirubinIndirect) ||
           "NA",
         (item.employeebloodinformation &&
-          item.employeebloodinformation.redCells) ||
+          item.employeebloodinformation.sProteins) ||
+          "NA",
+        (item.employeebloodinformation &&
+          item.employeebloodinformation.alklinePhosphatase) ||
+          "NA",
+        (item.employeebloodinformation &&
+          item.employeebloodinformation.albumin) ||
+          "NA",
+        (item.employeebloodinformation &&
+          item.employeebloodinformation.globulin) ||
+          "NA",
+        (item.employeebloodinformation &&
+          item.employeebloodinformation.sodium) ||
+          "NA",
+        (item.employeebloodinformation &&
+          item.employeebloodinformation.potassuim) ||
+          "NA",
+        (item.employeebloodinformation &&
+          item.employeebloodinformation.chloride) ||
+          "NA",
+
+        (item.employeebloodinformation &&
+          item.employeebloodinformation.scholesterol) ||
+          "NA",
+        (item.employeebloodinformation &&
+          item.employeebloodinformation.hdlcholesterol) ||
+          "NA",
+        (item.employeebloodinformation &&
+          item.employeebloodinformation.ldlcholesterol) ||
+          "NA",
+        (item.employeebloodinformation &&
+          item.employeebloodinformation.striglucerides) ||
+          "NA",
+        (item.employeebloodinformation &&
+          item.employeebloodinformation.stoolrm) ||
           "NA",
         (item.employeeinvestigationinformation &&
           item.employeeinvestigationinformation.spirometry) ||
@@ -297,7 +360,10 @@ const MedicalReports = () => {
           item.employeeinvestigationinformation.audiometry) ||
           "NA",
         (item.employeeinvestigationinformation &&
-          item.employeeinvestigationinformation.xRayChest) ||
+          item.employeeinvestigationinformation.ecgReport) ||
+          "NA",
+        (item.employeeinvestigationinformation &&
+          item.employeeinvestigationinformation.xRayReport) ||
           "NA",
         (item.employeeinvestigationinformation &&
           item.employeeinvestigationinformation.remarks) ||
@@ -340,7 +406,7 @@ const MedicalReports = () => {
       const colWidths = [
         20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
         20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-        20, 20, 20, 20, 20, 20, 20, 20, 20,
+        20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,20, 20, 20, 20, 20, 20,
       ];
       worksheet["!cols"] = colWidths.map((width) => ({ width }));
       const workbook = XLSX.utils.book_new();

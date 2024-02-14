@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Formik } from "formik";
 
 import { Card, CardHeader, Col, Input, Row } from "reactstrap";
@@ -8,41 +8,41 @@ import { useContext } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const BloodInvestigation = (props) => {
-  const [bloodinfo,setbloodinfo]=useState({
-              hb: "",
-              rbc: "",
-              wbc: "",
-              differentialCount: "",
-              plateletCount: "",
-              esr: "",
-              blGroup: "",
-              blSugarFastingOrRandom: "",
-              blSugarPP2BS: "",
-              blUrea: "",
-              bun: "",
-              sCreatinine: "",
-              sgpt: "",
-              sgot: "",
-              sBilirubinTotal: "",
-              sBilirubinDirect: "",
-              sBilirubinIndirect: "",
-              alklinePhosphatase: "",
-              sProteins: "",
-              albumin: "",
-              globulin: "",
-              sodium: "",
-              potassuim: "",
-              chloride: "",
-              remarks:"",
+  const [bloodinfo, setbloodinfo] = useState({
+    hb: "",
+    rbc: "",
+    wbc: "",
+    differentialCount: "",
+    plateletCount: "",
+    esr: "",
+    blGroup: "",
+    blSugarFastingOrRandom: "",
+    blSugarPP2BS: "",
+    blUrea: "",
+    bun: "",
+    sCreatinine: "",
+    sgpt: "",
+    sgot: "",
+    sBilirubinTotal: "",
+    sBilirubinDirect: "",
+    sBilirubinIndirect: "",
+    alklinePhosphatase: "",
+    sProteins: "",
+    albumin: "",
+    globulin: "",
+    sodium: "",
+    potassuim: "",
+    chloride: "",
+    remarks: "",
   });
-  console.log("props.bllooood",props.blood);
-  const { setBloodDetails,GetSpecificBlood,
-    editBlood, } = useContext(SignContext);
+  console.log("props.bllooood", props.blood);
+  const { setBloodDetails, GetSpecificBlood, editBlood } =
+    useContext(SignContext);
 
   const handleSubmitData = async (values) => {
     // toast.success("Data submitted successfully!", {
     //   position: "top-right",
-    //   autoClose: 3000, 
+    //   autoClose: 3000,
     //   hideProgressBar: false,
     //   closeOnClick: true,
     //   pauseOnHover: true,
@@ -55,11 +55,10 @@ const BloodInvestigation = (props) => {
     console.log(response);
   };
   const gettingid = async () => {
-    if(props.blood!==null)
-    {
-    const res = await GetSpecificBlood(props.blood);
-    console.log(">>>blood", res.data);
-    setbloodinfo(res.data);
+    if (props.blood !== null) {
+      const res = await GetSpecificBlood(props.blood);
+      console.log(">>>blood", res.data);
+      setbloodinfo(res.data);
     }
     // console.log(vital.temperature);
   };
@@ -68,19 +67,16 @@ const BloodInvestigation = (props) => {
   }, [props.blood]);
   return (
     <>
-      {props.blood?(
-      <Row>
-        <Col lg={12}>
-          <Formik
-            initialValues={{
-              bloodinfo
-              
-            }}
-            // validationSchema={validationSchema}
+      {props.blood ? (
+        <Row>
+          <Col lg={12}>
+            <Formik
+              initialValues={{
+                bloodinfo,
+              }}
+              // validationSchema={validationSchema}
 
-            onSubmit={async (values, { resetForm }) => {
-                
-
+              onSubmit={async (values, { resetForm }) => {
                 const data = { ...props, ...bloodinfo };
                 console.log(data);
                 const res = await editBlood(props.blood, data);
@@ -89,58 +85,58 @@ const BloodInvestigation = (props) => {
                 }
                 resetForm();
               }}
-          >
-            {({
-              isSubmitting,
-              handleChange,
-              handleSubmit,
-              errors,
-              touched,
-              values,
-              handleBlur,
-              setFieldValue,
-            }) => (
-              <Form onSubmit={handleSubmit}>
-                <Card>
-                  <CardHeader>
-                    <Row className="g-1 m-1">
-                      <Col className="col-sm">
-                        <div className="d-flex justify-content-sm-between">
-                          <h2 className="card-title mb-0 justify-content-sm-start">
-                            <strong>Blood Investigation</strong>
-                          </h2>
-                        </div>
-                      </Col>
-                    </Row>
-                  </CardHeader>
-                  <div className="card-body">
-                    <div className="live-preview">
-                      <Row className="align-items-center g-3">
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              Hb
-                            </label>
+            >
+              {({
+                isSubmitting,
+                handleChange,
+                handleSubmit,
+                errors,
+                touched,
+                values,
+                handleBlur,
+                setFieldValue,
+              }) => (
+                <Form onSubmit={handleSubmit}>
+                  <Card>
+                    <CardHeader>
+                      <Row className="g-1 m-1">
+                        <Col className="col-sm">
+                          <div className="d-flex justify-content-sm-between">
+                            <h2 className="card-title mb-0 justify-content-sm-start">
+                              <strong>Blood Investigation</strong>
+                            </h2>
+                          </div>
+                        </Col>
+                      </Row>
+                    </CardHeader>
+                    <div className="card-body">
+                      <div className="live-preview">
+                        <Row className="align-items-center g-3">
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="Hb"
-                                name="hb"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={(e) =>
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                Hb
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="Hb"
+                                  name="hb"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={(e) =>
                                     setbloodinfo({
                                       ...bloodinfo,
                                       hb: e.target.value,
                                     })
                                   }
-                                onBlur={handleBlur}
-                                value={
+                                  onBlur={handleBlur}
+                                  value={
                                     bloodinfo
                                       ? bloodinfo.hb !== null &&
                                         bloodinfo.hb !== ""
@@ -148,40 +144,40 @@ const BloodInvestigation = (props) => {
                                         : ""
                                       : ""
                                   }
-                              />
-                              <p className="error text-danger">
-                                {errors.height &&
-                                  touched.height &&
-                                  errors.height}
-                              </p>
+                                />
+                                <p className="error text-danger">
+                                  {errors.height &&
+                                    touched.height &&
+                                    errors.height}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </Col>
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              RBC
-                            </label>
+                          </Col>
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="RBC"
-                                name="rbc"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={(e) =>
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                RBC
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="RBC"
+                                  name="rbc"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={(e) =>
                                     setbloodinfo({
                                       ...bloodinfo,
                                       rbc: e.target.value,
                                     })
                                   }
-                                onBlur={handleBlur}
-                                value={
+                                  onBlur={handleBlur}
+                                  value={
                                     bloodinfo
                                       ? bloodinfo.rbc !== null &&
                                         bloodinfo.rbc !== ""
@@ -189,40 +185,40 @@ const BloodInvestigation = (props) => {
                                         : ""
                                       : ""
                                   }
-                              />
-                              <p className="error text-danger">
-                                {errors.weight &&
-                                  touched.weight &&
-                                  errors.weight}
-                              </p>
+                                />
+                                <p className="error text-danger">
+                                  {errors.weight &&
+                                    touched.weight &&
+                                    errors.weight}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </Col>
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              WBC
-                            </label>
+                          </Col>
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="WBC"
-                                name="wbc"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={(e) =>
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                WBC
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="WBC"
+                                  name="wbc"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={(e) =>
                                     setbloodinfo({
                                       ...bloodinfo,
                                       wbc: e.target.value,
                                     })
                                   }
-                                onBlur={handleBlur}
-                                value={
+                                  onBlur={handleBlur}
+                                  value={
                                     bloodinfo
                                       ? bloodinfo.wbc !== null &&
                                         bloodinfo.wbc !== ""
@@ -230,39 +226,39 @@ const BloodInvestigation = (props) => {
                                         : ""
                                       : ""
                                   }
-                              />
-                              <p className="error text-danger">
-                                {errors.bmi && touched.bmi && errors.bmi}
-                              </p>
+                                />
+                                <p className="error text-danger">
+                                  {errors.bmi && touched.bmi && errors.bmi}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </Col>
+                          </Col>
 
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              Differential Count
-                            </label>
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="Differential Count"
-                                name="differentialCount"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={(e) =>
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                Differential Count
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="Differential Count"
+                                  name="differentialCount"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={(e) =>
                                     setbloodinfo({
                                       ...bloodinfo,
                                       differentialCount: e.target.value,
                                     })
                                   }
-                                onBlur={handleBlur}
-                                value={
+                                  onBlur={handleBlur}
+                                  value={
                                     bloodinfo
                                       ? bloodinfo.differentialCount !== null &&
                                         bloodinfo.differentialCount !== ""
@@ -270,38 +266,40 @@ const BloodInvestigation = (props) => {
                                         : ""
                                       : ""
                                   }
-                              />
-                              <p className="error text-danger">
-                                {errors.pulse && touched.pulse && errors.pulse}
-                              </p>
+                                />
+                                <p className="error text-danger">
+                                  {errors.pulse &&
+                                    touched.pulse &&
+                                    errors.pulse}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </Col>
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              Platelet Count
-                            </label>
+                          </Col>
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="platelet Count"
-                                name="plateletCount"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={(e) =>
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                Platelet Count
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="platelet Count"
+                                  name="plateletCount"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={(e) =>
                                     setbloodinfo({
                                       ...bloodinfo,
                                       plateletCount: e.target.value,
                                     })
                                   }
-                                onBlur={handleBlur}
-                                value={
+                                  onBlur={handleBlur}
+                                  value={
                                     bloodinfo
                                       ? bloodinfo.plateletCount !== null &&
                                         bloodinfo.plateletCount !== ""
@@ -309,38 +307,38 @@ const BloodInvestigation = (props) => {
                                         : ""
                                       : ""
                                   }
-                              />
-                              <p className="error text-danger">
-                                {errors.bp && touched.bp && errors.bp}
-                              </p>
+                                />
+                                <p className="error text-danger">
+                                  {errors.bp && touched.bp && errors.bp}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </Col>
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              ESR
-                            </label>
+                          </Col>
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="ESR"
-                                name="esr"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={(e) =>
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                ESR
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="ESR"
+                                  name="esr"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={(e) =>
                                     setbloodinfo({
                                       ...bloodinfo,
                                       esr: e.target.value,
                                     })
                                   }
-                                onBlur={handleBlur}
-                                value={
+                                  onBlur={handleBlur}
+                                  value={
                                     bloodinfo
                                       ? bloodinfo.esr !== null &&
                                         bloodinfo.esr !== ""
@@ -348,40 +346,40 @@ const BloodInvestigation = (props) => {
                                         : ""
                                       : ""
                                   }
-                              />
-                              <p className="error text-danger">
-                                {errors.temp && touched.temp && errors.temp}
-                              </p>
+                                />
+                                <p className="error text-danger">
+                                  {errors.temp && touched.temp && errors.temp}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </Col>
-                      </Row>
-                      <Row className="align-items-center g-3">
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              Blood Group
-                            </label>
+                          </Col>
+                        </Row>
+                        <Row className="align-items-center g-3">
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="Blood Group"
-                                name="blGroup"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={(e) =>
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                Blood Group
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="Blood Group"
+                                  name="blGroup"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={(e) =>
                                     setbloodinfo({
                                       ...bloodinfo,
                                       blGroup: e.target.value,
                                     })
                                   }
-                                onBlur={handleBlur}
-                                value={
+                                  onBlur={handleBlur}
+                                  value={
                                     bloodinfo
                                       ? bloodinfo.blGroup !== null &&
                                         bloodinfo.blGroup !== ""
@@ -389,82 +387,83 @@ const BloodInvestigation = (props) => {
                                         : ""
                                       : ""
                                   }
-                              />
-                              <p className="error text-danger">
-                                {errors.height &&
-                                  touched.height &&
-                                  errors.height}
-                              </p>
+                                />
+                                <p className="error text-danger">
+                                  {errors.height &&
+                                    touched.height &&
+                                    errors.height}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </Col>
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                              style={{fontSize:'11px'}}
-                            >
-                              BloodSugar Fasting
-                            </label>
+                          </Col>
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="BloodSugar Fasting"
-                                name="blSugarFastingOrRandom"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={(e) =>
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                                style={{ fontSize: "11px" }}
+                              >
+                                BloodSugar Fasting
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="BloodSugar Fasting"
+                                  name="blSugarFastingOrRandom"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={(e) =>
                                     setbloodinfo({
                                       ...bloodinfo,
                                       blSugarFastingOrRandom: e.target.value,
                                     })
                                   }
-                                onBlur={handleBlur}
-                                value={
+                                  onBlur={handleBlur}
+                                  value={
                                     bloodinfo
-                                      ? bloodinfo.blSugarFastingOrRandom !== null &&
+                                      ? bloodinfo.blSugarFastingOrRandom !==
+                                          null &&
                                         bloodinfo.blSugarFastingOrRandom !== ""
                                         ? bloodinfo.blSugarFastingOrRandom
                                         : ""
                                       : ""
                                   }
-                              />
-                              <p className="error text-danger">
-                                {errors.weight &&
-                                  touched.weight &&
-                                  errors.weight}
-                              </p>
+                                />
+                                <p className="error text-danger">
+                                  {errors.weight &&
+                                    touched.weight &&
+                                    errors.weight}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </Col>
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              Blood Sugar PP2BS
-                            </label>
+                          </Col>
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="Blood Sugar PP2BS"
-                                name="blSugarPP2BS"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={(e) =>
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                Blood Sugar PP2BS
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="Blood Sugar PP2BS"
+                                  name="blSugarPP2BS"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={(e) =>
                                     setbloodinfo({
                                       ...bloodinfo,
                                       blSugarPP2BS: e.target.value,
                                     })
                                   }
-                                onBlur={handleBlur}
-                                value={
+                                  onBlur={handleBlur}
+                                  value={
                                     bloodinfo
                                       ? bloodinfo.blSugarPP2BS !== null &&
                                         bloodinfo.blSugarPP2BS !== ""
@@ -472,39 +471,39 @@ const BloodInvestigation = (props) => {
                                         : ""
                                       : ""
                                   }
-                              />
-                              <p className="error text-danger">
-                                {errors.bmi && touched.bmi && errors.bmi}
-                              </p>
+                                />
+                                <p className="error text-danger">
+                                  {errors.bmi && touched.bmi && errors.bmi}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </Col>
+                          </Col>
 
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              Blood Urea
-                            </label>
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="blUrea"
-                                name="blUrea"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={(e) =>
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                Blood Urea
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="blUrea"
+                                  name="blUrea"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={(e) =>
                                     setbloodinfo({
                                       ...bloodinfo,
                                       blUrea: e.target.value,
                                     })
                                   }
-                                onBlur={handleBlur}
-                                value={
+                                  onBlur={handleBlur}
+                                  value={
                                     bloodinfo
                                       ? bloodinfo.blUrea !== null &&
                                         bloodinfo.blUrea !== ""
@@ -512,38 +511,40 @@ const BloodInvestigation = (props) => {
                                         : ""
                                       : ""
                                   }
-                              />
-                              <p className="error text-danger">
-                                {errors.pulse && touched.pulse && errors.pulse}
-                              </p>
+                                />
+                                <p className="error text-danger">
+                                  {errors.pulse &&
+                                    touched.pulse &&
+                                    errors.pulse}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </Col>
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              BUN
-                            </label>
+                          </Col>
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="BUN"
-                                name="bun"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={(e) =>
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                BUN
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="BUN"
+                                  name="bun"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={(e) =>
                                     setbloodinfo({
                                       ...bloodinfo,
                                       bun: e.target.value,
                                     })
                                   }
-                                onBlur={handleBlur}
-                                value={
+                                  onBlur={handleBlur}
+                                  value={
                                     bloodinfo
                                       ? bloodinfo.bun !== null &&
                                         bloodinfo.bun !== ""
@@ -551,38 +552,38 @@ const BloodInvestigation = (props) => {
                                         : ""
                                       : ""
                                   }
-                              />
-                              <p className="error text-danger">
-                                {errors.bp && touched.bp && errors.bp}
-                              </p>
+                                />
+                                <p className="error text-danger">
+                                  {errors.bp && touched.bp && errors.bp}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </Col>
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              S Creatine
-                            </label>
+                          </Col>
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="S Creatine"
-                                name="sCreatinine"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={(e) =>
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                S Creatine
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="S Creatine"
+                                  name="sCreatinine"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={(e) =>
                                     setbloodinfo({
                                       ...bloodinfo,
                                       sCreatinine: e.target.value,
                                     })
                                   }
-                                onBlur={handleBlur}
-                                value={
+                                  onBlur={handleBlur}
+                                  value={
                                     bloodinfo
                                       ? bloodinfo.sCreatinine !== null &&
                                         bloodinfo.sCreatinine !== ""
@@ -590,40 +591,40 @@ const BloodInvestigation = (props) => {
                                         : ""
                                       : ""
                                   }
-                              />
-                              <p className="error text-danger">
-                                {errors.temp && touched.temp && errors.temp}
-                              </p>
+                                />
+                                <p className="error text-danger">
+                                  {errors.temp && touched.temp && errors.temp}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </Col>
-                      </Row>
-                      <Row className="align-items-center g-3">
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              SGPT
-                            </label>
+                          </Col>
+                        </Row>
+                        <Row className="align-items-center g-3">
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="SGPT"
-                                name="sgpt"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={(e) =>
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                SGPT
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="SGPT"
+                                  name="sgpt"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={(e) =>
                                     setbloodinfo({
                                       ...bloodinfo,
                                       sgpt: e.target.value,
                                     })
                                   }
-                                onBlur={handleBlur}
-                                value={
+                                  onBlur={handleBlur}
+                                  value={
                                     bloodinfo
                                       ? bloodinfo.sgpt !== null &&
                                         bloodinfo.sgpt !== ""
@@ -631,40 +632,40 @@ const BloodInvestigation = (props) => {
                                         : ""
                                       : ""
                                   }
-                              />
-                              <p className="error text-danger">
-                                {errors.height &&
-                                  touched.height &&
-                                  errors.height}
-                              </p>
+                                />
+                                <p className="error text-danger">
+                                  {errors.height &&
+                                    touched.height &&
+                                    errors.height}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </Col>
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              SGOT
-                            </label>
+                          </Col>
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="SGOT"
-                                name="sgot"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={(e) =>
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                SGOT
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="SGOT"
+                                  name="sgot"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={(e) =>
                                     setbloodinfo({
                                       ...bloodinfo,
                                       sgot: e.target.value,
                                     })
                                   }
-                                onBlur={handleBlur}
-                                value={
+                                  onBlur={handleBlur}
+                                  value={
                                     bloodinfo
                                       ? bloodinfo.sgot !== null &&
                                         bloodinfo.sgot !== ""
@@ -672,40 +673,40 @@ const BloodInvestigation = (props) => {
                                         : ""
                                       : ""
                                   }
-                              />
-                              <p className="error text-danger">
-                                {errors.weight &&
-                                  touched.weight &&
-                                  errors.weight}
-                              </p>
+                                />
+                                <p className="error text-danger">
+                                  {errors.weight &&
+                                    touched.weight &&
+                                    errors.weight}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </Col>
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              S.BilirubinTotal
-                            </label>
+                          </Col>
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="S.BilirubinTotal"
-                                name="sBilirubinTotal"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={(e) =>
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                S.BilirubinTotal
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="S.BilirubinTotal"
+                                  name="sBilirubinTotal"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={(e) =>
                                     setbloodinfo({
                                       ...bloodinfo,
                                       sBilirubinTotal: e.target.value,
                                     })
                                   }
-                                onBlur={handleBlur}
-                                value={
+                                  onBlur={handleBlur}
+                                  value={
                                     bloodinfo
                                       ? bloodinfo.sBilirubinTotal !== null &&
                                         bloodinfo.sBilirubinTotal !== ""
@@ -713,39 +714,39 @@ const BloodInvestigation = (props) => {
                                         : ""
                                       : ""
                                   }
-                              />
-                              <p className="error text-danger">
-                                {errors.bmi && touched.bmi && errors.bmi}
-                              </p>
+                                />
+                                <p className="error text-danger">
+                                  {errors.bmi && touched.bmi && errors.bmi}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </Col>
+                          </Col>
 
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              S.Bilirubin Direct
-                            </label>
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="S.BilirubinDirect"
-                                name="sBilirubinDirect"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={(e) =>
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                S.Bilirubin Direct
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="S.BilirubinDirect"
+                                  name="sBilirubinDirect"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={(e) =>
                                     setbloodinfo({
                                       ...bloodinfo,
                                       sBilirubinDirect: e.target.value,
                                     })
                                   }
-                                onBlur={handleBlur}
-                                value={
+                                  onBlur={handleBlur}
+                                  value={
                                     bloodinfo
                                       ? bloodinfo.sBilirubinDirect !== null &&
                                         bloodinfo.sBilirubinDirect !== ""
@@ -753,38 +754,40 @@ const BloodInvestigation = (props) => {
                                         : ""
                                       : ""
                                   }
-                              />
-                              <p className="error text-danger">
-                                {errors.pulse && touched.pulse && errors.pulse}
-                              </p>
+                                />
+                                <p className="error text-danger">
+                                  {errors.pulse &&
+                                    touched.pulse &&
+                                    errors.pulse}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </Col>
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              S.Bilirubin InDirect
-                            </label>
+                          </Col>
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="platelet Count"
-                                name="sBilirubinIndirect"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={(e) =>
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                S.Bilirubin InDirect
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="platelet Count"
+                                  name="sBilirubinIndirect"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={(e) =>
                                     setbloodinfo({
                                       ...bloodinfo,
                                       sBilirubinIndirect: e.target.value,
                                     })
                                   }
-                                onBlur={handleBlur}
-                                value={
+                                  onBlur={handleBlur}
+                                  value={
                                     bloodinfo
                                       ? bloodinfo.sBilirubinIndirect !== null &&
                                         bloodinfo.sBilirubinIndirect !== ""
@@ -792,39 +795,39 @@ const BloodInvestigation = (props) => {
                                         : ""
                                       : ""
                                   }
-                              />
-                              <p className="error text-danger">
-                                {errors.bp && touched.bp && errors.bp}
-                              </p>
+                                />
+                                <p className="error text-danger">
+                                  {errors.bp && touched.bp && errors.bp}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </Col>
-                        <Col slg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                              style={{fontSize:'11px'}}
-                            >
-                              Alkaline Phosphatase
-                            </label>
+                          </Col>
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="Alkaline Phosphatase"
-                                name="alklinePhosphatase"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={(e) =>
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                                style={{ fontSize: "11px" }}
+                              >
+                                Alkaline Phosphatase
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="Alkaline Phosphatase"
+                                  name="alklinePhosphatase"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={(e) =>
                                     setbloodinfo({
                                       ...bloodinfo,
                                       alklinePhosphatase: e.target.value,
                                     })
                                   }
-                                onBlur={handleBlur}
-                                value={
+                                  onBlur={handleBlur}
+                                  value={
                                     bloodinfo
                                       ? bloodinfo.alklinePhosphatase !== null &&
                                         bloodinfo.alklinePhosphatase !== ""
@@ -832,40 +835,40 @@ const BloodInvestigation = (props) => {
                                         : ""
                                       : ""
                                   }
-                              />
-                              <p className="error text-danger">
-                                {errors.temp && touched.temp && errors.temp}
-                              </p>
+                                />
+                                <p className="error text-danger">
+                                  {errors.temp && touched.temp && errors.temp}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </Col>
-                      </Row>
-                      <Row className="align-items-center g-3">
-                        <Col sm={2}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              S.protiens
-                            </label>
+                          </Col>
+                        </Row>
+                        <Row className="align-items-center g-3">
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="Sprotiens"
-                                name="sProteins"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={(e) =>
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                S.protiens
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="Sprotiens"
+                                  name="sProteins"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={(e) =>
                                     setbloodinfo({
                                       ...bloodinfo,
                                       sProteins: e.target.value,
                                     })
                                   }
-                                onBlur={handleBlur}
-                                value={
+                                  onBlur={handleBlur}
+                                  value={
                                     bloodinfo
                                       ? bloodinfo.sProteins !== null &&
                                         bloodinfo.sProteins !== ""
@@ -873,40 +876,40 @@ const BloodInvestigation = (props) => {
                                         : ""
                                       : ""
                                   }
-                              />
-                              <p className="error text-danger">
-                                {errors.height &&
-                                  touched.height &&
-                                  errors.height}
-                              </p>
+                                />
+                                <p className="error text-danger">
+                                  {errors.height &&
+                                    touched.height &&
+                                    errors.height}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </Col>
-                        <Col sm={2}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              Albumin
-                            </label>
+                          </Col>
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="Albumin"
-                                name="albumin"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={(e) =>
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                Albumin
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="Albumin"
+                                  name="albumin"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={(e) =>
                                     setbloodinfo({
                                       ...bloodinfo,
                                       albumin: e.target.value,
                                     })
                                   }
-                                onBlur={handleBlur}
-                                value={
+                                  onBlur={handleBlur}
+                                  value={
                                     bloodinfo
                                       ? bloodinfo.albumin !== null &&
                                         bloodinfo.albumin !== ""
@@ -914,40 +917,40 @@ const BloodInvestigation = (props) => {
                                         : ""
                                       : ""
                                   }
-                              />
-                              <p className="error text-danger">
-                                {errors.weight &&
-                                  touched.weight &&
-                                  errors.weight}
-                              </p>
+                                />
+                                <p className="error text-danger">
+                                  {errors.weight &&
+                                    touched.weight &&
+                                    errors.weight}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </Col>
-                        <Col sm={2}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              Globulin
-                            </label>
+                          </Col>
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="Globulin"
-                                name="globulin"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={(e) =>
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                Globulin
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="Globulin"
+                                  name="globulin"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={(e) =>
                                     setbloodinfo({
                                       ...bloodinfo,
                                       globulin: e.target.value,
                                     })
                                   }
-                                onBlur={handleBlur}
-                                value={
+                                  onBlur={handleBlur}
+                                  value={
                                     bloodinfo
                                       ? bloodinfo.globulin !== null &&
                                         bloodinfo.globulin !== ""
@@ -955,39 +958,39 @@ const BloodInvestigation = (props) => {
                                         : ""
                                       : ""
                                   }
-                              />
-                              <p className="error text-danger">
-                                {errors.bmi && touched.bmi && errors.bmi}
-                              </p>
+                                />
+                                <p className="error text-danger">
+                                  {errors.bmi && touched.bmi && errors.bmi}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </Col>
+                          </Col>
 
-                        <Col sm={2}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              Sodium
-                            </label>
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="Sodium"
-                                name="sodium"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={(e) =>
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                Sodium
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="Sodium"
+                                  name="sodium"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={(e) =>
                                     setbloodinfo({
                                       ...bloodinfo,
                                       sodium: e.target.value,
                                     })
                                   }
-                                onBlur={handleBlur}
-                                value={
+                                  onBlur={handleBlur}
+                                  value={
                                     bloodinfo
                                       ? bloodinfo.sodium !== null &&
                                         bloodinfo.sodium !== ""
@@ -995,38 +998,40 @@ const BloodInvestigation = (props) => {
                                         : ""
                                       : ""
                                   }
-                              />
-                              <p className="error text-danger">
-                                {errors.pulse && touched.pulse && errors.pulse}
-                              </p>
+                                />
+                                <p className="error text-danger">
+                                  {errors.pulse &&
+                                    touched.pulse &&
+                                    errors.pulse}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </Col>
-                        <Col sm={2}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              Potassium
-                            </label>
+                          </Col>
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="Potassium"
-                                name="potassuim"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={(e) =>
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                Potassium
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="Potassium"
+                                  name="potassuim"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={(e) =>
                                     setbloodinfo({
                                       ...bloodinfo,
                                       potassuim: e.target.value,
                                     })
                                   }
-                                onBlur={handleBlur}
-                                value={
+                                  onBlur={handleBlur}
+                                  value={
                                     bloodinfo
                                       ? bloodinfo.potassuim !== null &&
                                         bloodinfo.potassuim !== ""
@@ -1034,38 +1039,38 @@ const BloodInvestigation = (props) => {
                                         : ""
                                       : ""
                                   }
-                              />
-                              <p className="error text-danger">
-                                {errors.bp && touched.bp && errors.bp}
-                              </p>
+                                />
+                                <p className="error text-danger">
+                                  {errors.bp && touched.bp && errors.bp}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </Col>
-                        <Col sm={2}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              Chloride
-                            </label>
+                          </Col>
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="Chloride"
-                                name="chloride"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={(e) =>
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                Chloride
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="Chloride"
+                                  name="chloride"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={(e) =>
                                     setbloodinfo({
                                       ...bloodinfo,
                                       chloride: e.target.value,
                                     })
                                   }
-                                onBlur={handleBlur}
-                                value={
+                                  onBlur={handleBlur}
+                                  value={
                                     bloodinfo
                                       ? bloodinfo.chloride !== null &&
                                         bloodinfo.chloride !== ""
@@ -1073,52 +1078,247 @@ const BloodInvestigation = (props) => {
                                         : ""
                                       : ""
                                   }
-                              />
-                              <p className="error text-danger">
-                                {errors.temp && touched.temp && errors.temp}
-                              </p>
-                            </div>
-                          </div>
-                        </Col>
-                      </Row>
-                      <CardHeader>
-                        <Row className="g-1">
-                          <Col sm={2}>
-                            <div className="d-flex justify-content-sm-between">
-                              <h2 className="card-title mb-0 justify-content-sm-start">
-                                <strong>Urine R&M:Remarks</strong>
-                              </h2>
+                                />
+                                <p className="error text-danger">
+                                  {errors.temp && touched.temp && errors.temp}
+                                </p>
+                              </div>
                             </div>
                           </Col>
-                          <Col sm={4} style={{ marginTop: "-2px" }}>
-                            <div className="">
-                              {/* <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              Remarks
-                            </label> */}
+                        </Row>
+
+                        <Row className="align-items-center g-3">
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                S.cholesterol
+                              </label>
                               <div className="mb-3">
                                 <Input
                                   type="text"
                                   className="form-control"
                                   id="product-orders-input"
-                                  placeholder="General Remark"
-                                  name="remarks"
+                                  placeholder="scholesterol"
+                                  name="scholesterol"
                                   aria-label="orders"
                                   aria-describedby="product-orders-addon"
                                   onChange={(e) =>
                                     setbloodinfo({
                                       ...bloodinfo,
-                                      remarks: e.target.value,
+                                      scholesterol: e.target.value,
                                     })
                                   }
                                   onBlur={handleBlur}
                                   value={
                                     bloodinfo
-                                      ? bloodinfo.remarks !== null &&
-                                        bloodinfo.remarks !== ""
-                                        ? bloodinfo.remarks
+                                      ? bloodinfo.scholesterol !== null &&
+                                        bloodinfo.scholesterol !== ""
+                                        ? bloodinfo.scholesterol
+                                        : ""
+                                      : ""
+                                  }
+                                />
+                                <p className="error text-danger">
+                                  {errors.height &&
+                                    touched.height &&
+                                    errors.height}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                HDL cholestrol
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="hdlcholesterol"
+                                  name="hdlcholesterol"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={(e) =>
+                                    setbloodinfo({
+                                      ...bloodinfo,
+                                      hdlcholesterol: e.target.value,
+                                    })
+                                  }
+                                  onBlur={handleBlur}
+                                  value={
+                                    bloodinfo
+                                      ? bloodinfo.hdlcholesterol !== null &&
+                                        bloodinfo.hdlcholesterol !== ""
+                                        ? bloodinfo.hdlcholesterol
+                                        : ""
+                                      : ""
+                                  }
+                                />
+                                <p className="error text-danger">
+                                  {errors.weight &&
+                                    touched.weight &&
+                                    errors.weight}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                LDL cholorestol
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="ldlcholesterol"
+                                  name="ldlcholesterol"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={(e) =>
+                                    setbloodinfo({
+                                      ...bloodinfo,
+                                      ldlcholesterol: e.target.value,
+                                    })
+                                  }
+                                  onBlur={handleBlur}
+                                  value={
+                                    bloodinfo
+                                      ? bloodinfo.ldlcholesterol !== null &&
+                                        bloodinfo.ldlcholesterol !== ""
+                                        ? bloodinfo.ldlcholesterol
+                                        : ""
+                                      : ""
+                                  }
+                                />
+                                <p className="error text-danger">
+                                  {errors.bmi && touched.bmi && errors.bmi}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
+
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                S.Triglucerides
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="striglucerides"
+                                  name="striglucerides"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={(e) =>
+                                    setbloodinfo({
+                                      ...bloodinfo,
+                                      striglucerides: e.target.value,
+                                    })
+                                  }
+                                  onBlur={handleBlur}
+                                  value={
+                                    bloodinfo
+                                      ? bloodinfo.striglucerides !== null &&
+                                        bloodinfo.striglucerides !== ""
+                                        ? bloodinfo.striglucerides
+                                        : ""
+                                      : ""
+                                  }
+                                />
+                                <p className="error text-danger">
+                                  {errors.pulse &&
+                                    touched.pulse &&
+                                    errors.pulse}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                Others
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder=""
+                                  name="others1"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={(e) =>
+                                    setbloodinfo({
+                                      ...bloodinfo,
+                                      others1: e.target.value,
+                                    })
+                                  }
+                                  onBlur={handleBlur}
+                                  value={
+                                    bloodinfo
+                                      ? bloodinfo.others1 !== null &&
+                                        bloodinfo.others1 !== ""
+                                        ? bloodinfo.others1
+                                        : ""
+                                      : ""
+                                  }
+                                />
+                                <p className="error text-danger">
+                                  {errors.bp && touched.bp && errors.bp}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                Others
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="Chloride"
+                                  name="others2"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={(e) =>
+                                    setbloodinfo({
+                                      ...bloodinfo,
+                                      others2: e.target.value,
+                                    })
+                                  }
+                                  onBlur={handleBlur}
+                                  value={
+                                    bloodinfo
+                                      ? bloodinfo.others2 !== null &&
+                                        bloodinfo.others2 !== ""
+                                        ? bloodinfo.others2
                                         : ""
                                       : ""
                                   }
@@ -1130,792 +1330,349 @@ const BloodInvestigation = (props) => {
                             </div>
                           </Col>
                         </Row>
-                      </CardHeader>
-                    </div>
-                  </div>
-
-                  <div className="text-end mb-3 me-3">
-                    <button className="btn btn-success w-sm" type="submit">
-                      Submit
-                    </button>
-                  </div>
-                </Card>
-              </Form>
-            )}
-          </Formik>
-        </Col>
-      </Row>
-      ):(
-        <Row>
-        <Col lg={12}>
-          <Formik
-            initialValues={{
-              hb: "",
-              rbc: "",
-              wbc: "",
-              differentialCount: "",
-              plateletCount: "",
-              esr: "",
-              blGroup: "",
-              blSugarFastingOrRandom: "",
-              blSugarPP2BS: "",
-              blUrea: "",
-              bun: "",
-              sCreatinine: "",
-              sgpt: "",
-              sgot: "",
-              sBilirubinTotal: "",
-              sBilirubinDirect: "",
-              sBilirubinIndirect: "",
-              alklinePhosphatase: "",
-              sProteins: "",
-              albumin: "",
-              globulin: "",
-              sodium: "",
-              potassuim: "",
-              chloride: "",
-              remarks:"",
-              
-            }}
-            // validationSchema={validationSchema}
-
-            onSubmit={(values,{ resetForm }) => {
-              handleSubmitData(values);
-              resetForm();
-            }}
-          >
-            {({
-              isSubmitting,
-              handleChange,
-              handleSubmit,
-              errors,
-              touched,
-              values,
-              handleBlur,
-              setFieldValue,
-            }) => (
-              <Form onSubmit={handleSubmit}>
-                <Card>
-                  <CardHeader>
-                    <Row className="g-1 m-1">
-                      <Col className="col-sm">
-                        <div className="d-flex justify-content-sm-between">
-                          <h2 className="card-title mb-0 justify-content-sm-start">
-                            <strong>Blood Investigation</strong>
-                          </h2>
-                        </div>
-                      </Col>
-                    </Row>
-                  </CardHeader>
-                  <div className="card-body">
-                    <div className="live-preview">
-                      <Row className="align-items-center g-3">
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              Hb
-                            </label>
+                        <Row className="align-items-center g-3">
+                          <Col lg={2} md={4}>
                             <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="Hb"
-                                name="hb"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.hb}
-                              />
-                              <p className="error text-danger">
-                                {errors.height &&
-                                  touched.height &&
-                                  errors.height}
-                              </p>
-                            </div>
-                          </div>
-                        </Col>
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              RBC
-                            </label>
-                            <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="RBC"
-                                name="rbc"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.rbc}
-                              />
-                              <p className="error text-danger">
-                                {errors.weight &&
-                                  touched.weight &&
-                                  errors.weight}
-                              </p>
-                            </div>
-                          </div>
-                        </Col>
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              WBC
-                            </label>
-                            <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="WBC"
-                                name="wbc"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.wbc}
-                              />
-                              <p className="error text-danger">
-                                {errors.bmi && touched.bmi && errors.bmi}
-                              </p>
-                            </div>
-                          </div>
-                        </Col>
-
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              Differential Count
-                            </label>
-                            <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="Differential Count"
-                                name="differentialCount"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.differentialCount}
-                              />
-                              <p className="error text-danger">
-                                {errors.pulse && touched.pulse && errors.pulse}
-                              </p>
-                            </div>
-                          </div>
-                        </Col>
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              Platelet Count
-                            </label>
-                            <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="platelet Count"
-                                name="plateletCount"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.plateletCount}
-                              />
-                              <p className="error text-danger">
-                                {errors.bp && touched.bp && errors.bp}
-                              </p>
-                            </div>
-                          </div>
-                        </Col>
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              ESR
-                            </label>
-                            <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="ESR"
-                                name="esr"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.esr}
-                              />
-                              <p className="error text-danger">
-                                {errors.temp && touched.temp && errors.temp}
-                              </p>
-                            </div>
-                          </div>
-                        </Col>
-                      </Row>
-                      <Row className="align-items-center g-3">
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              Blood Group
-                            </label>
-                            <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="Blood Group"
-                                name="blGroup"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.blGroup}
-                              />
-                              <p className="error text-danger">
-                                {errors.height &&
-                                  touched.height &&
-                                  errors.height}
-                              </p>
-                            </div>
-                          </div>
-                        </Col>
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                              style={{fontSize:'12px'}}
-                            >
-                              BloodSugar Fasting
-                            </label>
-                            <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="BloodSugar Fasting"
-                                name="blSugarFastingOrRandom"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.blSugarFastingOrRandom}
-                              />
-                              <p className="error text-danger">
-                                {errors.weight &&
-                                  touched.weight &&
-                                  errors.weight}
-                              </p>
-                            </div>
-                          </div>
-                        </Col>
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              Blood Sugar PP2BS
-                            </label>
-                            <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="Blood Sugar PP2BS"
-                                name="blSugarPP2BS"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.blSugarPP2BS}
-                              />
-                              <p className="error text-danger">
-                                {errors.bmi && touched.bmi && errors.bmi}
-                              </p>
-                            </div>
-                          </div>
-                        </Col>
-
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              Blood Urea
-                            </label>
-                            <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="blUrea"
-                                name="blUrea"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.blUrea}
-                              />
-                              <p className="error text-danger">
-                                {errors.pulse && touched.pulse && errors.pulse}
-                              </p>
-                            </div>
-                          </div>
-                        </Col>
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              BUN
-                            </label>
-                            <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="BUN"
-                                name="bun"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.bun}
-                              />
-                              <p className="error text-danger">
-                                {errors.bp && touched.bp && errors.bp}
-                              </p>
-                            </div>
-                          </div>
-                        </Col>
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              S Creatine
-                            </label>
-                            <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="S Creatine"
-                                name="sCreatinine"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.sCreatinine}
-                              />
-                              <p className="error text-danger">
-                                {errors.temp && touched.temp && errors.temp}
-                              </p>
-                            </div>
-                          </div>
-                        </Col>
-                      </Row>
-                      <Row className="align-items-center g-3">
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              SGPT
-                            </label>
-                            <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="SGPT"
-                                name="sgpt"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.sgpt}
-                              />
-                              <p className="error text-danger">
-                                {errors.height &&
-                                  touched.height &&
-                                  errors.height}
-                              </p>
-                            </div>
-                          </div>
-                        </Col>
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              SGOT
-                            </label>
-                            <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="SGOT"
-                                name="sgot"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.sgot}
-                              />
-                              <p className="error text-danger">
-                                {errors.weight &&
-                                  touched.weight &&
-                                  errors.weight}
-                              </p>
-                            </div>
-                          </div>
-                        </Col>
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              S.BilirubinTotal
-                            </label>
-                            <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="S.BilirubinTotal"
-                                name="sBilirubinTotal"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.sBilirubinTotal}
-                              />
-                              <p className="error text-danger">
-                                {errors.bmi && touched.bmi && errors.bmi}
-                              </p>
-                            </div>
-                          </div>
-                        </Col>
-
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              S.Bilirubin Direct
-                            </label>
-                            <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="S.BilirubinDirect"
-                                name="sBilirubinDirect"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.sBilirubinDirect}
-                              />
-                              <p className="error text-danger">
-                                {errors.pulse && touched.pulse && errors.pulse}
-                              </p>
-                            </div>
-                          </div>
-                        </Col>
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              S.Bilirubin InDirect
-                            </label>
-                            <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="platelet Count"
-                                name="sBilirubinIndirect"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.sBilirubinIndirect}
-                              />
-                              <p className="error text-danger">
-                                {errors.bp && touched.bp && errors.bp}
-                              </p>
-                            </div>
-                          </div>
-                        </Col>
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                              style={{fontSize:'11px'}}
-                            >
-                              Alkaline Phosphatase
-                            </label>
-                            <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="Alkaline Phosphatase"
-                                name="alklinePhosphatase"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.alklinePhosphatase}
-                              />
-                              <p className="error text-danger">
-                                {errors.temp && touched.temp && errors.temp}
-                              </p>
-                            </div>
-                          </div>
-                        </Col>
-                      </Row>
-                      <Row className="align-items-center g-3">
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              S.protiens
-                            </label>
-                            <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="Sprotiens"
-                                name="sProteins"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.sProteins}
-                              />
-                              <p className="error text-danger">
-                                {errors.height &&
-                                  touched.height &&
-                                  errors.height}
-                              </p>
-                            </div>
-                          </div>
-                        </Col>
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              Albumin
-                            </label>
-                            <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="Albumin"
-                                name="albumin"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.albumin}
-                              />
-                              <p className="error text-danger">
-                                {errors.weight &&
-                                  touched.weight &&
-                                  errors.weight}
-                              </p>
-                            </div>
-                          </div>
-                        </Col>
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              Globulin
-                            </label>
-                            <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="Globulin"
-                                name="globulin"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.globulin}
-                              />
-                              <p className="error text-danger">
-                                {errors.bmi && touched.bmi && errors.bmi}
-                              </p>
-                            </div>
-                          </div>
-                        </Col>
-
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              Sodium
-                            </label>
-                            <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="Sodium"
-                                name="sodium"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.sodium}
-                              />
-                              <p className="error text-danger">
-                                {errors.pulse && touched.pulse && errors.pulse}
-                              </p>
-                            </div>
-                          </div>
-                        </Col>
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              Potassium
-                            </label>
-                            <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="Potassium"
-                                name="potassuim"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.potassuim}
-                              />
-                              <p className="error text-danger">
-                                {errors.bp && touched.bp && errors.bp}
-                              </p>
-                            </div>
-                          </div>
-                        </Col>
-                        <Col lg={2} md={4}>
-                          <div className="mb-3">
-                            <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              Chloride
-                            </label>
-                            <div className="mb-3">
-                              <Input
-                                type="text"
-                                className="form-control"
-                                id="product-orders-input"
-                                placeholder="Chloride"
-                                name="chloride"
-                                aria-label="orders"
-                                aria-describedby="product-orders-addon"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.chloride}
-                              />
-                              <p className="error text-danger">
-                                {errors.temp && touched.temp && errors.temp}
-                              </p>
-                            </div>
-                          </div>
-                        </Col>
-                      </Row>
-                      <CardHeader>
-                        <Row className="g-1">
-                          <Col lg={2} md={5}>
-                            <div className="d-flex justify-content-sm-between">
-                              <h2 className="card-title mb-0 justify-content-sm-start">
-                                <strong>Urine R&M:Remarks</strong>
-                              </h2>
-                            </div>
-                          </Col>
-                          <Col lg={4} md={6} style={{ marginTop: "-2px" }}>
-                            <div className="">
-                              {/* <label
-                              className="form-label"
-                              htmlFor="product-orders-input"
-                            >
-                              Remarks
-                            </label> */}
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                Stool R&M
+                              </label>
                               <div className="mb-3">
                                 <Input
                                   type="text"
                                   className="form-control"
                                   id="product-orders-input"
-                                  placeholder="General Remark"
-                                  name="remarks"
+                                  placeholder="stoolrm"
+                                  name="stoolrm"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={(e) =>
+                                    setbloodinfo({
+                                      ...bloodinfo,
+                                      stoolrm: e.target.value,
+                                    })
+                                  }
+                                  onBlur={handleBlur}
+                                  value={
+                                    bloodinfo
+                                      ? bloodinfo.stoolrm !== null &&
+                                        bloodinfo.stoolrm !== ""
+                                        ? bloodinfo.stoolrm
+                                        : ""
+                                      : ""
+                                  }
+                                />
+                                <p className="error text-danger">
+                                  {errors.height &&
+                                    touched.height &&
+                                    errors.height}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
+                          
+
+                         
+                        </Row>
+                        <CardHeader>
+                          <Row className="g-1">
+                            <Col lg={2} md={4}>
+                              <div className="d-flex justify-content-sm-between">
+                                <h2 className="card-title mb-0 justify-content-sm-start">
+                                  <strong>Urine R&M:Remarks</strong>
+                                </h2>
+                              </div>
+                            </Col>
+                            <Col lg={4} md={8} style={{ marginTop: "-2px" }}>
+                              <div className="">
+                                {/* <label
+                              className="form-label"
+                              htmlFor="product-orders-input"
+                            >
+                              Remarks
+                            </label> */}
+                                <div className="mb-3">
+                                  <Input
+                                    type="text"
+                                    className="form-control"
+                                    id="product-orders-input"
+                                    placeholder="General Remark"
+                                    name="remarks"
+                                    aria-label="orders"
+                                    aria-describedby="product-orders-addon"
+                                    onChange={(e) =>
+                                      setbloodinfo({
+                                        ...bloodinfo,
+                                        remarks: e.target.value,
+                                      })
+                                    }
+                                    onBlur={handleBlur}
+                                    value={
+                                      bloodinfo
+                                        ? bloodinfo.remarks !== null &&
+                                          bloodinfo.remarks !== ""
+                                          ? bloodinfo.remarks
+                                          : ""
+                                        : ""
+                                    }
+                                  />
+                                  <p className="error text-danger">
+                                    {errors.temp && touched.temp && errors.temp}
+                                  </p>
+                                </div>
+                              </div>
+                            </Col>
+                          </Row>
+                        </CardHeader>
+                      </div>
+                    </div>
+
+                    <div className="text-end mb-3 me-3">
+                      <button className="btn btn-success w-sm" type="submit">
+                        Submit
+                      </button>
+                    </div>
+                  </Card>
+                </Form>
+              )}
+            </Formik>
+          </Col>
+        </Row>
+      ) : (
+        <Row>
+          <Col lg={12}>
+            <Formik
+              initialValues={{
+                hb: "",
+                rbc: "",
+                wbc: "",
+                differentialCount: "",
+                plateletCount: "",
+                esr: "",
+                blGroup: "",
+                blSugarFastingOrRandom: "",
+                blSugarPP2BS: "",
+                blUrea: "",
+                bun: "",
+                sCreatinine: "",
+                sgpt: "",
+                sgot: "",
+                sBilirubinTotal: "",
+                sBilirubinDirect: "",
+                sBilirubinIndirect: "",
+                alklinePhosphatase: "",
+                sProteins: "",
+                albumin: "",
+                globulin: "",
+                sodium: "",
+                potassuim: "",
+                chloride: "",
+                scholesterol:"",
+                hdlcholesterol:"",
+                ldlcholesterol:"",
+                striglucerides:"",
+                stoolrm:"",
+                others1:"",
+                others2:"",
+                remarks: "",
+              }}
+              // validationSchema={validationSchema}
+
+              onSubmit={(values, { resetForm }) => {
+                handleSubmitData(values);
+                // resetForm();
+              }}
+            >
+              {({
+                isSubmitting,
+                handleChange,
+                handleSubmit,
+                errors,
+                touched,
+                values,
+                handleBlur,
+                setFieldValue,
+              }) => (
+                <Form onSubmit={handleSubmit}>
+                  <Card>
+                    <CardHeader>
+                      <Row className="g-1 m-1">
+                        <Col className="col-sm">
+                          <div className="d-flex justify-content-sm-between">
+                            <h2 className="card-title mb-0 justify-content-sm-start">
+                              <strong>Blood Investigation</strong>
+                            </h2>
+                          </div>
+                        </Col>
+                      </Row>
+                    </CardHeader>
+                    <div className="card-body">
+                      <div className="live-preview">
+                        <Row className="align-items-center g-3">
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                Hb
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="Hb"
+                                  name="hb"
                                   aria-label="orders"
                                   aria-describedby="product-orders-addon"
                                   onChange={handleChange}
                                   onBlur={handleBlur}
-                                   value={values.remarks}
+                                  value={values.hb}
+                                />
+                                <p className="error text-danger">
+                                  {errors.height &&
+                                    touched.height &&
+                                    errors.height}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                RBC
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="RBC"
+                                  name="rbc"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.rbc}
+                                />
+                                <p className="error text-danger">
+                                  {errors.weight &&
+                                    touched.weight &&
+                                    errors.weight}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                WBC
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="WBC"
+                                  name="wbc"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.wbc}
+                                />
+                                <p className="error text-danger">
+                                  {errors.bmi && touched.bmi && errors.bmi}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
+
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                Differential Count
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="Differential Count"
+                                  name="differentialCount"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.differentialCount}
+                                />
+                                <p className="error text-danger">
+                                  {errors.pulse &&
+                                    touched.pulse &&
+                                    errors.pulse}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                Platelet Count
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="platelet Count"
+                                  name="plateletCount"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.plateletCount}
+                                />
+                                <p className="error text-danger">
+                                  {errors.bp && touched.bp && errors.bp}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                ESR
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="ESR"
+                                  name="esr"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.esr}
                                 />
                                 <p className="error text-danger">
                                   {errors.temp && touched.temp && errors.temp}
@@ -1924,22 +1681,781 @@ const BloodInvestigation = (props) => {
                             </div>
                           </Col>
                         </Row>
-                      </CardHeader>
-                      
-                    </div>
-                  </div>
+                        <Row className="align-items-center g-3">
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                Blood Group
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="Blood Group"
+                                  name="blGroup"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.blGroup}
+                                />
+                                <p className="error text-danger">
+                                  {errors.height &&
+                                    touched.height &&
+                                    errors.height}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                                style={{ fontSize: "12px" }}
+                              >
+                                BloodSugar Fasting
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="BloodSugar Fasting"
+                                  name="blSugarFastingOrRandom"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.blSugarFastingOrRandom}
+                                />
+                                <p className="error text-danger">
+                                  {errors.weight &&
+                                    touched.weight &&
+                                    errors.weight}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                Blood Sugar PP2BS
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="Blood Sugar PP2BS"
+                                  name="blSugarPP2BS"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.blSugarPP2BS}
+                                />
+                                <p className="error text-danger">
+                                  {errors.bmi && touched.bmi && errors.bmi}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
 
-                  <div className="text-end mb-3 me-3">
-                    <button className="btn btn-success w-sm" type="submit">
-                      Submit
-                    </button>
-                  </div>
-                </Card>
-              </Form>
-            )}
-          </Formik>
-        </Col>
-      </Row>
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                Blood Urea
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="blUrea"
+                                  name="blUrea"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.blUrea}
+                                />
+                                <p className="error text-danger">
+                                  {errors.pulse &&
+                                    touched.pulse &&
+                                    errors.pulse}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                BUN
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="BUN"
+                                  name="bun"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.bun}
+                                />
+                                <p className="error text-danger">
+                                  {errors.bp && touched.bp && errors.bp}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                S Creatine
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="S Creatine"
+                                  name="sCreatinine"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.sCreatinine}
+                                />
+                                <p className="error text-danger">
+                                  {errors.temp && touched.temp && errors.temp}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
+                        </Row>
+                        <Row className="align-items-center g-3">
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                SGPT
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="SGPT"
+                                  name="sgpt"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.sgpt}
+                                />
+                                <p className="error text-danger">
+                                  {errors.height &&
+                                    touched.height &&
+                                    errors.height}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                SGOT
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="SGOT"
+                                  name="sgot"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.sgot}
+                                />
+                                <p className="error text-danger">
+                                  {errors.weight &&
+                                    touched.weight &&
+                                    errors.weight}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                S.BilirubinTotal
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="S.BilirubinTotal"
+                                  name="sBilirubinTotal"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.sBilirubinTotal}
+                                />
+                                <p className="error text-danger">
+                                  {errors.bmi && touched.bmi && errors.bmi}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
+
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                S.Bilirubin Direct
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="S.BilirubinDirect"
+                                  name="sBilirubinDirect"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.sBilirubinDirect}
+                                />
+                                <p className="error text-danger">
+                                  {errors.pulse &&
+                                    touched.pulse &&
+                                    errors.pulse}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                S.Bilirubin InDirect
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="platelet Count"
+                                  name="sBilirubinIndirect"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.sBilirubinIndirect}
+                                />
+                                <p className="error text-danger">
+                                  {errors.bp && touched.bp && errors.bp}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                                style={{ fontSize: "11px" }}
+                              >
+                                Alkaline Phosphatase
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="Alkaline Phosphatase"
+                                  name="alklinePhosphatase"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.alklinePhosphatase}
+                                />
+                                <p className="error text-danger">
+                                  {errors.temp && touched.temp && errors.temp}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
+                        </Row>
+                        <Row className="align-items-center g-3">
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                S.protiens
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="Sprotiens"
+                                  name="sProteins"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.sProteins}
+                                />
+                                <p className="error text-danger">
+                                  {errors.height &&
+                                    touched.height &&
+                                    errors.height}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                Albumin
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="Albumin"
+                                  name="albumin"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.albumin}
+                                />
+                                <p className="error text-danger">
+                                  {errors.weight &&
+                                    touched.weight &&
+                                    errors.weight}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                Globulin
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="Globulin"
+                                  name="globulin"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.globulin}
+                                />
+                                <p className="error text-danger">
+                                  {errors.bmi && touched.bmi && errors.bmi}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
+
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                Sodium
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="Sodium"
+                                  name="sodium"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.sodium}
+                                />
+                                <p className="error text-danger">
+                                  {errors.pulse &&
+                                    touched.pulse &&
+                                    errors.pulse}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                Potassium
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="Potassium"
+                                  name="potassuim"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.potassuim}
+                                />
+                                <p className="error text-danger">
+                                  {errors.bp && touched.bp && errors.bp}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                Chloride
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="Chloride"
+                                  name="chloride"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.chloride}
+                                />
+                                <p className="error text-danger">
+                                  {errors.temp && touched.temp && errors.temp}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
+                        </Row>
+                        <Row className="align-items-center g-3">
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                S.cholesterol
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="scholesterol"
+                                  name="scholesterol"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.scholesterol}
+                                />
+                                <p className="error text-danger">
+                                  {errors.height &&
+                                    touched.height &&
+                                    errors.height}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                HDL cholestrol
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="hdlcholesterol"
+                                  name="hdlcholesterol"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.hdlcholesterol}
+                                />
+                                <p className="error text-danger">
+                                  {errors.weight &&
+                                    touched.weight &&
+                                    errors.weight}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                LDL cholorestol
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="ldlcholesterol"
+                                  name="ldlcholesterol"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.ldlcholesterol}
+                                />
+                                <p className="error text-danger">
+                                  {errors.bmi && touched.bmi && errors.bmi}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
+
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                S.Triglucerides
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="striglucerides"
+                                  name="striglucerides"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.striglucerides}
+                                />
+                                <p className="error text-danger">
+                                  {errors.pulse &&
+                                    touched.pulse &&
+                                    errors.pulse}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                Others
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder=""
+                                  name="others1"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.others1}
+                                />
+                                <p className="error text-danger">
+                                  {errors.bp && touched.bp && errors.bp}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                Others
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="Chloride"
+                                  name="others2"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.others2}
+                                />
+                                <p className="error text-danger">
+                                  {errors.temp && touched.temp && errors.temp}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
+                        </Row>
+                        <Row className="align-items-center g-3">
+                          <Col lg={2} md={4}>
+                            <div className="mb-3">
+                              <label
+                                className="form-label"
+                                htmlFor="product-orders-input"
+                              >
+                                Stool R&M
+                              </label>
+                              <div className="mb-3">
+                                <Input
+                                  type="text"
+                                  className="form-control"
+                                  id="product-orders-input"
+                                  placeholder="stoolrm"
+                                  name="stoolrm"
+                                  aria-label="orders"
+                                  aria-describedby="product-orders-addon"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.stoolrm}
+                                />
+                                <p className="error text-danger">
+                                  {errors.height &&
+                                    touched.height &&
+                                    errors.height}
+                                </p>
+                              </div>
+                            </div>
+                          </Col>
+                          
+
+                         
+                        </Row>
+
+
+
+                        <CardHeader>
+                          <Row className="g-1">
+                            <Col lg={2} md={5}>
+                              <div className="d-flex justify-content-sm-between">
+                                <h2 className="card-title mb-0 justify-content-sm-start">
+                                  <strong>Urine R&M:Remarks</strong>
+                                </h2>
+                              </div>
+                            </Col>
+                            <Col lg={4} md={6} style={{ marginTop: "-2px" }}>
+                              <div className="">
+                                {/* <label
+                              className="form-label"
+                              htmlFor="product-orders-input"
+                            >
+                              Remarks
+                            </label> */}
+                                <div className="mb-3">
+                                  <Input
+                                    type="text"
+                                    className="form-control"
+                                    id="product-orders-input"
+                                    placeholder="General Remark"
+                                    name="remarks"
+                                    aria-label="orders"
+                                    aria-describedby="product-orders-addon"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.remarks}
+                                  />
+                                  <p className="error text-danger">
+                                    {errors.temp && touched.temp && errors.temp}
+                                  </p>
+                                </div>
+                              </div>
+                            </Col>
+                          </Row>
+                        </CardHeader>
+                      </div>
+                    </div>
+
+                    <div className="text-end mb-3 me-3">
+                      <button className="btn btn-success w-sm" type="submit">
+                        Submit
+                      </button>
+                    </div>
+                  </Card>
+                </Form>
+              )}
+            </Formik>
+          </Col>
+        </Row>
       )}
     </>
   );
